@@ -1,19 +1,56 @@
 [
   {
+    "path": "posts/2021-01-17-automatically-obtaining-data-from-damodarans-website-with-r/",
+    "title": "Automatically obtaining data from Damodaran's website with R",
+    "description": "A quick tutorial on how to obtain data automatically from Damodaran's website with R.",
+    "author": [
+      {
+        "name": "Christoph Jäckel",
+        "url": {}
+      }
+    ],
+    "date": "2021-01-17",
+    "categories": [
+      "R",
+      "Data"
+    ],
+    "contents": "\r\nNYU professor Aswath Damodaran has very helpful data about many important financial market topics such as discount rates, valuation multiples, etc. on his website. However, the data is saved in Excel files that do not necessarily have a standardized format to easily obtain the information automatically.\r\nScreenshotDistill is a publication format for scientific and technical writing, native to the web.\r\nLearn more about using Distill at https://rstudio.github.io/distill.\r\n\r\n\r\n\r\n",
+    "preview": {},
+    "last_modified": "2021-01-17T11:04:48+01:00",
+    "input_file": "automatically-obtaining-data-from-damodarans-website-with-r.utf8.md"
+  },
+  {
+    "path": "posts/2021-01-16-quandl-zacks-and-r/",
+    "title": "Quandl, Zacks, and R",
+    "description": "A short description of the post.",
+    "author": [
+      {
+        "name": "Christoph Jäckel",
+        "url": {}
+      }
+    ],
+    "date": "2021-01-16",
+    "categories": [],
+    "contents": "\r\nDistill is a publication format for scientific and technical writing, native to the web.\r\nLearn more about using Distill at https://rstudio.github.io/distill. Test.\r\n\r\n\r\n\r\n",
+    "preview": {},
+    "last_modified": "2021-01-16T13:39:42+01:00",
+    "input_file": {}
+  },
+  {
     "path": "posts/welcome/",
     "title": "Welcome to My Blog",
     "description": "Welcome to our new blog, My Blog. We hope you enjoy \nreading what we have to say!",
     "author": [
       {
-        "name": "Nora Jones",
-        "url": "https://example.com/norajones"
+        "name": "Christoph Jäckel",
+        "url": {}
       }
     ],
     "date": "2020-12-20",
     "categories": [],
-    "contents": "\r\n\r\n\r\n\r\n",
+    "contents": "\r\nTest\r\n\r\n\r\n\r\n",
     "preview": {},
-    "last_modified": "2020-12-20T13:16:32+01:00",
+    "last_modified": "2021-01-16T13:40:49+01:00",
     "input_file": {}
   }
 ]

@@ -1,0 +1,30 @@
+---
+title: "Automatically obtaining data from Damodaran's website with R"
+description: |
+  A quick tutorial on how to obtain data automatically from Damodaran's website with R.
+author:
+  - name: Christoph Jäckel
+base_url: https://github.com/christophj/cjaeckel.github.io/
+preview: images/Damodaran_vebitda_screenshot.PNG
+date: 01-17-2021
+output:
+  distill::distill_article:
+    self_contained: false
+categories:
+  - R
+  - Data
+---
+
+NYU professor Aswath Damodaran has very helpful data about many important financial market topics such as discount rates, valuation multiples, etc. on his [website](http://pages.stern.nyu.edu/~adamodar/New_Home_Page/dataarchived.html). However, the data is saved in Excel files that do not necessarily have a standardized format to easily obtain the information automatically. 
+
+![Screenshot](Damodaran_vebitda_screenshot.PNG)
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+Distill is a publication format for scientific and technical writing, native to the web.
+
+Learn more about using Distill at <https://rstudio.github.io/distill>.
+
+

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
+  <channel>
+    <title>Uncertain times</title>
+    <link>https://github.com/christophj/cjaeckel.github.io/</link>
+    <atom:link href="https://github.com/christophj/cjaeckel.github.io/index.xml" rel="self" type="application/rss+xml"/>
+    <description>My personal blog about finance, valuations, economics,
+statistics and whatever comes to mind.
+</description>
+    <generator>Distill</generator>
+    <lastBuildDate>Sat, 16 Jan 2021 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Automatically obtaining data from Damodaran's website with R</title>
+      <dc:creator>Christoph Jäckel</dc:creator>
+      <link>https://github.com/christophj/cjaeckel.github.io/posts/2021-01-17-automatically-obtaining-data-from-damodarans-website-with-r</link>
+      <description>A quick tutorial on how to obtain data automatically from Damodaran's website with R.</description>
+      <category>R</category>
+      <category>Data</category>
+      <guid>https://github.com/christophj/cjaeckel.github.io/posts/2021-01-17-automatically-obtaining-data-from-damodarans-website-with-r</guid>
+      <pubDate>Sat, 16 Jan 2021 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Quandl, Zacks, and R</title>
+      <dc:creator>Christoph Jäckel</dc:creator>
+      <link>https://github.com/christophj/cjaeckel.github.io/posts/2021-01-16-quandl-zacks-and-r</link>
+      <description>A short description of the post.</description>
+      <guid>https://github.com/christophj/cjaeckel.github.io/posts/2021-01-16-quandl-zacks-and-r</guid>
+      <pubDate>Sat, 16 Jan 2021 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Welcome to My Blog</title>
+      <dc:creator>Christoph Jäckel</dc:creator>
+      <link>https://github.com/christophj/cjaeckel.github.io/posts/welcome</link>
+      <description>Welcome to our new blog, My Blog. We hope you enjoy 
+reading what we have to say!</description>
+      <guid>https://github.com/christophj/cjaeckel.github.io/posts/welcome</guid>
+      <pubDate>Sun, 20 Dec 2020 00:00:00 +0000</pubDate>
+    </item>
+  </channel>
+</rss>

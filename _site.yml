@@ -1,7 +1,9 @@
-name: "Blog"
-title: "My Blog"
+name: "uncertain-times"
+title: "Uncertain times"
 description: |
-  My Blog
+  My personal blog about finance, valuations, economics,
+  statistics and whatever comes to mind.
+base_url: https://github.com/christophj/cjaeckel.github.io/
 output_dir: "docs"
 navbar:
   right:
@@ -9,4 +11,9 @@ navbar:
       href: index.html
     - text: "About"
       href: about.html
+    - icon: fa fa-rss
+      href: index.xml
 output: distill::distill_article
+collections:
+  posts:
+    citations: false

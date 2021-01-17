@@ -1,9 +1,20 @@
 ---
 title: "About this blog"
 description: |
-  Some additional details about the blog
+  Why bother?
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
+
+I like financial markets; so much so that I have spent five years of my life to better understand one important driver of them, discount rates, by writing a [dissertation](https://mediatum.ub.tum.de/1192155) at the Technical University of Munich. And after finishing my dissertation, I started to work in the finance industry, at [Montana Capital Partners](https://www.montana-capital-partners.eu/), a firm that is focused on secondaries in private equity. In a nutshell, I try to make good investments for our investors such as pension fund, insurance companies and sovereign wealth funds.
+
+While writing my dissertation, I had plenty of time to run data analyses on large data sets, something I not only thoroughly enjoy, but something that I also find very insightful. At my current job, I still aim to improve my work with data-driven analyses, but there is only so much time you have between internal discussions, external meetings and calls, and day-to-day tasks. 
+
+Fortunately though, my wife enjoys online shopping more than I do, which gives me a few hours a week to spend my time thinking about financial market, and related, topics and supporting my thoughts with data. I have also noticed that writing these thoughts down and presenting them to othe people forces you to a higher quality. That's why I decided to start this blog. And hopefully, some of you find it helpful. I know that most certainly I will find it helpful as I can go back to certain topics...I always find it fascinating and shocking how fast I can forget things that I looked into previously. As such, some posts will also be simple tutorials on how to do certain things in [R](https://www.r-project.org/), the data analysis software of my choice. And it's also great for blogging; this blog was created with the awesome [Distill](https://rstudio.github.io/distill/) package.
+
+Why did I choose the name of the blog "Uncertain times"? As a gentle reminder that there is only one thing for certain about the future, which after all drive current markets: that it is uncertain. So I'm very certain that the blog's title will continue to make sense...
+
+**Disclaimer:** Any opinions I express in this blog are mine and do not represent in any way the position of anyone else, including my employer.
+
