@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
   <meta name="generator" content="distill" />
-  <link rel="alternate" type="application/rss+xml" href="https://github.com/christophj/cjaeckel.github.io/index.xml" />
+  <link rel="alternate" type="application/rss+xml" href="http://www.christoph-jaeckel.com/index.xml" />
 
   <style type="text/css">
   /* Hide doc at startup (prevent jankiness while JS renders/transforms) */
@@ -2040,6 +2040,25 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <script src="site_libs/webcomponents-2.0.0/webcomponents.js"></script>
   <script src="site_libs/distill-2.2.21/template.v2.js"></script>
   <!--radix_placeholder_site_in_header-->
+  <script type="text/javascript" src="https://www.cookieconsent.com/releases/3.1.0/cookie-consent.js"></script>
+  <script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', function () {
+  cookieconsent.run({
+  'notice_banner_type':'simple',
+  'consent_type': 'express',
+  'palette': 'light',
+  'language': 'en',
+  'website_name': 'uncertain-times',
+  'cookies_policy_url': 'url',
+  'change_preferences_selector':'#CookiePreferences'
+  });});</script>
+  <script type="text/plain" cookie-consent="tracking" async src="https://www.googletagmanager.com/gtag/js?id=260566416"></script>
+  <script type="text/plain" cookie-consent="tracking">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '260566416');
+  </script>
   <!--/radix_placeholder_site_in_header-->
 
 
@@ -2319,9 +2338,16 @@ function init_posts_list() {
 <!--radix_placeholder_site_after_body-->
 <!--/radix_placeholder_site_after_body-->
 <!--radix_placeholder_appendices-->
-<div class="appendix-bottom"></div>
+<div class="appendix-bottom">
+<h3 id="updates-and-corrections">Corrections</h3>
+<p>If you see mistakes or want to suggest changes, please <a href="https://github.com/christophj/cjaeckel.github.io/issues/new">create an issue</a> on the source repository.</p>
+</div>
 <!--/radix_placeholder_appendices-->
 <!--radix_placeholder_navigation_after_body-->
+<div class="distill-site-nav distill-site-footer">
+<p>© Copyright 2021 <a href="https://www.linkedin.com/in/christoph-j%C3%A4ckel-97401127/">Christoph Jäckel</a></p>
+<p>Code shared on this website licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, v2.0</a>.</p>
+</div>
 <!--/radix_placeholder_navigation_after_body-->
 
 </body>

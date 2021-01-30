@@ -1501,7 +1501,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </ul>
 </nav>
 </div>
-<p>In the blog post “EV/EBITDA valuation multiple: the theory”, I derived the EV/EBITDA multiple from a FCFF-DCF model under some simplifying assumptions. In this post, I want to dive deeper into some empirical characteristics of the EV/EBITDA multiple. To do so, I use the <a href="https://www.quandl.com/data/RB1-Robur-Global-Select-Stock-Fundamentals/documentation?anchor=coverage-data-organization">RB1 Robur data set</a> available on Quandl, which is not freely available.</p>
+<p>In the blog post <a href="http://www.christoph-jaeckel.com/posts/2021-01-17-evebitda-valuation-multiple-the-theory/">EV/EBITDA valuation multiple: the theory</a>, I derived the EV/EBITDA multiple from a FCFF-DCF model under some simplifying assumptions. In this post, I want to dive deeper into some empirical characteristics of the EV/EBITDA multiple. To do so, I use the <a href="https://www.quandl.com/data/RB1-Robur-Global-Select-Stock-Fundamentals/documentation?anchor=coverage-data-organization">RB1 Robur data set</a> available on Quandl, which is not freely available.</p>
 <p>In the section “Download and formatting the data”, I describe how I got the data into R. Readers that are only interested in the results can skip this section. As the documentation of the data set is rather extensive, I will not go into too much detail about it in this post (which companies are covered, for how long, etc.).</p>
 <h2 id="download-and-formatting-the-data">Download and formatting the data</h2>
 <p>I downloaded the data from Quandl on 10/24/2020. I struggled to pull all the data directly into one data set with the R package, so I ran a for loop to download the data sets for each individual ticker, which ran half a day. The code is saved below for reference, but there is probably an easier and better way to do this. If you know it, let me know!</p>
@@ -1755,7 +1755,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#cpsxqdgzob .gt_table {
+#vbuubmkdqx .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1780,7 +1780,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-left-color: #D3D3D3;
 }
 
-#cpsxqdgzob .gt_heading {
+#vbuubmkdqx .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1792,7 +1792,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-right-color: #D3D3D3;
 }
 
-#cpsxqdgzob .gt_title {
+#vbuubmkdqx .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1802,7 +1802,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-bottom-width: 0;
 }
 
-#cpsxqdgzob .gt_subtitle {
+#vbuubmkdqx .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1812,13 +1812,13 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-top-width: 0;
 }
 
-#cpsxqdgzob .gt_bottom_border {
+#vbuubmkdqx .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#cpsxqdgzob .gt_col_headings {
+#vbuubmkdqx .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1833,7 +1833,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-right-color: #D3D3D3;
 }
 
-#cpsxqdgzob .gt_col_heading {
+#vbuubmkdqx .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1853,7 +1853,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   overflow-x: hidden;
 }
 
-#cpsxqdgzob .gt_column_spanner_outer {
+#vbuubmkdqx .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1865,15 +1865,15 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   padding-right: 4px;
 }
 
-#cpsxqdgzob .gt_column_spanner_outer:first-child {
+#vbuubmkdqx .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#cpsxqdgzob .gt_column_spanner_outer:last-child {
+#vbuubmkdqx .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#cpsxqdgzob .gt_column_spanner {
+#vbuubmkdqx .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1885,7 +1885,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   width: 100%;
 }
 
-#cpsxqdgzob .gt_group_heading {
+#vbuubmkdqx .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1907,7 +1907,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   vertical-align: middle;
 }
 
-#cpsxqdgzob .gt_empty_group_heading {
+#vbuubmkdqx .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1922,15 +1922,15 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   vertical-align: middle;
 }
 
-#cpsxqdgzob .gt_from_md > :first-child {
+#vbuubmkdqx .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#cpsxqdgzob .gt_from_md > :last-child {
+#vbuubmkdqx .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#cpsxqdgzob .gt_row {
+#vbuubmkdqx .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1949,7 +1949,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   overflow-x: hidden;
 }
 
-#cpsxqdgzob .gt_stub {
+#vbuubmkdqx .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1961,7 +1961,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   padding-left: 12px;
 }
 
-#cpsxqdgzob .gt_summary_row {
+#vbuubmkdqx .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1971,7 +1971,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   padding-right: 5px;
 }
 
-#cpsxqdgzob .gt_first_summary_row {
+#vbuubmkdqx .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1981,7 +1981,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-top-color: #D3D3D3;
 }
 
-#cpsxqdgzob .gt_grand_summary_row {
+#vbuubmkdqx .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1991,7 +1991,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   padding-right: 5px;
 }
 
-#cpsxqdgzob .gt_first_grand_summary_row {
+#vbuubmkdqx .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2001,11 +2001,11 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-top-color: #D3D3D3;
 }
 
-#cpsxqdgzob .gt_striped {
+#vbuubmkdqx .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#cpsxqdgzob .gt_table_body {
+#vbuubmkdqx .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2014,7 +2014,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-bottom-color: #D3D3D3;
 }
 
-#cpsxqdgzob .gt_footnotes {
+#vbuubmkdqx .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2028,13 +2028,13 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-right-color: #D3D3D3;
 }
 
-#cpsxqdgzob .gt_footnote {
+#vbuubmkdqx .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#cpsxqdgzob .gt_sourcenotes {
+#vbuubmkdqx .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2048,46 +2048,46 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-right-color: #D3D3D3;
 }
 
-#cpsxqdgzob .gt_sourcenote {
+#vbuubmkdqx .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#cpsxqdgzob .gt_left {
+#vbuubmkdqx .gt_left {
   text-align: left;
 }
 
-#cpsxqdgzob .gt_center {
+#vbuubmkdqx .gt_center {
   text-align: center;
 }
 
-#cpsxqdgzob .gt_right {
+#vbuubmkdqx .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#cpsxqdgzob .gt_font_normal {
+#vbuubmkdqx .gt_font_normal {
   font-weight: normal;
 }
 
-#cpsxqdgzob .gt_font_bold {
+#vbuubmkdqx .gt_font_bold {
   font-weight: bold;
 }
 
-#cpsxqdgzob .gt_font_italic {
+#vbuubmkdqx .gt_font_italic {
   font-style: italic;
 }
 
-#cpsxqdgzob .gt_super {
+#vbuubmkdqx .gt_super {
   font-size: 65%;
 }
 
-#cpsxqdgzob .gt_footnote_marks {
+#vbuubmkdqx .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
-<div id="cpsxqdgzob" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+<div id="vbuubmkdqx" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
   
   <thead class="gt_col_headings">
     <tr>
@@ -2272,7 +2272,7 @@ Let’s not start the discussion here at what multiple Tesla should be valued…
 <p>By and large, the sector multiples saw a simultaneous increase over the last decade, but there are also some changes in the ordering. For example, healthcare and IT have seen large increases in their median multiples over the last decade, catapulting them to the top, while construction saw a decline.</p>
 <h2 id="drivers-of-valuation-multiples">Drivers of valuation multiples</h2>
 <p>In my opinion, the aggregation to sectors is just a shortcut of deducting valuation multiples. Software companies by and large have high cash conversion, and as high cash conversion is linked with high multiples, one can argue that a software company should trade for a high multiple. Of course, as the analysis above has shown, this is a dangerous deduction. In the case in which a company is classified as a software company but does not have high a cash conversions for some reason, simply assuming a mean or median software multiple leads to upward biased valuations.</p>
-<p>In the post “EV/EBITDA valuation multiple: the theory”, I derived the EV/EBITDA multiple from a FCFF-DCF model under some simplifying assumptions. I showed that the EV/EBITDA multiple should the higher,</p>
+<p>In the blog post <a href="http://www.christoph-jaeckel.com/posts/2021-01-17-evebitda-valuation-multiple-the-theory/">EV/EBITDA valuation multiple: the theory</a>, I derived the EV/EBITDA multiple from a FCFF-DCF model under some simplifying assumptions. I showed that the EV/EBITDA multiple should the higher,</p>
 <ul>
 <li>the higher the operational cash conversion (OCC);</li>
 <li>the higher the growth of the business;</li>

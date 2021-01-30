@@ -2,8 +2,8 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
   <channel>
     <title>Uncertain times</title>
-    <link>https://github.com/christophj/cjaeckel.github.io/</link>
-    <atom:link href="https://github.com/christophj/cjaeckel.github.io/index.xml" rel="self" type="application/rss+xml"/>
+    <link>http://www.christoph-jaeckel.com/</link>
+    <atom:link href="http://www.christoph-jaeckel.com/index.xml" rel="self" type="application/rss+xml"/>
     <description>My personal blog about finance, valuations, economics,
 statistics and whatever comes to mind.
 </description>
@@ -12,34 +12,34 @@ statistics and whatever comes to mind.
     <item>
       <title>EV/EBITDA valuation multiple: some data</title>
       <dc:creator>Christoph Jäckel</dc:creator>
-      <link>https://github.com/christophj/cjaeckel.github.io/posts/2021-01-17-evebitda-valuation-multiple-the-data</link>
+      <link>http://www.christoph-jaeckel.com/posts/2021-01-17-evebitda-valuation-multiple-the-data</link>
       <description>A closer empirical look at the EV/EBITDA multiple.</description>
       <category>Valuation</category>
       <category>Data</category>
-      <guid>https://github.com/christophj/cjaeckel.github.io/posts/2021-01-17-evebitda-valuation-multiple-the-data</guid>
+      <guid>http://www.christoph-jaeckel.com/posts/2021-01-17-evebitda-valuation-multiple-the-data</guid>
       <pubDate>Mon, 25 Jan 2021 00:00:00 +0000</pubDate>
-      <media:content url="https://github.com/christophj/cjaeckel.github.io/posts/2021-01-17-evebitda-valuation-multiple-the-data/evebitda-valuation-multiple-the-data_files/figure-html5/ggpairs_Plot-1.png" medium="image" type="image/png" width="1248" height="768"/>
+      <media:content url="http://www.christoph-jaeckel.com/posts/2021-01-17-evebitda-valuation-multiple-the-data/evebitda-valuation-multiple-the-data_files/figure-html5/ggpairs_Plot-1.png" medium="image" type="image/png" width="1248" height="768"/>
     </item>
     <item>
       <title>EV/EBITDA valuation multiple: the theory</title>
       <dc:creator>Christoph Jäckel</dc:creator>
-      <link>https://github.com/christophj/cjaeckel.github.io/posts/2021-01-17-evebitda-valuation-multiple-the-theory</link>
+      <link>http://www.christoph-jaeckel.com/posts/2021-01-17-evebitda-valuation-multiple-the-theory</link>
       <description>How to justify the use of EV/EBITDA valuation multiples with the discounted cash flow model.</description>
       <category>Valuation</category>
-      <guid>https://github.com/christophj/cjaeckel.github.io/posts/2021-01-17-evebitda-valuation-multiple-the-theory</guid>
+      <guid>http://www.christoph-jaeckel.com/posts/2021-01-17-evebitda-valuation-multiple-the-theory</guid>
       <pubDate>Wed, 20 Jan 2021 00:00:00 +0000</pubDate>
-      <media:content url="https://github.com/christophj/cjaeckel.github.io/posts/2021-01-17-evebitda-valuation-multiple-the-theory/evebitda-valuation-multiple-the-theory_files/figure-html5/Relationship_of_OCC_g_r_EV_EBITDA-1.png" medium="image" type="image/png" width="1248" height="768"/>
+      <media:content url="http://www.christoph-jaeckel.com/posts/2021-01-17-evebitda-valuation-multiple-the-theory/evebitda-valuation-multiple-the-theory_files/figure-html5/Relationship_of_OCC_g_r_EV_EBITDA-1.png" medium="image" type="image/png" width="1248" height="768"/>
     </item>
     <item>
       <title>Automatically obtaining data from Damodaran's website with R</title>
       <dc:creator>Christoph Jäckel</dc:creator>
-      <link>https://github.com/christophj/cjaeckel.github.io/posts/2021-01-17-automatically-obtaining-data-from-damodarans-website-with-r</link>
+      <link>http://www.christoph-jaeckel.com/posts/2021-01-17-automatically-obtaining-data-from-damodarans-website-with-r</link>
       <description>A quick tutorial on how to obtain data automatically from Damodaran's website with R.</description>
       <category>R</category>
       <category>Data</category>
-      <guid>https://github.com/christophj/cjaeckel.github.io/posts/2021-01-17-automatically-obtaining-data-from-damodarans-website-with-r</guid>
+      <guid>http://www.christoph-jaeckel.com/posts/2021-01-17-automatically-obtaining-data-from-damodarans-website-with-r</guid>
       <pubDate>Sun, 17 Jan 2021 00:00:00 +0000</pubDate>
-      <media:content url="https://github.com/christophj/cjaeckel.github.io/posts/2021-01-17-automatically-obtaining-data-from-damodarans-website-with-r/Damodaran_vebitda_screenshot.PNG" medium="image" type="image/png" width="2781" height="1312"/>
+      <media:content url="http://www.christoph-jaeckel.com/posts/2021-01-17-automatically-obtaining-data-from-damodarans-website-with-r/Damodaran_vebitda_screenshot.PNG" medium="image" type="image/png" width="2781" height="1312"/>
     </item>
   </channel>
 </rss>

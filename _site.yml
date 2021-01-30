@@ -3,7 +3,9 @@ title: "Uncertain times"
 description: |
   My personal blog about finance, valuations, economics,
   statistics and whatever comes to mind.
-base_url: https://github.com/christophj/cjaeckel.github.io/
+base_url: http://www.christoph-jaeckel.com/
+repository_url: https://github.com/christophj/cjaeckel.github.io
+google_analytics: "260566416"
 output_dir: "docs"
 navbar:
   right:
@@ -19,4 +21,10 @@ collections:
   posts:
     share: [twitter, linkedin]
     citations: false
+cookie_consent:
+  style: simple
+  type: express
+  palette: light
+  lang: en
+  cookies_policy: url
     
