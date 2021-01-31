@@ -17,7 +17,7 @@ categories:
 draft: false
 ---
 
-In the blog post [EV/EBITDA valuation multiple: the theory](http://www.christoph-jaeckel.com/posts/2021-01-17-evebitda-valuation-multiple-the-theory/), I derived the EV/EBITDA multiple from a FCFF-DCF model under some simplifying assumptions. In this post, I want to dive deeper into some empirical characteristics of the EV/EBITDA multiple. To do so, I use the [RB1 Robur data set](https://www.quandl.com/data/RB1-Robur-Global-Select-Stock-Fundamentals/documentation?anchor=coverage-data-organization) available on Quandl, which is not freely available.  
+In the blog post [EV/EBITDA valuation multiple: the theory](https://www.christoph-jaeckel.com/posts/2021-01-17-evebitda-valuation-multiple-the-theory/), I derived the EV/EBITDA multiple from a FCFF-DCF model under some simplifying assumptions. In this post, I want to dive deeper into some empirical characteristics of the EV/EBITDA multiple. To do so, I use the [RB1 Robur data set](https://www.quandl.com/data/RB1-Robur-Global-Select-Stock-Fundamentals/documentation?anchor=coverage-data-organization) available on Quandl, which is not freely available.  
 
 In the section "Download and formatting the data", I describe how I got the data into R. Readers that are only interested in the results can skip this section. As the documentation of the data set is rather extensive, I will not go into too much detail about it in this post (which companies are covered, for how long, etc.).
 
@@ -343,7 +343,7 @@ By and large, the sector multiples saw a simultaneous increase over the last dec
 
 In my opinion, the aggregation to sectors is just a shortcut of deducting valuation multiples. Software companies by and large have high cash conversion, and as high cash conversion is linked with high multiples, one can argue that a software company should trade for a high multiple. Of course, as the analysis above has shown, this is a dangerous deduction. In the case in which a company is classified as a software company but does not have high a cash conversions for some reason, simply assuming a mean or median software multiple leads to upward biased valuations.
 
-In the blog post [EV/EBITDA valuation multiple: the theory](http://www.christoph-jaeckel.com/posts/2021-01-17-evebitda-valuation-multiple-the-theory/), I derived the EV/EBITDA multiple from a FCFF-DCF model under some simplifying assumptions. I showed that the EV/EBITDA multiple should the higher, 
+In the blog post [EV/EBITDA valuation multiple: the theory](https://www.christoph-jaeckel.com/posts/2021-01-17-evebitda-valuation-multiple-the-theory/), I derived the EV/EBITDA multiple from a FCFF-DCF model under some simplifying assumptions. I showed that the EV/EBITDA multiple should the higher, 
 
 - the higher the operational cash conversion (OCC);
 - the higher the growth of the business;
