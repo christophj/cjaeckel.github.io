@@ -31,12 +31,10 @@ Starting with a DCF of all expected free cash flows $FCFF$, the enterprise value
 $$ EV_t = \sum_{i=t+1}^{\infty} \frac{FCFF_i}{(1+r)^i}, $$
 where $r$ is the firm-specific discount rate. For simplicity, I ignore the expectation operator $E()$.
 
-$FCFF_i$ can be rewritten as follows:
+$FCFF_i$ can be rewritten as follows:^[The attentive reader will notice that the tax is calculated based on the EBIT, the earnings *before* interest, which is incorrect, as it is in reality based on the EBT, the earnings *after* interest. In the DCF model, the tax benefits of debt and the accompanying interest are considered in the discount rate, which makes the calculation much simpler. Hence, $\tau$ has to be considered as a hypothetical tax rate, not the actual one, yet another simplification.]
 
 $$ 
-\begin{aligned}
-FCFF_i &= (EBITDA_i - DA_i) \times (1 - \tau) + DA_i - \Delta NWC_i - CAPEX_i,  \\
-\end{aligned} 
+FCFF_i = (EBITDA_i - DA_i) \times (1 - \tau) + DA_i - \Delta NWC_i - CAPEX_i,  \\
 $$
 
 where $DA$ is depreciation & amortization, $CAPEX$ is capital expenditure and $\tau$ is the tax-rate. $\Delta NWC$ is the change of the net working capital in the period. If $NWC$ increases, it will reduce $FCFF$.

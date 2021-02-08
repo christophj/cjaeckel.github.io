@@ -1,0 +1,47 @@
+---
+title: "Nomenclature of private equity"
+description: |
+  The lingo of private equity explained.
+author:
+  - name: Christoph Jäckel
+    url: {}
+date: 02-06-2021
+output:
+  distill::distill_article:
+    self_contained: false
+draft: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+[Here](https://www.investopedia.com/articles/stocks/09/abcs-of-private-equity.asp)
+[Here](http://www.allenlatta.com/glossary-of-private-equity-terms.html)
+
+Helpful for new joiners and outsiders. Rather than having to ask in the first meeting as an intern or
+
+Have a short version and a longer explanation (or an informal and formal one); have it alphabetically and maybe you can link it. Try to keep it casual...Also, show synonyms
+
+Sponsor
+
+GP
+
+LP
+
+MOIC, TVPI, multiple
+
+IRR
+
+Syndicate
+
+Carry/Carried interest, American, European, catch-up
+
+Hurdle
+
+LBO
+
+
+
+

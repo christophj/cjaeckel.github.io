@@ -1491,11 +1491,9 @@ If you want to dive into this issue a bit further, <a href="http://pages.stern.n
 </aside>
 <p>Starting with a DCF of all expected free cash flows <span class="math inline">\(FCFF\)</span>, the enterprise value at time <span class="math inline">\(t\)</span>, <span class="math inline">\(EV_t\)</span>, can be written as:</p>
 <p><span class="math display">\[ EV_t = \sum_{i=t+1}^{\infty} \frac{FCFF_i}{(1+r)^i}, \]</span> where <span class="math inline">\(r\)</span> is the firm-specific discount rate. For simplicity, I ignore the expectation operator <span class="math inline">\(E()\)</span>.</p>
-<p><span class="math inline">\(FCFF_i\)</span> can be rewritten as follows:</p>
+<p><span class="math inline">\(FCFF_i\)</span> can be rewritten as follows:<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <p><span class="math display">\[ 
-\begin{aligned}
-FCFF_i &amp;= (EBITDA_i - DA_i) \times (1 - \tau) + DA_i - \Delta NWC_i - CAPEX_i,  \\
-\end{aligned} 
+FCFF_i = (EBITDA_i - DA_i) \times (1 - \tau) + DA_i - \Delta NWC_i - CAPEX_i,  \\
 \]</span></p>
 <p>where <span class="math inline">\(DA\)</span> is depreciation &amp; amortization, <span class="math inline">\(CAPEX\)</span> is capital expenditure and <span class="math inline">\(\tau\)</span> is the tax-rate. <span class="math inline">\(\Delta NWC\)</span> is the change of the net working capital in the period. If <span class="math inline">\(NWC\)</span> increases, it will reduce <span class="math inline">\(FCFF\)</span>.</p>
 <p>This formula shows nicely why EBITDA is so prominent in private equity in the first place: it is a proxy for cash flows that is less impacted by periodic items such as D&amp;A and net working capital changes. However, one must remember that EBITDA ignores capital expenditures. As Warren Buffett apparently once asked: “Does management think the tooth fairy pays for capital expenditures?”</p>
@@ -1566,6 +1564,12 @@ EV_t &amp;= \sum_{i=t+1}^{\infty} \frac{EBITDA_i \times OCC_i \times (1-\tau)}{(
 <p>These relationships are very important to keep in mind when valuing a business with the multiple approach. For example, if you are looking at a company that has a much lower cash-generation than its peers, it should have a much lower valuation. Applying the same EV/EBITDA multiple as the peers can lead to large valuation mistakes.</p>
 <p>Furthermore, remember that we needed quite a bit of simplifying assumptions to establish the relationship between the FCFF-DCF method and the EV/EBITDA multiple. These assumptions most certainly will not hold for an actual business. For example, it is not easy to translate future growth over many periods in one reasonable assumption for <span class="math inline">\(g\)</span>.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<section class="footnotes" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><p>The attentive reader will notice that the tax is calculated based on the EBIT, the earnings <em>before</em> interest, which is incorrect, as it is in reality based on the EBT, the earnings <em>after</em> interest. In the DCF model, the tax benefits of debt and the accompanying interest are considered in the discount rate, which makes the calculation much simpler. Hence, <span class="math inline">\(\tau\)</span> has to be considered as a hypothetical tax rate, not the actual one, yet another simplification.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

@@ -1,0 +1,3657 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+  <meta name="generator" content="distill" />
+
+  <style type="text/css">
+  /* Hide doc at startup (prevent jankiness while JS renders/transforms) */
+  body {
+    visibility: hidden;
+  }
+  </style>
+
+ <!--radix_placeholder_import_source-->
+ <!--/radix_placeholder_import_source-->
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ad0000; } /* Alert */
+code span.an { color: #5e5e5e; } /* Annotation */
+code span.at { color: #20794d; } /* Attribute */
+code span.bn { color: #ad0000; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007ba5; } /* ControlFlow */
+code span.ch { color: #20794d; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #5e5e5e; } /* Comment */
+code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+code span.dt { color: #ad0000; } /* DataType */
+code span.dv { color: #ad0000; } /* DecVal */
+code span.er { color: #ad0000; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #ad0000; } /* Float */
+code span.fu { color: #4758ab; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #5e5e5e; } /* Information */
+code span.kw { color: #007ba5; } /* Keyword */
+code span.op { color: #5e5e5e; } /* Operator */
+code span.ot { color: #007ba5; } /* Other */
+code span.pp { color: #ad0000; } /* Preprocessor */
+code span.sc { color: #20794d; } /* SpecialChar */
+code span.ss { color: #20794d; } /* SpecialString */
+code span.st { color: #20794d; } /* String */
+code span.va { color: #111111; } /* Variable */
+code span.vs { color: #20794d; } /* VerbatimString */
+code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+</style>
+
+  <!--radix_placeholder_meta_tags-->
+<title>Uncertain times: The LBO value bridge</title>
+
+<meta property="description" itemprop="description" content="One of the most important valuation tools in private equity."/>
+
+<link rel="canonical" href="https://www.christoph-jaeckel.com/posts/2021-01-31-the-value-bridge/"/>
+
+<!--  https://schema.org/Article -->
+<meta property="article:published" itemprop="datePublished" content="2021-02-06"/>
+<meta property="article:created" itemprop="dateCreated" content="2021-02-06"/>
+<meta name="article:author" content="Christoph Jäckel"/>
+
+<!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
+<meta property="og:title" content="Uncertain times: The LBO value bridge"/>
+<meta property="og:type" content="article"/>
+<meta property="og:description" content="One of the most important valuation tools in private equity."/>
+<meta property="og:url" content="https://www.christoph-jaeckel.com/posts/2021-01-31-the-value-bridge/"/>
+<meta property="og:image" content="https://www.christoph-jaeckel.com/posts/2021-01-31-the-value-bridge/the-value-bridge_files/figure-html5/Puche_example_plot-1.png"/>
+<meta property="og:image:width" content="1248"/>
+<meta property="og:image:height" content="768"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:site_name" content="Uncertain times"/>
+
+<!--  https://dev.twitter.com/cards/types/summary -->
+<meta property="twitter:card" content="summary_large_image"/>
+<meta property="twitter:title" content="Uncertain times: The LBO value bridge"/>
+<meta property="twitter:description" content="One of the most important valuation tools in private equity."/>
+<meta property="twitter:url" content="https://www.christoph-jaeckel.com/posts/2021-01-31-the-value-bridge/"/>
+<meta property="twitter:image" content="https://www.christoph-jaeckel.com/posts/2021-01-31-the-value-bridge/the-value-bridge_files/figure-html5/Puche_example_plot-1.png"/>
+<meta property="twitter:image:width" content="1248"/>
+<meta property="twitter:image:height" content="768"/>
+
+<!--/radix_placeholder_meta_tags-->
+  <!--radix_placeholder_rmarkdown_metadata-->
+
+<script type="text/json" id="radix-rmarkdown-metadata">
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","categories","draft","canonical_url"]}},"value":[{"type":"character","attributes":{},"value":["The LBO value bridge"]},{"type":"character","attributes":{},"value":["One of the most important valuation tools in private equity."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Christoph Jäckel"]}]}]},{"type":"character","attributes":{},"value":["02-06-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained","code_folding"]}},"value":[{"type":"logical","attributes":{},"value":[false]},{"type":"logical","attributes":{},"value":[true]}]}]},{"type":"character","attributes":{},"value":["Valuation","R","Private Equity"]},{"type":"logical","attributes":{},"value":[false]},{"type":"character","attributes":{},"value":["https://www.christoph-jaeckel.com/posts/2021-01-31-the-value-bridge/"]}]}
+</script>
+<!--/radix_placeholder_rmarkdown_metadata-->
+  
+  <script type="text/json" id="radix-resource-manifest">
+  {"type":"character","attributes":{},"value":["Assumptions_Puche_case.PNG","Figure_2_2_Puche.PNG","the-value-bridge_files/anchor-4.2.2/anchor.min.js","the-value-bridge_files/bowser-1.9.3/bowser.min.js","the-value-bridge_files/distill-2.2.21/template.v2.js","the-value-bridge_files/figure-html5/Financial-engineering-1.png","the-value-bridge_files/figure-html5/Financial_engineering-1.png","the-value-bridge_files/figure-html5/Multiple-expansion-1.png","the-value-bridge_files/figure-html5/Multiple_expansion-1.png","the-value-bridge_files/figure-html5/Puche_example-1.png","the-value-bridge_files/figure-html5/Puche_example_plot-1.png","the-value-bridge_files/jquery-1.11.3/jquery.min.js","the-value-bridge_files/kePrint-0.0.1/kePrint.js","the-value-bridge_files/lightable-0.0.1/lightable.css","the-value-bridge_files/popper-2.6.0/popper.min.js","the-value-bridge_files/tippy-6.2.7/tippy-bundle.umd.min.js","the-value-bridge_files/tippy-6.2.7/tippy-light-border.css","the-value-bridge_files/tippy-6.2.7/tippy.css","the-value-bridge_files/tippy-6.2.7/tippy.umd.min.js","the-value-bridge_files/webcomponents-2.0.0/webcomponents.js"]}
+  </script>
+  <!--radix_placeholder_navigation_in_header-->
+<meta name="distill:offset" content="../.."/>
+
+<script type="application/javascript">
+
+  window.headroom_prevent_pin = false;
+
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+
+    // initialize headroom for banner
+    var header = $('header').get(0);
+    var headerHeight = header.offsetHeight;
+    var headroom = new Headroom(header, {
+      tolerance: 5,
+      onPin : function() {
+        if (window.headroom_prevent_pin) {
+          window.headroom_prevent_pin = false;
+          headroom.unpin();
+        }
+      }
+    });
+    headroom.init();
+    if(window.location.hash)
+      headroom.unpin();
+    $(header).addClass('headroom--transition');
+
+    // offset scroll location for banner on hash change
+    // (see: https://github.com/WickyNilliams/headroom.js/issues/38)
+    window.addEventListener("hashchange", function(event) {
+      window.scrollTo(0, window.pageYOffset - (headerHeight + 25));
+    });
+
+    // responsive menu
+    $('.distill-site-header').each(function(i, val) {
+      var topnav = $(this);
+      var toggle = topnav.find('.nav-toggle');
+      toggle.on('click', function() {
+        topnav.toggleClass('responsive');
+      });
+    });
+
+    // nav dropdowns
+    $('.nav-dropbtn').click(function(e) {
+      $(this).next('.nav-dropdown-content').toggleClass('nav-dropdown-active');
+      $(this).parent().siblings('.nav-dropdown')
+         .children('.nav-dropdown-content').removeClass('nav-dropdown-active');
+    });
+    $("body").click(function(e){
+      $('.nav-dropdown-content').removeClass('nav-dropdown-active');
+    });
+    $(".nav-dropdown").click(function(e){
+      e.stopPropagation();
+    });
+  });
+</script>
+
+<style type="text/css">
+
+/* Theme (user-documented overrideables for nav appearance) */
+
+.distill-site-nav {
+  color: rgba(255, 255, 255, 0.8);
+  background-color: #0F2E3D;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.distill-site-nav a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.distill-site-nav a:hover {
+  color: white;
+}
+
+@media print {
+  .distill-site-nav {
+    display: none;
+  }
+}
+
+.distill-site-header {
+
+}
+
+.distill-site-footer {
+
+}
+
+
+/* Site Header */
+
+.distill-site-header {
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 3;
+}
+
+.distill-site-header .nav-left {
+  display: inline-block;
+  margin-left: 8px;
+}
+
+@media screen and (max-width: 768px) {
+  .distill-site-header .nav-left {
+    margin-left: 0;
+  }
+}
+
+
+.distill-site-header .nav-right {
+  float: right;
+  margin-right: 8px;
+}
+
+.distill-site-header a,
+.distill-site-header .title {
+  display: inline-block;
+  text-align: center;
+  padding: 14px 10px 14px 10px;
+}
+
+.distill-site-header .title {
+  font-size: 18px;
+  min-width: 150px;
+}
+
+.distill-site-header .logo {
+  padding: 0;
+}
+
+.distill-site-header .logo img {
+  display: none;
+  max-height: 20px;
+  width: auto;
+  margin-bottom: -4px;
+}
+
+.distill-site-header .nav-image img {
+  max-height: 18px;
+  width: auto;
+  display: inline-block;
+  margin-bottom: -3px;
+}
+
+
+
+@media screen and (min-width: 1000px) {
+  .distill-site-header .logo img {
+    display: inline-block;
+  }
+  .distill-site-header .nav-left {
+    margin-left: 20px;
+  }
+  .distill-site-header .nav-right {
+    margin-right: 20px;
+  }
+  .distill-site-header .title {
+    padding-left: 12px;
+  }
+}
+
+
+.distill-site-header .nav-toggle {
+  display: none;
+}
+
+.nav-dropdown {
+  display: inline-block;
+  position: relative;
+}
+
+.nav-dropdown .nav-dropbtn {
+  border: none;
+  outline: none;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 16px 10px;
+  background-color: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  margin: 0;
+  margin-top: 1px;
+  z-index: 2;
+}
+
+.nav-dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 200px;
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 4px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+  z-index: 1;
+  margin-top: 2px;
+  white-space: nowrap;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.nav-dropdown-content hr {
+  margin-top: 4px;
+  margin-bottom: 4px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.nav-dropdown-active {
+  display: block;
+}
+
+.nav-dropdown-content a, .nav-dropdown-content .nav-dropdown-header {
+  color: black;
+  padding: 6px 24px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.nav-dropdown-content .nav-dropdown-header {
+  display: block;
+  padding: 5px 24px;
+  padding-bottom: 0;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: #999999;
+  white-space: nowrap;
+}
+
+.nav-dropdown:hover .nav-dropbtn {
+  color: white;
+}
+
+.nav-dropdown-content a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.nav-right .nav-dropdown-content {
+  margin-left: -45%;
+  right: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .distill-site-header a, .distill-site-header .nav-dropdown  {display: none;}
+  .distill-site-header a.nav-toggle {
+    float: right;
+    display: block;
+  }
+  .distill-site-header .title {
+    margin-left: 0;
+  }
+  .distill-site-header .nav-right {
+    margin-right: 0;
+  }
+  .distill-site-header {
+    overflow: hidden;
+  }
+  .nav-right .nav-dropdown-content {
+    margin-left: 0;
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  .distill-site-header.responsive {position: relative; min-height: 500px; }
+  .distill-site-header.responsive a.nav-toggle {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .distill-site-header.responsive a,
+  .distill-site-header.responsive .nav-dropdown {
+    display: block;
+    text-align: left;
+  }
+  .distill-site-header.responsive .nav-left,
+  .distill-site-header.responsive .nav-right {
+    width: 100%;
+  }
+  .distill-site-header.responsive .nav-dropdown {float: none;}
+  .distill-site-header.responsive .nav-dropdown-content {position: relative;}
+  .distill-site-header.responsive .nav-dropdown .nav-dropbtn {
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
+}
+
+/* Site Footer */
+
+.distill-site-footer {
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  z-index: 3;
+  margin-top: 30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  text-align: center;
+}
+
+/* Headroom */
+
+d-title {
+  padding-top: 6rem;
+}
+
+@media print {
+  d-title {
+    padding-top: 4rem;
+  }
+}
+
+.headroom {
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.headroom--transition {
+  transition: all .4s ease-in-out;
+}
+
+.headroom--unpinned {
+  top: -100px;
+}
+
+.headroom--pinned {
+  top: 0;
+}
+
+/* adjust viewport for navbar height */
+/* helps vertically center bootstrap (non-distill) content */
+.min-vh-100 {
+  min-height: calc(100vh - 100px) !important;
+}
+
+</style>
+
+<script src="../../site_libs/jquery-1.11.3/jquery.min.js"></script>
+<link href="../../site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
+<link href="../../site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
+<script src="../../site_libs/headroom-0.9.4/headroom.min.js"></script>
+<script src="../../site_libs/autocomplete-0.37.1/autocomplete.min.js"></script>
+<script src="../../site_libs/fuse-6.4.1/fuse.min.js"></script>
+
+<script type="application/javascript">
+
+function getMeta(metaName) {
+  var metas = document.getElementsByTagName('meta');
+  for (let i = 0; i < metas.length; i++) {
+    if (metas[i].getAttribute('name') === metaName) {
+      return metas[i].getAttribute('content');
+    }
+  }
+  return '';
+}
+
+function offsetURL(url) {
+  var offset = getMeta('distill:offset');
+  return offset ? offset + '/' + url : url;
+}
+
+function createFuseIndex() {
+
+  // create fuse index
+  var options = {
+    keys: [
+      { name: 'title', weight: 20 },
+      { name: 'categories', weight: 15 },
+      { name: 'description', weight: 10 },
+      { name: 'contents', weight: 5 },
+    ],
+    ignoreLocation: true,
+    threshold: 0
+  };
+  var fuse = new window.Fuse([], options);
+
+  // fetch the main search.json
+  return fetch(offsetURL('search.json'))
+    .then(function(response) {
+      if (response.status == 200) {
+        return response.json().then(function(json) {
+          // index main articles
+          json.articles.forEach(function(article) {
+            fuse.add(article);
+          });
+          // download collections and index their articles
+          return Promise.all(json.collections.map(function(collection) {
+            return fetch(offsetURL(collection)).then(function(response) {
+              if (response.status === 200) {
+                return response.json().then(function(articles) {
+                  articles.forEach(function(article) {
+                    fuse.add(article);
+                  });
+                })
+              } else {
+                return Promise.reject(
+                  new Error('Unexpected status from search index request: ' +
+                            response.status)
+                );
+              }
+            });
+          })).then(function() {
+            return fuse;
+          });
+        });
+
+      } else {
+        return Promise.reject(
+          new Error('Unexpected status from search index request: ' +
+                      response.status)
+        );
+      }
+    });
+}
+
+window.document.addEventListener("DOMContentLoaded", function (event) {
+
+  // get search element (bail if we don't have one)
+  var searchEl = window.document.getElementById('distill-search');
+  if (!searchEl)
+    return;
+
+  createFuseIndex()
+    .then(function(fuse) {
+
+      // make search box visible
+      searchEl.classList.remove('hidden');
+
+      // initialize autocomplete
+      var options = {
+        autoselect: true,
+        hint: false,
+        minLength: 2,
+      };
+      window.autocomplete(searchEl, options, [{
+        source: function(query, callback) {
+          const searchOptions = {
+            isCaseSensitive: false,
+            shouldSort: true,
+            minMatchCharLength: 2,
+            limit: 10,
+          };
+          var results = fuse.search(query, searchOptions);
+          callback(results
+            .map(function(result) { return result.item; })
+          );
+        },
+        templates: {
+          suggestion: function(suggestion) {
+            var img = suggestion.preview && Object.keys(suggestion.preview).length > 0
+              ? `<img src="${offsetURL(suggestion.preview)}"</img>`
+              : '';
+            var html = `
+              <div class="search-item">
+                <h3>${suggestion.title}</h3>
+                <div class="search-item-description">
+                  ${suggestion.description || ''}
+                </div>
+                <div class="search-item-preview">
+                  ${img}
+                </div>
+              </div>
+            `;
+            return html;
+          }
+        }
+      }]).on('autocomplete:selected', function(event, suggestion) {
+        window.location.href = offsetURL(suggestion.path);
+      });
+      // remove inline display style on autocompleter (we want to
+      // manage responsive display via css)
+      $('.algolia-autocomplete').css("display", "");
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
+
+});
+
+</script>
+
+<style type="text/css">
+
+.nav-search {
+  font-size: x-small;
+}
+
+/* Algolioa Autocomplete */
+
+.algolia-autocomplete {
+  display: inline-block;
+  margin-left: 10px;
+  vertical-align: sub;
+  background-color: white;
+  color: black;
+  padding: 6px;
+  padding-top: 8px;
+  padding-bottom: 0;
+  border-radius: 6px;
+  border: 1px #0F2E3D solid;
+  width: 180px;
+}
+
+
+@media screen and (max-width: 768px) {
+  .distill-site-nav .algolia-autocomplete {
+    display: none;
+    visibility: hidden;
+  }
+  .distill-site-nav.responsive .algolia-autocomplete {
+    display: inline-block;
+    visibility: visible;
+  }
+  .distill-site-nav.responsive .algolia-autocomplete .aa-dropdown-menu {
+    margin-left: 0;
+    width: 400px;
+    max-height: 400px;
+  }
+}
+
+.algolia-autocomplete .aa-input, .algolia-autocomplete .aa-hint {
+  width: 90%;
+  outline: none;
+  border: none;
+}
+
+.algolia-autocomplete .aa-hint {
+  color: #999;
+}
+.algolia-autocomplete .aa-dropdown-menu {
+  width: 550px;
+  max-height: 70vh;
+  overflow-x: visible;
+  overflow-y: scroll;
+  padding: 5px;
+  margin-top: 3px;
+  margin-left: -150px;
+  background-color: #fff;
+  border-radius: 5px;
+  border: 1px solid #999;
+  border-top: none;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion {
+  cursor: pointer;
+  padding: 5px 4px;
+  border-bottom: 1px solid #eee;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion:last-of-type {
+  border-bottom: none;
+  margin-bottom: 2px;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item {
+  overflow: hidden;
+  font-size: 0.8em;
+  line-height: 1.4em;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item h3 {
+  font-size: 1rem;
+  margin-block-start: 0;
+  margin-block-end: 5px;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-description {
+  display: inline-block;
+  overflow: hidden;
+  height: 2.8em;
+  width: 80%;
+  margin-right: 4%;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview {
+  display: inline-block;
+  width: 15%;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img {
+  height: 3em;
+  width: auto;
+  display: none;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img[src] {
+  display: initial;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion.aa-cursor {
+  background-color: #eee;
+}
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion em {
+  font-weight: bold;
+  font-style: normal;
+}
+
+</style>
+
+
+<!--/radix_placeholder_navigation_in_header-->
+  <!--radix_placeholder_distill-->
+
+<style type="text/css">
+
+body {
+  background-color: white;
+}
+
+.pandoc-table {
+  width: 100%;
+}
+
+.pandoc-table>caption {
+  margin-bottom: 10px;
+}
+
+.pandoc-table th:not([align]) {
+  text-align: left;
+}
+
+.pagedtable-footer {
+  font-size: 15px;
+}
+
+d-byline .byline {
+  grid-template-columns: 2fr 2fr;
+}
+
+d-byline .byline h3 {
+  margin-block-start: 1.5em;
+}
+
+d-byline .byline .authors-affiliations h3 {
+  margin-block-start: 0.5em;
+}
+
+.authors-affiliations .orcid-id {
+  width: 16px;
+  height:16px;
+  margin-left: 4px;
+  margin-right: 4px;
+  vertical-align: middle;
+  padding-bottom: 2px;
+}
+
+d-title .dt-tags {
+  margin-top: 1em;
+  grid-column: text;
+}
+
+.dt-tags .dt-tag {
+  text-decoration: none;
+  display: inline-block;
+  color: rgba(0,0,0,0.6);
+  padding: 0em 0.4em;
+  margin-right: 0.5em;
+  margin-bottom: 0.4em;
+  font-size: 70%;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 3px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+d-article table.gt_table td,
+d-article table.gt_table th {
+  border-bottom: none;
+}
+
+.html-widget {
+  margin-bottom: 2.0em;
+}
+
+.l-screen-inset {
+  padding-right: 16px;
+}
+
+.l-screen .caption {
+  margin-left: 10px;
+}
+
+.shaded {
+  background: rgb(247, 247, 247);
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.shaded .html-widget {
+  margin-bottom: 0;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.shaded .shaded-content {
+  background: white;
+}
+
+.text-output {
+  margin-top: 0;
+  line-height: 1.5em;
+}
+
+.hidden {
+  display: none !important;
+}
+
+d-article {
+  padding-top: 2.5rem;
+  padding-bottom: 30px;
+}
+
+d-appendix {
+  padding-top: 30px;
+}
+
+d-article>p>img {
+  width: 100%;
+}
+
+d-article h2 {
+  margin: 1rem 0 1.5rem 0;
+}
+
+d-article h3 {
+  margin-top: 1.5rem;
+}
+
+d-article iframe {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 2.0em;
+  width: 100%;
+}
+
+/* Tweak code blocks */
+
+d-article div.sourceCode code,
+d-article pre code {
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+}
+
+d-article pre,
+d-article div.sourceCode,
+d-article div.sourceCode pre {
+  overflow: auto;
+}
+
+d-article div.sourceCode {
+  background-color: white;
+}
+
+d-article div.sourceCode pre {
+  padding-left: 10px;
+  font-size: 12px;
+  border-left: 2px solid rgba(0,0,0,0.1);
+}
+
+d-article pre {
+  font-size: 12px;
+  color: black;
+  background: none;
+  margin-top: 0;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+d-article pre a {
+  border-bottom: none;
+}
+
+d-article pre a:hover {
+  border-bottom: none;
+  text-decoration: underline;
+}
+
+d-article details {
+  grid-column: text;
+  margin-bottom: 0.8em;
+}
+
+@media(min-width: 768px) {
+
+d-article pre,
+d-article div.sourceCode,
+d-article div.sourceCode pre {
+  overflow: visible !important;
+}
+
+d-article div.sourceCode pre {
+  padding-left: 18px;
+  font-size: 14px;
+}
+
+d-article pre {
+  font-size: 14px;
+}
+
+}
+
+figure img.external {
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+  padding: 18px;
+  box-sizing: border-box;
+}
+
+/* CSS for d-contents */
+
+.d-contents {
+  grid-column: text;
+  color: rgba(0,0,0,0.8);
+  font-size: 0.9em;
+  padding-bottom: 1em;
+  margin-bottom: 1em;
+  padding-bottom: 0.5em;
+  margin-bottom: 1em;
+  padding-left: 0.25em;
+  justify-self: start;
+}
+
+@media(min-width: 1000px) {
+  .d-contents.d-contents-float {
+    height: 0;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    justify-self: center;
+    padding-right: 3em;
+    padding-left: 2em;
+  }
+}
+
+.d-contents nav h3 {
+  font-size: 18px;
+  margin-top: 0;
+  margin-bottom: 1em;
+}
+
+.d-contents li {
+  list-style-type: none
+}
+
+.d-contents nav > ul {
+  padding-left: 0;
+}
+
+.d-contents ul {
+  padding-left: 1em
+}
+
+.d-contents nav ul li {
+  margin-top: 0.6em;
+  margin-bottom: 0.2em;
+}
+
+.d-contents nav a {
+  font-size: 13px;
+  border-bottom: none;
+  text-decoration: none
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.d-contents nav a:hover {
+  text-decoration: underline solid rgba(0, 0, 0, 0.6)
+}
+
+.d-contents nav > ul > li > a {
+  font-weight: 600;
+}
+
+.d-contents nav > ul > li > ul {
+  font-weight: inherit;
+}
+
+.d-contents nav > ul > li > ul > li {
+  margin-top: 0.2em;
+}
+
+
+.d-contents nav ul {
+  margin-top: 0;
+  margin-bottom: 0.25em;
+}
+
+.d-article-with-toc h2:nth-child(2) {
+  margin-top: 0;
+}
+
+
+/* Figure */
+
+.figure {
+  position: relative;
+  margin-bottom: 2.5em;
+  margin-top: 1.5em;
+}
+
+.figure img {
+  width: 100%;
+}
+
+.figure .caption {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 12px;
+  line-height: 1.5em;
+}
+
+.figure img.external {
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+  padding: 18px;
+  box-sizing: border-box;
+}
+
+.figure .caption a {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.figure .caption b,
+.figure .caption strong, {
+  font-weight: 600;
+  color: rgba(0, 0, 0, 1.0);
+}
+
+/* Citations */
+
+d-article .citation {
+  color: inherit;
+  cursor: inherit;
+}
+
+div.hanging-indent{
+  margin-left: 1em; text-indent: -1em;
+}
+
+/* Citation hover box */
+
+.tippy-box[data-theme~=light-border] {
+  background-color: rgba(250, 250, 250, 0.95);
+}
+
+.tippy-content > p {
+  margin-bottom: 0;
+  padding: 2px;
+}
+
+
+/* Tweak 1000px media break to show more text */
+
+@media(min-width: 1000px) {
+  .base-grid,
+  distill-header,
+  d-title,
+  d-abstract,
+  d-article,
+  d-appendix,
+  distill-appendix,
+  d-byline,
+  d-footnote-list,
+  d-citation-list,
+  distill-footer {
+    grid-template-columns: [screen-start] 1fr [page-start kicker-start] 80px [middle-start] 50px [text-start kicker-end] 65px 65px 65px 65px 65px 65px 65px 65px [text-end gutter-start] 65px [middle-end] 65px [page-end gutter-end] 1fr [screen-end];
+    grid-column-gap: 16px;
+  }
+
+  .grid {
+    grid-column-gap: 16px;
+  }
+
+  d-article {
+    font-size: 1.06rem;
+    line-height: 1.7em;
+  }
+  figure .caption, .figure .caption, figure figcaption {
+    font-size: 13px;
+  }
+}
+
+@media(min-width: 1180px) {
+  .base-grid,
+  distill-header,
+  d-title,
+  d-abstract,
+  d-article,
+  d-appendix,
+  distill-appendix,
+  d-byline,
+  d-footnote-list,
+  d-citation-list,
+  distill-footer {
+    grid-template-columns: [screen-start] 1fr [page-start kicker-start] 60px [middle-start] 60px [text-start kicker-end] 60px 60px 60px 60px 60px 60px 60px 60px [text-end gutter-start] 60px [middle-end] 60px [page-end gutter-end] 1fr [screen-end];
+    grid-column-gap: 32px;
+  }
+
+  .grid {
+    grid-column-gap: 32px;
+  }
+}
+
+
+/* Get the citation styles for the appendix (not auto-injected on render since
+   we do our own rendering of the citation appendix) */
+
+d-appendix .citation-appendix,
+.d-appendix .citation-appendix {
+  font-size: 11px;
+  line-height: 15px;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  padding-left: 18px;
+  border: 1px solid rgba(0,0,0,0.1);
+  background: rgba(0, 0, 0, 0.02);
+  padding: 10px 18px;
+  border-radius: 3px;
+  color: rgba(150, 150, 150, 1);
+  overflow: hidden;
+  margin-top: -12px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* Include appendix styles here so they can be overridden */
+
+d-appendix {
+  contain: layout style;
+  font-size: 0.8em;
+  line-height: 1.7em;
+  margin-top: 60px;
+  margin-bottom: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  color: rgba(0,0,0,0.5);
+  padding-top: 60px;
+  padding-bottom: 48px;
+}
+
+d-appendix h3 {
+  grid-column: page-start / text-start;
+  font-size: 15px;
+  font-weight: 500;
+  margin-top: 1em;
+  margin-bottom: 0;
+  color: rgba(0,0,0,0.65);
+}
+
+d-appendix h3 + * {
+  margin-top: 1em;
+}
+
+d-appendix ol {
+  padding: 0 0 0 15px;
+}
+
+@media (min-width: 768px) {
+  d-appendix ol {
+    padding: 0 0 0 30px;
+    margin-left: -30px;
+  }
+}
+
+d-appendix li {
+  margin-bottom: 1em;
+}
+
+d-appendix a {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+d-appendix > * {
+  grid-column: text;
+}
+
+d-appendix > d-footnote-list,
+d-appendix > d-citation-list,
+d-appendix > distill-appendix {
+  grid-column: screen;
+}
+
+/* Include footnote styles here so they can be overridden */
+
+d-footnote-list {
+  contain: layout style;
+}
+
+d-footnote-list > * {
+  grid-column: text;
+}
+
+d-footnote-list a.footnote-backlink {
+  color: rgba(0,0,0,0.3);
+  padding-left: 0.5em;
+}
+
+
+
+/* Anchor.js */
+
+.anchorjs-link {
+  /*transition: all .25s linear; */
+  text-decoration: none;
+  border-bottom: none;
+}
+*:hover > .anchorjs-link {
+  margin-left: -1.125em !important;
+  text-decoration: none;
+  border-bottom: none;
+}
+
+/* Social footer */
+
+.social_footer {
+  margin-top: 30px;
+  margin-bottom: 0;
+  color: rgba(0,0,0,0.67);
+}
+
+.disqus-comments {
+  margin-right: 30px;
+}
+
+.disqus-comment-count {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+
+#disqus_thread {
+  margin-top: 30px;
+}
+
+.article-sharing a {
+  border-bottom: none;
+  margin-right: 8px;
+}
+
+.article-sharing a:hover {
+  border-bottom: none;
+}
+
+.sidebar-section.subscribe {
+  font-size: 12px;
+  line-height: 1.6em;
+}
+
+.subscribe p {
+  margin-bottom: 0.5em;
+}
+
+
+.article-footer .subscribe {
+  font-size: 15px;
+  margin-top: 45px;
+}
+
+
+.sidebar-section.custom {
+  font-size: 12px;
+  line-height: 1.6em;
+}
+
+.custom p {
+  margin-bottom: 0.5em;
+}
+
+/* Styles for listing layout (hide title) */
+.layout-listing d-title, .layout-listing .d-title {
+  display: none;
+}
+
+/* Styles for posts lists (not auto-injected) */
+
+
+.posts-with-sidebar {
+  padding-left: 45px;
+  padding-right: 45px;
+}
+
+.posts-list .description h2,
+.posts-list .description p {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+.posts-list .description h2 {
+  font-weight: 700;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.posts-list h2.post-tag {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding-bottom: 12px;
+}
+.posts-list {
+  margin-top: 60px;
+  margin-bottom: 24px;
+}
+
+.posts-list .post-preview {
+  text-decoration: none;
+  overflow: hidden;
+  display: block;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 24px 0;
+}
+
+.post-preview-last {
+  border-bottom: none !important;
+}
+
+.posts-list .posts-list-caption {
+  grid-column: screen;
+  font-weight: 400;
+}
+
+.posts-list .post-preview h2 {
+  margin: 0 0 6px 0;
+  line-height: 1.2em;
+  font-style: normal;
+  font-size: 24px;
+}
+
+.posts-list .post-preview p {
+  margin: 0 0 12px 0;
+  line-height: 1.4em;
+  font-size: 16px;
+}
+
+.posts-list .post-preview .thumbnail {
+  box-sizing: border-box;
+  margin-bottom: 24px;
+  position: relative;
+  max-width: 500px;
+}
+.posts-list .post-preview img {
+  width: 100%;
+  display: block;
+}
+
+.posts-list .metadata {
+  font-size: 12px;
+  line-height: 1.4em;
+  margin-bottom: 18px;
+}
+
+.posts-list .metadata > * {
+  display: inline-block;
+}
+
+.posts-list .metadata .publishedDate {
+  margin-right: 2em;
+}
+
+.posts-list .metadata .dt-authors {
+  display: block;
+  margin-top: 0.3em;
+  margin-right: 2em;
+}
+
+.posts-list .dt-tags {
+  display: block;
+  line-height: 1em;
+}
+
+.posts-list .dt-tags .dt-tag {
+  display: inline-block;
+  color: rgba(0,0,0,0.6);
+  padding: 0.3em 0.4em;
+  margin-right: 0.2em;
+  margin-bottom: 0.4em;
+  font-size: 60%;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 3px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.posts-list img {
+  opacity: 1;
+}
+
+.posts-list img[data-src] {
+  opacity: 0;
+}
+
+.posts-more {
+  clear: both;
+}
+
+
+.posts-sidebar {
+  font-size: 16px;
+}
+
+.posts-sidebar h3 {
+  font-size: 16px;
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.sidebar-section {
+  margin-bottom: 30px;
+}
+
+.categories ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.categories li {
+  color: rgba(0, 0, 0, 0.8);
+  margin-bottom: 0;
+}
+
+.categories li>a {
+  border-bottom: none;
+}
+
+.categories li>a:hover {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.categories .active {
+  font-weight: 600;
+}
+
+.categories .category-count {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+
+@media(min-width: 768px) {
+  .posts-list .post-preview h2 {
+    font-size: 26px;
+  }
+  .posts-list .post-preview .thumbnail {
+    float: right;
+    width: 30%;
+    margin-bottom: 0;
+  }
+  .posts-list .post-preview .description {
+    float: left;
+    width: 45%;
+  }
+  .posts-list .post-preview .metadata {
+    float: left;
+    width: 20%;
+    margin-top: 8px;
+  }
+  .posts-list .post-preview p {
+    margin: 0 0 12px 0;
+    line-height: 1.5em;
+    font-size: 16px;
+  }
+  .posts-with-sidebar .posts-list {
+    float: left;
+    width: 75%;
+  }
+  .posts-with-sidebar .posts-sidebar {
+    float: right;
+    width: 20%;
+    margin-top: 60px;
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+}
+
+
+/* Improve display for browsers without grid (IE/Edge <= 15) */
+
+.downlevel {
+  line-height: 1.6em;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+  margin: 0;
+}
+
+.downlevel .d-title {
+  padding-top: 6rem;
+  padding-bottom: 1.5rem;
+}
+
+.downlevel .d-title h1 {
+  font-size: 50px;
+  font-weight: 700;
+  line-height: 1.1em;
+  margin: 0 0 0.5rem;
+}
+
+.downlevel .d-title p {
+  font-weight: 300;
+  font-size: 1.2rem;
+  line-height: 1.55em;
+  margin-top: 0;
+}
+
+.downlevel .d-byline {
+  padding-top: 0.8em;
+  padding-bottom: 0.8em;
+  font-size: 0.8rem;
+  line-height: 1.8em;
+}
+
+.downlevel .section-separator {
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.downlevel .d-article {
+  font-size: 1.06rem;
+  line-height: 1.7em;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+}
+
+
+.downlevel .d-appendix {
+  padding-left: 0;
+  padding-right: 0;
+  max-width: none;
+  font-size: 0.8em;
+  line-height: 1.7em;
+  margin-bottom: 0;
+  color: rgba(0,0,0,0.5);
+  padding-top: 40px;
+  padding-bottom: 48px;
+}
+
+.downlevel .footnotes ol {
+  padding-left: 13px;
+}
+
+.downlevel .base-grid,
+.downlevel .distill-header,
+.downlevel .d-title,
+.downlevel .d-abstract,
+.downlevel .d-article,
+.downlevel .d-appendix,
+.downlevel .distill-appendix,
+.downlevel .d-byline,
+.downlevel .d-footnote-list,
+.downlevel .d-citation-list,
+.downlevel .distill-footer,
+.downlevel .appendix-bottom,
+.downlevel .posts-container {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+@media(min-width: 768px) {
+  .downlevel .base-grid,
+  .downlevel .distill-header,
+  .downlevel .d-title,
+  .downlevel .d-abstract,
+  .downlevel .d-article,
+  .downlevel .d-appendix,
+  .downlevel .distill-appendix,
+  .downlevel .d-byline,
+  .downlevel .d-footnote-list,
+  .downlevel .d-citation-list,
+  .downlevel .distill-footer,
+  .downlevel .appendix-bottom,
+  .downlevel .posts-container {
+  padding-left: 150px;
+  padding-right: 150px;
+  max-width: 900px;
+}
+}
+
+.downlevel pre code {
+  display: block;
+  border-left: 2px solid rgba(0, 0, 0, .1);
+  padding: 0 0 0 20px;
+  font-size: 14px;
+}
+
+.downlevel code, .downlevel pre {
+  color: black;
+  background: none;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+.downlevel .posts-list .post-preview {
+  color: inherit;
+}
+
+
+
+</style>
+
+<script type="application/javascript">
+
+function is_downlevel_browser() {
+  if (bowser.isUnsupportedBrowser({ msie: "12", msedge: "16"},
+                                 window.navigator.userAgent)) {
+    return true;
+  } else {
+    return window.load_distill_framework === undefined;
+  }
+}
+
+// show body when load is complete
+function on_load_complete() {
+
+  // add anchors
+  if (window.anchors) {
+    window.anchors.options.placement = 'left';
+    window.anchors.add('d-article > h2, d-article > h3, d-article > h4, d-article > h5');
+  }
+
+
+  // set body to visible
+  document.body.style.visibility = 'visible';
+
+  // force redraw for leaflet widgets
+  if (window.HTMLWidgets) {
+    var maps = window.HTMLWidgets.findAll(".leaflet");
+    $.each(maps, function(i, el) {
+      var map = this.getMap();
+      map.invalidateSize();
+      map.eachLayer(function(layer) {
+        if (layer instanceof L.TileLayer)
+          layer.redraw();
+      });
+    });
+  }
+
+  // trigger 'shown' so htmlwidgets resize
+  $('d-article').trigger('shown');
+}
+
+function init_distill() {
+
+  init_common();
+
+  // create front matter
+  var front_matter = $('<d-front-matter></d-front-matter>');
+  $('#distill-front-matter').wrap(front_matter);
+
+  // create d-title
+  $('.d-title').changeElementType('d-title');
+
+  // create d-byline
+  var byline = $('<d-byline></d-byline>');
+  $('.d-byline').replaceWith(byline);
+
+  // create d-article
+  var article = $('<d-article></d-article>');
+  $('.d-article').wrap(article).children().unwrap();
+
+  // move posts container into article
+  $('.posts-container').appendTo($('d-article'));
+
+  // create d-appendix
+  $('.d-appendix').changeElementType('d-appendix');
+
+  // flag indicating that we have appendix items
+  var appendix = $('.appendix-bottom').children('h3').length > 0;
+
+  // replace footnotes with <d-footnote>
+  $('.footnote-ref').each(function(i, val) {
+    appendix = true;
+    var href = $(this).attr('href');
+    var id = href.replace('#', '');
+    var fn = $('#' + id);
+    var fn_p = $('#' + id + '>p');
+    fn_p.find('.footnote-back').remove();
+    var text = fn_p.html();
+    var dtfn = $('<d-footnote></d-footnote>');
+    dtfn.html(text);
+    $(this).replaceWith(dtfn);
+  });
+  // remove footnotes
+  $('.footnotes').remove();
+
+  // move refs into #references-listing
+  $('#references-listing').replaceWith($('#refs'));
+
+  $('h1.appendix, h2.appendix').each(function(i, val) {
+    $(this).changeElementType('h3');
+  });
+  $('h3.appendix').each(function(i, val) {
+    var id = $(this).attr('id');
+    $('.d-contents a[href="#' + id + '"]').parent().remove();
+    appendix = true;
+    $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('d-appendix'));
+  });
+
+  // show d-appendix if we have appendix content
+  $("d-appendix").css('display', appendix ? 'grid' : 'none');
+
+  // localize layout chunks to just output
+  $('.layout-chunk').each(function(i, val) {
+
+    // capture layout
+    var layout = $(this).attr('data-layout');
+
+    // apply layout to markdown level block elements
+    var elements = $(this).children().not('details, div.sourceCode, pre, script');
+    elements.each(function(i, el) {
+      var layout_div = $('<div class="' + layout + '"></div>');
+      if (layout_div.hasClass('shaded')) {
+        var shaded_content = $('<div class="shaded-content"></div>');
+        $(this).wrap(shaded_content);
+        $(this).parent().wrap(layout_div);
+      } else {
+        $(this).wrap(layout_div);
+      }
+    });
+
+
+    // unwrap the layout-chunk div
+    $(this).children().unwrap();
+  });
+
+  // remove code block used to force  highlighting css
+  $('.distill-force-highlighting-css').parent().remove();
+
+  // remove empty line numbers inserted by pandoc when using a
+  // custom syntax highlighting theme
+  $('code.sourceCode a:empty').remove();
+
+  // load distill framework
+  load_distill_framework();
+
+  // wait for window.distillRunlevel == 4 to do post processing
+  function distill_post_process() {
+
+    if (!window.distillRunlevel || window.distillRunlevel < 4)
+      return;
+
+    // hide author/affiliations entirely if we have no authors
+    var front_matter = JSON.parse($("#distill-front-matter").html());
+    var have_authors = front_matter.authors && front_matter.authors.length > 0;
+    if (!have_authors)
+      $('d-byline').addClass('hidden');
+
+    // article with toc class
+    $('.d-contents').parent().addClass('d-article-with-toc');
+
+    // strip links that point to #
+    $('.authors-affiliations').find('a[href="#"]').removeAttr('href');
+
+    // add orcid ids
+    $('.authors-affiliations').find('.author').each(function(i, el) {
+      var orcid_id = front_matter.authors[i].orcidID;
+      if (orcid_id) {
+        var a = $('<a></a>');
+        a.attr('href', 'https://orcid.org/' + orcid_id);
+        var img = $('<img></img>');
+        img.addClass('orcid-id');
+        img.attr('alt', 'ORCID ID');
+        img.attr('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==');
+        a.append(img);
+        $(this).append(a);
+      }
+    });
+
+    // hide elements of author/affiliations grid that have no value
+    function hide_byline_column(caption) {
+      $('d-byline').find('h3:contains("' + caption + '")').parent().css('visibility', 'hidden');
+    }
+
+    // affiliations
+    var have_affiliations = false;
+    for (var i = 0; i<front_matter.authors.length; ++i) {
+      var author = front_matter.authors[i];
+      if (author.affiliation !== "&nbsp;") {
+        have_affiliations = true;
+        break;
+      }
+    }
+    if (!have_affiliations)
+      $('d-byline').find('h3:contains("Affiliations")').css('visibility', 'hidden');
+
+    // published date
+    if (!front_matter.publishedDate)
+      hide_byline_column("Published");
+
+    // document object identifier
+    var doi = $('d-byline').find('h3:contains("DOI")');
+    var doi_p = doi.next().empty();
+    if (!front_matter.doi) {
+      // if we have a citation and valid citationText then link to that
+      if ($('#citation').length > 0 && front_matter.citationText) {
+        doi.html('Citation');
+        $('<a href="#citation"></a>')
+          .text(front_matter.citationText)
+          .appendTo(doi_p);
+      } else {
+        hide_byline_column("DOI");
+      }
+    } else {
+      $('<a></a>')
+         .attr('href', "https://doi.org/" + front_matter.doi)
+         .html(front_matter.doi)
+         .appendTo(doi_p);
+    }
+
+     // change plural form of authors/affiliations
+    if (front_matter.authors.length === 1) {
+      var grid = $('.authors-affiliations');
+      grid.children('h3:contains("Authors")').text('Author');
+      grid.children('h3:contains("Affiliations")').text('Affiliation');
+    }
+
+    // remove d-appendix and d-footnote-list local styles
+    $('d-appendix > style:first-child').remove();
+    $('d-footnote-list > style:first-child').remove();
+
+    // move appendix-bottom entries to the bottom
+    $('.appendix-bottom').appendTo('d-appendix').children().unwrap();
+    $('.appendix-bottom').remove();
+
+    // hoverable references
+    $('span.citation[data-cites]').each(function() {
+      var refHtml = $('#ref-' + $(this).attr('data-cites')).html();
+      window.tippy(this, {
+        allowHTML: true,
+        content: refHtml,
+        maxWidth: 500,
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'light-border',
+        placement: 'bottom-start'
+      });
+    });
+
+    // clear polling timer
+    clearInterval(tid);
+
+    // show body now that everything is ready
+    on_load_complete();
+  }
+
+  var tid = setInterval(distill_post_process, 50);
+  distill_post_process();
+
+}
+
+function init_downlevel() {
+
+  init_common();
+
+   // insert hr after d-title
+  $('.d-title').after($('<hr class="section-separator"/>'));
+
+  // check if we have authors
+  var front_matter = JSON.parse($("#distill-front-matter").html());
+  var have_authors = front_matter.authors && front_matter.authors.length > 0;
+
+  // manage byline/border
+  if (!have_authors)
+    $('.d-byline').remove();
+  $('.d-byline').after($('<hr class="section-separator"/>'));
+  $('.d-byline a').remove();
+
+  // remove toc
+  $('.d-contents').remove();
+
+  // move appendix elements
+  $('h1.appendix, h2.appendix').each(function(i, val) {
+    $(this).changeElementType('h3');
+  });
+  $('h3.appendix').each(function(i, val) {
+    $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('.d-appendix'));
+  });
+
+
+  // inject headers into references and footnotes
+  var refs_header = $('<h3></h3>');
+  refs_header.text('References');
+  $('#refs').prepend(refs_header);
+
+  var footnotes_header = $('<h3></h3');
+  footnotes_header.text('Footnotes');
+  $('.footnotes').children('hr').first().replaceWith(footnotes_header);
+
+  // move appendix-bottom entries to the bottom
+  $('.appendix-bottom').appendTo('.d-appendix').children().unwrap();
+  $('.appendix-bottom').remove();
+
+  // remove appendix if it's empty
+  if ($('.d-appendix').children().length === 0)
+    $('.d-appendix').remove();
+
+  // prepend separator above appendix
+  $('.d-appendix').before($('<hr class="section-separator" style="clear: both"/>'));
+
+  // trim code
+  $('pre>code').each(function(i, val) {
+    $(this).html($.trim($(this).html()));
+  });
+
+  // move posts-container right before article
+  $('.posts-container').insertBefore($('.d-article'));
+
+  $('body').addClass('downlevel');
+
+  on_load_complete();
+}
+
+
+function init_common() {
+
+  // jquery plugin to change element types
+  (function($) {
+    $.fn.changeElementType = function(newType) {
+      var attrs = {};
+
+      $.each(this[0].attributes, function(idx, attr) {
+        attrs[attr.nodeName] = attr.nodeValue;
+      });
+
+      this.replaceWith(function() {
+        return $("<" + newType + "/>", attrs).append($(this).contents());
+      });
+    };
+  })(jQuery);
+
+  // prevent underline for linked images
+  $('a > img').parent().css({'border-bottom' : 'none'});
+
+  // mark non-body figures created by knitr chunks as 100% width
+  $('.layout-chunk').each(function(i, val) {
+    var figures = $(this).find('img, .html-widget');
+    if ($(this).attr('data-layout') !== "l-body") {
+      figures.css('width', '100%');
+    } else {
+      figures.css('max-width', '100%');
+      figures.filter("[width]").each(function(i, val) {
+        var fig = $(this);
+        fig.css('width', fig.attr('width') + 'px');
+      });
+
+    }
+  });
+
+  // auto-append index.html to post-preview links in file: protocol
+  // and in rstudio ide preview
+  $('.post-preview').each(function(i, val) {
+    if (window.location.protocol === "file:")
+      $(this).attr('href', $(this).attr('href') + "index.html");
+  });
+
+  // get rid of index.html references in header
+  if (window.location.protocol !== "file:") {
+    $('.distill-site-header a[href]').each(function(i,val) {
+      $(this).attr('href', $(this).attr('href').replace("index.html", "./"));
+    });
+  }
+
+  // add class to pandoc style tables
+  $('tr.header').parent('thead').parent('table').addClass('pandoc-table');
+  $('.kable-table').children('table').addClass('pandoc-table');
+
+  // add figcaption style to table captions
+  $('caption').parent('table').addClass("figcaption");
+
+  // initialize posts list
+  if (window.init_posts_list)
+    window.init_posts_list();
+
+  // implmement disqus comment link
+  $('.disqus-comment-count').click(function() {
+    window.headroom_prevent_pin = true;
+    $('#disqus_thread').toggleClass('hidden');
+    if (!$('#disqus_thread').hasClass('hidden')) {
+      var offset = $(this).offset();
+      $(window).resize();
+      $('html, body').animate({
+        scrollTop: offset.top - 35
+      });
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  if (is_downlevel_browser())
+    init_downlevel();
+  else
+    window.addEventListener('WebComponentsReady', init_distill);
+});
+
+</script>
+
+<!--/radix_placeholder_distill-->
+  <script src="../../site_libs/kePrint-0.0.1/kePrint.js"></script>
+  <link href="../../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+  <script src="../../site_libs/jquery-1.11.3/jquery.min.js"></script>
+  <script src="../../site_libs/popper-2.6.0/popper.min.js"></script>
+  <link href="../../site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
+  <link href="../../site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
+  <script src="../../site_libs/tippy-6.2.7/tippy.umd.min.js"></script>
+  <script src="../../site_libs/anchor-4.2.2/anchor.min.js"></script>
+  <script src="../../site_libs/bowser-1.9.3/bowser.min.js"></script>
+  <script src="../../site_libs/webcomponents-2.0.0/webcomponents.js"></script>
+  <script src="../../site_libs/distill-2.2.21/template.v2.js"></script>
+  <!--radix_placeholder_site_in_header-->
+<script type="text/javascript" src="https://www.cookieconsent.com/releases/3.1.0/cookie-consent.js"></script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({
+'notice_banner_type':'simple',
+'consent_type': 'express',
+'palette': 'light',
+'language': 'en',
+'website_name': 'uncertain-times',
+'cookies_policy_url': 'url',
+'change_preferences_selector':'#CookiePreferences'
+});});</script>
+<script type="text/plain" cookie-consent="tracking" async src="https://www.googletagmanager.com/gtag/js?id=G-J5RM2E8REJ"></script>
+<script type="text/plain" cookie-consent="tracking">
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-J5RM2E8REJ');
+</script>
+<!--/radix_placeholder_site_in_header-->
+
+
+</head>
+
+<body>
+
+<!--radix_placeholder_front_matter-->
+
+<script id="distill-front-matter" type="text/json">
+{"title":"The LBO value bridge","description":"One of the most important valuation tools in private equity.","authors":[{"author":"Christoph Jäckel","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-02-06T00:00:00.000+01:00","citationText":"Jäckel, 2021"}
+</script>
+
+<!--/radix_placeholder_front_matter-->
+<!--radix_placeholder_navigation_before_body-->
+<header class="header header--fixed" role="banner">
+<nav class="distill-site-nav distill-site-header">
+<div class="nav-left">
+<a href="../../index.html" class="title">Uncertain times</a>
+<input id="distill-search" class="nav-search hidden" type="text" placeholder="Search..."/>
+</div>
+<div class="nav-right">
+<a href="../../index.html">Home</a>
+<a href="../../about.html">About</a>
+<a href="../../index.xml">
+<i class="fa fa-rss" aria-hidden="true"></i>
+</a>
+<a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
+</div>
+</nav>
+</header>
+<!--/radix_placeholder_navigation_before_body-->
+<!--radix_placeholder_site_before_body-->
+<!--/radix_placeholder_site_before_body-->
+
+<div class="d-title">
+<h1>The LBO value bridge</h1>
+<!--radix_placeholder_categories-->
+<div class="dt-tags">
+  <a href="../../index.html#category:Valuation" class="dt-tag">Valuation</a>
+  <a href="../../index.html#category:R" class="dt-tag">R</a>
+  <a href="../../index.html#category:Private_Equity" class="dt-tag">Private Equity</a>
+</div>
+<!--/radix_placeholder_categories-->
+<p><p>One of the most important valuation tools in private equity.</p></p>
+</div>
+
+<div class="d-byline">
+  Christoph Jäckel  
+  
+<br/>02-06-2021
+</div>
+
+<div class="d-article">
+<p>A key question in private equity is how a fund manager (general partner, or “GP”) generates value. With most key questions in life, there is no simple answer and fund managers around the globe will come up with their own ones. By having a great network, by selecting the right deals, by being able to generate proprietary deal flow, by improving the businesses operationally, by prettying them up for a successful exit, by identifying sector trends, etc. There are so many answers to the question and each GP has their own answer in how they try to return more capital to their investors than they took.</p>
+<p>However, for investors it is important to have a framework to measure value creation consistently. Only then can they make meaningful comparisons between different LBOs, funds and GPs. Fortunately, such a framework exists: the LBO value bridge, which splits the overall gain or loss made on an investment into a combination of the following factors:</p>
+<ol type="1">
+<li><em>EBITDA growth:</em> either by top-line growth or margin improvements;</li>
+<li><em>Change in the EV/EBITDA valuation multiple:</em> by selling for a higher or lower multiple than what the business was acquired for;</li>
+<li><em>Changes in net debt/cash:</em> by reducing net debt so that a larger share of the enterprise value ends up with the fund (FCF effect);</li>
+<li><em>Leverage</em></li>
+</ol>
+<p>In this blog post, I show how to calculate these factors for an LBO. I then run through a couple of examples.</p>
+<h2 id="how-to-calculate-the-value-creation-factors-for-an-lbo">How to calculate the value creation factors for an LBO</h2>
+<h3 id="derivation">Derivation</h3>
+<p>The goal is to explain the total net proceeds or gains to equity investors during the holding period, <span class="math inline">\(TNP\)</span>, i.e., the difference between the equity proceeds to equity holders at exit, <span class="math inline">\(E_T\)</span>, and the invested cost of equity at entry, <span class="math inline">\(E_t\)</span>, as well as any interim dividends and equity injections:<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<aside>
+Throughout this blog post, I draw heavily from <a href="https://www.springer.com/gp/book/9783835008526">Daniel Pindur’s</a> and <a href="https://mediatum.ub.tum.de/1293663">Benjamin Puche’s</a> dissertations, which explain the methodology and an example in greater detail. They also show empirical results for larger data sets.
+</aside>
+<p><span class="math display">\[ TNP=E_T - E_t + \sum_{n=t+1}^{T-1} E_n. \]</span></p>
+<p>The equity value at entry and exit is the difference between the enterprise value, <span class="math inline">\(EV\)</span>, and the net debt, <span class="math inline">\(ND\)</span>. For example, we can calculate <span class="math inline">\(E_T\)</span> as:</p>
+<p><span class="math display">\[ E_T = EV_T - ND_T.\]</span></p>
+<p>The enterprise value is typically expressed as the product of the EBITDA and the EV/EBITDA multiple. More generally though, we can use any cash flow measure, <span class="math inline">\(C\)</span>, and the accompanying multiple, <span class="math inline">\(m\)</span>:<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p><span class="math display">\[ E_T = m_T C_T - ND_T.\]</span></p>
+<p>Plugging the <span class="math inline">\(E_T\)</span> and <span class="math inline">\(E_t\)</span> equations into the equation to calculate <span class="math inline">\(TNP\)</span>, we get:</p>
+<p><span class="math display">\[ 
+\begin{aligned}
+TNP &amp;=E_T - E_t + \sum_{n=t+1}^{T-1} E_n \\
+   &amp;=(m_T C_T - ND_T) - (m_t C_t - ND_t) + \sum_{n=t+1}^{T-1} E_n \\
+   &amp;=(m_T C_T - m_t C_t) - (ND_t - ND_t) + \sum_{n=t+1}^{T-1} E_n \\
+\end{aligned}
+\]</span></p>
+<p>Let’s further define <span class="math inline">\(\Delta\)</span> as the change of a variable from <span class="math inline">\(t\)</span> to <span class="math inline">\(T\)</span>. For example, <span class="math inline">\(\Delta m = m_T - m_t\)</span>. Then we can rewrite the above equation:</p>
+<p><span class="math display">\[ 
+\begin{aligned}
+TNP   &amp;=((\Delta m + m_t) (\Delta C + C_t) - m_t C_t) - \Delta ND + \sum_{n=t+1}^{T-1} E_n \\
+      &amp;= m_t \Delta C + \Delta m C_t + \Delta m \Delta C + m_t C_t -m_t C_t - \Delta ND + \sum_{n=t+1}^{T-1} E_n \\
+      &amp;= m_t \Delta C + \Delta m C_t + \Delta m \Delta C - \Delta ND + \sum_{n=t+1}^{T-1} E_n \\
+\end{aligned}
+\]</span> While the above formula might look scary, it has a pretty straightforward interpretation that is easiest to see with a small example. Let’s assume a 100% equity financed transaction without any dividends or cash injections between the entry and the exit.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> Let’s assume further a fund invested 100 and got 200 back, so the total net proceeds <span class="math inline">\(TNP\)</span> are 100. Where did this gain of 100 come from? The above formula shows that it must come either from an increase of the EBITDA, an increase of the multiple, or a combination of both. There is no other explanation.</p>
+<p>Let’s assume that the company had an EBITDA at entry of 10 (<span class="math inline">\(C_t=10\)</span>). As <span class="math inline">\(EV_t=E_t=100\)</span> in this example, it follows that <span class="math inline">\(m_t=10\)</span>. What happens if the EBITDA was still the same at exit, i.e., <span class="math inline">\(C_T=10\)</span>? In this case, <span class="math inline">\(m_T\)</span> must be 20, as we know that <span class="math inline">\(EV_T=E_T=200\)</span>. The value creation came in this case exclusively from multiple expansion, the <span class="math inline">\(\Delta m C_t\)</span> part of the equation.</p>
+<p>If we assume instead that the EBITDA increased to 20 until exit, the exit multiple would have been <span class="math inline">\(m_T=10\)</span> and the value creation would have come exclusively from the EBITDA increase, what is often called <em>operational improvements</em>.</p>
+<p>In reality, it is almost always a combination of both an increase in EBITDA and multiple expansion. As a result, there is a part of the value creation that cannot be allocated unambiguously to either the EBITDA increase or the multiple expansion. This is the <span class="math inline">\(\Delta m \Delta C\)</span> part of the equation.</p>
+<h3 id="further-required-adjustments">Further required adjustments</h3>
+<p>In the previous section, I have shown how to break up the total net gains for an equity investor into three components (and a combination component):<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<ol type="1">
+<li><em>EBITDA growth:</em> <span class="math inline">\(m_t \Delta C\)</span></li>
+<li><em>Change in the EV/EBITDA valuation multiple:</em> <span class="math inline">\(\Delta m C_t\)</span></li>
+<li><em>Changes in net debt/cash:</em> <span class="math inline">\(\Delta ND\)</span></li>
+<li><em>A combination of 1. and 2.:</em> <span class="math inline">\(\Delta m \Delta C\)</span></li>
+</ol>
+<p>So far, all calculations are in absolute values. Practitioners though typically think in terms of money multiples, as it makes a comparison between LBOs much easier. Did a GP do a good job that generated net gains of USD 100 million? Well, we don’t know, as we don’t know how much money was invested in the first place. However, if we scale the net gains by the invested capital and calculate the multiple, it becomes much easier: if they invested USD 10 million, and made 11x, it looks like a great deal; if they invested USD 1 billion, and made 1.1x, it doesn’t look so good anymore.</p>
+<p>However, even looking at the multiple can be misleading as we have so far ignored another very important value driver of LBOs, leverage. To understand why leverage is so important, let’s compare the two LBOs in the table below.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://yihui.org/knitr/'>knitr</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://haozhu233.github.io/kableExtra/'>kableExtra</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://Rdatatable.gitlab.io/data.table'>data.table</a></span><span class='op'>)</span>
+<span class='va'>DT</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span><span class='op'>(</span>Item        <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"EV"</span>, <span class='st'>"Equity"</span>, <span class='st'>"Net debt"</span>, <span class='st'>"EBITDA"</span>, <span class='st'>"Interim cash flows"</span><span class='op'>)</span>,
+                 LBO_A_entry <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>100</span>, <span class='fl'>100</span>, <span class='fl'>0</span>, <span class='fl'>10</span>, <span class='fl'>0</span><span class='op'>)</span>,
+                 LBO_A_exit  <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>200</span>, <span class='fl'>200</span>, <span class='fl'>0</span>, <span class='fl'>20</span>, <span class='fl'>0</span><span class='op'>)</span>,
+                 LBO_B_entry <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>100</span>, <span class='fl'>10</span>, <span class='fl'>90</span>, <span class='fl'>10</span>, <span class='fl'>0</span><span class='op'>)</span>,
+                 LBO_B_exit  <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>200</span>, <span class='fl'>110</span>,<span class='fl'>90</span>, <span class='fl'>20</span>, <span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/kableExtra/man/kbl.html'>kbl</a></span><span class='op'>(</span><span class='va'>DT</span>, col.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Item"</span>, <span class='st'>"Entry"</span>, <span class='st'>"Exit"</span>, <span class='st'>"Entry"</span>, <span class='st'>"Exit"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/kableExtra/man/kable_classic.html'>kable_classic</a></span><span class='op'>(</span>full_width <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/kableExtra/man/add_header_above.html'>add_header_above</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>" "</span> <span class='op'>=</span> <span class='fl'>1</span>, <span class='st'>"LBO by Fund A"</span> <span class='op'>=</span> <span class='fl'>2</span>, <span class='st'>"LBO by Fund B"</span> <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<table class=" lightable-classic" style='font-family: "Arial Narrow", "Source Sans Pro", sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'>
+<thead>
+<tr>
+<th style="empty-cells: hide;" colspan="1">
+</th>
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #111111; margin-bottom: -1px; ">
+LBO by Fund A
+</div>
+</th>
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #111111; margin-bottom: -1px; ">
+LBO by Fund B
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+Item
+</th>
+<th style="text-align:right;">
+Entry
+</th>
+<th style="text-align:right;">
+Exit
+</th>
+<th style="text-align:right;">
+Entry
+</th>
+<th style="text-align:right;">
+Exit
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+EV
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+200
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+200
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Equity
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+200
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+110
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Net debt
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+90
+</td>
+<td style="text-align:right;">
+90
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+EBITDA
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+20
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+20
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Interim cash flows
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>In both LBOs, the exact same value creation happened: the enterprise value increased by 100, or 2x, due to a 2x increase of the EBITDA. There was no multiple expansion. Furthermore, in both LBOs, the equity value increased by 100. The only difference is the financing: the LBO of Fund A was fully equity financed, the LBO of Fund B was financed 10% with equity and 90% with debt.</p>
+<p>Now, if an investor in Fund A and one in Fund B would meet and exchange notes, which LBO would steal the show? Most certainly the LBO of Fund B, where investors made a 10x return, while the multiple on the LBO in Fund A was a measly 2x. Such is the power of leverage…However, rather than chiming in on the praise for the GP of Fund B, we want a methodology that simply shows that almost all of the <em>value creation</em> was due to the leverage.</p>
+<p>To do so, let’s start with the multiple to equity investors, or the levered multiple, <span class="math inline">\(TM_L\)</span>:</p>
+<p><span class="math display">\[ TM_L = \frac{TNP - \sum_{n=t+1}^{T-1} E_n}{\sum_{n=t}^{T-1} E_{n}^{+}}. \]</span> This formula includes now the capital injection and distribution parts to calculate the total proceeds to equity holders, as they are just as relevant: distributions during the holding period increase an investor’s gains, just as capital injections reduce them (let’s denote them with a <span class="math inline">\(+\)</span> superscript, i.e., <span class="math inline">\(E^+\)</span>). Next, I divide by all capital injections, including the initial investment at <span class="math inline">\(E_t\)</span>.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> These formulas always look a bit complicated, so let’s have a simple example to clarify: 100% of equity in a company is acquired for 100; during the holding period, additional 50 are injected in the business and 60 are paid out (e.g., through a dividend); at exit, the equity holders get 200. Then the multiple is calculated as:</p>
+<p><span class="math display">\[ TM_L = \frac{200-100-50+60}{100+50} = \frac{110}{150} = 0.7x. \]</span> It is important to keep in mind that this is the multiple on the net gains, i.e., ignoring the invested cost, in the numerator. This is different to the multiple used in every pitch book or in my example above, where the invested cost, or 1x, is added (so 1.7x in this example). The reason I use this slightly different definition, following the literature in this field, is that it allows me to calculate an unlevered multiple, <span class="math inline">\(TM_U\)</span>, from the levered multiple, <span class="math inline">\(TM_L\)</span>, applying the famous <a href="https://en.wikipedia.org/wiki/Modigliani%E2%80%93Miller_theorem">Miller/Modigliani theorem</a>:</p>
+<p><span class="math display">\[ TM_U = \frac{TM_L + r_D \frac{D}{E}}{1+\frac{D}{E}}. \]</span></p>
+<p><span class="math inline">\(r_D\)</span> are the costs of the debt over the entire investment time and <span class="math inline">\(D/E\)</span> is the average debt/equity ratio.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
+<p>Applying this formula to the above example shows that the unlevered multiple is exactly the same: <span class="math inline">\((10 + 0\times 90/10)/(1+90/10)=1\)</span>, or <span class="math inline">\(2\)</span>, if you include the invested cost.</p>
+<p>Now I have all the different parts to explain the levered multiple. To summarize, the procedure is as follows:</p>
+<ol type="1">
+<li>Start by calculating the levered multiple, <span class="math inline">\(TM_L\)</span>. Always keep in mind that this multiple does <em>not</em> include the invested cost, so a multiple of 0x does not mean a full loss of invested capital, but zero gains. A full loss would be -1x.</li>
+<li>Calculate the unlevered multiple, <span class="math inline">\(TM_U\)</span>, using the <a href="https://en.wikipedia.org/wiki/Modigliani%E2%80%93Miller_theorem">Miller/Modigliani theorem</a>.</li>
+<li>Calculate the other value creation factors. As the sum of all value creation factors must add up to the overall net gains, <span class="math inline">\(TNP - \sum_{n=t+1}^{T-1} E_n\)</span>, dividing them by the net gains will give the relative split of each value creation lever.</li>
+<li>Multiplying the percentages per value creation lever with the unlevered multiple shows it as a multiple, instead of as a percentage.</li>
+</ol>
+<p>Let’s walk through a few more realistic examples and let’s also plot the value bridge, which gives a much better intuition of the results. I promise that the next part will be more fun than this one.</p>
+<h3 id="r-implementation">R implementation</h3>
+<p>I implemented functions to calculate and plot the value creation factors in <a href="https://www.r-project.org/">R</a>. Let’s run through an example, taken from <a href="https://mediatum.ub.tum.de/1293663">Puche’s dissertation</a>.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'>#' Calculate the value creation bridge for a PE investment, splitting it up in leverage, multiple and EBITDA effect</span>
+<span class='co'>#'</span>
+<span class='co'>#' The function creates the value creation for LBOs; detailed explanation about methodology can be found in Puche (2016) and Pindur (2007).</span>
+<span class='co'>#' The split-up of the total proceeds (which are net of invested cost, i.e. the net capital gain) in multiple effect, EBITDA effect,</span>
+<span class='co'>#' combination effect and FCF effect is straightforward and best explained</span>
+<span class='co'>#' in Pindur (2007). Pindur then scales everything simply by dividing by the total proceeds so that everything adds to 1.</span>
+<span class='co'>#'</span>
+<span class='co'>#' In addition, Puche (2016, see footnote 23) focuses on the multiple, which is partly a result of leverage; hence, he</span>
+<span class='co'>#' unlevers first the multiple and the difference between the levered and unlevered mutiple is the multiple effect.</span>
+<span class='co'>#'</span>
+<span class='co'>#'@param .startEquity numeric; equity valuation at start date of the observation period (typically at entry), i.e. EV minus the debt at start point.</span>
+<span class='co'>#'                    Careful: if fund does not acquire 100 per cent of equity, you have to scale the fund's investment up.</span>
+<span class='co'>#'@param .endEquity numeric; equity valuation at end date of observation period.</span>
+<span class='co'>#'@param .startDebt numeric; debt at start date.</span>
+<span class='co'>#'@param .endDebt numeric; debt at end date.</span>
+<span class='co'>#'@param .startRev numeric; revenue at start date.</span>
+<span class='co'>#'@param .endRev numeric; revenue at end date.</span>
+<span class='co'>#'@param .startEBITDA numeric; EBITDA at start date.</span>
+<span class='co'>#'@param .endEBITDA numeric; EBITDA at end date.</span>
+<span class='co'>#'@param .interimCC numeric; interim additional equity investments. Careful with scaling, should be 100 per cent of equity.</span>
+<span class='co'>#'@param .interimDist numeric; interim distributions to equity from investments. Careful with scaling, should be 100  per cent of equity.</span>
+<span class='co'>#'@param .interimIntRate numeric; the interest rate during the holding period for that specific deal. </span>
+<span class='co'>#'@param .holdingPeriod numeric; holding period (in years) from start to end date of the observation.</span>
+<span class='co'>#'@return List including the following: 1) A vector with the levered and unlevered multiple (TM_lev and TM_unlev), </span>
+<span class='co'>#'        the overall gain / (loss) on the deal, and </span>
+<span class='co'>#'        the leverage effect, which is the difference between TM_lev and TM_unlev; it then includes the different effects (FCF, EBITDA, etc.) </span>
+<span class='co'>#'        that explain the gain. Important: those effects are shown in absolute numbers. 2) A data.table with the relevant input parameters. </span>
+<span class='co'>#'        3) A data.table with the relevant results.</span>
+<span class='co'>#'@export</span>
+<span class='co'>#'</span>
+<span class='co'>#'@references</span>
+<span class='co'>#' Puche (2016): Essays on Value Creation and its Determinants in Private Equity, Dissertation, p. 29ff</span>
+<span class='co'>#' Pindur (2007): Value Creation in Successful LBOs, Dissertation, p. 69ff</span>
+<span class='co'>#'</span>
+<span class='co'>#'@examples</span>
+<span class='co'>#' ##### Use numerical example from Puche (2016, Table 2-1)</span>
+<span class='co'>#' list_results &lt;- value_creation_LBO(.startEquity         = 50,</span>
+<span class='co'>#'                    .endEquity           = 135,</span>
+<span class='co'>#'                    .startDebt           = 50,</span>
+<span class='co'>#'                    .endDebt             = 30,</span>
+<span class='co'>#'                    .startRev            = 100,</span>
+<span class='co'>#'                    .endRev              = 120,</span>
+<span class='co'>#'                    .startEBITDA         = 10,</span>
+<span class='co'>#'                    .endEBITDA           = 15,</span>
+<span class='co'>#'                    .interimCC           = 15,</span>
+<span class='co'>#'                    .interimDist         = 20,</span>
+<span class='co'>#'                    .interimIntRate      = 0.09,</span>
+<span class='co'>#'                    .holdingPeriod       = 4)</span>
+<span class='va'>value_creation_LBO</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>.startEquity</span>, <span class='va'>.endEquity</span>, <span class='va'>.startDebt</span>, <span class='va'>.endDebt</span>, <span class='va'>.startRev</span>, <span class='va'>.endRev</span>, <span class='va'>.startEBITDA</span>, <span class='va'>.endEBITDA</span>,
+                               <span class='va'>.interimCC</span>, <span class='va'>.interimDist</span>, <span class='va'>.interimIntRate</span>, <span class='va'>.holdingPeriod</span><span class='op'>)</span> <span class='op'>{</span>
+
+  <span class='co'>### Calculations of additional inputs</span>
+  <span class='va'>startEV</span> <span class='op'>&lt;-</span> <span class='va'>.startEquity</span> <span class='op'>+</span> <span class='va'>.startDebt</span>
+  <span class='va'>endEV</span>   <span class='op'>&lt;-</span> <span class='va'>.endEquity</span>   <span class='op'>+</span> <span class='va'>.endDebt</span>
+  <span class='va'>startEV_EBITDA_mult</span> <span class='op'>&lt;-</span> <span class='va'>startEV</span><span class='op'>/</span><span class='va'>.startEBITDA</span>
+  <span class='va'>endEV_EBITDA_mult</span>   <span class='op'>&lt;-</span> <span class='va'>endEV</span><span class='op'>/</span><span class='va'>.endEBITDA</span>
+  <span class='va'>costDebt</span> <span class='op'>&lt;-</span> <span class='op'>(</span><span class='fl'>1</span><span class='op'>+</span><span class='va'>.interimIntRate</span><span class='op'>)</span><span class='op'>^</span><span class='va'>.holdingPeriod</span> <span class='op'>-</span> <span class='fl'>1</span>
+  <span class='va'>invCapital</span> <span class='op'>&lt;-</span> <span class='va'>.startEquity</span> <span class='op'>+</span> <span class='va'>.interimCC</span>
+  <span class='va'>deltaEquity</span> <span class='op'>&lt;-</span> <span class='va'>.endEquity</span> <span class='op'>-</span> <span class='va'>.startEquity</span>
+  <span class='va'>gain</span> <span class='op'>&lt;-</span> <span class='va'>deltaEquity</span> <span class='op'>+</span> <span class='va'>.interimDist</span> <span class='op'>-</span> <span class='va'>.interimCC</span>
+  <span class='va'>avgDebtEquity</span> <span class='op'>&lt;-</span> <span class='op'>(</span><span class='va'>.startDebt</span><span class='op'>/</span><span class='va'>.startEquity</span> <span class='op'>+</span> <span class='va'>.endDebt</span><span class='op'>/</span><span class='va'>.endEquity</span><span class='op'>)</span><span class='op'>/</span><span class='fl'>2</span> <span class='co'>#TODO: Understand why you need the average here</span>
+  <span class='va'>startMargin</span> <span class='op'>&lt;-</span> <span class='va'>.startEBITDA</span><span class='op'>/</span><span class='va'>.startRev</span>
+  <span class='va'>endMargin</span>   <span class='op'>&lt;-</span> <span class='va'>.endEBITDA</span><span class='op'>/</span><span class='va'>.endRev</span>
+
+  <span class='co'>### Calculations of output</span>
+  <span class='va'>TM_lev</span>                  <span class='op'>&lt;-</span> <span class='va'>gain</span><span class='op'>/</span><span class='va'>invCapital</span>
+  <span class='va'>TM_unlev</span>                <span class='op'>&lt;-</span> <span class='op'>(</span><span class='va'>TM_lev</span> <span class='op'>+</span> <span class='va'>costDebt</span> <span class='op'>*</span> <span class='va'>avgDebtEquity</span><span class='op'>)</span><span class='op'>/</span><span class='op'>(</span><span class='fl'>1</span> <span class='op'>+</span> <span class='va'>avgDebtEquity</span><span class='op'>)</span>
+  <span class='va'>lev_effect</span>              <span class='op'>&lt;-</span> <span class='va'>TM_lev</span> <span class='op'>-</span> <span class='va'>TM_unlev</span>
+  <span class='va'>mult_effect</span>             <span class='op'>&lt;-</span> <span class='va'>.startEBITDA</span> <span class='op'>*</span> <span class='op'>(</span><span class='va'>endEV_EBITDA_mult</span> <span class='op'>-</span> <span class='va'>startEV_EBITDA_mult</span><span class='op'>)</span>
+  <span class='va'>mult_EBITDA_comb_effect</span> <span class='op'>&lt;-</span> <span class='op'>(</span><span class='va'>.endEBITDA</span> <span class='op'>-</span> <span class='va'>.startEBITDA</span><span class='op'>)</span> <span class='op'>*</span> <span class='op'>(</span><span class='va'>endEV_EBITDA_mult</span> <span class='op'>-</span> <span class='va'>startEV_EBITDA_mult</span><span class='op'>)</span>
+  <span class='va'>FCF_effect</span>              <span class='op'>&lt;-</span> <span class='op'>-</span><span class='op'>(</span><span class='va'>.endDebt</span> <span class='op'>-</span> <span class='va'>.startDebt</span><span class='op'>)</span> <span class='op'>+</span> <span class='va'>.interimDist</span> <span class='op'>-</span> <span class='va'>.interimCC</span>
+  <span class='va'>EBITDA_effect</span>           <span class='op'>&lt;-</span> <span class='op'>(</span><span class='va'>.endEBITDA</span> <span class='op'>-</span> <span class='va'>.startEBITDA</span><span class='op'>)</span> <span class='op'>*</span> <span class='va'>startEV_EBITDA_mult</span>
+  <span class='va'>Rev_effect</span>              <span class='op'>&lt;-</span> <span class='op'>(</span><span class='va'>.endRev</span> <span class='op'>-</span> <span class='va'>.startRev</span><span class='op'>)</span> <span class='op'>*</span> <span class='va'>startMargin</span> <span class='op'>*</span> <span class='va'>startEV_EBITDA_mult</span>
+  <span class='va'>margin_effect</span>           <span class='op'>&lt;-</span> <span class='op'>(</span><span class='va'>endMargin</span> <span class='op'>-</span> <span class='va'>startMargin</span><span class='op'>)</span> <span class='op'>*</span> <span class='va'>.startRev</span>  <span class='op'>*</span> <span class='va'>startEV_EBITDA_mult</span>
+  <span class='va'>SM_comb_effect</span>          <span class='op'>&lt;-</span> <span class='op'>(</span><span class='va'>.endRev</span> <span class='op'>-</span> <span class='va'>.startRev</span><span class='op'>)</span> <span class='op'>*</span> <span class='op'>(</span><span class='va'>endMargin</span> <span class='op'>-</span> <span class='va'>startMargin</span><span class='op'>)</span> <span class='op'>*</span> <span class='va'>startEV_EBITDA_mult</span>
+
+  <span class='va'>vec_results</span> <span class='op'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>TM_lev                  <span class='op'>=</span> <span class='va'>TM_lev</span>,
+                  TM_unlev                <span class='op'>=</span> <span class='va'>TM_unlev</span>,
+                  gain                    <span class='op'>=</span> <span class='va'>gain</span>,
+                  lev_effect              <span class='op'>=</span> <span class='va'>lev_effect</span>,
+                  mult_effect             <span class='op'>=</span> <span class='va'>mult_effect</span>,
+                  mult_EBITDA_comb_effect <span class='op'>=</span> <span class='va'>mult_EBITDA_comb_effect</span>,
+                  EBITDA_effect           <span class='op'>=</span> <span class='va'>EBITDA_effect</span>,
+                  FCF_effect              <span class='op'>=</span> <span class='va'>FCF_effect</span>,
+                  Rev_effect              <span class='op'>=</span> <span class='va'>Rev_effect</span>,
+                  margin_effect           <span class='op'>=</span> <span class='va'>margin_effect</span>,
+                  SM_comb_effect          <span class='op'>=</span> <span class='va'>SM_comb_effect</span>,
+                  startEV_EBITDA_mult     <span class='op'>=</span> <span class='va'>startEV_EBITDA_mult</span>,
+                  endEV_EBITDA_mult       <span class='op'>=</span> <span class='va'>endEV_EBITDA_mult</span>,
+                  startEV                 <span class='op'>=</span> <span class='va'>startEV</span>,
+                  endEV                   <span class='op'>=</span> <span class='va'>endEV</span>,
+                  totalInv                <span class='op'>=</span> <span class='va'>.startEquity</span> <span class='op'>+</span> <span class='va'>.interimCC</span>,
+                  TM_mult                 <span class='op'>=</span> <span class='va'>mult_effect</span><span class='op'>/</span><span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>abs</a></span><span class='op'>(</span><span class='va'>gain</span><span class='op'>)</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>abs</a></span><span class='op'>(</span><span class='va'>TM_unlev</span><span class='op'>)</span>,
+                  TM_mult_EBITDA_comb     <span class='op'>=</span> <span class='va'>mult_EBITDA_comb_effect</span><span class='op'>/</span><span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>abs</a></span><span class='op'>(</span><span class='va'>gain</span><span class='op'>)</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>abs</a></span><span class='op'>(</span><span class='va'>TM_unlev</span><span class='op'>)</span>,
+                  TM_EBITDA               <span class='op'>=</span> <span class='va'>EBITDA_effect</span><span class='op'>/</span><span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>abs</a></span><span class='op'>(</span><span class='va'>gain</span><span class='op'>)</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>abs</a></span><span class='op'>(</span><span class='va'>TM_unlev</span><span class='op'>)</span>,
+                  TM_FCF                  <span class='op'>=</span> <span class='va'>FCF_effect</span><span class='op'>/</span><span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>abs</a></span><span class='op'>(</span><span class='va'>gain</span><span class='op'>)</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>abs</a></span><span class='op'>(</span><span class='va'>TM_unlev</span><span class='op'>)</span>,
+                  TM_Rev                  <span class='op'>=</span> <span class='va'>Rev_effect</span><span class='op'>/</span><span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>abs</a></span><span class='op'>(</span><span class='va'>gain</span><span class='op'>)</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>abs</a></span><span class='op'>(</span><span class='va'>TM_unlev</span><span class='op'>)</span>,
+                  TM_margin               <span class='op'>=</span> <span class='va'>margin_effect</span><span class='op'>/</span><span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>abs</a></span><span class='op'>(</span><span class='va'>gain</span><span class='op'>)</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>abs</a></span><span class='op'>(</span><span class='va'>TM_unlev</span><span class='op'>)</span>,
+                  TM_SM_comb              <span class='op'>=</span> <span class='va'>SM_comb_effect</span><span class='op'>/</span><span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>abs</a></span><span class='op'>(</span><span class='va'>gain</span><span class='op'>)</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>abs</a></span><span class='op'>(</span><span class='va'>TM_unlev</span><span class='op'>)</span><span class='op'>)</span>
+  
+    <span class='va'>print_table_inputs</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span><span class='op'>(</span>
+     Item  <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Revenue"</span>, <span class='st'>"EBITDA"</span>, <span class='st'>"Equity"</span>, <span class='st'>"Net Debt"</span>, <span class='st'>"EV"</span>, <span class='st'>"EV/EBITDA"</span>, <span class='st'>"CC"</span>, <span class='st'>"Dist"</span>,
+               <span class='st'>"Holding period"</span>, <span class='st'>"Interest rate p.a."</span>,  <span class='st'>"Avg debt/equity ratio"</span>, <span class='st'>"Cost of debt"</span><span class='op'>)</span>,
+     Entry <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>.startRev</span>, <span class='va'>.startEBITDA</span>, <span class='va'>.startEquity</span>, <span class='va'>.startDebt</span>, <span class='va'>startEV</span>, <span class='va'>startEV_EBITDA_mult</span>,
+               <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='cn'>NA</span>, <span class='fl'>6</span><span class='op'>)</span><span class='op'>)</span>,
+     Interim <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='cn'>NA</span>, <span class='fl'>6</span><span class='op'>)</span>, <span class='va'>.interimCC</span>, <span class='va'>.interimDist</span>, 
+                 <span class='va'>.holdingPeriod</span>, <span class='va'>.interimIntRate</span>, <span class='va'>avgDebtEquity</span>, <span class='va'>costDebt</span><span class='op'>)</span>,
+     Exit    <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>.endRev</span>, <span class='va'>.endEBITDA</span>, <span class='va'>.endEquity</span>, <span class='va'>.endDebt</span>, <span class='va'>endEV</span>, <span class='va'>endEV_EBITDA_mult</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='cn'>NA</span>, <span class='fl'>6</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='op'>)</span>
+  
+  <span class='va'>print_table_outputs</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span><span class='op'>(</span>
+     Item  <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"TM (levered)"</span>, 
+               <span class='st'>"Gain / TM (unlevered)"</span>,
+               <span class='st'>"FCF"</span>,
+               <span class='st'>"Comb. multiple / EBITDA"</span>,
+               <span class='st'>"Multiple"</span>,
+               <span class='st'>"EBITDA"</span>,
+               <span class='st'>"Comb. revenue/margin"</span>,
+               <span class='st'>"Revenue"</span>,
+               <span class='st'>"Margin"</span><span class='op'>)</span>,
+     Absolute <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>NA</span>, <span class='va'>vec_results</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>,<span class='fl'>8</span>,<span class='fl'>6</span>,<span class='fl'>5</span>,<span class='fl'>7</span>,<span class='fl'>11</span>,<span class='fl'>9</span>,<span class='fl'>10</span><span class='op'>)</span><span class='op'>]</span><span class='op'>)</span>,
+     TM       <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>vec_results</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>20</span>,<span class='fl'>18</span>,<span class='fl'>17</span>,<span class='fl'>19</span>,<span class='fl'>23</span>,<span class='fl'>21</span>,<span class='fl'>22</span><span class='op'>)</span><span class='op'>]</span><span class='op'>)</span>
+  <span class='op'>)</span>
+  
+  
+  <span class='co'>### Output</span>
+  <span class='kw'><a href='https://rdrr.io/r/base/function.html'>return</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>vec_results         <span class='op'>=</span> <span class='va'>vec_results</span>,
+              print_table_inputs  <span class='op'>=</span> <span class='va'>print_table_inputs</span>,
+              print_table_outputs <span class='op'>=</span> <span class='va'>print_table_outputs</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='op'>}</span>
+</code></pre>
+</div>
+</details>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'>#' Wrapper function for ggplot to plot value bridge for function \code{\link{value_creation_LBO}}</span>
+<span class='co'>#'</span>
+<span class='co'>#' @param .list_value_creation_LBO list; output from function \code{\link{value_creation_LBO}}.</span>
+<span class='co'>#' @return ggplot2 bar plot that shows the value creation bridge.</span>
+<span class='co'>#'</span>
+<span class='co'>#' @import ggplot2</span>
+<span class='co'>#' @export</span>
+<span class='co'>#'</span>
+<span class='co'>#' @references</span>
+<span class='co'>#' \url{https://learnr.wordpress.com/2010/05/10/ggplot2-waterfall-charts/}</span>
+<span class='co'>#'</span>
+<span class='co'>#' @examples</span>
+<span class='co'>#' #### Puche example</span>
+<span class='co'>#' plotValueBridge(value_creation_LBO(</span>
+<span class='co'>#'                    .startEquity         = 50,</span>
+<span class='co'>#'                    .endEquity           = 135,</span>
+<span class='co'>#'                    .startDebt           = 50,</span>
+<span class='co'>#'                    .endDebt             = 30,</span>
+<span class='co'>#'                    .startRev            = 100,</span>
+<span class='co'>#'                    .endRev              = 120,</span>
+<span class='co'>#'                    .startEBITDA         = 10,</span>
+<span class='co'>#'                    .endEBITDA           = 15,</span>
+<span class='co'>#'                    .interimCC           = 15,</span>
+<span class='co'>#'                    .interimDist         = 20,</span>
+<span class='co'>#'                    .interimIntRate      = 0.09,</span>
+<span class='co'>#'                    .holdingPeriod       = 4)$vec_results)</span>
+<span class='co'>#' #### How does it look with negative multiples</span>
+<span class='co'>#' plotValueBridge(value_creation_LBO(.startEquity         = 50,</span>
+<span class='co'>#'                    .endEquity           = 60,</span>
+<span class='co'>#'                    .startDebt           = 50,</span>
+<span class='co'>#'                    .endDebt             = 30,</span>
+<span class='co'>#'                    .startRev            = 100,</span>
+<span class='co'>#'                    .endRev              = 80,</span>
+<span class='co'>#'                    .startEBITDA         = 10,</span>
+<span class='co'>#'                    .endEBITDA           = 6,</span>
+<span class='co'>#'                    .interimCC           = 5,</span>
+<span class='co'>#'                    .interimDist         = 0,</span>
+<span class='co'>#'                    .interimIntRate      = 0.09,</span>
+<span class='co'>#'                    .holdingPeriod       = 4)$vec_results)</span>
+<span class='co'>#' #### Yet another example</span>
+<span class='co'>#' plotValueBridge(value_creation_LBO(.startEquity         = 37.333,</span>
+<span class='co'>#'                    .endEquity           = 50.67,</span>
+<span class='co'>#'                    .startDebt           = 7.1,</span>
+<span class='co'>#'                    .endDebt             = 0.7,</span>
+<span class='co'>#'                    .startRev            = 91,</span>
+<span class='co'>#'                    .endRev              = 117.3,</span>
+<span class='co'>#'                    .startEBITDA         = 7.7,</span>
+<span class='co'>#'                    .endEBITDA           = 10.9,</span>
+<span class='co'>#'                    .interimCC           = 0,</span>
+<span class='co'>#'                    .interimDist         = 1.44,</span>
+<span class='co'>#'                    .interimIntRate      = 0.09,</span>
+<span class='co'>#'                    .holdingPeriod       = 2)$vec_results)</span>
+<span class='co'>#' ##### Next example where multiple is increased because the business is struggling and GP wants to moderate decrease in valuation</span>
+<span class='co'>#' plotValueBridge(value_creation_LBO(.startEquity         = 19.13,</span>
+<span class='co'>#'                    .endEquity           = 12.05,</span>
+<span class='co'>#'                    .startDebt           = 0.8,</span>
+<span class='co'>#'                    .endDebt             = 4.53,</span>
+<span class='co'>#'                    .startRev            = 87.12,</span>
+<span class='co'>#'                    .endRev              = 58.98,</span>
+<span class='co'>#'                    .startEBITDA         = 5.54,</span>
+<span class='co'>#'                    .endEBITDA           = 3.93,</span>
+<span class='co'>#'                    .interimCC           = 0,</span>
+<span class='co'>#'                    .interimDist         = 0,</span>
+<span class='co'>#'                    .interimIntRate      = 0.09,</span>
+<span class='co'>#'                    .holdingPeriod       = 2)$vec_results)</span>
+<span class='va'>plot_value_bridge</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>.vec_value_creation_LBO</span>, <span class='va'>.fillColors</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"#FFC300"</span>, <span class='st'>"#581845"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+
+  <span class='co'>#Calculate inbetween multiples</span>
+  <span class='va'>mult_OpImpr</span> <span class='op'>&lt;-</span> <span class='va'>.vec_value_creation_LBO</span><span class='op'>[</span><span class='st'>"TM_unlev"</span><span class='op'>]</span> <span class='op'>-</span> <span class='va'>.vec_value_creation_LBO</span><span class='op'>[</span><span class='st'>"TM_mult"</span><span class='op'>]</span> <span class='op'>-</span> <span class='va'>.vec_value_creation_LBO</span><span class='op'>[</span><span class='st'>"TM_mult_EBITDA_comb"</span><span class='op'>]</span>
+
+  <span class='va'>strDesc</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Combination S/M effect"</span>, <span class='st'>"Margin effect"</span>, <span class='st'>"Sales effect"</span>, <span class='st'>"EBITDA effect"</span>, <span class='st'>"FCF effect"</span>, <span class='st'>"Operating improvements"</span>,
+               <span class='st'>"Combination effect"</span>, <span class='st'>"Multiple effect"</span>, <span class='st'>"TM (unlev)"</span>, <span class='st'>"Leverage effect"</span>, <span class='st'>"TM (lev)"</span><span class='op'>)</span>
+
+  <span class='va'>plotDF</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>Desc  <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>strDesc</span>, levels <span class='op'>=</span> <span class='va'>strDesc</span><span class='op'>)</span>,
+                       Type  <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Bridge"</span>, <span class='st'>"Bridge"</span>, <span class='st'>"Bridge"</span>, <span class='st'>"Full"</span>, <span class='st'>"Bridge"</span>, <span class='st'>"Full"</span>, <span class='st'>"Bridge"</span>, <span class='st'>"Bridge"</span>, <span class='st'>"Full"</span>, <span class='st'>"Bridge"</span>, <span class='st'>"Full"</span><span class='op'>)</span>,
+                       Start <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,
+                                 <span class='va'>.vec_value_creation_LBO</span><span class='op'>[</span><span class='st'>"TM_SM_comb"</span><span class='op'>]</span>, 
+                                 <span class='va'>.vec_value_creation_LBO</span><span class='op'>[</span><span class='st'>"TM_SM_comb"</span><span class='op'>]</span> <span class='op'>+</span> <span class='va'>.vec_value_creation_LBO</span><span class='op'>[</span><span class='st'>"TM_margin"</span><span class='op'>]</span>, 
+                                 <span class='fl'>0</span>,
+                                 <span class='va'>.vec_value_creation_LBO</span><span class='op'>[</span><span class='st'>"TM_EBITDA"</span><span class='op'>]</span>, 
+                                 <span class='fl'>0</span>,
+                                 <span class='va'>mult_OpImpr</span>,
+                                 <span class='va'>mult_OpImpr</span> <span class='op'>+</span> <span class='va'>.vec_value_creation_LBO</span><span class='op'>[</span><span class='st'>"TM_mult_EBITDA_comb"</span><span class='op'>]</span>, 
+                                 <span class='fl'>0</span>,
+                                 <span class='va'>.vec_value_creation_LBO</span><span class='op'>[[</span><span class='st'>"TM_unlev"</span><span class='op'>]</span><span class='op'>]</span>,
+                                 <span class='fl'>0</span><span class='op'>)</span>,
+                       End   <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>.vec_value_creation_LBO</span><span class='op'>[</span><span class='st'>"TM_SM_comb"</span><span class='op'>]</span>,
+                                 <span class='va'>.vec_value_creation_LBO</span><span class='op'>[</span><span class='st'>"TM_SM_comb"</span><span class='op'>]</span> <span class='op'>+</span> <span class='va'>.vec_value_creation_LBO</span><span class='op'>[</span><span class='st'>"TM_margin"</span><span class='op'>]</span>,
+                                 <span class='va'>.vec_value_creation_LBO</span><span class='op'>[</span><span class='st'>"TM_EBITDA"</span><span class='op'>]</span>,
+                                 <span class='va'>.vec_value_creation_LBO</span><span class='op'>[</span><span class='st'>"TM_EBITDA"</span><span class='op'>]</span>,
+                                 <span class='va'>mult_OpImpr</span>,
+                                 <span class='va'>mult_OpImpr</span>,
+                                 <span class='va'>mult_OpImpr</span> <span class='op'>+</span> <span class='va'>.vec_value_creation_LBO</span><span class='op'>[</span><span class='st'>"TM_mult_EBITDA_comb"</span><span class='op'>]</span>,
+                                 <span class='va'>.vec_value_creation_LBO</span><span class='op'>[[</span><span class='st'>"TM_unlev"</span><span class='op'>]</span><span class='op'>]</span>,
+                                 <span class='va'>.vec_value_creation_LBO</span><span class='op'>[[</span><span class='st'>"TM_unlev"</span><span class='op'>]</span><span class='op'>]</span>,
+                                 <span class='va'>.vec_value_creation_LBO</span><span class='op'>[[</span><span class='st'>"TM_lev"</span><span class='op'>]</span><span class='op'>]</span>,
+                                 <span class='va'>.vec_value_creation_LBO</span><span class='op'>[[</span><span class='st'>"TM_lev"</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='va'>plotDF</span><span class='op'>$</span><span class='va'>Amount</span> <span class='op'>&lt;-</span> <span class='va'>plotDF</span><span class='op'>$</span><span class='va'>End</span> <span class='op'>-</span> <span class='va'>plotDF</span><span class='op'>$</span><span class='va'>Start</span>
+  <span class='va'>plotDF</span><span class='op'>$</span><span class='va'>ID</span> <span class='op'>&lt;-</span> <span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>plotDF</span><span class='op'>)</span>
+
+  <span class='co'>#https://stackoverflow.com/questions/50688764/r-ggplot2-ignoring-unknown-aesthetics-with-geom-rect</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/warning.html'>suppressWarnings</a></span><span class='op'>(</span><span class='fu'>ggplot</span><span class='op'>(</span><span class='va'>plotDF</span>, <span class='fu'>aes</span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>Desc</span>, fill <span class='op'>=</span> <span class='va'>Type</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+                     <span class='fu'>scale_fill_manual</span><span class='op'>(</span>values <span class='op'>=</span> <span class='va'>.fillColors</span><span class='op'>)</span> <span class='op'>+</span>
+                     <span class='fu'>geom_rect</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>Desc</span>, xmin <span class='op'>=</span> <span class='va'>ID</span> <span class='op'>-</span> <span class='fl'>0.45</span>, xmax <span class='op'>=</span> <span class='va'>ID</span> <span class='op'>+</span> <span class='fl'>0.45</span>, ymin <span class='op'>=</span> <span class='va'>Start</span>, ymax <span class='op'>=</span> <span class='va'>End</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+                     <span class='fu'>xlab</span><span class='op'>(</span><span class='st'>""</span><span class='op'>)</span> <span class='op'>+</span>
+                     <span class='fu'>theme</span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>"none"</span>, axis.text.x <span class='op'>=</span> <span class='fu'>element_text</span><span class='op'>(</span>angle <span class='op'>=</span> <span class='fl'>45</span>, hjust <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='op'>}</span>
+</code></pre>
+</div>
+</details>
+</div>
+<p>The screenshot below summarizes the assumptions.</p>
+<figure>
+<img src="Assumptions_Puche_case.PNG" alt="" /><figcaption>Screenshot of Panel A in Table 2-1 in Puche’s dissertation</figcaption>
+</figure>
+<p>Passing the inputs to the function <code>value_creation_LBO()</code> provides us with all the relevant results.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
+<span class='co'>##### Use numerical example from Puche (2016, Table 2-1)</span>
+<span class='va'>list_results</span> <span class='op'>&lt;-</span> <span class='fu'>value_creation_LBO</span><span class='op'>(</span>.startEquity <span class='op'>=</span> <span class='fl'>50</span>,
+                   .endEquity           <span class='op'>=</span> <span class='fl'>135</span>,
+                   .startDebt           <span class='op'>=</span> <span class='fl'>50</span>,
+                   .endDebt             <span class='op'>=</span> <span class='fl'>30</span>,
+                   .startRev            <span class='op'>=</span> <span class='fl'>100</span>,
+                   .endRev              <span class='op'>=</span> <span class='fl'>120</span>,
+                   .startEBITDA         <span class='op'>=</span> <span class='fl'>10</span>,
+                   .endEBITDA           <span class='op'>=</span> <span class='fl'>15</span>,
+                   .interimCC           <span class='op'>=</span> <span class='fl'>15</span>,
+                   .interimDist         <span class='op'>=</span> <span class='fl'>20</span>,
+                   .interimIntRate      <span class='op'>=</span> <span class='fl'>0.09</span>,
+                   .holdingPeriod       <span class='op'>=</span> <span class='fl'>4</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/kableExtra/man/kbl.html'>kbl</a></span><span class='op'>(</span><span class='va'>list_results</span><span class='op'>$</span><span class='va'>print_table_outputs</span>,
+    caption<span class='op'>=</span><span class='st'>"Results of value creation analysis of Puche's example"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/kableExtra/man/kable_classic.html'>kable_classic</a></span><span class='op'>(</span>full_width <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<table class=" lightable-classic" style='font-family: "Arial Narrow", "Source Sans Pro", sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'>
+<caption>
+<span id="tab:Puche-example">Table 1: </span>Results of value creation analysis of Puche’s example
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Item
+</th>
+<th style="text-align:right;">
+Absolute
+</th>
+<th style="text-align:right;">
+TM
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+TM (levered)
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+1.3846154
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Gain / TM (unlevered)
+</td>
+<td style="text-align:right;">
+90
+</td>
+<td style="text-align:right;">
+1.0155336
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FCF
+</td>
+<td style="text-align:right;">
+25
+</td>
+<td style="text-align:right;">
+0.2820927
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Comb. multiple / EBITDA
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0.0564185
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Multiple
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+0.1128371
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+EBITDA
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:right;">
+0.5641853
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Comb. revenue/margin
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0.0564185
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Revenue
+</td>
+<td style="text-align:right;">
+20
+</td>
+<td style="text-align:right;">
+0.2256741
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Margin
+</td>
+<td style="text-align:right;">
+25
+</td>
+<td style="text-align:right;">
+0.2820927
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>With the function <code>plot_value_bridge()</code>, it is also easy to visualize the results.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>plot_value_bridge</span><span class='op'>(</span><span class='va'>list_results</span><span class='op'>$</span><span class='va'>vec_results</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<p><img src="the-value-bridge_files/figure-html5/Puche_example_plot-1.png" width="624" data-distill-preview=1 /></p>
+</div>
+<h2 id="archetypes-of-lbos">Archetypes of LBOs</h2>
+<p>Let’s run through some examples to better understand how to interpret the results.</p>
+<h3 id="growing-the-business">Growing the business</h3>
+<p>Look no further than Puche’s example above and you see what a an LBO looks like in which all factors of value creation play their role. The EBITDA was grown during ownership, both by top-line growth (<em>Sales effect</em>) and by improving the margins (<em>Margin effect</em>). Overall, this generated a c. 0.6x return. In addition, free cash flows reduced the net debt and enabled a dividend payment, adding another 0.3x. The multiple effect was minor with 0.1x. As 50% of the LBO were financed with debt, the leverage effect added another 0.4x, bringing the overall multiple to 1.4x (2.4x including invested cost).</p>
+<h3 id="financial-engineering">Financial engineering</h3>
+<p>Let’s have an extreme case of financial engineering. As you can see from the table below, the EBITDA of the company only grew by 10% over 4 years. Net debt remained constant, so the cash flow was just enough to pay for taxes, interests, CAPEX, and net working capital. The new buyer wasn’t willing to pay a higher multiple.</p>
+<p>Nevertheless, the LBO made a 2x return, equally split by the EBITDA increase and the leverage effect. 0.5x increase sounds like a lot for a 10% increase of the EBITDA, but bear in mind that it is in relation to the invested equity. As the invested equity was very low in relation to debt, even small operational improvements on the overall business lead to larger increases in the multiple for equity investors.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>list_results</span> <span class='op'>&lt;-</span> <span class='fu'>value_creation_LBO</span><span class='op'>(</span>
+                   .startEquity         <span class='op'>=</span> <span class='fl'>10</span>,
+                   .endEquity           <span class='op'>=</span> <span class='fl'>20</span>,
+                   .startDebt           <span class='op'>=</span> <span class='fl'>90</span>,
+                   .endDebt             <span class='op'>=</span> <span class='fl'>90</span>,
+                   .startRev            <span class='op'>=</span> <span class='fl'>100</span>,
+                   .endRev              <span class='op'>=</span> <span class='fl'>110</span>,
+                   .startEBITDA         <span class='op'>=</span> <span class='fl'>10</span>,
+                   .endEBITDA           <span class='op'>=</span> <span class='fl'>11</span>,
+                   .interimCC           <span class='op'>=</span> <span class='fl'>0</span>,
+                   .interimDist         <span class='op'>=</span> <span class='fl'>0</span>,
+                   .interimIntRate      <span class='op'>=</span> <span class='fl'>0.09</span>,
+                   .holdingPeriod       <span class='op'>=</span> <span class='fl'>4</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/kableExtra/man/kbl.html'>kbl</a></span><span class='op'>(</span><span class='va'>list_results</span><span class='op'>$</span><span class='va'>print_table_inputs</span>,
+    caption<span class='op'>=</span><span class='st'>"Inputs of financial engineering example"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/kableExtra/man/kable_classic.html'>kable_classic</a></span><span class='op'>(</span>full_width <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<table class=" lightable-classic" style='font-family: "Arial Narrow", "Source Sans Pro", sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'>
+<caption>
+<span id="tab:Financial-engineering">Table 2: </span>Inputs of financial engineering example
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Item
+</th>
+<th style="text-align:right;">
+Entry
+</th>
+<th style="text-align:right;">
+Interim
+</th>
+<th style="text-align:right;">
+Exit
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Revenue
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+110
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+EBITDA
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Equity
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+20
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Net Debt
+</td>
+<td style="text-align:right;">
+90
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+90
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+EV
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+110
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+EV/EBITDA
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CC
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Dist
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Holding period
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+4.0000000
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Interest rate p.a.
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+0.0900000
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Avg debt/equity ratio
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+6.7500000
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Cost of debt
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+0.4115816
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>plot_value_bridge</span><span class='op'>(</span><span class='va'>list_results</span><span class='op'>$</span><span class='va'>vec_results</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<p><img src="the-value-bridge_files/figure-html5/Financial-engineering-1.png" width="624" /></p>
+</div>
+<p>Of course, finance theory 101 tells us that with high leverage comes high risk. To see this, let’s look what would have happened with this deal if the EBITDA would have shrunk by 10% instead of growing. The answer: a full write-off of the equity. Note that the value bridge can’t be calculated anymore as the average debt/equity ratio is undefined. In absolute values though, the loss is fully attributable to the EBITDA decrease.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'>##### Use numerical example from Puche (2016, Table 2-1)</span>
+<span class='va'>list_results</span> <span class='op'>&lt;-</span> <span class='fu'>value_creation_LBO</span><span class='op'>(</span>
+                   .startEquity         <span class='op'>=</span> <span class='fl'>10</span>,
+                   .endEquity           <span class='op'>=</span> <span class='fl'>0</span>,
+                   .startDebt           <span class='op'>=</span> <span class='fl'>90</span>,
+                   .endDebt             <span class='op'>=</span> <span class='fl'>90</span>,
+                   .startRev            <span class='op'>=</span> <span class='fl'>100</span>,
+                   .endRev              <span class='op'>=</span> <span class='fl'>90</span>,
+                   .startEBITDA         <span class='op'>=</span> <span class='fl'>10</span>,
+                   .endEBITDA           <span class='op'>=</span> <span class='fl'>9</span>,
+                   .interimCC           <span class='op'>=</span> <span class='fl'>0</span>,
+                   .interimDist         <span class='op'>=</span> <span class='fl'>0</span>,
+                   .interimIntRate      <span class='op'>=</span> <span class='fl'>0.09</span>,
+                   .holdingPeriod       <span class='op'>=</span> <span class='fl'>4</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/kableExtra/man/kbl.html'>kbl</a></span><span class='op'>(</span><span class='va'>list_results</span><span class='op'>$</span><span class='va'>print_table_inputs</span>,
+    caption<span class='op'>=</span><span class='st'>"Inputs of financial engineering example in case of underperformance"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/kableExtra/man/kable_classic.html'>kable_classic</a></span><span class='op'>(</span>full_width <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<table class=" lightable-classic" style='font-family: "Arial Narrow", "Source Sans Pro", sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'>
+<caption>
+<span id="tab:Financial-engineering-2">Table 3: </span>Inputs of financial engineering example in case of underperformance
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Item
+</th>
+<th style="text-align:right;">
+Entry
+</th>
+<th style="text-align:right;">
+Interim
+</th>
+<th style="text-align:right;">
+Exit
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Revenue
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+90
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+EBITDA
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Equity
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Net Debt
+</td>
+<td style="text-align:right;">
+90
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+90
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+EV
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+90
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+EV/EBITDA
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CC
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Dist
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Holding period
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+4.0000000
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Interest rate p.a.
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+0.0900000
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Avg debt/equity ratio
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Cost of debt
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+0.4115816
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'>### Not meaningful in this case</span>
+<span class='co'>#plot_value_bridge(list_results$vec_results)</span>
+</code></pre>
+</div>
+</details>
+</div>
+<h3 id="the-multiple-expansion-miracle">The multiple expansion miracle</h3>
+<p>So far, I have looked at the LBO value bridge from entry to exit. However, nothing prevents me to use the same framework to understand the valuations of unrealized deals of a GP. Instead of plugging the values at exit, I can simply plug in the values at a reporting date, provided by a GP. In an ideal world, these valuations should match the values that would be realized in an actual sale. In reality though, the valuations will likely differ, either because there is some idiosyncratic valuation error by the GP or because there are some more systematic valuation mistakes. One reason could be that a GP is conservative in their valuations so that there are positive surprises for the investors. Another one is that some GPs might inflate their valuations to increase their chances in fundraising. This hypothesis was tested and confirmed by a <a href="https://www.sciencedirect.com/science/article/abs/pii/S0304405X18303015">paper</a> from Brown, Gredil and Kaplan.</p>
+<p>Look at the below example. It is hard to imagine that an LBO actually ends up with such a value bridge at realization. The EBITDA actually decreased over the four-year holding period and the debt paydown has been very minor. Nevertheless, the unlevered / levered multiple is 0.5x / 0.6x, indicating that meaningful value creation has happened. As EBITDA growth and FCF effect are out of the equation, the only other factor, the EV/EBITDA multiple change, has to explain this value creation. In this example, it jumped from 10x to 14x, which is difficult to justify with the operational development the firm has taken.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'>##### Use numerical example from Puche (2016, Table 2-1)</span>
+<span class='va'>list_results</span> <span class='op'>&lt;-</span> <span class='fu'>value_creation_LBO</span><span class='op'>(</span>
+                   .startEquity         <span class='op'>=</span> <span class='fl'>50</span>,
+                   .endEquity           <span class='op'>=</span> <span class='fl'>80</span>,
+                   .startDebt           <span class='op'>=</span> <span class='fl'>50</span>,
+                   .endDebt             <span class='op'>=</span> <span class='fl'>45</span>,
+                   .startRev            <span class='op'>=</span> <span class='fl'>100</span>,
+                   .endRev              <span class='op'>=</span> <span class='fl'>95</span>,
+                   .startEBITDA         <span class='op'>=</span> <span class='fl'>10</span>,
+                   .endEBITDA           <span class='op'>=</span> <span class='fl'>9</span>,
+                   .interimCC           <span class='op'>=</span> <span class='fl'>0</span>,
+                   .interimDist         <span class='op'>=</span> <span class='fl'>0</span>,
+                   .interimIntRate      <span class='op'>=</span> <span class='fl'>0.09</span>,
+                   .holdingPeriod       <span class='op'>=</span> <span class='fl'>4</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/kableExtra/man/kbl.html'>kbl</a></span><span class='op'>(</span><span class='va'>list_results</span><span class='op'>$</span><span class='va'>print_table_inputs</span>,
+    caption<span class='op'>=</span><span class='st'>"Inputs of multiple expansion example"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/kableExtra/man/kable_classic.html'>kable_classic</a></span><span class='op'>(</span>full_width <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<table class=" lightable-classic" style='font-family: "Arial Narrow", "Source Sans Pro", sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'>
+<caption>
+<span id="tab:Multiple-expansion">Table 4: </span>Inputs of multiple expansion example
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Item
+</th>
+<th style="text-align:right;">
+Entry
+</th>
+<th style="text-align:right;">
+Interim
+</th>
+<th style="text-align:right;">
+Exit
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Revenue
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+95.00000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+EBITDA
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+9.00000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Equity
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+80.00000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Net Debt
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+45.00000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+EV
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+125.00000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+EV/EBITDA
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+13.88889
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CC
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Dist
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Holding period
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+4.0000000
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Interest rate p.a.
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+0.0900000
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Avg debt/equity ratio
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+0.7812500
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Cost of debt
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+0.4115816
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/kableExtra/man/kbl.html'>kbl</a></span><span class='op'>(</span><span class='va'>list_results</span><span class='op'>$</span><span class='va'>print_table_outputs</span>,
+    caption<span class='op'>=</span><span class='st'>"Results of value creation analysis of multiple expansion example"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/kableExtra/man/kable_classic.html'>kable_classic</a></span><span class='op'>(</span>full_width <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<table class=" lightable-classic" style='font-family: "Arial Narrow", "Source Sans Pro", sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'>
+<caption>
+<span id="tab:Multiple-expansion">Table 4: </span>Results of value creation analysis of multiple expansion example
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Item
+</th>
+<th style="text-align:right;">
+Absolute
+</th>
+<th style="text-align:right;">
+TM
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+TM (levered)
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+0.6000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Gain / TM (unlevered)
+</td>
+<td style="text-align:right;">
+30.0000000
+</td>
+<td style="text-align:right;">
+0.5173604
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FCF
+</td>
+<td style="text-align:right;">
+5.0000000
+</td>
+<td style="text-align:right;">
+0.0862267
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Comb. multiple / EBITDA
+</td>
+<td style="text-align:right;">
+-3.8888889
+</td>
+<td style="text-align:right;">
+-0.0670652
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Multiple
+</td>
+<td style="text-align:right;">
+38.8888889
+</td>
+<td style="text-align:right;">
+0.6706523
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+EBITDA
+</td>
+<td style="text-align:right;">
+-10.0000000
+</td>
+<td style="text-align:right;">
+-0.1724535
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Comb. revenue/margin
+</td>
+<td style="text-align:right;">
+0.2631579
+</td>
+<td style="text-align:right;">
+0.0045382
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Revenue
+</td>
+<td style="text-align:right;">
+-5.0000000
+</td>
+<td style="text-align:right;">
+-0.0862267
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Margin
+</td>
+<td style="text-align:right;">
+-5.2631579
+</td>
+<td style="text-align:right;">
+-0.0907650
+</td>
+</tr>
+</tbody>
+</table>
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>plot_value_bridge</span><span class='op'>(</span><span class='va'>list_results</span><span class='op'>$</span><span class='va'>vec_results</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<p><img src="the-value-bridge_files/figure-html5/Multiple-expansion-1.png" width="624" /></p>
+</div>
+<p>In such situations, it is important for an investor to question the valuation of the GP and to get a satisfying justification for a multiple increase despite decreasing EBITDA. Interestingly, Brown, Gredil and Kaplan show in their paper that investors are pretty good in identifying GPs that value their investments too aggressively, as such GPs are less successful in fundraising.</p>
+<h2 id="summary">Summary</h2>
+<p>In this blog post, I have shown how to break up the total net equity proceeds or gains into different elements of value creation: operational improvements, i.e., EBITDA growth; multiple expansion; free cash flow generation; and leverage.</p>
+<p>I have derived the formulas, implemented them in R and run through a few examples.</p>
+<p>The LBO value bridge is a very important tool to understand how value was created for fully realized deals and to justify the valuations for unrealized deals.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<section class="footnotes" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><p>For simplicity, I’m ignoring transaction costs. Furthermore, I do not go into detail about the ownership structure, which is another complication. For example, a fund’s total net gains might be lower because the management has received an equity as part of an equity incentive plan and, as a consequence, their pro-rata share of the total net proceeds was reduced over the holding period.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p>I follow <a href="https://www.springer.com/gp/book/9783835008526">Pindur’s</a> notation here, see p. 69ff.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3" role="doc-endnote"><p>Essentially, this means we can ignore the last two elements of the last equation…I know, not really a <em>leveraged</em> buyout…<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4" role="doc-endnote"><p>Again, the derivations are more general and can be applied to any cash flow measure, but I focus on the EBITDA as the by far the most prominent measure in private equity.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5" role="doc-endnote"><p>For simplicity, I ignore interest on the debt.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6" role="doc-endnote"><p>That’s why the sum starts now at <span class="math inline">\(t\)</span>, not <span class="math inline">\(t+1\)</span>.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7" role="doc-endnote"><p>Note that the Miller/Modigliani theorem is derived for single period return, not multi-period multiples. Hence, the above formula is a simplification, a topic that is for example discussed in a <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1946110">paper</a> by my PhD advisor.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8" role="doc-endnote"><p>I also further split up the EBITDA effect in a revenue growth and margin effect. The calculations are in spirit the same as the ones to split up the total net proceeds <span class="math inline">\(TNP\)</span> and straightforward. Hence, I do not show them.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+<!--radix_placeholder_article_footer-->
+<div class="article-footer">
+  <p class="social_footer">
+    <span class="disqus-comments">
+      <i class="fas fa-comments"></i>
+      &nbsp;
+      <span class="disqus-comment-count" data-disqus-identifier="posts/2021-01-31-the-value-bridge/">Comment on this article</span>
+    </span>
+    <span class="article-sharing">
+      Share: &nbsp;
+      <a href="https://twitter.com/share?text=The%20LBO%20value%20bridge&amp;url=https%3A%2F%2Fwww.christoph-jaeckel.com%2Fposts%2F2021-01-31-the-value-bridge%2F">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.christoph-jaeckel.com%2Fposts%2F2021-01-31-the-value-bridge%2F&amp;title=The%20LBO%20value%20bridge">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </span>
+  </p>
+  <script id="dsq-count-scr" src="https://https-www-christoph-jaeckel-com.disqus.com/count.js" async></script>
+  <div id="disqus_thread" class="hidden"></div>
+  <script type="text/plain" cookie-consent="functionality">
+var disqus_config = function () {
+  this.page.url = 'https://www.christoph-jaeckel.com/posts/2021-01-31-the-value-bridge/';
+  this.page.identifier = 'posts/2021-01-31-the-value-bridge/';
+};
+(function() {
+  var d = document, s = d.createElement('script');
+  s.src = 'https://https-www-christoph-jaeckel-com.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+})();
+</script>
+</div>
+<!--/radix_placeholder_article_footer-->
+</div>
+
+<div class="d-appendix">
+</div>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+<!--radix_placeholder_site_after_body-->
+<!--/radix_placeholder_site_after_body-->
+<!--radix_placeholder_appendices-->
+<div class="appendix-bottom">
+  <h3 id="updates-and-corrections">Corrections</h3>
+  <p>If you see mistakes or want to suggest changes, please <a href="https://github.com/christophj/cjaeckel.github.io/issues/new">create an issue</a> on the source repository.</p>
+</div>
+<!--/radix_placeholder_appendices-->
+<!--radix_placeholder_navigation_after_body-->
+<div class="distill-site-nav distill-site-footer">
+  <p>Copyright 2021 <a href="https://www.linkedin.com/in/christoph-j%C3%A4ckel-97401127/">Christoph JÃ¤ckel</a></p>
+  <p>Code shared on this website licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, v2.0</a>.</p>
+</div>
+<!--/radix_placeholder_navigation_after_body-->
+
+
+</body>
+
+</html>

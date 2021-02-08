@@ -20,6 +20,8 @@ output:
 collections:
   posts:
     share: [twitter, linkedin]
+    disqus:
+      shortname: https-www-christoph-jaeckel-com
     citations: false
 cookie_consent:
   style: simple
