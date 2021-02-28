@@ -1,0 +1,259 @@
+---
+title: "The size premium in private equity"
+description: |
+  A short description of the post.
+author:
+  - name: Christoph Jäckel
+    url: {}
+date: 02-14-2021
+output:
+  distill::distill_article:
+    self_contained: false
+    code_folding: true
+categories:
+  - Private Equity
+draft: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(data.table)
+library(ggplot2)
+library(knitr)
+library(kableExtra)
+options(scipen=999) # https://stackoverflow.com/questions/5352099/how-to-disable-scientific-notation
+```
+
+Starting with the size premium in public equity, refer to your value bridge article and start with the premise that many smaller buyout managers have a simple value creation story: increase the EBITDA and take a multiple arbitrage, kinda implying that just for a larger business, people pay more. Go back then to financial theory 101, value additivity: http://www.its.caltech.edu/~rosentha/courses/BEM103/Readings/BOCh03.pdf
+
+The price of a basket of goods (apples, pears,...) equals the sum of the prices of the individual goods.
+
+So just by bringing to businesses together, you are not magically increasing its value. Argue than how value can created.
+
+Then show examples with a value bridge...
+
+
+```{r Value_Bridge_function, include=FALSE}
+value_creation_LBO <- function(.startEquity, .endEquity, .startDebt, .endDebt, .startRev, .endRev, .startEBITDA, .endEBITDA,
+                               .interimCC, .interimDist, .interimIntRate, .holdingPeriod) {
+
+  ### Calculations of additional inputs
+  startEV <- .startEquity + .startDebt
+  endEV   <- .endEquity   + .endDebt
+  startEV_EBITDA_mult <- startEV/.startEBITDA
+  endEV_EBITDA_mult   <- endEV/.endEBITDA
+  costDebt <- (1+.interimIntRate)^.holdingPeriod - 1
+  invCapital <- .startEquity + .interimCC
+  deltaEquity <- .endEquity - .startEquity
+  gain <- deltaEquity + .interimDist - .interimCC
+  avgDebtEquity <- (.startDebt/.startEquity + .endDebt/.endEquity)/2 #TODO: Understand why you need the average here
+  startMargin <- .startEBITDA/.startRev
+  endMargin   <- .endEBITDA/.endRev
+
+  ### Calculations of output
+  TM_lev                  <- gain/invCapital
+  TM_unlev                <- (TM_lev + costDebt * avgDebtEquity)/(1 + avgDebtEquity)
+  lev_effect              <- TM_lev - TM_unlev
+  mult_effect             <- .startEBITDA * (endEV_EBITDA_mult - startEV_EBITDA_mult)
+  mult_EBITDA_comb_effect <- (.endEBITDA - .startEBITDA) * (endEV_EBITDA_mult - startEV_EBITDA_mult)
+  FCF_effect              <- -(.endDebt - .startDebt) + .interimDist - .interimCC
+  EBITDA_effect           <- (.endEBITDA - .startEBITDA) * startEV_EBITDA_mult
+  Rev_effect              <- (.endRev - .startRev) * startMargin * startEV_EBITDA_mult
+  margin_effect           <- (endMargin - startMargin) * .startRev  * startEV_EBITDA_mult
+  SM_comb_effect          <- (.endRev - .startRev) * (endMargin - startMargin) * startEV_EBITDA_mult
+
+  vec_results <-c(TM_lev                  = TM_lev,
+                  TM_unlev                = TM_unlev,
+                  gain                    = gain,
+                  lev_effect              = lev_effect,
+                  mult_effect             = mult_effect,
+                  mult_EBITDA_comb_effect = mult_EBITDA_comb_effect,
+                  EBITDA_effect           = EBITDA_effect,
+                  FCF_effect              = FCF_effect,
+                  Rev_effect              = Rev_effect,
+                  margin_effect           = margin_effect,
+                  SM_comb_effect          = SM_comb_effect,
+                  startEV_EBITDA_mult     = startEV_EBITDA_mult,
+                  endEV_EBITDA_mult       = endEV_EBITDA_mult,
+                  startEV                 = startEV,
+                  endEV                   = endEV,
+                  totalInv                = .startEquity + .interimCC,
+                  TM_mult                 = mult_effect/abs(gain) * abs(TM_unlev),
+                  TM_mult_EBITDA_comb     = mult_EBITDA_comb_effect/abs(gain) * abs(TM_unlev),
+                  TM_EBITDA               = EBITDA_effect/abs(gain) * abs(TM_unlev),
+                  TM_FCF                  = FCF_effect/abs(gain) * abs(TM_unlev),
+                  TM_Rev                  = Rev_effect/abs(gain) * abs(TM_unlev),
+                  TM_margin               = margin_effect/abs(gain) * abs(TM_unlev),
+                  TM_SM_comb              = SM_comb_effect/abs(gain) * abs(TM_unlev))
+  
+    print_table_inputs <- data.table(
+     Item  = c("Revenue", "EBITDA", "Equity", "Net Debt", "EV", "EV/EBITDA", "CC", "Dist",
+               "Holding period", "Interest rate p.a.",  "Avg debt/equity ratio", "Cost of debt"),
+     Entry = c(.startRev, .startEBITDA, .startEquity, .startDebt, startEV, startEV_EBITDA_mult,
+               rep(NA, 6)),
+     Interim = c(rep(NA, 6), .interimCC, .interimDist, 
+                 .holdingPeriod, .interimIntRate, avgDebtEquity, costDebt),
+     Exit    = c(.endRev, .endEBITDA, .endEquity, .endDebt, endEV, endEV_EBITDA_mult, rep(NA, 6))
+  )
+  
+  print_table_outputs <- data.table(
+     Item  = c("TM (levered)", 
+               "Gain / TM (unlevered)",
+               "FCF",
+               "Comb. multiple / EBITDA",
+               "Multiple",
+               "EBITDA",
+               "Comb. revenue/margin",
+               "Revenue",
+               "Margin"),
+     Absolute = c(NA, vec_results[c(3,8,6,5,7,11,9,10)]),
+     TM       = c(vec_results[c(1,2,20,18,17,19,23,21,22)])
+  )
+  
+  
+  ### Output
+  return(list(vec_results         = vec_results,
+              print_table_inputs  = print_table_inputs,
+              print_table_outputs = print_table_outputs))
+
+}
+```
+
+
+```{r Plotting_value_bridge, include=FALSE}
+plot_value_bridge <- function(.vec_value_creation_LBO, .fillColors = c("#FFC300", "#581845")) {
+
+  #Calculate inbetween multiples
+  mult_OpImpr <- .vec_value_creation_LBO["TM_unlev"] - .vec_value_creation_LBO["TM_mult"] - .vec_value_creation_LBO["TM_mult_EBITDA_comb"]
+
+  strDesc <- c("Combination S/M effect", "Margin effect", "Sales effect", "EBITDA effect", "FCF effect", "Operating improvements",
+               "Combination effect", "Multiple effect", "TM (unlev)", "Leverage effect", "TM (lev)")
+
+  plotDF <- data.frame(Desc  = factor(strDesc, levels = strDesc),
+                       Type  = c("Bridge", "Bridge", "Bridge", "Full", "Bridge", "Full", "Bridge", "Bridge", "Full", "Bridge", "Full"),
+                       Start = c(0,
+                                 .vec_value_creation_LBO["TM_SM_comb"], 
+                                 .vec_value_creation_LBO["TM_SM_comb"] + .vec_value_creation_LBO["TM_margin"], 
+                                 0,
+                                 .vec_value_creation_LBO["TM_EBITDA"], 
+                                 0,
+                                 mult_OpImpr,
+                                 mult_OpImpr + .vec_value_creation_LBO["TM_mult_EBITDA_comb"], 
+                                 0,
+                                 .vec_value_creation_LBO[["TM_unlev"]],
+                                 0),
+                       End   = c(.vec_value_creation_LBO["TM_SM_comb"],
+                                 .vec_value_creation_LBO["TM_SM_comb"] + .vec_value_creation_LBO["TM_margin"],
+                                 .vec_value_creation_LBO["TM_EBITDA"],
+                                 .vec_value_creation_LBO["TM_EBITDA"],
+                                 mult_OpImpr,
+                                 mult_OpImpr,
+                                 mult_OpImpr + .vec_value_creation_LBO["TM_mult_EBITDA_comb"],
+                                 .vec_value_creation_LBO[["TM_unlev"]],
+                                 .vec_value_creation_LBO[["TM_unlev"]],
+                                 .vec_value_creation_LBO[["TM_lev"]],
+                                 .vec_value_creation_LBO[["TM_lev"]]))
+  plotDF$Amount <- plotDF$End - plotDF$Start
+  plotDF$ID <- 1:nrow(plotDF)
+
+  #https://stackoverflow.com/questions/50688764/r-ggplot2-ignoring-unknown-aesthetics-with-geom-rect
+  suppressWarnings(ggplot(plotDF, aes(x=Desc, fill = Type)) +
+                     scale_fill_manual(values = .fillColors) +
+                     geom_rect(aes(x=Desc, xmin = ID - 0.45, xmax = ID + 0.45, ymin = Start, ymax = End)) +
+                     xlab("") +
+                     theme(legend.position = "none", axis.text.x = element_text(angle = 45, hjust = 1)))
+
+}
+
+```
+
+
+## The starting point: no value creation
+
+Start with example, left pocket, right pocket. Doesn't create value.
+
+```{r Start_left_pocket_right_pocket, echo=FALSE}
+interest <- 0.00 #As you simply do an analysis before/after acquisition
+### Start with company
+startEV     <- 100
+startEquity <- 50
+startDebt   <- startEV - startEquity
+startEBITDA <- 10
+startRev    <- 100
+startMargin <- startEBITDA/startRev
+EV_EBITDA_multiple <- startEV/startEBITDA
+### Acquire business with the same characteristics for the same multiple
+#   Assume it's fully financed with debt
+addEV <- 100
+addEBITDA <- addEV/EV_EBITDA_multiple
+addRev <- addEBITDA / startMargin
+
+
+list_results <- value_creation_LBO(
+                   .startEquity         = startEquity,
+                   #As additional EV is fully financed by debt, I add and subtract it; 0.01 needed otherwise NA
+                   .endEquity           = startEV + addEV - startDebt - addEV + 0.01, 
+                   .startDebt           = startDebt,
+                   .endDebt             = startDebt + addEV,
+                   .startRev            = startRev,
+                   .endRev              = startRev + addRev,
+                   .startEBITDA         = startEBITDA,
+                   .endEBITDA           = startEBITDA + addEBITDA,
+                   .interimCC           = 0,
+                   .interimDist         = 0,
+                   .interimIntRate      = interest,
+                   .holdingPeriod       = 0)
+kbl(list_results$print_table_inputs,
+    caption="Inputs of add-on example") %>%
+  kable_classic(full_width = FALSE)
+kbl(list_results$print_table_outputs,
+    caption="Results of value creation analysis of add-on example") %>%
+  kable_classic(full_width = FALSE)
+# Doesn't make sense here, as no value created
+plot_value_bridge(list_results$vec_results)
+```
+
+## Synergies 
+
+Now bring synergies into the game. 
+
+
+```{r Synergies, echo=FALSE}
+### Assume margin improvement of 5%, same multiple
+margin_impr <- 0.05
+endEBITDA <- startEBITDA + addEBITDA + margin_impr*(startRev + addRev)
+endEV <- endEBITDA * EV_EBITDA_multiple
+endEquity <- endEV - (startDebt + addEV)
+
+list_results <- value_creation_LBO(
+                   .startEquity         = startEquity,
+                   #As additional EV is fully financed by debt, I add and subtract it; 0.01 needed otherwise NA
+                   .endEquity           = endEquity, 
+                   .startDebt           = startDebt,
+                   .endDebt             = startDebt + addEV,
+                   .startRev            = startRev,
+                   .endRev              = startRev + addRev,
+                   .startEBITDA         = startEBITDA,
+                   .endEBITDA           = endEBITDA,
+                   .interimCC           = 0,
+                   .interimDist         = 0,
+                   .interimIntRate      = interest,
+                   .holdingPeriod       = 0)
+kbl(list_results$print_table_inputs,
+    caption="Inputs of add-on example with synergies") %>%
+  kable_classic(full_width = FALSE)
+kbl(list_results$print_table_outputs,
+    caption="Results of value creation analysis of add-on example with synergies") %>%
+  kable_classic(full_width = FALSE)
+# Doesn't make sense here, as no value created
+plot_value_bridge(list_results$vec_results)
+```
+
+## Roll-ups
+
+Describe [Roll ups](https://en.wikipedia.org/wiki/Rollup) as a special form, in which multiple arbitrage is reasonable to assume, simply because you are providing liquidity to an otherwise illiquid market (e.g., very difficult for a dentist to sell). With everything in life though, it's supply and demand and if there are too many players active in th market, it also becomes more and more difficult to profit from this illiquidity premium.
+
+Also, it is not a trivial question, and one that does by far not get as much attention as it should, to have a reasonable estimate on how large this multiple expansion should be. 2x, 4x, 6x? Driven by what factors?
+
+Hence, it is important again to link the analysis back to free cash flows (link to your [blog post](https://www.christoph-jaeckel.com/posts/2021-01-17-evebitda-valuation-multiple-the-theory/)).

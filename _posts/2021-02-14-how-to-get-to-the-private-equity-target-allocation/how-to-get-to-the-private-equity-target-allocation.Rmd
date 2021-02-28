@@ -1,0 +1,70 @@
+---
+title: "How to get to the private equity target allocation"
+description: |
+  A simple heuristic to help investors understand how to get to and maintain a target allocation in private equity.
+author:
+  - name: Christoph Jäckel
+    url: {}
+date: 02-14-2021
+output:
+  distill::distill_article:
+    self_contained: false
+    code_folding: true
+categories:
+  - Private Equity
+draft: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+Start by explaining the issue: notoriously difficult to translate commitments into NAVs. While the question how much to invest to get the desired allocation is trivial for almost every other asset class, it is rather complicated for private equity. Explain a bit why: commitments vs. investments, portfolio in closed-end fund.
+
+Then explain solutions: typically Monte-Carlo simulations, refer to Pinebridge study: [Achieving Private Equity Allocation Targets: Eliminating The Guesswork](https://hub.ipe.com/download?ac=60700) or your BVCA study. 
+
+However, this is not really great for the own understanding and communication with others. I'm the best example: I have run dozens of private equity portfolios through Monte Carlo simulations, wrote my diploma thesis about the allocation of private equity into an overall portfolio; yet, if someone would ask me how much you have to commit each year in private equity funds to get to a target NAV of x million, I could not come up with a simple answer. 
+
+Hence, I thought about the issue a bit more and came up with one simple heuristic to understand the issue a bit better. Without further ado, let's get into it.
+
+
+```{r Function_combine_vectors}
+combine_vectors <- function(.vec, .iter = 50, .scale_factor=0, .bol_cumulative=FALSE, .lag=1) {
+
+  #1. Create a data.table in which you store the element number and the original vector
+  DT <- data.table::data.table(Number  = 1:(.iter + length(.vec)),
+                               Vec1    = c(.vec, rep(0, .iter)))
+
+
+  #2. Lag the vector
+  if (.iter < 2) {
+    stop(".iter in combine_vectors() has to be at least 2.")
+  }
+  for (i in 2:.iter) {
+
+    str_eval <- paste0("DT[, Vec", i, ":=", "shift(Vec", i-1, ",n=", .lag, ",fill=0,type='lag')]")
+    eval(parse(text=str_eval))
+
+  }
+
+  #3. Scale the vector
+  for (i in 2:.iter) {
+
+    if (.bol_cumulative) {
+      str_eval <- paste0("DT[, Vec", i, ":=Vec", i, "*", (1+.scale_factor)^(i-1), "]")
+    } else {
+      str_eval <- paste0("DT[, Vec", i, ":=Vec", i, "*", (1+.scale_factor*(i-1)), "]")
+    }
+    eval(parse(text=str_eval))
+  }
+
+  #4. Sum the rows (deducting column Number)
+  DT[, Sum := rowSums(DT) - Number]
+  DT[, CumSum := cumsum(Sum)]
+
+  #5. Return data.table
+  return(DT)
+
+}
+```
