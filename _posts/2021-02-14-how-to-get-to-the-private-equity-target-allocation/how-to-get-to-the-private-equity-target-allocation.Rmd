@@ -1,32 +1,64 @@
 ---
 title: "How to get to the private equity target allocation"
 description: |
-  A simple heuristic to help investors understand how to get to and maintain a target allocation in private equity.
+  A simple heuristic to help investors understand how to get to and maintain a target allocation in private equity. In a nutshell: steady state is your friend.
 author:
   - name: Christoph Jäckel
     url: {}
-date: 02-14-2021
+date: 04-19-2021
 output:
   distill::distill_article:
     self_contained: false
-    code_folding: true
+    code_folding: false
 categories:
   - Private Equity
-draft: true
+draft: false
 ---
 
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
+library(data.table)
+library(ggplot2)
+library(kableExtra)
+library(utilitiesCJ)
+max_vintage <- 2005
+DT <- readRDS("C:/Users/Christoph Jaeckel/Desktop/Preqin/preqin_data_22March2021.rds")
 ```
 
-Start by explaining the issue: notoriously difficult to translate commitments into NAVs. While the question how much to invest to get the desired allocation is trivial for almost every other asset class, it is rather complicated for private equity. Explain a bit why: commitments vs. investments, portfolio in closed-end fund.
 
-Then explain solutions: typically Monte-Carlo simulations, refer to Pinebridge study: [Achieving Private Equity Allocation Targets: Eliminating The Guesswork](https://hub.ipe.com/download?ac=60700) or your BVCA study. 
 
-However, this is not really great for the own understanding and communication with others. I'm the best example: I have run dozens of private equity portfolios through Monte Carlo simulations, wrote my diploma thesis about the allocation of private equity into an overall portfolio; yet, if someone would ask me how much you have to commit each year in private equity funds to get to a target NAV of x million, I could not come up with a simple answer. 
+To get to a target allocation for private equity, an investor has to understand how their commitments will translate to valuations over time. Unfortunately, this is not an easy exercise. Experienced investors often have their proprietary models to come up with commitment proposals. Often, these models are based on [Monte Carlo simulations (MCS)](https://en.wikipedia.org/wiki/Monte_Carlo_method), such as a study by [Pinebridge](https://hub.ipe.com/download?ac=60700) or an [article](https://www.bvca.co.uk/Portals/0/library/documents/Guide%20to%20Risk/Risk%20in%20Private%20Equity%20-%20Oct%202015.pdf) I wrote together with a colleague about the risks in private equity.
 
-Hence, I thought about the issue a bit more and came up with one simple heuristic to understand the issue a bit better. Without further ado, let's get into it.
+More complicated models, such as Monte Carlo simulations, are essential for an investor who wants to build up and manage a private equity portfolio professionally. However, such models are not well suited to grasp the results intuitively and communicate them to others. And this is often as important as the validity of the results. People, me included, don't feel comfortable making decisions about large sums of money that are based on opaque models. In addition, decision makers in larger organizations are not very familiar with private equity.  
+
+How can you give such decision makers an intuitive answer to the question how much one has to commit annually to funds to end up at a certain portfolio value? I have run dozens of private equity portfolios through Monte Carlo simulations, have written my diploma thesis about the allocation of private equity into an overall portfolio by using simulations; yet, if someone used to ask me this question, I could not come up with a simple answer. 
+
+Hence, I thought about the issue a bit more and came up with one. Without further ado, let's get into it.
+
+The idea is to start with the development of the net asset value (NAV) of a typical private equity fund over time. In the following, I use cash flow data from [Preqin](https://www.preqin.com/) and for illustrative purposes, only focus on mature buyout funds with a vintage year of `r max_vintage` or older. The chart below shows the NAV in relation to the commitment  over time for a median buyout fund.
+
+
+```{r NAV, echo=FALSE, fig.cap="Data provided by Preqin. Only buyout funds with vintage year 2005 or older considered. Median statistics shown."}
+intDT <- DT[type=="buyout" & vintage<=max_vintage, 
+            list(NAV   = median(nav),
+                 TV    = median(nav + cum_dist),
+                 Dist  = median(cum_dist),
+                 Call  = median(cum_call)), 
+            by=qtr]
+
+ggplot(melt(intDT[qtr<75], id.var="qtr"), aes(x=qtr, y=value, color=variable)) + 
+  geom_line() + xlab("Quarter") + ylab("In relation to COM") +
+  ggtitle("Development of a typical buyout fund over time") +
+  scale_y_continuous(labels = scales::percent)
+
+```
+
+During the investment period, the NAV increases quickly as the fund manager invests into underlying companies. The NAV peaks in year `r round(intDT[NAV==max(NAV), qtr/4])`, at the end of the investment period for most buyout funds. Interestingly though, it does not get to anywhere close to the commitment size but starts decreasing around the 75% mark. This might come as a surprise to some, but if you commit USD 10 million to a buyout fund, the unrealized value in this fund will most likely not get close to USD 10 million at any point in the lifetime of the fund. This is not because buyout funds don't perform, but because they start generating distributions well before the end of their lifetime.
+
+<aside>
+As a reminder, I use funds with vintage years of 2005 or older and it might be that youngers funds took longer to generate liquidity. Maybe something I can look into more detail in another post.
+</aside>
 
 
 ```{r Function_combine_vectors}
@@ -68,3 +100,65 @@ combine_vectors <- function(.vec, .iter = 50, .scale_factor=0, .bol_cumulative=F
 
 }
 ```
+
+
+What we can also see from the chart is that a typical buyout fund takes 15 years to be fully realized. To reach a steady state, an investor must commit each year the same amount. After 15 years, the portfolio is then at the point where it consists of a fund in each stage (one-year old fund, two-year old fund, etc.). 
+
+All we got to do now is to string together the relevant curves for the funds, with a year difference per fund. The table below shows the built up of the portfolio for the first 10 years.
+
+```{r Table}
+res <- combine_vectors(.vec = intDT$NAV[seq(from=4, to=60,by=4)],
+                       .iter = 30, 
+                       .scale_factor=0, 
+                       .bol_cumulative=FALSE, 
+                       .lag=1)
+setnames(res, "Number", "Year")
+setnames(res, names(res), gsub("Vec", "Fund ", names(res)))
+castDT <- melt(res[Year<=10, 1:10], id.vars="Year")
+castDT[,value:=paste0(round(value*100),"%")]
+castDT <- dcast(castDT, variable ~ Year)
+setnames(castDT, "variable", "")
+kbl(castDT,
+    caption="Built up of private equity portfolio") %>%
+  kable_classic(full_width = FALSE) %>%
+  add_header_above(c(" " = 1, "Year" = 10))
+```
+
+
+We can also plot the NAV curves for individual funds and show the sum of these individual curves, which is nothing else as the value of the whole portfolio. The value of the portfolio reaches its steady state after 15 years, which is when the commitment into the first fund is fully realized.
+
+```{r Combine_curves, preview=TRUE}
+ggplot(melt(res[Year<30,-"CumSum",with=FALSE],id.vars="Year"), aes(x=Year,y=value,color=variable)) +
+  geom_line() + theme(legend.position = "none") + ylab("In relation to COM") +
+  ggtitle("Development of the portfolio NAV") +
+  scale_y_continuous(labels = scales::percent) +
+  annotate("text", x=15, y=5, label= "Portfolio") +
+  annotate("text", x=15, y=1, label= "Individual funds")
+
+```
+
+The value of the portfolio is slightly above 5, based on a one unit of annual commitments. As an example, an investor who wants to get to a roughly USD 50 million private equity portfolio (in terms of NAV) should commit around USD 10 million each year. Of course, this rule is dependent on the assumption about the development of the NAV for a private equity fund. Above, I used the median curve of buyout funds from the Preqin universe. 
+
+Below, I show the NAV development for different percentiles from the Preqin data set. Notice the large dispersion: while the median curve reaches it maximum before 75%, there are close to 10% of buyout funds that actually end up with an NAV larger than the commitment size. 
+
+<aside>
+The black curve in this chart is the same as the red NAV curve in the first chart. 
+</aside>
+
+```{r Quantiles}
+gg <- plot_quantiles_over_time(.dt = DT[type=="buyout" & vintage<=max_vintage],
+                         .str_value = "nav",
+                         .str_time  = "qtr",
+                         .probs     =  c(0.05, 0.1, 0.25, 0.5, 0.75, 0.9, 0.95),
+                         .col_alpha = 0.75,
+                         .str_ylab  = "NAV")
+gg + scale_y_continuous(labels = scales::percent)
+```
+
+This is why diversification is so important: if an investor commits to only one fund, the outcome could be anything. However, the more diversified the portfolio becomes, the higher the likelihood that the portfolio ends up closer to the average.^[Careful: the average is not the same as the median and due to the right-skewed distributions in private equity, the average will be higher. However, we want here a big picture analysis: Which ballpark commitments do I have to write to end up at a certain allocation? To answer this question, the subtle difference between median and average is not that important.]
+
+To summarize: In this post, I have shown a simple trick to understand what annual commitments are required to end up with a certain private equity allocation. The trick is to string together the same NAV curve of a representative fund until a steady state is reached. In the steady state, the sum of all individual NAVs is the portfolio NAV. I have further shown that in case of a typical buyout fund, the factor from annual commitments to portfolio NAV is `r round(res[Year==30, Sum],1)`. An investor who commits USD 10 million per year would end up with a portfolio NAV of USD `r round(res[Year==30, Sum*10],0)` million when the steady state is reached. 
+
+Another way to derive this result is by calculating the mean of the NAV curve for one fund over the 15 years, which is `r round(100*mean(intDT$NAV[1:60]),0)`% for the median buyout fund in our sample. In absolute numbers and for a USD 10 million commitment, that means that throughout the lifetime of the fund the NAV is on average USD `r round(10*mean(intDT$NAV[1:60]),1)` million. As we have 15 funds in the steady state in parallel, the portfolio NAV is USD `r round(15*10*mean(intDT$NAV[1:60]),0)` million.^[Don't get caught up on the number of funds. All you need is an average ratio of NAV to commitment. If you have that, it is irrelevant if the commitment is given to one or ten funds per year. The ratio might change depending on the number of funds, but I want to emphasize again that this approach just wants to support an investor getting a simple understanding of why certain commitment amounts are needed to get to a certain private equity allocation.]
+
+Of course, an investor who wants to start investing in private equity should rely on more sophisticated models. But this simple heuristic is a good starting point to get a better understanding how commitments and portfolio valuations are linked.

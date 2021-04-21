@@ -86,638 +86,39 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
 
   <!--radix_placeholder_meta_tags-->
-  <title>Uncertain times: About this blog</title>
+  <title>How to get to the private equity target allocation</title>
 
-  <meta property="description" itemprop="description" content="Why bother?"/>
+  <meta property="description" itemprop="description" content="A simple heuristic to help investors understand how to get to and maintain a target allocation in private equity. In a nutshell: steady state is your friend."/>
 
 
+  <!--  https://schema.org/Article -->
+  <meta property="article:published" itemprop="datePublished" content="2021-04-19"/>
+  <meta property="article:created" itemprop="dateCreated" content="2021-04-19"/>
+  <meta name="article:author" content="Christoph Jäckel"/>
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Uncertain times: About this blog"/>
+  <meta property="og:title" content="How to get to the private equity target allocation"/>
   <meta property="og:type" content="article"/>
-  <meta property="og:description" content="Why bother?"/>
+  <meta property="og:description" content="A simple heuristic to help investors understand how to get to and maintain a target allocation in private equity. In a nutshell: steady state is your friend."/>
   <meta property="og:locale" content="en_US"/>
-  <meta property="og:site_name" content="Uncertain times"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Uncertain times: About this blog"/>
-  <meta property="twitter:description" content="Why bother?"/>
+  <meta property="twitter:title" content="How to get to the private equity target allocation"/>
+  <meta property="twitter:description" content="A simple heuristic to help investors understand how to get to and maintain a target allocation in private equity. In a nutshell: steady state is your friend."/>
 
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description"]}},"value":[{"type":"character","attributes":{},"value":["About this blog"]},{"type":"character","attributes":{},"value":["Why bother?"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","categories","draft"]}},"value":[{"type":"character","attributes":{},"value":["How to get to the private equity target allocation"]},{"type":"character","attributes":{},"value":["A simple heuristic to help investors understand how to get to and maintain a target allocation in private equity. In a nutshell: steady state is your friend.\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Christoph Jäckel"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["04-19-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained","code_folding"]}},"value":[{"type":"logical","attributes":{},"value":[false]},{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"character","attributes":{},"value":["Private Equity"]},{"type":"logical","attributes":{},"value":[false]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
+  
+  <script type="text/json" id="radix-resource-manifest">
+  {"type":"character","attributes":{},"value":["how-to-get-to-the-private-equity-target-allocation_files/anchor-4.2.2/anchor.min.js","how-to-get-to-the-private-equity-target-allocation_files/bowser-1.9.3/bowser.min.js","how-to-get-to-the-private-equity-target-allocation_files/distill-2.2.21/template.v2.js","how-to-get-to-the-private-equity-target-allocation_files/figure-html5/Combine_curves-1.png","how-to-get-to-the-private-equity-target-allocation_files/figure-html5/NAV-1.png","how-to-get-to-the-private-equity-target-allocation_files/figure-html5/Quantiles-1.png","how-to-get-to-the-private-equity-target-allocation_files/header-attrs-2.6/header-attrs.js","how-to-get-to-the-private-equity-target-allocation_files/jquery-1.11.3/jquery.min.js","how-to-get-to-the-private-equity-target-allocation_files/kePrint-0.0.1/kePrint.js","how-to-get-to-the-private-equity-target-allocation_files/lightable-0.0.1/lightable.css","how-to-get-to-the-private-equity-target-allocation_files/popper-2.6.0/popper.min.js","how-to-get-to-the-private-equity-target-allocation_files/tippy-6.2.7/tippy-bundle.umd.min.js","how-to-get-to-the-private-equity-target-allocation_files/tippy-6.2.7/tippy-light-border.css","how-to-get-to-the-private-equity-target-allocation_files/tippy-6.2.7/tippy.css","how-to-get-to-the-private-equity-target-allocation_files/tippy-6.2.7/tippy.umd.min.js","how-to-get-to-the-private-equity-target-allocation_files/webcomponents-2.0.0/webcomponents.js"]}
+  </script>
   <!--radix_placeholder_navigation_in_header-->
-  <meta name="distill:offset" content=""/>
-
-  <script type="application/javascript">
-
-    window.headroom_prevent_pin = false;
-
-    window.document.addEventListener("DOMContentLoaded", function (event) {
-
-      // initialize headroom for banner
-      var header = $('header').get(0);
-      var headerHeight = header.offsetHeight;
-      var headroom = new Headroom(header, {
-        tolerance: 5,
-        onPin : function() {
-          if (window.headroom_prevent_pin) {
-            window.headroom_prevent_pin = false;
-            headroom.unpin();
-          }
-        }
-      });
-      headroom.init();
-      if(window.location.hash)
-        headroom.unpin();
-      $(header).addClass('headroom--transition');
-
-      // offset scroll location for banner on hash change
-      // (see: https://github.com/WickyNilliams/headroom.js/issues/38)
-      window.addEventListener("hashchange", function(event) {
-        window.scrollTo(0, window.pageYOffset - (headerHeight + 25));
-      });
-
-      // responsive menu
-      $('.distill-site-header').each(function(i, val) {
-        var topnav = $(this);
-        var toggle = topnav.find('.nav-toggle');
-        toggle.on('click', function() {
-          topnav.toggleClass('responsive');
-        });
-      });
-
-      // nav dropdowns
-      $('.nav-dropbtn').click(function(e) {
-        $(this).next('.nav-dropdown-content').toggleClass('nav-dropdown-active');
-        $(this).parent().siblings('.nav-dropdown')
-           .children('.nav-dropdown-content').removeClass('nav-dropdown-active');
-      });
-      $("body").click(function(e){
-        $('.nav-dropdown-content').removeClass('nav-dropdown-active');
-      });
-      $(".nav-dropdown").click(function(e){
-        e.stopPropagation();
-      });
-    });
-  </script>
-
-  <style type="text/css">
-
-  /* Theme (user-documented overrideables for nav appearance) */
-
-  .distill-site-nav {
-    color: rgba(255, 255, 255, 0.8);
-    background-color: #0F2E3D;
-    font-size: 15px;
-    font-weight: 300;
-  }
-
-  .distill-site-nav a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  .distill-site-nav a:hover {
-    color: white;
-  }
-
-  @media print {
-    .distill-site-nav {
-      display: none;
-    }
-  }
-
-  .distill-site-header {
-
-  }
-
-  .distill-site-footer {
-
-  }
-
-
-  /* Site Header */
-
-  .distill-site-header {
-    width: 100%;
-    box-sizing: border-box;
-    z-index: 3;
-  }
-
-  .distill-site-header .nav-left {
-    display: inline-block;
-    margin-left: 8px;
-  }
-
-  @media screen and (max-width: 768px) {
-    .distill-site-header .nav-left {
-      margin-left: 0;
-    }
-  }
-
-
-  .distill-site-header .nav-right {
-    float: right;
-    margin-right: 8px;
-  }
-
-  .distill-site-header a,
-  .distill-site-header .title {
-    display: inline-block;
-    text-align: center;
-    padding: 14px 10px 14px 10px;
-  }
-
-  .distill-site-header .title {
-    font-size: 18px;
-    min-width: 150px;
-  }
-
-  .distill-site-header .logo {
-    padding: 0;
-  }
-
-  .distill-site-header .logo img {
-    display: none;
-    max-height: 20px;
-    width: auto;
-    margin-bottom: -4px;
-  }
-
-  .distill-site-header .nav-image img {
-    max-height: 18px;
-    width: auto;
-    display: inline-block;
-    margin-bottom: -3px;
-  }
-
-
-
-  @media screen and (min-width: 1000px) {
-    .distill-site-header .logo img {
-      display: inline-block;
-    }
-    .distill-site-header .nav-left {
-      margin-left: 20px;
-    }
-    .distill-site-header .nav-right {
-      margin-right: 20px;
-    }
-    .distill-site-header .title {
-      padding-left: 12px;
-    }
-  }
-
-
-  .distill-site-header .nav-toggle {
-    display: none;
-  }
-
-  .nav-dropdown {
-    display: inline-block;
-    position: relative;
-  }
-
-  .nav-dropdown .nav-dropbtn {
-    border: none;
-    outline: none;
-    color: rgba(255, 255, 255, 0.8);
-    padding: 16px 10px;
-    background-color: transparent;
-    font-family: inherit;
-    font-size: inherit;
-    font-weight: inherit;
-    margin: 0;
-    margin-top: 1px;
-    z-index: 2;
-  }
-
-  .nav-dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: white;
-    min-width: 200px;
-    border: 1px solid rgba(0,0,0,0.15);
-    border-radius: 4px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
-    z-index: 1;
-    margin-top: 2px;
-    white-space: nowrap;
-    padding-top: 4px;
-    padding-bottom: 4px;
-  }
-
-  .nav-dropdown-content hr {
-    margin-top: 4px;
-    margin-bottom: 4px;
-    border: none;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  }
-
-  .nav-dropdown-active {
-    display: block;
-  }
-
-  .nav-dropdown-content a, .nav-dropdown-content .nav-dropdown-header {
-    color: black;
-    padding: 6px 24px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-  }
-
-  .nav-dropdown-content .nav-dropdown-header {
-    display: block;
-    padding: 5px 24px;
-    padding-bottom: 0;
-    text-transform: uppercase;
-    font-size: 14px;
-    color: #999999;
-    white-space: nowrap;
-  }
-
-  .nav-dropdown:hover .nav-dropbtn {
-    color: white;
-  }
-
-  .nav-dropdown-content a:hover {
-    background-color: #ddd;
-    color: black;
-  }
-
-  .nav-right .nav-dropdown-content {
-    margin-left: -45%;
-    right: 0;
-  }
-
-  @media screen and (max-width: 768px) {
-    .distill-site-header a, .distill-site-header .nav-dropdown  {display: none;}
-    .distill-site-header a.nav-toggle {
-      float: right;
-      display: block;
-    }
-    .distill-site-header .title {
-      margin-left: 0;
-    }
-    .distill-site-header .nav-right {
-      margin-right: 0;
-    }
-    .distill-site-header {
-      overflow: hidden;
-    }
-    .nav-right .nav-dropdown-content {
-      margin-left: 0;
-    }
-  }
-
-
-  @media screen and (max-width: 768px) {
-    .distill-site-header.responsive {position: relative; min-height: 500px; }
-    .distill-site-header.responsive a.nav-toggle {
-      position: absolute;
-      right: 0;
-      top: 0;
-    }
-    .distill-site-header.responsive a,
-    .distill-site-header.responsive .nav-dropdown {
-      display: block;
-      text-align: left;
-    }
-    .distill-site-header.responsive .nav-left,
-    .distill-site-header.responsive .nav-right {
-      width: 100%;
-    }
-    .distill-site-header.responsive .nav-dropdown {float: none;}
-    .distill-site-header.responsive .nav-dropdown-content {position: relative;}
-    .distill-site-header.responsive .nav-dropdown .nav-dropbtn {
-      display: block;
-      width: 100%;
-      text-align: left;
-    }
-  }
-
-  /* Site Footer */
-
-  .distill-site-footer {
-    width: 100%;
-    overflow: hidden;
-    box-sizing: border-box;
-    z-index: 3;
-    margin-top: 30px;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    text-align: center;
-  }
-
-  /* Headroom */
-
-  d-title {
-    padding-top: 6rem;
-  }
-
-  @media print {
-    d-title {
-      padding-top: 4rem;
-    }
-  }
-
-  .headroom {
-    z-index: 1000;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-  }
-
-  .headroom--transition {
-    transition: all .4s ease-in-out;
-  }
-
-  .headroom--unpinned {
-    top: -100px;
-  }
-
-  .headroom--pinned {
-    top: 0;
-  }
-
-  /* adjust viewport for navbar height */
-  /* helps vertically center bootstrap (non-distill) content */
-  .min-vh-100 {
-    min-height: calc(100vh - 100px) !important;
-  }
-
-  </style>
-
-  <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
-  <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
-  <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
-  <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
-  <script src="site_libs/autocomplete-0.37.1/autocomplete.min.js"></script>
-  <script src="site_libs/fuse-6.4.1/fuse.min.js"></script>
-
-  <script type="application/javascript">
-
-  function getMeta(metaName) {
-    var metas = document.getElementsByTagName('meta');
-    for (let i = 0; i < metas.length; i++) {
-      if (metas[i].getAttribute('name') === metaName) {
-        return metas[i].getAttribute('content');
-      }
-    }
-    return '';
-  }
-
-  function offsetURL(url) {
-    var offset = getMeta('distill:offset');
-    return offset ? offset + '/' + url : url;
-  }
-
-  function createFuseIndex() {
-
-    // create fuse index
-    var options = {
-      keys: [
-        { name: 'title', weight: 20 },
-        { name: 'categories', weight: 15 },
-        { name: 'description', weight: 10 },
-        { name: 'contents', weight: 5 },
-      ],
-      ignoreLocation: true,
-      threshold: 0
-    };
-    var fuse = new window.Fuse([], options);
-
-    // fetch the main search.json
-    return fetch(offsetURL('search.json'))
-      .then(function(response) {
-        if (response.status == 200) {
-          return response.json().then(function(json) {
-            // index main articles
-            json.articles.forEach(function(article) {
-              fuse.add(article);
-            });
-            // download collections and index their articles
-            return Promise.all(json.collections.map(function(collection) {
-              return fetch(offsetURL(collection)).then(function(response) {
-                if (response.status === 200) {
-                  return response.json().then(function(articles) {
-                    articles.forEach(function(article) {
-                      fuse.add(article);
-                    });
-                  })
-                } else {
-                  return Promise.reject(
-                    new Error('Unexpected status from search index request: ' +
-                              response.status)
-                  );
-                }
-              });
-            })).then(function() {
-              return fuse;
-            });
-          });
-
-        } else {
-          return Promise.reject(
-            new Error('Unexpected status from search index request: ' +
-                        response.status)
-          );
-        }
-      });
-  }
-
-  window.document.addEventListener("DOMContentLoaded", function (event) {
-
-    // get search element (bail if we don't have one)
-    var searchEl = window.document.getElementById('distill-search');
-    if (!searchEl)
-      return;
-
-    createFuseIndex()
-      .then(function(fuse) {
-
-        // make search box visible
-        searchEl.classList.remove('hidden');
-
-        // initialize autocomplete
-        var options = {
-          autoselect: true,
-          hint: false,
-          minLength: 2,
-        };
-        window.autocomplete(searchEl, options, [{
-          source: function(query, callback) {
-            const searchOptions = {
-              isCaseSensitive: false,
-              shouldSort: true,
-              minMatchCharLength: 2,
-              limit: 10,
-            };
-            var results = fuse.search(query, searchOptions);
-            callback(results
-              .map(function(result) { return result.item; })
-            );
-          },
-          templates: {
-            suggestion: function(suggestion) {
-              var img = suggestion.preview && Object.keys(suggestion.preview).length > 0
-                ? `<img src="${offsetURL(suggestion.preview)}"</img>`
-                : '';
-              var html = `
-                <div class="search-item">
-                  <h3>${suggestion.title}</h3>
-                  <div class="search-item-description">
-                    ${suggestion.description || ''}
-                  </div>
-                  <div class="search-item-preview">
-                    ${img}
-                  </div>
-                </div>
-              `;
-              return html;
-            }
-          }
-        }]).on('autocomplete:selected', function(event, suggestion) {
-          window.location.href = offsetURL(suggestion.path);
-        });
-        // remove inline display style on autocompleter (we want to
-        // manage responsive display via css)
-        $('.algolia-autocomplete').css("display", "");
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
-
-  });
-
-  </script>
-
-  <style type="text/css">
-
-  .nav-search {
-    font-size: x-small;
-  }
-
-  /* Algolioa Autocomplete */
-
-  .algolia-autocomplete {
-    display: inline-block;
-    margin-left: 10px;
-    vertical-align: sub;
-    background-color: white;
-    color: black;
-    padding: 6px;
-    padding-top: 8px;
-    padding-bottom: 0;
-    border-radius: 6px;
-    border: 1px #0F2E3D solid;
-    width: 180px;
-  }
-
-
-  @media screen and (max-width: 768px) {
-    .distill-site-nav .algolia-autocomplete {
-      display: none;
-      visibility: hidden;
-    }
-    .distill-site-nav.responsive .algolia-autocomplete {
-      display: inline-block;
-      visibility: visible;
-    }
-    .distill-site-nav.responsive .algolia-autocomplete .aa-dropdown-menu {
-      margin-left: 0;
-      width: 400px;
-      max-height: 400px;
-    }
-  }
-
-  .algolia-autocomplete .aa-input, .algolia-autocomplete .aa-hint {
-    width: 90%;
-    outline: none;
-    border: none;
-  }
-
-  .algolia-autocomplete .aa-hint {
-    color: #999;
-  }
-  .algolia-autocomplete .aa-dropdown-menu {
-    width: 550px;
-    max-height: 70vh;
-    overflow-x: visible;
-    overflow-y: scroll;
-    padding: 5px;
-    margin-top: 3px;
-    margin-left: -150px;
-    background-color: #fff;
-    border-radius: 5px;
-    border: 1px solid #999;
-    border-top: none;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion {
-    cursor: pointer;
-    padding: 5px 4px;
-    border-bottom: 1px solid #eee;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion:last-of-type {
-    border-bottom: none;
-    margin-bottom: 2px;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item {
-    overflow: hidden;
-    font-size: 0.8em;
-    line-height: 1.4em;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item h3 {
-    font-size: 1rem;
-    margin-block-start: 0;
-    margin-block-end: 5px;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-description {
-    display: inline-block;
-    overflow: hidden;
-    height: 2.8em;
-    width: 80%;
-    margin-right: 4%;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview {
-    display: inline-block;
-    width: 15%;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img {
-    height: 3em;
-    width: auto;
-    display: none;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img[src] {
-    display: initial;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion.aa-cursor {
-    background-color: #eee;
-  }
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion em {
-    font-weight: bold;
-    font-style: normal;
-  }
-
-  </style>
-
-
   <!--/radix_placeholder_navigation_in_header-->
   <!--radix_placeholder_distill-->
 
@@ -2033,35 +1434,19 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
-  <script src="site_libs/popper-2.6.0/popper.min.js"></script>
-  <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
-  <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
-  <script src="site_libs/tippy-6.2.7/tippy.umd.min.js"></script>
-  <script src="site_libs/anchor-4.2.2/anchor.min.js"></script>
-  <script src="site_libs/bowser-1.9.3/bowser.min.js"></script>
-  <script src="site_libs/webcomponents-2.0.0/webcomponents.js"></script>
-  <script src="site_libs/distill-2.2.21/template.v2.js"></script>
+  <script src="how-to-get-to-the-private-equity-target-allocation_files/header-attrs-2.6/header-attrs.js"></script>
+  <script src="how-to-get-to-the-private-equity-target-allocation_files/kePrint-0.0.1/kePrint.js"></script>
+  <link href="how-to-get-to-the-private-equity-target-allocation_files/lightable-0.0.1/lightable.css" rel="stylesheet" />
+  <script src="how-to-get-to-the-private-equity-target-allocation_files/jquery-1.11.3/jquery.min.js"></script>
+  <script src="how-to-get-to-the-private-equity-target-allocation_files/popper-2.6.0/popper.min.js"></script>
+  <link href="how-to-get-to-the-private-equity-target-allocation_files/tippy-6.2.7/tippy.css" rel="stylesheet" />
+  <link href="how-to-get-to-the-private-equity-target-allocation_files/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
+  <script src="how-to-get-to-the-private-equity-target-allocation_files/tippy-6.2.7/tippy.umd.min.js"></script>
+  <script src="how-to-get-to-the-private-equity-target-allocation_files/anchor-4.2.2/anchor.min.js"></script>
+  <script src="how-to-get-to-the-private-equity-target-allocation_files/bowser-1.9.3/bowser.min.js"></script>
+  <script src="how-to-get-to-the-private-equity-target-allocation_files/webcomponents-2.0.0/webcomponents.js"></script>
+  <script src="how-to-get-to-the-private-equity-target-allocation_files/distill-2.2.21/template.v2.js"></script>
   <!--radix_placeholder_site_in_header-->
-  <script type="text/javascript" src="https://www.cookieconsent.com/releases/3.1.0/cookie-consent.js"></script>
-  <script type="text/javascript">
-  document.addEventListener('DOMContentLoaded', function () {
-  cookieconsent.run({
-  'notice_banner_type':'simple',
-  'consent_type': 'express',
-  'palette': 'light',
-  'language': 'en',
-  'website_name': 'uncertain-times',
-  'cookies_policy_url': 'url',
-  'change_preferences_selector':'#CookiePreferences'
-  });});</script>
-  <script type="text/plain" cookie-consent="tracking" async src="https://www.googletagmanager.com/gtag/js?id=G-J5RM2E8REJ"></script>
-  <script type="text/plain" cookie-consent="tracking">
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-J5RM2E8REJ');
-  </script>
   <!--/radix_placeholder_site_in_header-->
 
 
@@ -2072,46 +1457,447 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"About this blog","description":"Why bother?","authors":[]}
+{"title":"How to get to the private equity target allocation","description":"A simple heuristic to help investors understand how to get to and maintain a target allocation in private equity. In a nutshell: steady state is your friend.","authors":[{"author":"Christoph Jäckel","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-04-19T00:00:00.000+02:00","citationText":"Jäckel, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
 <!--radix_placeholder_navigation_before_body-->
-<header class="header header--fixed" role="banner">
-<nav class="distill-site-nav distill-site-header">
-<div class="nav-left">
-<a href="index.html" class="title">Uncertain times</a>
-<input id="distill-search" class="nav-search hidden" type="text" placeholder="Search..."/>
-</div>
-<div class="nav-right">
-<a href="index.html">Home</a>
-<a href="about.html">About</a>
-<a href="index.xml">
-<i class="fa fa-rss" aria-hidden="true"></i>
-</a>
-<a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
-</div>
-</nav>
-</header>
 <!--/radix_placeholder_navigation_before_body-->
 <!--radix_placeholder_site_before_body-->
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>About this blog</h1>
+<h1>How to get to the private equity target allocation</h1>
 <!--radix_placeholder_categories-->
+<div class="dt-tags">
+<div class="dt=tag">Private Equity</div>
+</div>
 <!--/radix_placeholder_categories-->
-<p><p>Why bother?</p></p>
+<p><p>A simple heuristic to help investors understand how to get to and maintain a target allocation in private equity. In a nutshell: steady state is your friend.</p></p>
 </div>
 
+<div class="d-byline">
+  Christoph Jäckel true 
+  
+<br/>04-19-2021
+</div>
 
 <div class="d-article">
-<p>I like financial markets; so much so that I have spent five years of my life to better understand one important driver of them, discount rates, by writing a <a href="https://mediatum.ub.tum.de/1192155">dissertation</a> at the Technical University of Munich. And after finishing my dissertation, I started to work in the finance industry, at <a href="https://www.montana-capital-partners.eu/">Montana Capital Partners</a>, a firm that is focused on secondaries in private equity. In a nutshell, I try to make good investments for our investors such as pension funds, insurance companies and sovereign wealth funds.</p>
-<p>While writing my dissertation, I had plenty of time to run data analyses on large data sets, something I not only thoroughly enjoy, but something that I also find very insightful. At my current job, I still aim to improve my work with data-driven analyses, but there is only so much time you have between internal discussions, external meetings and calls, and day-to-day tasks.</p>
-<p>Fortunately, my wife enjoys puzzling more than I do, which gives me a few hours a week to spend my time thinking about financial markets and related topics and how to support my thoughts with data. I have also noticed that writing these thoughts down results in higher quality and clarity. That’s why I decided to start this blog. And hopefully, some of you find it helpful. I know that most certainly I will find it helpful… I’m often shocked how fast I can forget things that I looked into previously. As such, some posts will also be simple tutorials on how to do certain things in <a href="https://www.r-project.org/">R</a>, the data analysis software of my choice. And it’s also great for blogging; this blog was created with the awesome <a href="https://rstudio.github.io/distill/">Distill</a> package.</p>
-<p>Why did I choose the name of the blog “Uncertain times”? As a gentle reminder that there is only one thing for certain about the times to come, which after all drive current valuations in the financial markets: that they are uncertain. Hence, I’m quite confident that I can keep the blog title, and that’s great, because there aren’t too many other things I’m certain about.</p>
-<p><strong>Disclaimer:</strong> Any opinions I express in this blog are mine and do not represent in any way the opinions of anyone else, including my employer.</p>
+<p>To get to a target allocation for private equity, an investor has to understand how their commitments will translate to valuations over time. Unfortunately, this is not an easy exercise. Experienced investors often have their proprietary models to come up with commitment proposals. Often, these models are based on <a href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Monte Carlo simulations (MCS)</a>, such as a study by <a href="https://hub.ipe.com/download?ac=60700">Pinebridge</a> or an <a href="https://www.bvca.co.uk/Portals/0/library/documents/Guide%20to%20Risk/Risk%20in%20Private%20Equity%20-%20Oct%202015.pdf">article</a> I wrote together with a colleague about the risks in private equity.</p>
+<p>More complicated models, such as Monte Carlo simulations, are essential for an investor who wants to build up and manage a private equity portfolio professionally. However, such models are not well suited to grasp the results intuitively and communicate them to others. And this is often as important as the validity of the results. People, me included, don’t feel comfortable making decisions about large sums of money that are based on opaque models. In addition, decision makers in larger organizations are not very familiar with private equity.</p>
+<p>How can you give such decision makers an intuitive answer to the question how much one has to commit annually to funds to end up at a certain portfolio value? I have run dozens of private equity portfolios through Monte Carlo simulations, have written my diploma thesis about the allocation of private equity into an overall portfolio by using simulations; yet, if someone used to ask me this question, I could not come up with a simple answer.</p>
+<p>Hence, I thought about the issue a bit more and came up with one. Without further ado, let’s get into it.</p>
+<p>The idea is to start with the development of the net asset value (NAV) of a typical private equity fund over time. In the following, I use cash flow data from <a href="https://www.preqin.com/">Preqin</a> and for illustrative purposes, only focus on mature buyout funds with a vintage year of 2005 or older. The chart below shows the NAV in relation to the commitment over time for a median buyout fund.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="figure"><span id="fig:NAV"></span>
+<img src="how-to-get-to-the-private-equity-target-allocation_files/figure-html5/NAV-1.png" alt="Data provided by Preqin. Only buyout funds with vintage year 2005 or older considered. Median statistics shown." width="624" />
+<p class="caption">
+Figure 1: Data provided by Preqin. Only buyout funds with vintage year 2005 or older considered. Median statistics shown.
+</p>
+</div>
+</div>
+<p>During the investment period, the NAV increases quickly as the fund manager invests into underlying companies. The NAV peaks in year 5, at the end of the investment period for most buyout funds. Interestingly though, it does not get to anywhere close to the commitment size but starts decreasing around the 75% mark. This might come as a surprise to some, but if you commit USD 10 million to a buyout fund, the unrealized value in this fund will most likely not get close to USD 10 million at any point in the lifetime of the fund. This is not because buyout funds don’t perform, but because they start generating distributions well before the end of their lifetime.</p>
+<aside>
+As a reminder, I use funds with vintage years of 2005 or older and it might be that youngers funds took longer to generate liquidity. Maybe something I can look into more detail in another post.
+</aside>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<p>What we can also see from the chart is that a typical buyout fund takes 15 years to be fully realized. To reach a steady state, an investor must commit each year the same amount. After 15 years, the portfolio is then at the point where it consists of a fund in each stage (one-year old fund, two-year old fund, etc.).</p>
+<p>All we got to do now is to string together the relevant curves for the funds, with a year difference per fund. The table below shows the built up of the portfolio for the first 10 years.</p>
+<div class="layout-chunk" data-layout="l-body">
+<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:Table">Table 1: </span>Built up of private equity portfolio
+</caption>
+<thead>
+<tr>
+<th style="empty-cells: hide;" colspan="1">
+</th>
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="10">
+<div style="border-bottom: 1px solid #111111; margin-bottom: -1px; ">
+Year
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+1
+</th>
+<th style="text-align:left;">
+2
+</th>
+<th style="text-align:left;">
+3
+</th>
+<th style="text-align:left;">
+4
+</th>
+<th style="text-align:left;">
+5
+</th>
+<th style="text-align:left;">
+6
+</th>
+<th style="text-align:left;">
+7
+</th>
+<th style="text-align:left;">
+8
+</th>
+<th style="text-align:left;">
+9
+</th>
+<th style="text-align:left;">
+10
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Fund 1
+</td>
+<td style="text-align:left;">
+20%
+</td>
+<td style="text-align:left;">
+42%
+</td>
+<td style="text-align:left;">
+62%
+</td>
+<td style="text-align:left;">
+66%
+</td>
+<td style="text-align:left;">
+70%
+</td>
+<td style="text-align:left;">
+63%
+</td>
+<td style="text-align:left;">
+56%
+</td>
+<td style="text-align:left;">
+46%
+</td>
+<td style="text-align:left;">
+36%
+</td>
+<td style="text-align:left;">
+27%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Fund 2
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+20%
+</td>
+<td style="text-align:left;">
+42%
+</td>
+<td style="text-align:left;">
+62%
+</td>
+<td style="text-align:left;">
+66%
+</td>
+<td style="text-align:left;">
+70%
+</td>
+<td style="text-align:left;">
+63%
+</td>
+<td style="text-align:left;">
+56%
+</td>
+<td style="text-align:left;">
+46%
+</td>
+<td style="text-align:left;">
+36%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Fund 3
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+20%
+</td>
+<td style="text-align:left;">
+42%
+</td>
+<td style="text-align:left;">
+62%
+</td>
+<td style="text-align:left;">
+66%
+</td>
+<td style="text-align:left;">
+70%
+</td>
+<td style="text-align:left;">
+63%
+</td>
+<td style="text-align:left;">
+56%
+</td>
+<td style="text-align:left;">
+46%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Fund 4
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+20%
+</td>
+<td style="text-align:left;">
+42%
+</td>
+<td style="text-align:left;">
+62%
+</td>
+<td style="text-align:left;">
+66%
+</td>
+<td style="text-align:left;">
+70%
+</td>
+<td style="text-align:left;">
+63%
+</td>
+<td style="text-align:left;">
+56%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Fund 5
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+20%
+</td>
+<td style="text-align:left;">
+42%
+</td>
+<td style="text-align:left;">
+62%
+</td>
+<td style="text-align:left;">
+66%
+</td>
+<td style="text-align:left;">
+70%
+</td>
+<td style="text-align:left;">
+63%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Fund 6
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+20%
+</td>
+<td style="text-align:left;">
+42%
+</td>
+<td style="text-align:left;">
+62%
+</td>
+<td style="text-align:left;">
+66%
+</td>
+<td style="text-align:left;">
+70%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Fund 7
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+20%
+</td>
+<td style="text-align:left;">
+42%
+</td>
+<td style="text-align:left;">
+62%
+</td>
+<td style="text-align:left;">
+66%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Fund 8
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+20%
+</td>
+<td style="text-align:left;">
+42%
+</td>
+<td style="text-align:left;">
+62%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Fund 9
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+20%
+</td>
+<td style="text-align:left;">
+42%
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>We can also plot the NAV curves for individual funds and show the sum of these individual curves, which is nothing else as the value of the whole portfolio. The value of the portfolio reaches its steady state after 15 years, which is when the commitment into the first fund is fully realized.</p>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="how-to-get-to-the-private-equity-target-allocation_files/figure-html5/Combine_curves-1.png" width="624" data-distill-preview=1 /></p>
+</div>
+<p>The value of the portfolio is slightly above 5, based on a one unit of annual commitments. As an example, an investor who wants to get to a roughly USD 500 million private equity portfolio (in terms of NAV) should commit around USD 100 million each year. Of course, this rule is dependent on the assumption about the development of the NAV for a private equity fund. Above, I used the median curve of buyout funds from the Preqin universe.</p>
+<p>Below, I show the NAV development for different percentiles from the Preqin data set. Notice the large dispersion: while the median curve reaches it maximum before 75%, there are close to 10% of buyout funds that actually end up with an NAV larger than the commitment size.</p>
+<aside>
+The black curve in this chart is the same as the red NAV curve in the first chart.
+</aside>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="how-to-get-to-the-private-equity-target-allocation_files/figure-html5/Quantiles-1.png" width="624" /></p>
+</div>
+<p>This is why diversification is so important: if an investor commits to only one fund, the outcome could be anything. However, the more diversified the portfolio becomes, the higher the likelihood that the portfolio ends up closer to the average.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>To summarize: In this post, I have shown a simple trick to understand what annual commitments are required to end up with a certain private equity allocation. The trick is to string together the same NAV curve of a representative fund until a steady state is reached. In the steady state, the sum of all individual NAVs is the portfolio NAV. I have further shown that in case of a typical buyout fund, the factor from annual commitments to portfolio NAV is 5.3. An investor who commits USD 10 million per year would end up with a portfolio NAV of USD 53 million when the steady state is reached.</p>
+<p>Another way to derive this result is by calculating the mean of the NAV curve for one fund over the 15 years, which is 35% for the median buyout fund in our sample. In absolute numbers and for a USD 10 million commitment, that means that throughout the lifetime of the fund the NAV is on average USD 3.5 million. As we have 15 funds in the steady state in parallel, the portfolio NAV is USD 53 million.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>Of course, an investor who wants to start investing in private equity should rely on more sophisticated models. But this simple heuristic is a good starting point to get a better understanding how commitments and portfolio valuations are linked.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<section class="footnotes" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><p>Careful: the average is not the same as the median and due to the right-skewed distributions in private equity, the average will be higher. However, we want here a big picture analysis: Which ballpark commitments do I have to write to end up at a certain allocation? To answer this question, the subtle difference between median and average is not that important.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p>Don’t get caught up on the number of funds. All you need is an average ratio of NAV to commitment. If you have that, it is irrelevant if the commitment is given to one or ten funds per year. The ratio might change depending on the number of funds, but I want to emphasize again that this approach just wants to support an investor getting a simple understanding of why certain commitment amounts are needed to get to a certain private equity allocation.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
@@ -2123,18 +1909,10 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_site_after_body-->
 <!--/radix_placeholder_site_after_body-->
 <!--radix_placeholder_appendices-->
-<div class="appendix-bottom">
-<h3 id="updates-and-corrections">Corrections</h3>
-<p>If you see mistakes or want to suggest changes, please <a href="https://github.com/christophj/cjaeckel.github.io/issues/new">create an issue</a> on the source repository.</p>
-</div>
+<div class="appendix-bottom"></div>
 <!--/radix_placeholder_appendices-->
 <!--radix_placeholder_navigation_after_body-->
-<div class="distill-site-nav distill-site-footer">
-<p>Copyright 2021 <a href="https://www.linkedin.com/in/christoph-j%C3%A4ckel-97401127/">Christoph Jäckel</a></p>
-<p>Code shared on this website licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, v2.0</a>.</p>
-</div>
 <!--/radix_placeholder_navigation_after_body-->
-
 
 </body>
 
