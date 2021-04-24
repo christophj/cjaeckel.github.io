@@ -1,0 +1,24 @@
+---
+title: "Carry"
+description: |
+  A short description of the post.
+author:
+  - name: Christoph Jäckel
+    url: {}
+date: 04-24-2021
+output:
+  distill::distill_article:
+    self_contained: false
+categories:
+  - Private Equity
+draft: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+Discuss subtleties, calculation, etc. of the carry in more detail. Focus on issues from a secondary buyer's perspective.
+
+
