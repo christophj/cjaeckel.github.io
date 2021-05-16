@@ -1,5 +1,5 @@
 ---
-title: "The performance of private equity"
+title: "The ultimate guide to private equity performance"
 description: |
   A thorough analysis of the performance of the asset class private equity.
 author:
@@ -9,20 +9,48 @@ date: 04-24-2021
 output:
   distill::distill_article:
     self_contained: false
+    toc: true
 categories:
   - Private Equity
   - Data
   - Research
 draft: true
+bibliography: C:/Users/Christoph Jaeckel/Desktop/CJaeckel Blog/Blog/docs/biblio.bib
 ---
 
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
+library(data.table)
+library(ggplot2)
+library(kableExtra)
+library(utilitiesCJ)
+max_vintage <- 2005
+DT <- readRDS("C:/Users/Christoph Jaeckel/Desktop/Preqin/preqin_data_22March2021.rds")
 ```
 
-Should be a relatively long post, in which you summarize the performance based on sub-asset class (buyout, VC), geography (US/Europe), performance measure (Multiple, IRR, PME), different statistics (median, mean, pooled), etc. Also include J-curves.
+
+
+
+Should be a relatively long post, in which you summarize the performance based on sub-asset class (buyout, VC), geography (US/Europe), performance measure (Multiple, IRR, PME), different statistics (median, mean, pooled), data sources, etc. Also include J-curves.
 
 In addition, explain some subtle issues, such as the right-skewed distribution. Also, compare with other studies.
+
+# Introduction
+
+What's the performance of private equity? That's a simple question, yet there is no simple answer. @harris-etal:2014
+
+# Data
+
+# Summary statistics
+
+## By region
+
+## By vintage year
+
+## Over the fund's life time
+
+
+
 
 
