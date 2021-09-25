@@ -128,7 +128,7 @@ import_from_excel <- function(.str_file, .file_ext = ".xls", .perc_numeric=0.15,
   }
   intDT[, num_obs:=NULL]
 
-  if (pos_header2==pos_header2) {
+  if (pos_header1==pos_header2) {
     cat("Success: Both approaches in import_from_excel guessed the same start row of the data set.\n")
     pos_header <- pos_header1
   } else {

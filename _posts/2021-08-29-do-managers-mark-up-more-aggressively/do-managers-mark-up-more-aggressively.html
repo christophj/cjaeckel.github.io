@@ -7,7 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
   <meta name="generator" content="distill" />
-  <link rel="alternate" type="application/rss+xml" href="https://www.christoph-jaeckel.com/index.xml" />
 
   <style type="text/css">
   /* Hide doc at startup (prevent jankiness while JS renders/transforms) */
@@ -87,635 +86,41 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
 
   <!--radix_placeholder_meta_tags-->
-  <title>Uncertain times: Christoph Jäckel's blog</title>
+  <title>Do managers mark up their funds more aggressively?</title>
+
+  <meta property="description" itemprop="description" content="If they do, a comparison of the unrealized performance over vintage years might be meaningless."/>
 
 
-
+  <!--  https://schema.org/Article -->
+  <meta property="article:published" itemprop="datePublished" content="2021-09-25"/>
+  <meta property="article:created" itemprop="dateCreated" content="2021-09-25"/>
+  <meta name="article:author" content="Christoph Jäckel"/>
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Uncertain times: Christoph Jäckel&#39;s blog"/>
+  <meta property="og:title" content="Do managers mark up their funds more aggressively?"/>
   <meta property="og:type" content="article"/>
+  <meta property="og:description" content="If they do, a comparison of the unrealized performance over vintage years might be meaningless."/>
   <meta property="og:locale" content="en_US"/>
-  <meta property="og:site_name" content="Uncertain times"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Uncertain times: Christoph Jäckel&#39;s blog"/>
+  <meta property="twitter:title" content="Do managers mark up their funds more aggressively?"/>
+  <meta property="twitter:description" content="If they do, a comparison of the unrealized performance over vintage years might be meaningless."/>
 
   <!--/radix_placeholder_meta_tags-->
+  
+  <meta name="citation_reference" content="citation_title=Do private equity funds manipulate reported returns?;citation_publication_date=2019;citation_publisher=Elsevier;citation_volume=132;citation_author=Gregory W Brown;citation_author=Oleg R Gredil;citation_author=Steven N Kaplan"/>
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","site","listing"]}},"value":[{"type":"character","attributes":{},"value":["Christoph Jäckel's blog"]},{"type":"character","attributes":{},"value":["distill::distill_website"]},{"type":"character","attributes":{},"value":["posts"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","categories","draft","bibliography"]}},"value":[{"type":"character","attributes":{},"value":["Do managers mark up their funds more aggressively?"]},{"type":"character","attributes":{},"value":["If they do, a comparison of the unrealized performance over vintage years might be meaningless.\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Christoph Jäckel"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["09-25-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"character","attributes":{},"value":["Valuation","Private Equity"]},{"type":"logical","attributes":{},"value":[false]},{"type":"character","attributes":{},"value":["C:/Users/Christoph Jaeckel/Desktop/CJaeckel Blog/Blog/docs/biblio.bib"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
+  
+  <script type="text/json" id="radix-resource-manifest">
+  {"type":"character","attributes":{},"value":["do-managers-mark-up-more-aggressively_files/anchor-4.2.2/anchor.min.js","do-managers-mark-up-more-aggressively_files/bowser-1.9.3/bowser.min.js","do-managers-mark-up-more-aggressively_files/distill-2.2.21/template.v2.js","do-managers-mark-up-more-aggressively_files/figure-html5/Data_preparation-1.png","do-managers-mark-up-more-aggressively_files/figure-html5/DataPreparation-1.png","do-managers-mark-up-more-aggressively_files/header-attrs-2.6/header-attrs.js","do-managers-mark-up-more-aggressively_files/jquery-1.11.3/jquery.min.js","do-managers-mark-up-more-aggressively_files/popper-2.6.0/popper.min.js","do-managers-mark-up-more-aggressively_files/tippy-6.2.7/tippy-bundle.umd.min.js","do-managers-mark-up-more-aggressively_files/tippy-6.2.7/tippy-light-border.css","do-managers-mark-up-more-aggressively_files/tippy-6.2.7/tippy.css","do-managers-mark-up-more-aggressively_files/tippy-6.2.7/tippy.umd.min.js","do-managers-mark-up-more-aggressively_files/webcomponents-2.0.0/webcomponents.js"]}
+  </script>
   <!--radix_placeholder_navigation_in_header-->
-  <meta name="distill:offset" content=""/>
-
-  <script type="application/javascript">
-
-    window.headroom_prevent_pin = false;
-
-    window.document.addEventListener("DOMContentLoaded", function (event) {
-
-      // initialize headroom for banner
-      var header = $('header').get(0);
-      var headerHeight = header.offsetHeight;
-      var headroom = new Headroom(header, {
-        tolerance: 5,
-        onPin : function() {
-          if (window.headroom_prevent_pin) {
-            window.headroom_prevent_pin = false;
-            headroom.unpin();
-          }
-        }
-      });
-      headroom.init();
-      if(window.location.hash)
-        headroom.unpin();
-      $(header).addClass('headroom--transition');
-
-      // offset scroll location for banner on hash change
-      // (see: https://github.com/WickyNilliams/headroom.js/issues/38)
-      window.addEventListener("hashchange", function(event) {
-        window.scrollTo(0, window.pageYOffset - (headerHeight + 25));
-      });
-
-      // responsive menu
-      $('.distill-site-header').each(function(i, val) {
-        var topnav = $(this);
-        var toggle = topnav.find('.nav-toggle');
-        toggle.on('click', function() {
-          topnav.toggleClass('responsive');
-        });
-      });
-
-      // nav dropdowns
-      $('.nav-dropbtn').click(function(e) {
-        $(this).next('.nav-dropdown-content').toggleClass('nav-dropdown-active');
-        $(this).parent().siblings('.nav-dropdown')
-           .children('.nav-dropdown-content').removeClass('nav-dropdown-active');
-      });
-      $("body").click(function(e){
-        $('.nav-dropdown-content').removeClass('nav-dropdown-active');
-      });
-      $(".nav-dropdown").click(function(e){
-        e.stopPropagation();
-      });
-    });
-  </script>
-
-  <style type="text/css">
-
-  /* Theme (user-documented overrideables for nav appearance) */
-
-  .distill-site-nav {
-    color: rgba(255, 255, 255, 0.8);
-    background-color: #0F2E3D;
-    font-size: 15px;
-    font-weight: 300;
-  }
-
-  .distill-site-nav a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  .distill-site-nav a:hover {
-    color: white;
-  }
-
-  @media print {
-    .distill-site-nav {
-      display: none;
-    }
-  }
-
-  .distill-site-header {
-
-  }
-
-  .distill-site-footer {
-
-  }
-
-
-  /* Site Header */
-
-  .distill-site-header {
-    width: 100%;
-    box-sizing: border-box;
-    z-index: 3;
-  }
-
-  .distill-site-header .nav-left {
-    display: inline-block;
-    margin-left: 8px;
-  }
-
-  @media screen and (max-width: 768px) {
-    .distill-site-header .nav-left {
-      margin-left: 0;
-    }
-  }
-
-
-  .distill-site-header .nav-right {
-    float: right;
-    margin-right: 8px;
-  }
-
-  .distill-site-header a,
-  .distill-site-header .title {
-    display: inline-block;
-    text-align: center;
-    padding: 14px 10px 14px 10px;
-  }
-
-  .distill-site-header .title {
-    font-size: 18px;
-    min-width: 150px;
-  }
-
-  .distill-site-header .logo {
-    padding: 0;
-  }
-
-  .distill-site-header .logo img {
-    display: none;
-    max-height: 20px;
-    width: auto;
-    margin-bottom: -4px;
-  }
-
-  .distill-site-header .nav-image img {
-    max-height: 18px;
-    width: auto;
-    display: inline-block;
-    margin-bottom: -3px;
-  }
-
-
-
-  @media screen and (min-width: 1000px) {
-    .distill-site-header .logo img {
-      display: inline-block;
-    }
-    .distill-site-header .nav-left {
-      margin-left: 20px;
-    }
-    .distill-site-header .nav-right {
-      margin-right: 20px;
-    }
-    .distill-site-header .title {
-      padding-left: 12px;
-    }
-  }
-
-
-  .distill-site-header .nav-toggle {
-    display: none;
-  }
-
-  .nav-dropdown {
-    display: inline-block;
-    position: relative;
-  }
-
-  .nav-dropdown .nav-dropbtn {
-    border: none;
-    outline: none;
-    color: rgba(255, 255, 255, 0.8);
-    padding: 16px 10px;
-    background-color: transparent;
-    font-family: inherit;
-    font-size: inherit;
-    font-weight: inherit;
-    margin: 0;
-    margin-top: 1px;
-    z-index: 2;
-  }
-
-  .nav-dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: white;
-    min-width: 200px;
-    border: 1px solid rgba(0,0,0,0.15);
-    border-radius: 4px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
-    z-index: 1;
-    margin-top: 2px;
-    white-space: nowrap;
-    padding-top: 4px;
-    padding-bottom: 4px;
-  }
-
-  .nav-dropdown-content hr {
-    margin-top: 4px;
-    margin-bottom: 4px;
-    border: none;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  }
-
-  .nav-dropdown-active {
-    display: block;
-  }
-
-  .nav-dropdown-content a, .nav-dropdown-content .nav-dropdown-header {
-    color: black;
-    padding: 6px 24px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-  }
-
-  .nav-dropdown-content .nav-dropdown-header {
-    display: block;
-    padding: 5px 24px;
-    padding-bottom: 0;
-    text-transform: uppercase;
-    font-size: 14px;
-    color: #999999;
-    white-space: nowrap;
-  }
-
-  .nav-dropdown:hover .nav-dropbtn {
-    color: white;
-  }
-
-  .nav-dropdown-content a:hover {
-    background-color: #ddd;
-    color: black;
-  }
-
-  .nav-right .nav-dropdown-content {
-    margin-left: -45%;
-    right: 0;
-  }
-
-  @media screen and (max-width: 768px) {
-    .distill-site-header a, .distill-site-header .nav-dropdown  {display: none;}
-    .distill-site-header a.nav-toggle {
-      float: right;
-      display: block;
-    }
-    .distill-site-header .title {
-      margin-left: 0;
-    }
-    .distill-site-header .nav-right {
-      margin-right: 0;
-    }
-    .distill-site-header {
-      overflow: hidden;
-    }
-    .nav-right .nav-dropdown-content {
-      margin-left: 0;
-    }
-  }
-
-
-  @media screen and (max-width: 768px) {
-    .distill-site-header.responsive {position: relative; min-height: 500px; }
-    .distill-site-header.responsive a.nav-toggle {
-      position: absolute;
-      right: 0;
-      top: 0;
-    }
-    .distill-site-header.responsive a,
-    .distill-site-header.responsive .nav-dropdown {
-      display: block;
-      text-align: left;
-    }
-    .distill-site-header.responsive .nav-left,
-    .distill-site-header.responsive .nav-right {
-      width: 100%;
-    }
-    .distill-site-header.responsive .nav-dropdown {float: none;}
-    .distill-site-header.responsive .nav-dropdown-content {position: relative;}
-    .distill-site-header.responsive .nav-dropdown .nav-dropbtn {
-      display: block;
-      width: 100%;
-      text-align: left;
-    }
-  }
-
-  /* Site Footer */
-
-  .distill-site-footer {
-    width: 100%;
-    overflow: hidden;
-    box-sizing: border-box;
-    z-index: 3;
-    margin-top: 30px;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    text-align: center;
-  }
-
-  /* Headroom */
-
-  d-title {
-    padding-top: 6rem;
-  }
-
-  @media print {
-    d-title {
-      padding-top: 4rem;
-    }
-  }
-
-  .headroom {
-    z-index: 1000;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-  }
-
-  .headroom--transition {
-    transition: all .4s ease-in-out;
-  }
-
-  .headroom--unpinned {
-    top: -100px;
-  }
-
-  .headroom--pinned {
-    top: 0;
-  }
-
-  /* adjust viewport for navbar height */
-  /* helps vertically center bootstrap (non-distill) content */
-  .min-vh-100 {
-    min-height: calc(100vh - 100px) !important;
-  }
-
-  </style>
-
-  <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
-  <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
-  <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
-  <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
-  <script src="site_libs/autocomplete-0.37.1/autocomplete.min.js"></script>
-  <script src="site_libs/fuse-6.4.1/fuse.min.js"></script>
-
-  <script type="application/javascript">
-
-  function getMeta(metaName) {
-    var metas = document.getElementsByTagName('meta');
-    for (let i = 0; i < metas.length; i++) {
-      if (metas[i].getAttribute('name') === metaName) {
-        return metas[i].getAttribute('content');
-      }
-    }
-    return '';
-  }
-
-  function offsetURL(url) {
-    var offset = getMeta('distill:offset');
-    return offset ? offset + '/' + url : url;
-  }
-
-  function createFuseIndex() {
-
-    // create fuse index
-    var options = {
-      keys: [
-        { name: 'title', weight: 20 },
-        { name: 'categories', weight: 15 },
-        { name: 'description', weight: 10 },
-        { name: 'contents', weight: 5 },
-      ],
-      ignoreLocation: true,
-      threshold: 0
-    };
-    var fuse = new window.Fuse([], options);
-
-    // fetch the main search.json
-    return fetch(offsetURL('search.json'))
-      .then(function(response) {
-        if (response.status == 200) {
-          return response.json().then(function(json) {
-            // index main articles
-            json.articles.forEach(function(article) {
-              fuse.add(article);
-            });
-            // download collections and index their articles
-            return Promise.all(json.collections.map(function(collection) {
-              return fetch(offsetURL(collection)).then(function(response) {
-                if (response.status === 200) {
-                  return response.json().then(function(articles) {
-                    articles.forEach(function(article) {
-                      fuse.add(article);
-                    });
-                  })
-                } else {
-                  return Promise.reject(
-                    new Error('Unexpected status from search index request: ' +
-                              response.status)
-                  );
-                }
-              });
-            })).then(function() {
-              return fuse;
-            });
-          });
-
-        } else {
-          return Promise.reject(
-            new Error('Unexpected status from search index request: ' +
-                        response.status)
-          );
-        }
-      });
-  }
-
-  window.document.addEventListener("DOMContentLoaded", function (event) {
-
-    // get search element (bail if we don't have one)
-    var searchEl = window.document.getElementById('distill-search');
-    if (!searchEl)
-      return;
-
-    createFuseIndex()
-      .then(function(fuse) {
-
-        // make search box visible
-        searchEl.classList.remove('hidden');
-
-        // initialize autocomplete
-        var options = {
-          autoselect: true,
-          hint: false,
-          minLength: 2,
-        };
-        window.autocomplete(searchEl, options, [{
-          source: function(query, callback) {
-            const searchOptions = {
-              isCaseSensitive: false,
-              shouldSort: true,
-              minMatchCharLength: 2,
-              limit: 10,
-            };
-            var results = fuse.search(query, searchOptions);
-            callback(results
-              .map(function(result) { return result.item; })
-            );
-          },
-          templates: {
-            suggestion: function(suggestion) {
-              var img = suggestion.preview && Object.keys(suggestion.preview).length > 0
-                ? `<img src="${offsetURL(suggestion.preview)}"</img>`
-                : '';
-              var html = `
-                <div class="search-item">
-                  <h3>${suggestion.title}</h3>
-                  <div class="search-item-description">
-                    ${suggestion.description || ''}
-                  </div>
-                  <div class="search-item-preview">
-                    ${img}
-                  </div>
-                </div>
-              `;
-              return html;
-            }
-          }
-        }]).on('autocomplete:selected', function(event, suggestion) {
-          window.location.href = offsetURL(suggestion.path);
-        });
-        // remove inline display style on autocompleter (we want to
-        // manage responsive display via css)
-        $('.algolia-autocomplete').css("display", "");
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
-
-  });
-
-  </script>
-
-  <style type="text/css">
-
-  .nav-search {
-    font-size: x-small;
-  }
-
-  /* Algolioa Autocomplete */
-
-  .algolia-autocomplete {
-    display: inline-block;
-    margin-left: 10px;
-    vertical-align: sub;
-    background-color: white;
-    color: black;
-    padding: 6px;
-    padding-top: 8px;
-    padding-bottom: 0;
-    border-radius: 6px;
-    border: 1px #0F2E3D solid;
-    width: 180px;
-  }
-
-
-  @media screen and (max-width: 768px) {
-    .distill-site-nav .algolia-autocomplete {
-      display: none;
-      visibility: hidden;
-    }
-    .distill-site-nav.responsive .algolia-autocomplete {
-      display: inline-block;
-      visibility: visible;
-    }
-    .distill-site-nav.responsive .algolia-autocomplete .aa-dropdown-menu {
-      margin-left: 0;
-      width: 400px;
-      max-height: 400px;
-    }
-  }
-
-  .algolia-autocomplete .aa-input, .algolia-autocomplete .aa-hint {
-    width: 90%;
-    outline: none;
-    border: none;
-  }
-
-  .algolia-autocomplete .aa-hint {
-    color: #999;
-  }
-  .algolia-autocomplete .aa-dropdown-menu {
-    width: 550px;
-    max-height: 70vh;
-    overflow-x: visible;
-    overflow-y: scroll;
-    padding: 5px;
-    margin-top: 3px;
-    margin-left: -150px;
-    background-color: #fff;
-    border-radius: 5px;
-    border: 1px solid #999;
-    border-top: none;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion {
-    cursor: pointer;
-    padding: 5px 4px;
-    border-bottom: 1px solid #eee;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion:last-of-type {
-    border-bottom: none;
-    margin-bottom: 2px;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item {
-    overflow: hidden;
-    font-size: 0.8em;
-    line-height: 1.4em;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item h3 {
-    font-size: 1rem;
-    margin-block-start: 0;
-    margin-block-end: 5px;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-description {
-    display: inline-block;
-    overflow: hidden;
-    height: 2.8em;
-    width: 80%;
-    margin-right: 4%;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview {
-    display: inline-block;
-    width: 15%;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img {
-    height: 3em;
-    width: auto;
-    display: none;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img[src] {
-    display: initial;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion.aa-cursor {
-    background-color: #eee;
-  }
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion em {
-    font-weight: bold;
-    font-style: normal;
-  }
-
-  </style>
-
-
   <!--/radix_placeholder_navigation_in_header-->
   <!--radix_placeholder_distill-->
 
@@ -2031,410 +1436,88 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
-  <script src="site_libs/popper-2.6.0/popper.min.js"></script>
-  <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
-  <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
-  <script src="site_libs/tippy-6.2.7/tippy.umd.min.js"></script>
-  <script src="site_libs/anchor-4.2.2/anchor.min.js"></script>
-  <script src="site_libs/bowser-1.9.3/bowser.min.js"></script>
-  <script src="site_libs/webcomponents-2.0.0/webcomponents.js"></script>
-  <script src="site_libs/distill-2.2.21/template.v2.js"></script>
+  <script src="do-managers-mark-up-more-aggressively_files/header-attrs-2.6/header-attrs.js"></script>
+  <script src="do-managers-mark-up-more-aggressively_files/jquery-1.11.3/jquery.min.js"></script>
+  <script src="do-managers-mark-up-more-aggressively_files/popper-2.6.0/popper.min.js"></script>
+  <link href="do-managers-mark-up-more-aggressively_files/tippy-6.2.7/tippy.css" rel="stylesheet" />
+  <link href="do-managers-mark-up-more-aggressively_files/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
+  <script src="do-managers-mark-up-more-aggressively_files/tippy-6.2.7/tippy.umd.min.js"></script>
+  <script src="do-managers-mark-up-more-aggressively_files/anchor-4.2.2/anchor.min.js"></script>
+  <script src="do-managers-mark-up-more-aggressively_files/bowser-1.9.3/bowser.min.js"></script>
+  <script src="do-managers-mark-up-more-aggressively_files/webcomponents-2.0.0/webcomponents.js"></script>
+  <script src="do-managers-mark-up-more-aggressively_files/distill-2.2.21/template.v2.js"></script>
   <!--radix_placeholder_site_in_header-->
-  <script type="text/javascript" src="https://www.cookieconsent.com/releases/3.1.0/cookie-consent.js"></script>
-  <script type="text/javascript">
-  document.addEventListener('DOMContentLoaded', function () {
-  cookieconsent.run({
-  'notice_banner_type':'simple',
-  'consent_type': 'express',
-  'palette': 'light',
-  'language': 'en',
-  'website_name': 'uncertain-times',
-  'cookies_policy_url': 'url',
-  'change_preferences_selector':'#CookiePreferences'
-  });});</script>
-  <script type="text/plain" cookie-consent="tracking" async src="https://www.googletagmanager.com/gtag/js?id=G-J5RM2E8REJ"></script>
-  <script type="text/plain" cookie-consent="tracking">
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-J5RM2E8REJ');
-  </script>
   <!--/radix_placeholder_site_in_header-->
 
 
 </head>
 
-<body class="layout-listing">
+<body>
 
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Christoph Jäckel's blog","authors":[]}
+{"title":"Do managers mark up their funds more aggressively?","description":"If they do, a comparison of the unrealized performance over vintage years might be meaningless.","authors":[{"author":"Christoph Jäckel","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-09-25T00:00:00.000+02:00","citationText":"Jäckel, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
 <!--radix_placeholder_navigation_before_body-->
-<header class="header header--fixed" role="banner">
-<nav class="distill-site-nav distill-site-header">
-<div class="nav-left">
-<a href="index.html" class="title">Uncertain times</a>
-<input id="distill-search" class="nav-search hidden" type="text" placeholder="Search..."/>
-</div>
-<div class="nav-right">
-<a href="index.html">Home</a>
-<a href="about.html">About</a>
-<a href="index.xml">
-<i class="fa fa-rss" aria-hidden="true"></i>
-</a>
-<a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
-</div>
-</nav>
-</header>
 <!--/radix_placeholder_navigation_before_body-->
 <!--radix_placeholder_site_before_body-->
 <!--/radix_placeholder_site_before_body-->
-<!--radix_placeholder_article_listing-->
-
-
-<script type="application/javascript">
-
-function init_posts_list() {
-
-  function load_image(img) {
-    var src = $(img).attr('data-src');
-    if (src) {
-      $(img).attr('src', src);
-      $(img).load(function() {
-        img.removeAttribute('data-src');
-      });
-    }
-  }
-
-  function set_posts_visible(posts, visible) {
-    if (visible) {
-
-      // show bottom border by default
-      $(posts).removeClass('post-preview-last');
-
-      // apply limits if need be
-      var max_posts = 25;
-      var apply_limits = $('.posts-container').hasClass('posts-apply-limit');
-      if (apply_limits && posts.length > max_posts) {
-        posts = $(posts).slice(0, max_posts);
-      } else {
-        $('.posts-more a').addClass('hidden');
-      }
-
-      // apply last style
-      $(posts.slice(-1)[0]).addClass('post-preview-last');
-
-      $(posts).removeClass('hidden');
-      $(posts).find('img[data-src]').each(function(i, img) {
-        load_image(img);
-      });
-    } else {
-      $(posts).addClass('hidden');
-    }
-  }
-
-  function apply_hash_filter() {
-
-    // clear active state
-    $('.categories .active').removeClass('active');
-
-    // mark all posts invisible to start
-    set_posts_visible($('.posts-list').children('a'), false);
-
-    // if we have a hash filter
-    if (window.location.hash && window.location.hash.startsWith("#category:")) {
-
-      // mark posts that match the category visible
-      var page_category = window.location.hash.replace(/^#category:/, "");
-      var posts = $('.post-metadata').map(function(idx, script) {
-        var metadata = $.parseJSON($(script).html());
-        var post = null;
-        $.each(metadata.categories, function(idx, category) {
-          category = category.replace(/ /g,"_");
-          if ((page_category || '').toLowerCase() === "articles" || category === page_category) {
-            post = $(script).parent().get();
-            return false;
-          }
-        });
-        return post;
-      });
-      set_posts_visible(posts, true);
-
-      // mark the hash active
-      $('.categories li>a[href="' + window.location.hash + '"]').addClass('active');
-
-      // update the list_caption
-      var list_caption = $('.posts-list-caption');
-      var caption = (page_category || '').toLowerCase() === "articles"
-        ? list_caption.attr('data-caption')
-        : ('Category: ' + page_category.replace(/_/g," "));
-      list_caption.text(caption);
-
-    } else {
-
-      // no hash filter, make all posts visible (subject to max display)
-      set_posts_visible($('.posts-list').children(), true);
-
-      // reset list caption
-      var list_caption = $('.posts-list-caption');
-      list_caption.text(list_caption.attr('data-caption'));
-
-
-    }
-  }
-
-  // more articles
-  function apply_post_limits(apply) {
-    if (apply) {
-      $('.posts-container').addClass('posts-apply-limit');
-      $('.posts-more a').removeClass('hidden');
-    } else {
-      $('.posts-container').removeClass('posts-apply-limit');
-      $('.posts-more a').addClass('hidden');
-    }
-  }
-
-  // click handling for tags
-  $('.dt-tag').click(function(ev) {
-    window.location.hash = '#category:' + $(this).text().replace(/ /g, "_");
-    return false;
-  })
-
-  // hash filter handling
-  apply_hash_filter();
-  $(window).on('hashchange',function() {
-    apply_post_limits(true);
-    apply_hash_filter();
-  });
-
-  // more articles link
-  $('.posts-more a').click(function(e) {
-    e.preventDefault();
-    apply_post_limits(false);
-    apply_hash_filter();
-    return false;
-  });
-
-}
-
-</script>
-
-
-
-<div class="posts-container posts-with-sidebar posts-apply-limit l-screen-inset">
-<div class="posts-list">
-<h1 class="posts-list-caption" data-caption="Christoph Jäckel&#39;s blog">Christoph Jäckel's blog</h1>
-<a href="posts/2021-08-29-do-managers-mark-up-more-aggressively/" class="post-preview">
-<script class="post-metadata" type="text/json">{"categories":["Valuation","Private Equity"]}</script>
-<div class="metadata">
-<div class="publishedDate">Sept. 25, 2021</div>
-<div class="dt-authors">
-<div class="dt-author">Christoph Jäckel</div>
-</div>
-</div>
-<div class="thumbnail">
-<img src="posts/2021-08-29-do-managers-mark-up-more-aggressively/do-managers-mark-up-more-aggressively_files/figure-html5/DataPreparation-1.png"/>
-</div>
-<div class="description">
-<h2>Do managers mark up their funds more aggressively?</h2>
-<div class="dt-tags">
-<div class="dt-tag">Valuation</div>
-<div class="dt-tag">Private Equity</div>
-</div>
-<p>If they do, a comparison of the unrealized performance over vintage years might be meaningless.</p>
-</div>
-</a>
-<a href="posts/2021-05-09-closing-process-of-a-secondary-transaction/" class="post-preview">
-<script class="post-metadata" type="text/json">{"categories":["Private Equity"]}</script>
-<div class="metadata">
-<div class="publishedDate">May 16, 2021</div>
-<div class="dt-authors">
-<div class="dt-author">Christoph Jäckel</div>
-</div>
-</div>
-<div class="thumbnail">
-<img src="posts/2021-05-09-closing-process-of-a-secondary-transaction/Closing_process.PNG"/>
-</div>
-<div class="description">
-<h2>Closing process of a secondary transaction</h2>
-<div class="dt-tags">
-<div class="dt-tag">Private Equity</div>
-</div>
-<p>How to get from the base purchase price to the final purchase price.</p>
-</div>
-</a>
-<a href="posts/2021-02-14-how-to-get-to-the-private-equity-target-allocation/" class="post-preview">
-<script class="post-metadata" type="text/json">{"categories":["Private Equity"]}</script>
-<div class="metadata">
-<div class="publishedDate">April 19, 2021</div>
-<div class="dt-authors">
-<div class="dt-author">Christoph Jäckel</div>
-</div>
-</div>
-<div class="thumbnail">
-<img src="posts/2021-02-14-how-to-get-to-the-private-equity-target-allocation/how-to-get-to-the-private-equity-target-allocation_files/figure-html5/Combine_curves-1.png"/>
-</div>
-<div class="description">
-<h2>How to get to the private equity target allocation</h2>
-<div class="dt-tags">
-<div class="dt-tag">Private Equity</div>
-</div>
-<p>A simple heuristic to help investors understand how to get to and maintain a target allocation in private equity. In a nutshell: steady state is your friend.</p>
-</div>
-</a>
-<a href="posts/2021-02-28-why-does-private-equity-outperform-public-equity/" class="post-preview">
-<script class="post-metadata" type="text/json">{"categories":["Private Equity","Research"]}</script>
-<div class="metadata">
-<div class="publishedDate">Feb. 28, 2021</div>
-<div class="dt-authors">
-<div class="dt-author">Christoph Jäckel</div>
-</div>
-</div>
-<div class="thumbnail">
-<img src="posts/2021-02-28-why-does-private-equity-outperform-public-equity/Table_4_Stafford.PNG"/>
-</div>
-<div class="description">
-<h2>Why does private equity outperform public equity?</h2>
-<div class="dt-tags">
-<div class="dt-tag">Private Equity</div>
-<div class="dt-tag">Research</div>
-</div>
-<p>According to recent studies, it's a combination of selection skills and leverage.</p>
-</div>
-</a>
-<a href="posts/2021-01-31-the-value-bridge/" class="post-preview">
-<script class="post-metadata" type="text/json">{"categories":["Valuation","R","Private Equity"]}</script>
-<div class="metadata">
-<div class="publishedDate">Feb. 6, 2021</div>
-<div class="dt-authors">
-<div class="dt-author">Christoph Jäckel</div>
-</div>
-</div>
-<div class="thumbnail">
-<img src="posts/2021-01-31-the-value-bridge/the-value-bridge_files/figure-html5/Puche_example_plot-1.png"/>
-</div>
-<div class="description">
-<h2>The LBO value bridge</h2>
-<div class="dt-tags">
-<div class="dt-tag">Valuation</div>
-<div class="dt-tag">R</div>
-<div class="dt-tag">Private Equity</div>
-</div>
-<p>One of the most important valuation tools in private equity.</p>
-</div>
-</a>
-<a href="posts/2021-01-17-evebitda-valuation-multiple-the-data/" class="post-preview">
-<script class="post-metadata" type="text/json">{"categories":["Valuation","Data"]}</script>
-<div class="metadata">
-<div class="publishedDate">Jan. 25, 2021</div>
-<div class="dt-authors">
-<div class="dt-author">Christoph Jäckel</div>
-</div>
-</div>
-<div class="thumbnail">
-<img data-src="posts/2021-01-17-evebitda-valuation-multiple-the-data/evebitda-valuation-multiple-the-data_files/figure-html5/ggpairs_Plot-1.png"/>
-</div>
-<div class="description">
-<h2>EV/EBITDA valuation multiple: some data</h2>
-<div class="dt-tags">
-<div class="dt-tag">Valuation</div>
-<div class="dt-tag">Data</div>
-</div>
-<p>A closer empirical look at the EV/EBITDA multiple.</p>
-</div>
-</a>
-<a href="posts/2021-01-17-evebitda-valuation-multiple-the-theory/" class="post-preview">
-<script class="post-metadata" type="text/json">{"categories":["Valuation"]}</script>
-<div class="metadata">
-<div class="publishedDate">Jan. 20, 2021</div>
-<div class="dt-authors">
-<div class="dt-author">Christoph Jäckel</div>
-</div>
-</div>
-<div class="thumbnail">
-<img data-src="posts/2021-01-17-evebitda-valuation-multiple-the-theory/evebitda-valuation-multiple-the-theory_files/figure-html5/Relationship_of_OCC_g_r_EV_EBITDA-1.png"/>
-</div>
-<div class="description">
-<h2>EV/EBITDA valuation multiple: the theory</h2>
-<div class="dt-tags">
-<div class="dt-tag">Valuation</div>
-</div>
-<p>How to justify the use of EV/EBITDA valuation multiples with the discounted cash flow model.</p>
-</div>
-</a>
-<a href="posts/2021-01-17-automatically-obtaining-data-from-damodarans-website-with-r/" class="post-preview">
-<script class="post-metadata" type="text/json">{"categories":["R","Data"]}</script>
-<div class="metadata">
-<div class="publishedDate">Jan. 17, 2021</div>
-<div class="dt-authors">
-<div class="dt-author">Christoph Jäckel</div>
-</div>
-</div>
-<div class="thumbnail">
-<img data-src="posts/2021-01-17-automatically-obtaining-data-from-damodarans-website-with-r/Damodaran_vebitda_screenshot.PNG"/>
-</div>
-<div class="description">
-<h2>Automatically obtaining data from Damodaran's website with R</h2>
-<div class="dt-tags">
-<div class="dt-tag">R</div>
-<div class="dt-tag">Data</div>
-</div>
-<p>A quick tutorial on how to obtain data automatically from Damodaran's website with R.</p>
-</div>
-</a>
-</div>
-<div class="posts-sidebar">
-<div class="sidebar-section categories">
-<h3>Categories</h3>
-<ul>
-<li>
-<a href="#category:Articles">Articles</a>
-<span class="category-count">(8)</span>
-</li>
-<li>
-<a href="#category:Data">Data</a>
-<span class="category-count">(2)</span>
-</li>
-<li>
-<a href="#category:Private_Equity">Private Equity</a>
-<span class="category-count">(5)</span>
-</li>
-<li>
-<a href="#category:R">R</a>
-<span class="category-count">(2)</span>
-</li>
-<li>
-<a href="#category:Research">Research</a>
-<span class="category-count">(1)</span>
-</li>
-<li>
-<a href="#category:Valuation">Valuation</a>
-<span class="category-count">(4)</span>
-</li>
-</ul>
-</div>
-</div>
-<div class="posts-more">
-<a href="#">More articles &raquo;</a>
-</div>
-</div>
-<!--/radix_placeholder_article_listing-->
 
 <div class="d-title">
-<h1>Christoph Jäckel’s blog</h1>
+<h1>Do managers mark up their funds more aggressively?</h1>
 <!--radix_placeholder_categories-->
+<div class="dt-tags">
+<div class="dt=tag">Valuation</div>
+<div class="dt=tag">Private Equity</div>
+</div>
 <!--/radix_placeholder_categories-->
-
+<p><p>If they do, a comparison of the unrealized performance over vintage years might be meaningless.</p></p>
 </div>
 
+<div class="d-byline">
+  Christoph Jäckel true 
+  
+<br/>09-25-2021
+</div>
 
 <div class="d-article">
+<p>One of the key differences between private and public equity is that the latter provides investors with daily updates on their asset values based on actual transactions as the stocks are sold and purchased on exchanges around the globe, taking into consideration all available information, both on the specific company and the overall market. In contrast, a fund investment’s valuation is typically only based on an actual transaction between a seller and a buyer when fund managers acquire the company and when they sell it.</p>
+<p>In between, the valuations that fund managers provide to their investors are based on their internal valuation methodology, but there is no guarantee whatsoever if a buyer would be willing to pay this valuation. They might get it right, or they might under- or overestimate the value of the investment. But why would they do this? Well, first of all, just as all of us, fund managers are humans and they make mistakes. It might be that despite their best efforts, they misjudge what others would pay for their investment. In addition, they might have their reasons to distort the valuations. For example, <span class="citation" data-cites="brown-etal:2019"><a href="#ref-brown-etal:2019" role="doc-biblioref">Brown, Gredil, and Kaplan</a> (<a href="#ref-brown-etal:2019" role="doc-biblioref">2019</a>)</span> find that top-performing fund managers likely understate their valuations - why annoy your investors with higher valuations than subsequent proceeds? - while some struggling fund managers inflate valuations to increase their fundraising chances.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Also, the percentage of fund managers using mark-to-market valuation has most likely also increased over time.</p>
+<p>To summarize, unrealized investments are valued by fund managers and these valuations will most likely deviate in one way or the other from the true, fair market value that could be achieved in an arm’s length transaction. There is evidence that this deviation is not just independently distributed around the true value, but that there are systematic biases in these deviations that could inflate or underestimate the true performance of a fund. Finally, historically mark-to-market valuation was much less established in the early days of private equity, which might have resulted in much lower unrealized returns early on in a fund’s lifetime.</p>
+<p>Hence, in this blog post, I look closer at the mark-ups of private equity funds early on in their lifetime up to 5 years. After 5 years, a fund is typically in the harvesting period and many valuations are already based on ongoing exit processes with third parties.</p>
+<p>To do so, let’s look at the TVPIs of all U.S. buyout funds per vintage year after 4, 8, 12, 16, and 20 quarters. The idea is not to look at every boxplot individually, but rather try to identify any positive relationship between the vintage year and the TVPIs. Interestingly, and against my own prior belief, I don’t see such a relationship.</p>
+<aside>
+I’m using data provided by <a href="https://www.preqin.com/">Preqin</a> and downloaded in March 2021.
+</aside>
+<div class="layout-chunk" data-layout="l-page">
+<div class="figure"><span id="fig:DataPreparation"></span>
+<img src="do-managers-mark-up-more-aggressively_files/figure-html5/DataPreparation-1.png" alt="Dispersion of TVPIs for U.S. buyout funds, grouped by vintage year at different points in time over the fund life: after 4, 8, 12, 16, and 20 quarters (from top to bottom). Data from Preqin." width="624" />
+<p class="caption">
+Figure 1: Dispersion of TVPIs for U.S. buyout funds, grouped by vintage year at different points in time over the fund life: after 4, 8, 12, 16, and 20 quarters (from top to bottom). Data from Preqin.
+</p>
+</div>
+</div>
+<p>Looking at the first row in the chart, funds in all vintage year groups were marked very close to 1x after 4 quarters. There is no clear trend that younger funds are valued up earlier than their predecessors have been in the past. One change that is apparent over time though is that the dispersion of TVPIs becomes wider for younger funds. Up till 2006, the fund valuations after 4 quarters have been very close to 1x for almost all funds within each vintage year group as there is barely a box visible and the whiskers are very small. Since then, the boxes have become wider and 2018 and 2019 vintages have whiskers extending above 1.25x.</p>
+<p>After 8 quarters, the story doesn’t change much. Funds are still valued close to 1x and the dispersion within each vintage year group is relatively small. One change compared to the top row is that there is some variability across the vintage year groups. Most importantly, one could detect recessions from this chart as both the 2000 and 2006 median fund were marked below 1x.</p>
+<p>One year later, there is now a clear pattern to identify poor vintage years such as 1999/2000 funds, which were hit by the burst of the dot-com bubble, and 2006/7 funds, which invested prior to the global financial crisis. However, in relation to the question of this blog post - Do managers mark up their funds more aggressively? - there is again no indication that they do. Sure, funds with vintages 2008 and younger are typically marked above 1x after 3 years in their lifetime. But they also invested during times of good overall market sentiment and the valuations do not look aggressive by any standard. For none of the vintage year groups is the median TVPI over 1.25x. And more importantly, there are also plenty of older vintage years in which funds stood well above 1x after 3 years, such as funds from 1995 to 1997 and from 2001 to 2004.</p>
+<p>The picture does not change much when we look after 16 and 20 quarters: the performance per group seems to be mostly driven by the overall economic environment, rather than by changes in the valuation process over time.</p>
+<p>Of course, this analysis cannot prove that fund managers have not become more aggressive or pro-active in managing their valuations. For example, it could be that older fund investments performed much better than younger funds and only the fact that fund managers have become more aggressive with their valuations led to similar multiples early on in the fund’s lifetime. Furthermore, I have shown that 2018 and 2019 vintages have seen a very strong start and it will be interesting to repeat the analysis in the future. Maybe fund managers have become much more aggressive, but it doesn’t show quite yet in the data. I also cannot exclude the possibility that the mark-up in earlier funds were simply driven by actual exits of some underlying investments, rather than by write-ups by the fund manager without any imminent exits.</p>
+<p>Ideally, one would have underlying investment level data to understand better the drivers of the valuations of unrealized investments in private equity to look further into this topic. However, just by looking at the fund TVPIs over time, there is no apparent trend that younger funds are marked up to higher multiples early on in their life.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-brown-etal:2019" class="csl-entry" role="doc-biblioentry">
+Brown, Gregory W, Oleg R Gredil, and Steven N Kaplan. 2019. <span>“Do Private Equity Funds Manipulate Reported Returns?”</span> <em>Journal of Financial Economics</em> 132 (2): 267–97.
+</div>
+</div>
+<section class="footnotes" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><p>Interesting side note: investors see through this!<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
@@ -2447,17 +1530,12 @@ function init_posts_list() {
 <!--/radix_placeholder_site_after_body-->
 <!--radix_placeholder_appendices-->
 <div class="appendix-bottom">
-<h3 id="updates-and-corrections">Corrections</h3>
-<p>If you see mistakes or want to suggest changes, please <a href="https://github.com/christophj/cjaeckel.github.io/issues/new">create an issue</a> on the source repository.</p>
+<h3 id="references">References</h3>
+<div id="references-listing"></div>
 </div>
 <!--/radix_placeholder_appendices-->
 <!--radix_placeholder_navigation_after_body-->
-<div class="distill-site-nav distill-site-footer">
-<p>Copyright 2021 <a href="https://www.linkedin.com/in/christoph-j%C3%A4ckel-97401127/">Christoph Jaeckel</a></p>
-<p>Code shared on this website licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, v2.0</a>.</p>
-</div>
 <!--/radix_placeholder_navigation_after_body-->
-
 
 </body>
 

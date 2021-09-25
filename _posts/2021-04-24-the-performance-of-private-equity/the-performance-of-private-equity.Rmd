@@ -29,8 +29,14 @@ max_vintage <- 2005
 DT <- readRDS("C:/Users/Christoph Jaeckel/Desktop/Preqin/preqin_data_22March2021.rds")
 ```
 
+TODO:
+- Replace private equity with PE after the first occurence
 
+What's the performance of private equity? That's a simple question, yet there is no simple answer. There are too many parameters to adjust, such as the performance metric, the time period and the source of the data. In this blog post, I provide an overview of research papers that have looked into this topic and compare their results. I then do my own analysis with Preqin data. I focus in particular...
 
+<aside>
+I'm focusing on **fund** level performance. There is a separate literature that looks at the performance on the **deal** level. I discuss two such studies in more detail in [this blog post](https://www.christoph-jaeckel.com/posts/2021-02-28-why-does-private-equity-outperform-public-equity/).
+</aside>
 
 Should be a relatively long post, in which you summarize the performance based on sub-asset class (buyout, VC), geography (US/Europe), performance measure (Multiple, IRR, PME), different statistics (median, mean, pooled), data sources, etc. Also include J-curves.
 
@@ -38,7 +44,41 @@ In addition, explain some subtle issues, such as the right-skewed distribution. 
 
 # Introduction
 
-What's the performance of private equity? That's a simple question, yet there is no simple answer. @harris-etal:2014
+
+
+# Literature review
+
+## @kaplan-schoar:2005
+
+The mother of all PE studies..
+
+## @harris-etal:2014
+
+This study, published in one of the most prestigious finance journals, is the first to use data sourced by Burgiss. Why is that such a big thing? Because it is notoriously difficult to obtain high quality private equity. Note that there is typically no obligation by GPs and LPs to report their performance to any external parties and that's typically why they don't. So other data providers, such as Preqin, have to rely on data that is provided to them, either because the LPs are forced to do so - essentially U.S. public pension funds because of the [Freedom of Information Act](https://en.wikipedia.org/wiki/Freedom_of_Information_Act_(United_States)) - or because GPs want to. This, of course, creates a few issues: as the pension funds are forced to publish the data, but there is no benefits for them to do so, the data provided is not really well documented. They also do not provide the data in a standardized and granular way. This makes it very difficult to figure out exactly what happens and it is not uncommon to find different performance results from different pension funds for the very same fund. With data provided by GPs, there is a high risk of selection bias: obviously, GPs only have an interest to report those funds that perform well. In addition, GPs that had to close down because of their bad performance cannot report anymore (hindsight bias). Finally, you might have GPs with such a strong track record and such a high demand of LPs that they do not see any reason to publish their performance.
+
+Burgiss does not have these issues as they source the data directly from LPs that use their platform for their internal bookkeeping. As a result, the quality checks when entering the data are rigorous and there is good reason to believe that there is no selection bias: LPs don't stop reporting on a fund just because it performs poorly. One could still argue that the group of LPs that use Burgiss did not assemble a portfolio that is representative of the whole private equity universe. For example, it is likely that the LPs that use Burgiss are larger, more institutionalized LPs that tend to invest in larger funds. However, one would have to argue that such biases in fund selection by the LPs lead to biases in the results. And there is no strong reason to do so.
+
+@harris-etal:2014 continue to show that their sample of U.S. buyout funds outperformed the S&P 500 by roughly 3% p.a., which is a significant premium. Furthermore, this outperformance happened fairly consistently over their time period from 1984 to 2008 (see Table IV in their study). They also use other indices such as the Russell 3000, which is focused more on smaller listed companies that might be a better comparison for private equity. This slightly reduces the outperformance, but does not get rid of it.
+
+For VC, the picture is more mixed. While VC outperformed markets considerably in the 90s, this trend reversed in the 2000s until 2008. Overall, they find an average outperformance, but a median underperformance over the whole sample. I would assume that the strong performance over the last few years, so after the end of their analysis, for growth companies might have changed the picture a bit. Overall though, it is fair to say that VC's performance is more cyclical than the buyout one.
+
+In their Table VIII, @harris-etal:2014 compare the PMEs from the Burgiss data set with those from Cambridge Associates (CA), Preqin and Venture Economics. While the latter has a downward bias issue as uncovered by @stucke:2011, they show that the results with CA and Preqin data are rather similar. This result counters fears that because of the weaker data collection process applied by providers such as CA and Preqin systematic biases end up the results. Instead, the results are comparable. My co-author and I found the [same](https://www.bvca.co.uk/Portals/0/library/documents/Guide%20to%20Risk/Risk%20in%20Private%20Equity%20-%20Oct%202015.pdf?ver=2015-10-07-112204-040) when I compared the Preqin data set with two data sets that were sourced directly from the LPs or the GPs
+
+## @phalippou:2014
+
+This study does pretty much the same as @harris-etal:2014, with two important deviations. 
+
+First, it uses data from Preqin. However, to counter any criticism of data quality issues, it shows that the results are comparable to studies such as @harris-etal:2014. This is of course not surprising, as @harris-etal:2014 have made the same argument in their study.
+
+Second, it argues that buyout funds invest in companies that are much smaller than most listed companies, that are value, instead of growth companies, and that use more leverage. As all these factors are known to have led to higher stock returns historically, Phalippou argues that one should use indices that adjust for these factors. Using a small value index essentially gets rid of any outperformance in the data, leveraging the index up based on some high-level assumptions, the mean and median PME falls below 1, indicating an underperformance of PE funds to these indices. 
+
+[Similar results](https://www.christoph-jaeckel.com/posts/2021-02-28-why-does-private-equity-outperform-public-equity/) have been found by studies that looked at deal-level performance. Of course, it is important to bear in mind that the public indices Phalippou had to use to get the PME down had some of the strongest performances in U.S. public equity, which by itself is one of the strongest asset classes. It's a bit like saying that compared to Michael Jordan, LeBron James is a worse basketball player...that might be true, but it certainly doesn't mean he is bad at playing basketball.
+
+## Others
+
+The literature on PE performance has become too vast to fully cover, so this overview cannot cover all studies published on the topic of private equity performance. Above, I focused on studies that focused on PE performance. There are many other studies that discuss the performance of PE or focus on a specific issue within this topic so that they weren't covered in detail here.
+
+To name just a few, Sorensen /Wang ...
 
 # Data
 
