@@ -30,7 +30,7 @@ DT <- readRDS("C:/Users/Christoph Jaeckel/Desktop/Preqin/preqin_data_22March2021
 ```
 
 TODO:
-- Replace private equity with PE after the first occurence
+- Replace private equity with PE after the first occurrence
 
 What's the performance of private equity? That's a simple question, yet there is no simple answer. There are too many parameters to adjust, such as the performance metric, the time period and the source of the data. In this blog post, I provide an overview of research papers that have looked into this topic and compare their results. I then do my own analysis with Preqin data. I focus in particular...
 

@@ -1,0 +1,22 @@
+---
+title: "Investing 101"
+description: |
+  A short description of the post.
+author:
+  - name: Christoph Jäckel
+    url: {}
+date: 2021-12-08
+output:
+  distill::distill_article:
+    self_contained: false
+draft: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+Article for the noob/layman. What to look out for. Explain simple concepts for arbitrage / efficient market hypothesis.
+
+

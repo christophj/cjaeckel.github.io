@@ -1,0 +1,22 @@
+---
+title: "The gross-net spread of private equity funds"
+description: |
+  A short description of the post.
+author:
+  - name: Christoph Jäckel
+    url: {}
+date: 2021-12-08
+output:
+  distill::distill_article:
+    self_contained: false
+draft: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+Idea is similar to your credit line paper. Use preqin funds as starting point, model fees and carry on top of it. Compare gross / net spread. Helpful especially for IRR.
+
+

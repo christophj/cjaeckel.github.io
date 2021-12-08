@@ -1,0 +1,137 @@
+---
+title: "Value creation of a private equity fund over time"
+description: |
+  When does a private equity fund generate most of its value?
+author:
+  - name: Christoph Jäckel
+    url: {}
+date: 12-08-2021
+output:
+  distill::distill_article:
+    self_contained: false
+    toc: false
+categories:
+  - Private Equity
+  - Data
+  - Research
+draft: false
+bibliography: C:/Users/Christoph Jaeckel/Desktop/CJaeckel Blog/Blog/docs/biblio.bib
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(data.table)
+library(ggplot2)
+library(kableExtra)
+library(utilitiesCJ)
+library(lubridate)
+max_vintage <- 2010
+str_type <- "buyout"
+DT <- readRDS("C:/Users/Christoph Jaeckel/Desktop/Preqin/preqin_data_22March2021.rds")
+DT <- DT[type==str_type]
+DT <- DT[vintage<=max_vintage]
+
+#Only needed for analysis I didn't end up using (see further below, commented out)
+f_decade <- function(int_vy) {
+  
+  #As you are passing a vector
+  int_vy <- int_vy[1]
+  
+  if (int_vy >= 1990 & int_vy < 2000) {
+    return("1990s")
+  } else if (int_vy >= 2000 & int_vy < 2010) {
+    return("2000s")
+  } else {
+    return(NA_character_)
+  }
+}
+
+DT[,Decade:=f_decade(vintage),by=id]
+
+```
+
+Overall, private equity funds generate attractive returns over the course of their lives.^[For example, @harris-etal:2014 report average multiples and IRRs for their sample of buyout funds of 14% and 2.0x across the vintage years.] In this blog post, I'm looking further into the question *when* this value creation happens? This is an important question to ask, especially in my line of work as a secondary buyer: as returns can only come from the price a buyer pays for a fund or further value creation, knowing at what age of a fund the value creation is most likely to happen helps a buyer to better price fund interests.
+
+In the following, I use cash flow and NAV data of private equity funds from [Preqin](https://www.preqin.com/). I focus on `r str_type` funds and exclude all funds with a vintage year younger than `r max_vintage` as such funds still have meaningful value creation ahead of them.
+
+To start with, I calculate the annual return in year $t$ for a fund $i$ as follows:
+
+$$ Ret_{i,t} = \frac{NAV_{i,t} + Dist_{i, t}}{NAV_{i,t-1} + CC_{i,t}} - 1, $$
+
+where $NAV_{i,t}$ is the reported NAV of fund $i$ at the end of period $t$, and $CC_{i,t}$ and $Dist_{i,t}$ are the capital calls and distributions from and to the investors by the fund from $t-1$ to $t$.
+
+```{r Calculate_returns}
+setkey(DT, id, qtr)
+t <- 4
+DT[,N:=.N,by=id] #To make sure you have at least 5 quarters; otherwise, you can't calculate an annual return
+                 #Why five? You need the beginning of the quarter nav, which is the NAV of the previous quarter
+
+# See check that this is working further below
+DT[N>=5, AnnualRet := c(rep(NA,t), (nav[(1+t):.N] + cum_dist[(1+t):.N] - cum_dist[1:(.N-t)])/
+                                   (nav[1:(.N-t)] + cum_call[(1+t):.N] - cum_call[1:(.N-t)]) - 1), 
+         by=id]
+# Also get nav_reported for the beginning NAV so that you can check that both NAVs are reported
+DT[,nav_reported_beg := shift(nav_reported, n=t, type="lag"),by=id]
+# Do this check now (in the final blog post, you comment this in) ==> looks very similar
+#DT <- DT[nav_reported & nav_reported_beg]
+
+
+# Also add year for reporting
+DT[, Age:= as.factor(ceiling((qtr-1)/4))]
+```
+
+```{r Check_calculations, include=FALSE}
+ret_test <- DT[id=="10002" & qtr<=5, (nav[5] + sum(dist[2:5]))/(nav[1] + sum(call[2:5]))-1]
+all.equal(DT[id=="10002" & qtr==5, AnnualRet], ret_test)
+```
+
+The boxplot chart below shows the dispersion of annual returns over the first ten years of a `r str_type` fund. In the first three years, a typical `r str_type` fund does not report positive returns. As a matter of fact, most funds have a `negative` return in their first year when not many investments have been made yet, these that have been made are valued at cost, and the fund already charges management fees and asks investors to pay for the establishment expenses.
+
+
+```{r BoxplotAnnualReturns, fig.cap="Dispersion of annual returns of buyout funds over the first 10 years of their lifetime. The lower and upper hinges correspond to the first and third quartiles of the annual returns, the line in the middle to the median. Data from Preqin."}
+ggplot(DT[AnnualRet > - 1 & AnnualRet < 2][qtr %in% seq(from=5, to=41, by=4)], aes(Age, AnnualRet)) +
+  geom_boxplot(outlier.shape = NA, coef = 0) + 
+  scale_y_continuous(labels = scales::percent, limits = c(-0.2,0.2)) + xlab("Fund age (in years)") + ylab("Annual return")
+
+```
+
+Starting with year 4, funds start reporting positive returns with consistently strong years from year 5 to 8 where the median fund reports a return of 5% p.a. and more than one quarter of funds having returns of 10% p.a. or higher. This is the most important phase of value creation, often called the "harvesting phase" for a private equity fund.^[The median returns look rather low overall, never exceeding 5% in a year. How can this be reconciled with much higher median IRRs of `r str_type` funds? Three explanations come to mind, which I will not explore further as this is not the point of this blog post. First, distributions of private equity funds are right skewed and hence it is likely that a lot of the funds just have one or two very strong years that are the main drivers of the overall strong performance. Second, the annual return is not really an annual return as the capital calls and distributions happen within the year. Simple example: a fund starts at 0, calls 10 a day before the year end and reports an NAV of 11 at the end of the year. This results in a 10% annual return, while actually this return was achieved within a day and the annualized returns would be much higher. Third, and somewhat related, these returns are not capital weighted. In particular, the first year negative return is most likely on a very low invested capital basis and hence negligible with regards to the overall fund performance.
+] In this phase, the fund is out of the investment period, the fund managers are working on their operational initiatives and preparing the underlying investments for their exits. In year 9, returns come down meaningfully, although they continue to be positive for most of the funds. At this age of the fund, the strongest performing investments have already been sold successfully and the remaining ones have an issue in one way or the other. These funds are often described as "tail-end".
+
+@nadauld-etal:2019 report in their paper that secondary buyers pay the highest prices, in relation to the NAV, for funds that are four to nine years old. This resonates well with the results shown here: such funds are the most attractive, as they still have lots of value creation ahead of them, while most of the fee leakage has already been paid as it is front-loaded by private equity funds. For tail-end funds, secondary buyers require a larger discount as they cannot expect their returns to come from further value creation of the funds.
+
+To summarize, investors in `r str_type` should not expect great returns early on, but should get excited at the end of the investment period of what is yet to come.
+
+
+[//]: # (So far, I pooled all funds for the analysis. However, it could very well be that their are informative changes in the patterns of value creation over time. For example, in this [post](https://www.christoph-jaeckel.com/posts/2021-08-29-do-managers-mark-up-more-aggressively/) I asked the question if fund managers have become more aggressive in valuing their investments up early on. So let's now ask the question if there is a visible change of overall value creation for funds in different decades.)
+
+```{r BoxplotAnnualReturns_by_decade, eval=FALSE, fig.cap="Dispersion of annual returns of buyout funds over the first 10 years of their lifetime. The lower and upper hinges correspond to the first and third quartiles of the annual returns, the line in the middle to the median. Data from Preqin."}
+#Originally, I wanted to have this analysis in there, but I just find it confusing as there is a large pattern change; however, this is mostly a dot-com bubble effect in combination with a small universe in the early nineties; see chunk "Check" below
+ggplot(DT[!is.na(Decade) & AnnualRet > - 1 & AnnualRet < 2][qtr %in% seq(from=5, to=41, by=4)], aes(Age, AnnualRet)) +
+  geom_boxplot(outlier.shape = NA, coef = 0) + facet_wrap(~Decade, ncol=1) + 
+  scale_y_continuous(labels = scales::percent, limits = c(-0.2,0.2)) + xlab("Fund age (in years)") + ylab("Annual return")
+
+```
+
+```{r Check, eval=FALSE}
+#To better understand why the annual returns of the 90s is so poor, let's calculate first the traditional returns ==> these look overall good, but I find that the ones at the end of the 90s look poor
+setkey(DT, id, qtr) #DT has to be sorted by qtr as you need the last NAV as final valuation for TVPI
+DT[, ncf:=dist-call]
+DT[qtr==max_qtr, ncf:=ncf+nav]
+DT[, date:=min_date %m+% months(3*(qtr-1))]
+perfDT <- DT[, list(Invested = sum(call),
+                    DPI      = sum(dist)/sum(call),
+                    TVPI     = (sum(dist) + nav[.N])/sum(call),
+                    IRR      = utilitiesCJ::IRR(ncf, date)*100),
+             by=list(id, vintage, size, status, geo, type)]
+
+#Here you see that most funds in the 1990s are funds at the end of the 90s
+#These have performed poorly, in particular the 1997/98 funds.
+perfDT[,list(TVPI=median(TVPI, na.rm=TRUE), IRR = median(IRR, na.rm=TRUE), .N),keyby=vintage]
+
+#See how the median goes continuously down with later VYs; the dot-com bubble funds drive down the returns. 
+DT[vintage>1990 & vintage<1995 & Age==5, summary(AnnualRet)]
+DT[vintage>1990 & vintage<1997 & Age==5, summary(AnnualRet)]
+DT[vintage>1990 & vintage<1999 & Age==5, summary(AnnualRet)]
+```

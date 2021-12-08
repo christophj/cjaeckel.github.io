@@ -20,19 +20,19 @@
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -52,11 +52,11 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ad0000; } /* Alert */
 code span.an { color: #5e5e5e; } /* Annotation */
-code span.at { color: #20794d; } /* Attribute */
+code span.at { } /* Attribute */
 code span.bn { color: #ad0000; } /* BaseN */
 code span.bu { } /* BuiltIn */
 code span.cf { color: #007ba5; } /* ControlFlow */
@@ -77,7 +77,7 @@ code span.kw { color: #007ba5; } /* Keyword */
 code span.op { color: #5e5e5e; } /* Operator */
 code span.ot { color: #007ba5; } /* Other */
 code span.pp { color: #ad0000; } /* Preprocessor */
-code span.sc { color: #20794d; } /* SpecialChar */
+code span.sc { color: #5e5e5e; } /* SpecialChar */
 code span.ss { color: #20794d; } /* SpecialString */
 code span.st { color: #20794d; } /* String */
 code span.va { color: #111111; } /* Variable */
@@ -85,24 +85,46 @@ code span.vs { color: #20794d; } /* VerbatimString */
 code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
 
+<style>
+  div.csl-bib-body { }
+  div.csl-entry {
+    clear: both;
+    }
+  .hanging div.csl-entry {
+    margin-left:2em;
+    text-indent:-2em;
+  }
+  div.csl-left-margin {
+    min-width:2em;
+    float:left;
+  }
+  div.csl-right-inline {
+    margin-left:2em;
+    padding-left:1em;
+  }
+  div.csl-indent {
+    margin-left: 2em;
+  }
+</style>
+
   <!--radix_placeholder_meta_tags-->
-<title>Uncertain times: EV/EBITDA valuation multiple: the theory</title>
+<title>Uncertain times: Value creation of a private equity fund over time</title>
 
-<meta property="description" itemprop="description" content="How to justify the use of EV/EBITDA valuation multiples with the discounted cash flow model."/>
+<meta property="description" itemprop="description" content="When does a private equity fund generate most of its value?"/>
 
-<link rel="canonical" href="https://www.christoph-jaeckel.com/posts/2021-01-17-evebitda-valuation-multiple-the-theory/"/>
+<link rel="canonical" href="https://www.christoph-jaeckel.com/posts/2021-11-28-value-creation-of-a-private-equity-fund-over-time/"/>
 
 <!--  https://schema.org/Article -->
-<meta property="article:published" itemprop="datePublished" content="2021-01-20"/>
-<meta property="article:created" itemprop="dateCreated" content="2021-01-20"/>
+<meta property="article:published" itemprop="datePublished" content="2021-12-08"/>
+<meta property="article:created" itemprop="dateCreated" content="2021-12-08"/>
 <meta name="article:author" content="Christoph Jäckel"/>
 
 <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-<meta property="og:title" content="Uncertain times: EV/EBITDA valuation multiple: the theory"/>
+<meta property="og:title" content="Uncertain times: Value creation of a private equity fund over time"/>
 <meta property="og:type" content="article"/>
-<meta property="og:description" content="How to justify the use of EV/EBITDA valuation multiples with the discounted cash flow model."/>
-<meta property="og:url" content="https://www.christoph-jaeckel.com/posts/2021-01-17-evebitda-valuation-multiple-the-theory/"/>
-<meta property="og:image" content="https://www.christoph-jaeckel.com/posts/2021-01-17-evebitda-valuation-multiple-the-theory/evebitda-valuation-multiple-the-theory_files/figure-html5/Relationship_of_OCC_g_r_EV_EBITDA-1.png"/>
+<meta property="og:description" content="When does a private equity fund generate most of its value?"/>
+<meta property="og:url" content="https://www.christoph-jaeckel.com/posts/2021-11-28-value-creation-of-a-private-equity-fund-over-time/"/>
+<meta property="og:image" content="https://www.christoph-jaeckel.com/posts/2021-11-28-value-creation-of-a-private-equity-fund-over-time/value-creation-of-a-private-equity-fund-over-time_files/figure-html5/BoxplotAnnualReturns-1.png"/>
 <meta property="og:image:width" content="1248"/>
 <meta property="og:image:height" content="768"/>
 <meta property="og:locale" content="en_US"/>
@@ -110,23 +132,24 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 <!--  https://dev.twitter.com/cards/types/summary -->
 <meta property="twitter:card" content="summary_large_image"/>
-<meta property="twitter:title" content="Uncertain times: EV/EBITDA valuation multiple: the theory"/>
-<meta property="twitter:description" content="How to justify the use of EV/EBITDA valuation multiples with the discounted cash flow model."/>
-<meta property="twitter:url" content="https://www.christoph-jaeckel.com/posts/2021-01-17-evebitda-valuation-multiple-the-theory/"/>
-<meta property="twitter:image" content="https://www.christoph-jaeckel.com/posts/2021-01-17-evebitda-valuation-multiple-the-theory/evebitda-valuation-multiple-the-theory_files/figure-html5/Relationship_of_OCC_g_r_EV_EBITDA-1.png"/>
+<meta property="twitter:title" content="Uncertain times: Value creation of a private equity fund over time"/>
+<meta property="twitter:description" content="When does a private equity fund generate most of its value?"/>
+<meta property="twitter:url" content="https://www.christoph-jaeckel.com/posts/2021-11-28-value-creation-of-a-private-equity-fund-over-time/"/>
+<meta property="twitter:image" content="https://www.christoph-jaeckel.com/posts/2021-11-28-value-creation-of-a-private-equity-fund-over-time/value-creation-of-a-private-equity-fund-over-time_files/figure-html5/BoxplotAnnualReturns-1.png"/>
 <meta property="twitter:image:width" content="1248"/>
 <meta property="twitter:image:height" content="768"/>
 
 <!--/radix_placeholder_meta_tags-->
+  
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","base_url","date","output","categories","canonical_url"]}},"value":[{"type":"character","attributes":{},"value":["EV/EBITDA valuation multiple: the theory"]},{"type":"character","attributes":{},"value":["How to justify the use of EV/EBITDA valuation multiples with the discounted cash flow model."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Christoph Jäckel"]}]}]},{"type":"character","attributes":{},"value":["https://github.com/christophj/cjaeckel.github.io/"]},{"type":"character","attributes":{},"value":["01-20-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained","code_folding"]}},"value":[{"type":"logical","attributes":{},"value":[false]},{"type":"logical","attributes":{},"value":[true]}]}]},{"type":"character","attributes":{},"value":["Valuation"]},{"type":"character","attributes":{},"value":["https://www.christoph-jaeckel.com/posts/2021-01-17-evebitda-valuation-multiple-the-theory/"]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","categories","draft","bibliography","canonical_url"]}},"value":[{"type":"character","attributes":{},"value":["Value creation of a private equity fund over time"]},{"type":"character","attributes":{},"value":["When does a private equity fund generate most of its value?"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Christoph Jäckel"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["12-08-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained","toc"]}},"value":[{"type":"logical","attributes":{},"value":[false]},{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"character","attributes":{},"value":["Private Equity","Data","Research"]},{"type":"logical","attributes":{},"value":[false]},{"type":"character","attributes":{},"value":["C:/Users/Christoph Jaeckel/Desktop/CJaeckel Blog/Blog/docs/biblio.bib"]},{"type":"character","attributes":{},"value":["https://www.christoph-jaeckel.com/posts/2021-11-28-value-creation-of-a-private-equity-fund-over-time/"]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["evebitda-valuation-multiple-the-theory_files/anchor-4.2.2/anchor.min.js","evebitda-valuation-multiple-the-theory_files/bowser-1.9.3/bowser.min.js","evebitda-valuation-multiple-the-theory_files/distill-2.2.21/template.v2.js","evebitda-valuation-multiple-the-theory_files/figure-html5/Relationship_of_OCC_g_r_EV_EBITDA-1.png","evebitda-valuation-multiple-the-theory_files/jquery-1.11.3/jquery.min.js","evebitda-valuation-multiple-the-theory_files/popper-2.6.0/popper.min.js","evebitda-valuation-multiple-the-theory_files/tippy-6.2.7/tippy-bundle.umd.min.js","evebitda-valuation-multiple-the-theory_files/tippy-6.2.7/tippy-light-border.css","evebitda-valuation-multiple-the-theory_files/tippy-6.2.7/tippy.css","evebitda-valuation-multiple-the-theory_files/tippy-6.2.7/tippy.umd.min.js","evebitda-valuation-multiple-the-theory_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["value-creation-of-a-private-equity-fund-over-time_files/anchor-4.2.2/anchor.min.js","value-creation-of-a-private-equity-fund-over-time_files/bowser-1.9.3/bowser.min.js","value-creation-of-a-private-equity-fund-over-time_files/distill-2.2.21/template.v2.js","value-creation-of-a-private-equity-fund-over-time_files/figure-html5/Boxplot_annual_returns-1.png","value-creation-of-a-private-equity-fund-over-time_files/figure-html5/BoxplotAnnualReturns-1.png","value-creation-of-a-private-equity-fund-over-time_files/header-attrs-2.11/header-attrs.js","value-creation-of-a-private-equity-fund-over-time_files/jquery-3.6.0/jquery-3.6.0.js","value-creation-of-a-private-equity-fund-over-time_files/jquery-3.6.0/jquery-3.6.0.min.js","value-creation-of-a-private-equity-fund-over-time_files/jquery-3.6.0/jquery-3.6.0.min.map","value-creation-of-a-private-equity-fund-over-time_files/popper-2.6.0/popper.min.js","value-creation-of-a-private-equity-fund-over-time_files/tippy-6.2.7/tippy-bundle.umd.min.js","value-creation-of-a-private-equity-fund-over-time_files/tippy-6.2.7/tippy-light-border.css","value-creation-of-a-private-equity-fund-over-time_files/tippy-6.2.7/tippy.css","value-creation-of-a-private-equity-fund-over-time_files/tippy-6.2.7/tippy.umd.min.js","value-creation-of-a-private-equity-fund-over-time_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2053,7 +2076,8 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <!--/radix_placeholder_distill-->
-  <script src="../../site_libs/jquery-1.11.3/jquery.min.js"></script>
+  <script src="../../site_libs/header-attrs-2.11/header-attrs.js"></script>
+  <script src="../../site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <script src="../../site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="../../site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
   <link href="../../site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
@@ -2092,7 +2116,7 @@ gtag('config', 'G-J5RM2E8REJ');
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"EV/EBITDA valuation multiple: the theory","description":"How to justify the use of EV/EBITDA valuation multiples with the discounted cash flow model.","authors":[{"author":"Christoph Jäckel","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-01-20T00:00:00.000+01:00","citationText":"Jäckel, 2021"}
+{"title":"Value creation of a private equity fund over time","description":"When does a private equity fund generate most of its value?","authors":[{"author":"Christoph Jäckel","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-12-08T00:00:00.000+01:00","citationText":"Jäckel, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2118,110 +2142,64 @@ gtag('config', 'G-J5RM2E8REJ');
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>EV/EBITDA valuation multiple: the theory</h1>
+<h1>Value creation of a private equity fund over time</h1>
 <!--radix_placeholder_categories-->
 <div class="dt-tags">
-  <a href="../../index.html#category:Valuation" class="dt-tag">Valuation</a>
+  <a href="../../index.html#category:Private_Equity" class="dt-tag">Private Equity</a>
+  <a href="../../index.html#category:Data" class="dt-tag">Data</a>
+  <a href="../../index.html#category:Research" class="dt-tag">Research</a>
 </div>
 <!--/radix_placeholder_categories-->
-<p><p>How to justify the use of EV/EBITDA valuation multiples with the discounted cash flow model.</p></p>
+<p><p>When does a private equity fund generate most of its value?</p></p>
 </div>
 
 <div class="d-byline">
-  Christoph Jäckel  
+  Christoph Jäckel true 
   
-<br/>01-20-2021
+<br/>12-08-2021
 </div>
 
 <div class="d-article">
-<p>Multiples, most notably the EV/EBITDA multiple, are universally used in private equity to value companies. In contrast, the theoretical correct valuation approach, the discounted cash flow model (DCF), is rarely found in LBO models, pitch books, etc. Of course, there are good reasons for this, nicely summarized by <a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/1475-679X.00042">Liu/Nissim/Thomas (2002)</a>:</p>
-<blockquote>
-<p>While the multiple approach bypasses explicit projections and present value calculations, it relies on the same principles underlying the more comprehensive approach: value is an increasing function of future payoffs and a decreasing function of risk. Therefore, multiples are used often as a substitute for comprehensive valuations, because they communicate efficiently the essence of those valuations. Multiples are also used to complement comprehensive valuations, typically to calibrate those valuations to obtain terminal values.</p>
-</blockquote>
-<p>Put differently, multiples can be thought of as a <strong>summary statistic</strong> of a comprehensive valuation that is helpful in communicating the essence. A summary statistic typically does not contain the same amount of information as the data that is summarized, and one therefore has to be careful with regards to how and when to use it. Otherwise, one can end up such as the statistician who drowned in a lake averaging only 2 inches in depth…</p>
-<p>In this post, I derive under certain simplifying assumptions the EV/EBITDA multiple from a DCF model and discuss the factors that drive the EV/EBITDA multiple. I then discuss the consequences if those simplifying assumptions do not hold. In the blog post “EV/EBITDA valuation multiple: the data”, I look at the issue empirically.</p>
-<aside>
-If you want to dive into this issue a bit further, <a href="http://pages.stern.nyu.edu/~adamodar/pdfiles/country/relvalAIMR.pdf">Damodaran</a> has some helpful lecture slides.
-</aside>
-<p>Starting with a DCF of all expected free cash flows <span class="math inline">\(FCFF\)</span>, the enterprise value at time <span class="math inline">\(t\)</span>, <span class="math inline">\(EV_t\)</span>, can be written as:</p>
-<p><span class="math display">\[ EV_t = \sum_{i=t+1}^{\infty} \frac{FCFF_i}{(1+r)^i}, \]</span> where <span class="math inline">\(r\)</span> is the firm-specific discount rate. For simplicity, I ignore the expectation operator <span class="math inline">\(E()\)</span>.</p>
-<p><span class="math inline">\(FCFF_i\)</span> can be rewritten as follows:<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
-<p><span class="math display">\[ 
-FCFF_i = (EBITDA_i - DA_i) \times (1 - \tau) + DA_i - \Delta NWC_i - CAPEX_i,  \\
-\]</span></p>
-<p>where <span class="math inline">\(DA\)</span> is depreciation &amp; amortization, <span class="math inline">\(CAPEX\)</span> is capital expenditure and <span class="math inline">\(\tau\)</span> is the tax-rate. <span class="math inline">\(\Delta NWC\)</span> is the change of the net working capital in the period. If <span class="math inline">\(NWC\)</span> increases, it will reduce <span class="math inline">\(FCFF\)</span>.</p>
-<p>This formula shows nicely why EBITDA is so prominent in private equity in the first place: it is a proxy for cash flows that is less impacted by periodic items such as D&amp;A and net working capital changes. However, one must remember that EBITDA ignores capital expenditures. As Warren Buffett apparently once asked: “Does management think the tooth fairy pays for capital expenditures?”</p>
-<p>Let’s come to this point later, but let’s first make some simplifying assumptions:</p>
-<ol type="1">
-<li>Depreciation &amp; amortization, <span class="math inline">\(DA\)</span>, equals capital expenditures, <span class="math inline">\(CAPEX\)</span></li>
-<li>The change in net working capital, <span class="math inline">\(\Delta NWC\)</span>, is 0</li>
-</ol>
-<p>As the difference between D&amp;A and capital expenditures as well as changes in net working capital are transitory, these assumptions should hold in the long run. We can then rewrite the above equation:</p>
-<p><span class="math display">\[ 
-\begin{aligned}
-FCFF_i &amp;= (EBITDA_i - DA_i) \times (1 - \tau) \\
-       &amp;= EBITDA_i \times (1-\frac{DA_i}{EBITDA_i}) \times (1-\tau) \\
-       &amp;= EBITDA_i \times OCC_i \times (1-\tau),
-\end{aligned}
-\]</span></p>
-<p>where <span class="math inline">\(OCC_i\)</span> is the operational cash conversion. If it is close to 100%, it means that most EBITDA ends up in the firm’s debt- and equity holders’ pockets. If it is close to 0% due to high capital requirements, a lot of cash must be invested to generate the EBITDA.</p>
-<p>Let’s add two more assumptions:</p>
-<ol start="3" type="1">
-<li>Operational cash conversion stays constant over time, i.e. <span class="math inline">\(OCC_i=OCC_{i+1}=...=OCC\)</span></li>
-<li>EBITDA grows by a constant factor <span class="math inline">\(g\)</span></li>
-</ol>
-<p>We can now rewrite the calculation of <span class="math inline">\(EV_t\)</span>:</p>
-<p><span class="math display">\[
-\begin{aligned}
-EV_t &amp;= \sum_{i=t+1}^{\infty} \frac{EBITDA_i \times OCC_i \times (1-\tau)}{(1+r)^i} \\
-     &amp;= \sum_{i=t+1}^{\infty} \frac{EBITDA_t \times OCC \times (1-\tau)\times (1+g)^i}{(1+r)^i} \\
-     &amp;= \frac{EBITDA_t  \times  OCC \times (1-\tau) \times (1+g)}{r-g},
-\end{aligned}
-\]</span></p>
-<p>or</p>
-<p><span class="math display">\[ \frac{EV_t}{EBITDA_t} = \frac{OCC \times (1-\tau) \times (1+g)}{r-g} \]</span></p>
-<p>In words, the EV/EBITDA multiple is a function of the operational cash conversion <span class="math inline">\(OCC\)</span>, the growth of the business, <span class="math inline">\(g\)</span>, 1 minus the tax rate, and the discount rate, <span class="math inline">\(r\)</span>. All else being equal, the multiple is the higher,</p>
-<ul>
-<li>the more cash generative the business;</li>
-<li>the higher the growth of the business;</li>
-<li>the lower the tax rate; and</li>
-<li>the lower the discount rate, i.e., the risk of the business.</li>
-</ul>
-<p>Ignoring taxes by setting <span class="math inline">\(\tau=0\)</span>, I plot the EV/EBITDA multiple in relation to the other three factors below.</p>
+<p>Overall, private equity funds generate attractive returns over the course of their lives.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> In this blog post, I’m looking further into the question <em>when</em> this value creation happens? This is an important question to ask, especially in my line of work as a secondary buyer: as returns can only come from the price a buyer pays for a fund or further value creation, knowing at what age of a fund the value creation is most likely to happen helps a buyer to better price fund interests.</p>
+<p>In the following, I use cash flow and NAV data of private equity funds from <a href="https://www.preqin.com/">Preqin</a>. I focus on buyout funds and exclude all funds with a vintage year younger than 2010 as such funds still have meaningful value creation ahead of them.</p>
+<p>To start with, I calculate the annual return in year <span class="math inline">\(t\)</span> for a fund <span class="math inline">\(i\)</span> as follows:</p>
+<p><span class="math display">\[ Ret_{i,t} = \frac{NAV_{i,t} + Dist_{i, t}}{NAV_{i,t-1} + CC_{i,t}} - 1, \]</span></p>
+<p>where <span class="math inline">\(NAV_{i,t}\)</span> is the reported NAV of fund <span class="math inline">\(i\)</span> at the end of period <span class="math inline">\(t\)</span>, and <span class="math inline">\(CC_{i,t}\)</span> and <span class="math inline">\(Dist_{i,t}\)</span> are the capital calls and distributions from and to the investors by the fund from <span class="math inline">\(t-1\)</span> to <span class="math inline">\(t\)</span>.</p>
 <div class="layout-chunk" data-layout="l-body">
-<details>
-<summary>Show code</summary>
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://Rdatatable.gitlab.io/data.table'>data.table</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
-<span class='va'>DT</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html'>as.data.table</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/expand.grid.html'>expand.grid</a></span><span class='op'>(</span>OCC <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span>from<span class='op'>=</span><span class='fl'>0.0</span>,  to<span class='op'>=</span><span class='fl'>1</span>,   by<span class='op'>=</span><span class='fl'>0.1</span><span class='op'>)</span>,
-                                g   <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span>from<span class='op'>=</span><span class='fl'>0.0</span>, to<span class='op'>=</span><span class='fl'>.05</span>, by<span class='op'>=</span><span class='fl'>0.001</span><span class='op'>)</span>,
-                                r   <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span>from<span class='op'>=</span><span class='fl'>0.1</span>,  to<span class='op'>=</span><span class='fl'>.15</span>, by<span class='op'>=</span><span class='fl'>0.01</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>DT</span><span class='op'>[</span>, <span class='va'>Multiple</span><span class='op'>:=</span><span class='va'>OCC</span><span class='op'>*</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>+</span><span class='va'>g</span><span class='op'>)</span><span class='op'>/</span><span class='op'>(</span><span class='va'>r</span><span class='op'>-</span><span class='va'>g</span><span class='op'>)</span><span class='op'>]</span>
 
-<span class='va'>DT</span><span class='op'>[</span>, <span class='va'>OCC</span><span class='op'>:=</span><span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>OCC</span><span class='op'>)</span><span class='op'>]</span>
-<span class='va'>DT</span><span class='op'>[</span>, <span class='va'>r</span>  <span class='op'>:=</span><span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>]</span>
+</div>
+<p>The boxplot chart below shows the dispersion of annual returns over the first ten years of a buyout fund. In the first three years, a typical buyout fund does not report positive returns. As a matter of fact, most funds have a <code>negative</code> return in their first year when not many investments have been made yet, these that have been made are valued at cost, and the fund already charges management fees and asks investors to pay for the establishment expenses.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="figure"><span style="display:block;" id="fig:BoxplotAnnualReturns"></span>
+<img src="value-creation-of-a-private-equity-fund-over-time_files/figure-html5/BoxplotAnnualReturns-1.png" alt="Dispersion of annual returns of buyout funds over the first 10 years of their lifetime. The lower and upper hinges correspond to the first and third quartiles of the annual returns, the line in the middle to the median. Data from Preqin." width="624" />
+<p class="caption">
+Figure 1: Dispersion of annual returns of buyout funds over the first 10 years of their lifetime. The lower and upper hinges correspond to the first and third quartiles of the annual returns, the line in the middle to the median. Data from Preqin.
+</p>
+</div>
+</div>
+<p>Starting with year 4, funds start reporting positive returns with consistently strong years from year 5 to 8 where the median fund reports a return of 5% p.a. and more than one quarter of funds having returns of 10% p.a. or higher. This is the most important phase of value creation, often called the “harvesting phase” for a private equity fund.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> In this phase, the fund is out of the investment period, the fund managers are working on their operational initiatives and preparing the underlying investments for their exits. In year 9, returns come down meaningfully, although they continue to be positive for most of the funds. At this age of the fund, the strongest performing investments have already been sold successfully and the remaining ones have an issue in one way or the other. These funds are often described as “tail-end.”</p>
+<p><span class="citation" data-cites="nadauld-etal:2019"><a href="#ref-nadauld-etal:2019" role="doc-biblioref">Nadauld et al.</a> (<a href="#ref-nadauld-etal:2019" role="doc-biblioref">2019</a>)</span> report in their paper that secondary buyers pay the highest prices, in relation to the NAV, for funds that are four to nine years old. This resonates well with the results shown here: such funds are the most attractive, as they still have lots of value creation ahead of them, while most of the fee leakage has already been paid as it is front-loaded by private equity funds. For tail-end funds, secondary buyers require a larger discount as they cannot expect their returns to come from further value creation of the funds.</p>
+<p>To summarize, investors in buyout should not expect great returns early on, but should get excited at the end of the investment period of what is yet to come.</p>
+<div class="layout-chunk" data-layout="l-body">
 
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>DT</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>g</span>, y<span class='op'>=</span><span class='va'>Multiple</span>, color<span class='op'>=</span><span class='va'>OCC</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> 
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_wrap.html'>facet_wrap</a></span><span class='op'>(</span><span class='op'>~</span><span class='va'>r</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_x_continuous</a></span><span class='op'>(</span>labels <span class='op'>=</span> <span class='fu'>scales</span><span class='fu'>::</span><span class='va'><a href='https://scales.r-lib.org//reference/label_percent.html'>percent</a></span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>xlab</a></span><span class='op'>(</span><span class='st'>"Steady-state growth rate"</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>ylab</a></span><span class='op'>(</span><span class='st'>"EV/EBITDA multiple"</span><span class='op'>)</span> <span class='op'>+</span> 
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title<span class='op'>=</span><span class='st'>"EV/EBITDA multiple as function of operational cash conversion (OCC),\n steady-state growth and discount rate"</span>,
-       caption <span class='op'>=</span> <span class='st'>"The values in the group boxes indicate the discount rate"</span><span class='op'>)</span>
-</code></pre>
 </div>
-</details>
-<p><img src="evebitda-valuation-multiple-the-theory_files/figure-html5/Relationship_of_OCC_g_r_EV_EBITDA-1.png" width="624" /></p>
+<div class="layout-chunk" data-layout="l-body">
+
 </div>
-<p>Starting with the operational cash conversion, note that the EV/EBITDA multiple is 0x in case of a 0%-cash conversion. This is not surprising: if a business does not generate any cash on top of what it must re-invest in capital, it should be worth zero. More generally, businesses in sectors with high cash generation (e.g., software) should have much higher valuation multiples as businesses in CAPEX-intensive sectors such as manufacturing. The growth rate is also an important factor. Going from a 0% p.a. growth rate to a 5% p.a. roughly doubles the EV/EBITDA multiple in case of lower discount rates. Finally, the higher the discount rate, which can for example be calculated with the Weighted-Average Cost of Capital (WACC) method, the lower the valuations. A change from 10% to 15% might not sound like much, but it lowers an EV/EBITDA of a business with 100% OCC and 5% p.a. growth from over 20x to just around 10x (see right end of the most upper curve in the top left vs. the bottom right chart).</p>
-<p>These relationships are very important to keep in mind when valuing a business with the multiple approach. For example, if you are looking at a company that has a much lower cash-generation than its peers, it should have a much lower valuation. Applying the same EV/EBITDA multiple as the peers can lead to large valuation mistakes.</p>
-<p>Furthermore, remember that we needed quite a bit of simplifying assumptions to establish the relationship between the FCFF-DCF method and the EV/EBITDA multiple. These assumptions most certainly will not hold for an actual business. For example, it is not easy to translate future growth over many periods in one reasonable assumption for <span class="math inline">\(g\)</span>.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-harris-etal:2014" class="csl-entry" role="doc-biblioentry">
+Harris, Robert S, Tim Jenkinson, and Steven N Kaplan. 2014. <span>“Private Equity Performance: What Do We Know?”</span> <em>The Journal of Finance</em> 69 (5): 1851–82.
+</div>
+<div id="ref-nadauld-etal:2019" class="csl-entry" role="doc-biblioentry">
+Nadauld, Taylor D, Berk A Sensoy, Keith Vorkink, and Michael S Weisbach. 2019. <span>“The Liquidity Cost of Private Equity Investments: Evidence from Secondary Market Transactions.”</span> <em>Journal of Financial Economics</em> 132 (3): 158–81.
+</div>
+</div>
 <section class="footnotes" role="doc-endnotes">
 <hr />
 <ol>
-<li id="fn1" role="doc-endnote"><p>The attentive reader will notice that the tax is calculated based on the EBIT, the earnings <em>before</em> interest, which is incorrect, as it is in reality based on the EBT, the earnings <em>after</em> interest. In the DCF model, the tax benefits of debt and the accompanying interest are considered in the discount rate, which makes the calculation much simpler. Hence, <span class="math inline">\(\tau\)</span> has to be considered as a hypothetical tax rate, not the actual one, yet another simplification.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1" role="doc-endnote"><p>For example, <span class="citation" data-cites="harris-etal:2014"><a href="#ref-harris-etal:2014" role="doc-biblioref">Harris, Jenkinson, and Kaplan</a> (<a href="#ref-harris-etal:2014" role="doc-biblioref">2014</a>)</span> report average multiples and IRRs for their sample of buyout funds of 14% and 2.0x across the vintage years.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p>The median returns look rather low overall, never exceeding 5% in a year. How can this be reconciled with much higher median IRRs of buyout funds? Three explanations come to mind, which I will not explore further as this is not the point of this blog post. First, distributions of private equity funds are right skewed and hence it is likely that a lot of the funds just have one or two very strong years that are the main drivers of the overall strong performance. Second, the annual return is not really an annual return as the capital calls and distributions happen within the year. Simple example: a fund starts at 0, calls 10 a day before the year end and reports an NAV of 11 at the end of the year. This results in a 10% annual return, while actually this return was achieved within a day and the annualized returns would be much higher. Third, and somewhat related, these returns are not capital weighted. In particular, the first year negative return is most likely on a very low invested capital basis and hence negligible with regards to the overall fund performance.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 <!--radix_placeholder_article_footer-->
@@ -2230,14 +2208,14 @@ EV_t &amp;= \sum_{i=t+1}^{\infty} \frac{EBITDA_i \times OCC_i \times (1-\tau)}{(
     <span class="disqus-comments">
       <i class="fas fa-comments"></i>
       &nbsp;
-      <span class="disqus-comment-count" data-disqus-identifier="posts/2021-01-17-evebitda-valuation-multiple-the-theory/">Comment on this article</span>
+      <span class="disqus-comment-count" data-disqus-identifier="posts/2021-11-28-value-creation-of-a-private-equity-fund-over-time/">Comment on this article</span>
     </span>
     <span class="article-sharing">
       Share: &nbsp;
-      <a href="https://twitter.com/share?text=EV%2FEBITDA%20valuation%20multiple%3A%20the%20theory&amp;url=https%3A%2F%2Fwww.christoph-jaeckel.com%2Fposts%2F2021-01-17-evebitda-valuation-multiple-the-theory%2F">
+      <a href="https://twitter.com/share?text=Value%20creation%20of%20a%20private%20equity%20fund%20over%20time&amp;url=https%3A%2F%2Fwww.christoph-jaeckel.com%2Fposts%2F2021-11-28-value-creation-of-a-private-equity-fund-over-time%2F">
         <i class="fab fa-twitter"></i>
       </a>
-      <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.christoph-jaeckel.com%2Fposts%2F2021-01-17-evebitda-valuation-multiple-the-theory%2F&amp;title=EV%2FEBITDA%20valuation%20multiple%3A%20the%20theory">
+      <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.christoph-jaeckel.com%2Fposts%2F2021-11-28-value-creation-of-a-private-equity-fund-over-time%2F&amp;title=Value%20creation%20of%20a%20private%20equity%20fund%20over%20time">
         <i class="fab fa-linkedin"></i>
       </a>
     </span>
@@ -2246,8 +2224,8 @@ EV_t &amp;= \sum_{i=t+1}^{\infty} \frac{EBITDA_i \times OCC_i \times (1-\tau)}{(
   <div id="disqus_thread" class="hidden"></div>
   <script type="text/plain" cookie-consent="functionality">
 var disqus_config = function () {
-  this.page.url = 'https://www.christoph-jaeckel.com/posts/2021-01-17-evebitda-valuation-multiple-the-theory/';
-  this.page.identifier = 'posts/2021-01-17-evebitda-valuation-multiple-the-theory/';
+  this.page.url = 'https://www.christoph-jaeckel.com/posts/2021-11-28-value-creation-of-a-private-equity-fund-over-time/';
+  this.page.identifier = 'posts/2021-11-28-value-creation-of-a-private-equity-fund-over-time/';
 };
 (function() {
   var d = document, s = d.createElement('script');
@@ -2277,6 +2255,8 @@ var disqus_config = function () {
 <!--/radix_placeholder_site_after_body-->
 <!--radix_placeholder_appendices-->
 <div class="appendix-bottom">
+  <h3 id="references">References</h3>
+  <div id="references-listing"></div>
   <h3 id="updates-and-corrections">Corrections</h3>
   <p>If you see mistakes or want to suggest changes, please <a href="https://github.com/christophj/cjaeckel.github.io/issues/new">create an issue</a> on the source repository.</p>
 </div>
