@@ -31,6 +31,10 @@ str_type <- "buyout"
 DT <- readRDS("C:/Users/Christoph Jaeckel/Desktop/Preqin/preqin_data_22March2021.rds")
 DT <- DT[type==str_type]
 DT <- DT[vintage<=max_vintage]
+setkey(DT, id, qtr) #DT has to be sorted by qtr as you need the last NAV as final valuation for TVPI
+DT[, ncf:=dist-call]
+DT[qtr==max_qtr, ncf:=ncf+nav]
+DT[, date:=min_date %m+% months(3*(qtr-1))]
 
 #Only needed for analysis I didn't end up using (see further below, commented out)
 f_decade <- function(int_vy) {
@@ -101,7 +105,25 @@ Starting with year 4, funds start reporting positive returns with consistently s
 
 @nadauld-etal:2019 report in their paper that secondary buyers pay the highest prices, in relation to the NAV, for funds that are four to nine years old. This resonates well with the results shown here: such funds are the most attractive, as they still have lots of value creation ahead of them, while most of the fee leakage has already been paid as it is front-loaded by private equity funds. For tail-end funds, secondary buyers require a larger discount as they cannot expect their returns to come from further value creation of the funds.
 
-To summarize, investors in `r str_type` should not expect great returns early on, but should get excited at the end of the investment period of what is yet to come.
+So far, I have looked at the returns independently of the current state of the economy. An interesting follow-up question is if the value creation pattern described above changes in case of recessions. One hypothesis could be that more mature funds are not so much impacted anymore by the overall economy, as a larger share of the remaining value is non-investment related items such as cash, escrows, carry provisions, etc. To test this hypothesis I re-plot the boxplot for two particularly bad years of private equity, 2002 and 2009.
+
+```{r BoxplotAnnualReturnsFor2002, eval=TRUE, fig.cap="Dispersion of annual returns of buyout funds over the first 10 years of their lifetime. The lower and upper hinges correspond to the first and third quartiles of the annual returns, the line in the middle to the median. Data from Preqin. In this chart, only the annual return of 2002 is considered."}
+ggplot(DT[Age %in% as.factor(1:10) & AnnualRet > - 1 & AnnualRet < 2 & year(date)==2002], aes(Age, AnnualRet)) +
+  geom_boxplot(outlier.shape = NA, coef = 0) +
+  scale_y_continuous(labels = scales::percent, limits = c(-0.2,0.2)) + xlab("Fund age (in years)") + ylab("Annual return")
+
+```
+
+```{r BoxplotAnnualReturnsFor2009, eval=TRUE, fig.cap="Dispersion of annual returns of buyout funds over the first 10 years of their lifetime. The lower and upper hinges correspond to the first and third quartiles of the annual returns, the line in the middle to the median. Data from Preqin. In this chart, only the annual return of 2009 is considered."}
+
+ggplot(DT[Age %in% as.factor(1:10) & AnnualRet > - 1 & AnnualRet < 2 & year(date)==2009], aes(Age, AnnualRet)) +
+  geom_boxplot(outlier.shape = NA, coef = 0) +
+  scale_y_continuous(labels = scales::percent, limits = c(-0.2,0.2)) + xlab("Fund age (in years)") + ylab("Annual return")
+```
+
+Let's start with 2002, where funds still in the investment period reported rather large negative returns on average, while more mature funds had better median returns around 0%. Funds with an age of 9 years report a slightly worse performance. Overall, the patterns is very comparable to the one described above. The same is true for the 2009 cohort, where funds with age 3 to 7 are relatively the best performing funds, while the very young and more mature ones are more impacted. This is consistent with the overall pattern across all years.
+
+To summarize, investors in `r str_type` funds should not expect great returns early on, but should get excited at the end of the investment period of what is yet to come. This pattern seems to hold up even in times of market mayhem.
 
 
 [//]: # (So far, I pooled all funds for the analysis. However, it could very well be that their are informative changes in the patterns of value creation over time. For example, in this [post](https://www.christoph-jaeckel.com/posts/2021-08-29-do-managers-mark-up-more-aggressively/) I asked the question if fund managers have become more aggressive in valuing their investments up early on. So let's now ask the question if there is a visible change of overall value creation for funds in different decades.)
@@ -116,10 +138,6 @@ ggplot(DT[!is.na(Decade) & AnnualRet > - 1 & AnnualRet < 2][qtr %in% seq(from=5,
 
 ```{r Check, eval=FALSE}
 #To better understand why the annual returns of the 90s is so poor, let's calculate first the traditional returns ==> these look overall good, but I find that the ones at the end of the 90s look poor
-setkey(DT, id, qtr) #DT has to be sorted by qtr as you need the last NAV as final valuation for TVPI
-DT[, ncf:=dist-call]
-DT[qtr==max_qtr, ncf:=ncf+nav]
-DT[, date:=min_date %m+% months(3*(qtr-1))]
 perfDT <- DT[, list(Invested = sum(call),
                     DPI      = sum(dist)/sum(call),
                     TVPI     = (sum(dist) + nav[.N])/sum(call),
