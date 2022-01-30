@@ -294,9 +294,10 @@ Most of the observations for the EV/EBITDA multiple are in the range from 0x to 
 Next, I look at the EV/EBITDA multiples per industry or sector. I thereby focus on the multiple range from 0x to 30x and focus on `r paste(DT[!is.na(Continent_Name) & Continent_Name!="Africa" & Continent_Name!="South America", unique(Continent_Name)], collapse=", ")`.
 
 ```{r Boxplot}
+###Code changed on Jan 30, 2022: deleted ylim(c(0,30)) and moved to coord_flip; no material change though
 ggplot(data = DT[!is.na(Continent_Name) & Continent_Name!="Africa" & Continent_Name!="South America"], 
        aes(x = reorder(sector_group, EV_EBITDA, na.rm=TRUE), y = EV_EBITDA, )) + #fill = Continent_Name)) +
- geom_boxplot() + ylim(c(0,30))  + ylab("EV/EBITDA") + xlab("Sector") + coord_flip()
+ geom_boxplot() + ylim(c(0,30))  + ylab("EV/EBITDA") + xlab("Sector") + coord_flip(ylim=c(0,30))
 
 ```
 

@@ -1,0 +1,37 @@
+---
+title: "Re-investing carry and GP conviction"
+description: |
+  Is a re-investment really a bullish sign of a GP?
+author:
+  - name: Christoph Jäckel
+    url: {}
+date: 2022-01-12
+output:
+  distill::distill_article:
+    self_contained: false
+draft: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+Simple model:
+* Two-period economy:
+  + Beginning of first period, $t_0$: GP raises fund of $1 and invests it all into one company; fund has no management fee and a carry of 20% with a 0% hurdle^[To keep the math simple; I calibrate everything in such a way that the risk-free return is 0%. I don't calibrate the model to get to private equity multiples.]
+  + At the end of the first period, $t_1$, the GP knows the value of the investment in the company, $V_{T,1}$, if she would sell it to a competitor or a strategic; let's assume that direct buyers such as competitors or strategics are able to price the investment correctly, so this value represents the true value. It is distributed with a normal distribution that is centered around the expected return $r_1$ of the investment with a standard deviation of $\sigma$: $V_{T,1} \sim N(r_1, \sigma^2)$^[Here you could make it even more complicated that the GP knows the intrinsic value, but buyers are over- or underpaying for it right now.] 
+  + Alternatively, the GP could raise a continuation fund, at a valuation of $V_{C,1}$. If we assume $V_{C,1}=V_{T,1}$, it would imply that secondary buyers would price the investment accurately; if they are willing to pay more, they overpay and vice versa.
+  + She is also has an unbiased estimate about an exit value of the investment at $t_2$. This value is again normally distributed: $V_{T, 2}\sim N(V_{T,1}*r_2, \sigma^2)$
+  + If the GP raises the continuation fund, she would have to reinvest $x$ of the crystalized carry into the new vehicle. In addition, the GP charges $c$ carry on the continuation vehicle.
+
+
+```{r FunctionsParameters}
+r_1     <- 1.2 #Return of investment in first period
+r_2     <- 1.2 #Return of investment in second period
+std_dev <- 0.2 #Standard deviation of outcomes
+c       <- 0.1 # Carry of the continuation vehicle
+carry   <- 0.2 # Carry of the fund
+
+```
+

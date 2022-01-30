@@ -22,7 +22,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 Start that people / media are often fascinated with all-time records, which don't have much meaning with fundamentally growing indices. Example: Premier league number of total goals will be at an all time record.
 
-Idea is then to look at different valuation ratios (Buffets GDP to stock prices, Shiller's CAPE, real estate house price to income, etc.) and present the data consistently. Where do we currently stand. Similar to the charts HL once had.
+Idea is then to look at different valuation ratios (Buffetts GDP to stock prices, Shiller's CAPE, real estate house price to income, etc.) and present the data consistently. Where do we currently stand. Similar to the charts HL once had.
 
 Find the data, pool it here, analyze.
 

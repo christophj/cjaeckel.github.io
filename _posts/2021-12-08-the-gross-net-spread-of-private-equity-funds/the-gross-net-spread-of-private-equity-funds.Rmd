@@ -19,4 +19,6 @@ knitr::opts_chunk$set(echo = FALSE)
 
 Idea is similar to your credit line paper. Use preqin funds as starting point, model fees and carry on top of it. Compare gross / net spread. Helpful especially for IRR.
 
+Start with @phalippou-gottschalg:2009 that say it is 6% p.a. or McKinsey (2017) CEM Benchmarking study that apparently shows that the total fees of PE are 5.7%. Check also Gompers / Lenrner (1999) and Metrick / Yasuda (2007), which Phalippou / Gottschalg quote. My best guess for the large spread is that fees are on committed, while the impact on performance is on invested and the two can differ profoundly; however, it would be great to show this.
+
 

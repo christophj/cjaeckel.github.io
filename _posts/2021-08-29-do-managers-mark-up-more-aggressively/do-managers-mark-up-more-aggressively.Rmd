@@ -43,7 +43,7 @@ I'm using data provided by [Preqin](https://www.preqin.com/) and downloaded in M
 </aside>
 
 
-```{r DataPreparation, layout="l-page", fig.cap="Dispersion of TVPIs for U.S. buyout funds, grouped by vintage year at different points in time over the fund life: after 4, 8, 12, 16, and 20 quarters (from top to bottom). Data from Preqin."}
+```{r DataPreparation, layout="l-page", fig.cap="Dispersion of TVPIs for U.S. buyout funds, grouped by vintage year at different points in time over the fund life: after 4, 8, 12, 16, and 20 quarters (from top to bottom). Only funds with TVPI 2x or lower considered. Data from Preqin."}
 #Obviously you should only use reported NAVs, not the ones you CF-adjust
 DT[nav_reported==FALSE, nav:=NA]
 DT[, c("DPI", "TVPI"):=list(cum_dist/cum_call,

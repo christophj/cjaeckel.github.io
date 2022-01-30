@@ -1,0 +1,23 @@
+---
+title: "Mountain hikes and stock market predictions"
+description: |
+  A short description of the post.
+author:
+  - name: Christoph Jäckel
+    url: {}
+date: 2021-12-12
+output:
+  distill::distill_article:
+    self_contained: false
+draft: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+Explain the relationship of strong current performance and future poor performance with a hike: You see the peak on the horizon, you can roughly figure out the average incline and you start hiking. Now you go overcome a long scarp with a much higher average incline. Will it continue like that? Or should you expect a flatter period? Nice analogy you can build out, in the haze, don't see much. Hence, you don't know for sure what comes next, can continue to go up, can now be long and just flatter. But you know for sure that overall, it has to be flatter as you have to get back to the average.
+
+Show the nice charts for current valuation ratios and future expected returns. Built out with pictures.
+

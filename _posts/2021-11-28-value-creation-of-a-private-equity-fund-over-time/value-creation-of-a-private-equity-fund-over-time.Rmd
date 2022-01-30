@@ -90,18 +90,18 @@ ret_test <- DT[id=="10002" & qtr<=5, (nav[5] + sum(dist[2:5]))/(nav[1] + sum(cal
 all.equal(DT[id=="10002" & qtr==5, AnnualRet], ret_test)
 ```
 
-The boxplot chart below shows the dispersion of annual returns over the first ten years of a `r str_type` fund. In the first three years, a typical `r str_type` fund does not report positive returns. As a matter of fact, most funds have a `negative` return in their first year when not many investments have been made yet, these that have been made are valued at cost, and the fund already charges management fees and asks investors to pay for the establishment expenses.
+The boxplot chart below shows the dispersion of annual returns over the first ten years of a `r str_type` fund.^[Note: I had a bug in my code that I fixed on Jan 30, 2022, which changed the plots. The overall patterns were unchanged though.] In the first three years, a typical `r str_type` fund does not report positive returns. As a matter of fact, most funds have a `negative` return in their first year when not many investments have been made yet, these that have been made are valued at cost, and the fund already charges management fees and asks investors to pay for the establishment expenses.
 
 
 ```{r BoxplotAnnualReturns, fig.cap="Dispersion of annual returns of buyout funds over the first 10 years of their lifetime. The lower and upper hinges correspond to the first and third quartiles of the annual returns, the line in the middle to the median. Data from Preqin."}
 ggplot(DT[AnnualRet > - 1 & AnnualRet < 2][qtr %in% seq(from=5, to=41, by=4)], aes(Age, AnnualRet)) +
   geom_boxplot(outlier.shape = NA, coef = 0) + 
-  scale_y_continuous(labels = scales::percent, limits = c(-0.2,0.2)) + xlab("Fund age (in years)") + ylab("Annual return")
+  scale_y_continuous(labels = scales::percent) + xlab("Fund age (in years)") + ylab("Annual return") +
+  coord_cartesian(ylim = c(-0.2,0.3))
 
 ```
 
-Starting with year 4, funds start reporting positive returns with consistently strong years from year 5 to 8 where the median fund reports a return of 5% p.a. and more than one quarter of funds having returns of 10% p.a. or higher. This is the most important phase of value creation, often called the "harvesting phase" for a private equity fund.^[The median returns look rather low overall, never exceeding 5% in a year. How can this be reconciled with much higher median IRRs of `r str_type` funds? Three explanations come to mind, which I will not explore further as this is not the point of this blog post. First, distributions of private equity funds are right skewed and hence it is likely that a lot of the funds just have one or two very strong years that are the main drivers of the overall strong performance. Second, the annual return is not really an annual return as the capital calls and distributions happen within the year. Simple example: a fund starts at 0, calls 10 a day before the year end and reports an NAV of 11 at the end of the year. This results in a 10% annual return, while actually this return was achieved within a day and the annualized returns would be much higher. Third, and somewhat related, these returns are not capital weighted. In particular, the first year negative return is most likely on a very low invested capital basis and hence negligible with regards to the overall fund performance.
-] In this phase, the fund is out of the investment period, the fund managers are working on their operational initiatives and preparing the underlying investments for their exits. In year 9, returns come down meaningfully, although they continue to be positive for most of the funds. At this age of the fund, the strongest performing investments have already been sold successfully and the remaining ones have an issue in one way or the other. These funds are often described as "tail-end".
+Starting with year 4, funds start reporting positive returns with consistently strong years from year 5 to 8 where the median fund reports a return of 10% p.a. and more than one quarter of funds having returns of 10% p.a. or higher. This is the most important phase of value creation, often called the "harvesting phase" for a private equity fund. In this phase, the fund is out of the investment period, the fund managers are working on their operational initiatives and preparing the underlying investments for their exits. In year 9, returns come down meaningfully, although they continue to be positive for most of the funds. At this age of the fund, the strongest performing investments have already been sold successfully and the remaining ones have an issue in one way or the other. These funds are often described as "tail-end".
 
 @nadauld-etal:2019 report in their paper that secondary buyers pay the highest prices, in relation to the NAV, for funds that are four to nine years old. This resonates well with the results shown here: such funds are the most attractive, as they still have lots of value creation ahead of them, while most of the fee leakage has already been paid as it is front-loaded by private equity funds. For tail-end funds, secondary buyers require a larger discount as they cannot expect their returns to come from further value creation of the funds.
 
@@ -110,7 +110,8 @@ So far, I have looked at the returns independently of the current state of the e
 ```{r BoxplotAnnualReturnsFor2002, eval=TRUE, fig.cap="Dispersion of annual returns of buyout funds over the first 10 years of their lifetime. The lower and upper hinges correspond to the first and third quartiles of the annual returns, the line in the middle to the median. Data from Preqin. In this chart, only the annual return of 2002 is considered."}
 ggplot(DT[Age %in% as.factor(1:10) & AnnualRet > - 1 & AnnualRet < 2 & year(date)==2002], aes(Age, AnnualRet)) +
   geom_boxplot(outlier.shape = NA, coef = 0) +
-  scale_y_continuous(labels = scales::percent, limits = c(-0.2,0.2)) + xlab("Fund age (in years)") + ylab("Annual return")
+  scale_y_continuous(labels = scales::percent) + xlab("Fund age (in years)") + ylab("Annual return") +
+  coord_cartesian(ylim = c(-0.3,0.2))
 
 ```
 
@@ -118,10 +119,11 @@ ggplot(DT[Age %in% as.factor(1:10) & AnnualRet > - 1 & AnnualRet < 2 & year(date
 
 ggplot(DT[Age %in% as.factor(1:10) & AnnualRet > - 1 & AnnualRet < 2 & year(date)==2009], aes(Age, AnnualRet)) +
   geom_boxplot(outlier.shape = NA, coef = 0) +
-  scale_y_continuous(labels = scales::percent, limits = c(-0.2,0.2)) + xlab("Fund age (in years)") + ylab("Annual return")
+  scale_y_continuous(labels = scales::percent) + xlab("Fund age (in years)") + ylab("Annual return") +
+  coord_cartesian(ylim = c(-0.4,0.2))
 ```
 
-Let's start with 2002, where funds still in the investment period reported rather large negative returns on average, while more mature funds had better median returns around 0%. Funds with an age of 9 years report a slightly worse performance. Overall, the patterns is very comparable to the one described above. The same is true for the 2009 cohort, where funds with age 3 to 7 are relatively the best performing funds, while the very young and more mature ones are more impacted. This is consistent with the overall pattern across all years.
+Let's start with 2002, where funds still in the investment period reported rather large negative returns on average, while more mature funds had better median returns around 0%. Overall, the patterns is very comparable to the one described above. For the 2009 cohort, the results are more mixed with both verry young and quite mature funds being strongly impacted, while funds around 5 to 6 years did reasonably well.
 
 To summarize, investors in `r str_type` funds should not expect great returns early on, but should get excited at the end of the investment period of what is yet to come. This pattern seems to hold up even in times of market mayhem.
 
