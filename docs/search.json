@@ -6,14 +6,14 @@
       "description": "Why bother?",
       "author": [],
       "contents": "\r\nI like financial markets; so much so that I have spent five years of my life to better understand one important driver of them, discount rates, by writing a dissertation at the Technical University of Munich. And after finishing my dissertation, I started to work in the finance industry, at Montana Capital Partners, a firm that is focused on secondaries in private equity. In a nutshell, I try to make good investments for our investors such as pension funds, insurance companies and sovereign wealth funds.\r\nWhile writing my dissertation, I had plenty of time to run data analyses on large data sets, something I not only thoroughly enjoy, but something that I also find very insightful. At my current job, I still aim to improve my work with data-driven analyses, but there is only so much time you have between internal discussions, external meetings and calls, and day-to-day tasks.\r\nFortunately, my wife enjoys puzzling more than I do, which gives me a few hours a week to spend my time thinking about financial markets and related topics and how to support my thoughts with data. I have also noticed that writing these thoughts down results in higher quality and clarity. That’s why I decided to start this blog. And hopefully, some of you find it helpful. I know that most certainly I will find it helpful… I’m often shocked how fast I can forget things that I looked into previously. As such, some posts will also be simple tutorials on how to do certain things in R, the data analysis software of my choice. And it’s also great for blogging; this blog was created with the awesome Distill package.\r\nWhy did I choose the name of the blog “Uncertain times”? As a gentle reminder that there is only one thing for certain about the times to come, which after all drive current valuations in the financial markets: that they are uncertain. Hence, I’m quite confident that I can keep the blog title, and that’s great, because there aren’t too many other things I’m certain about.\r\nDisclaimer: Any opinions I express in this blog are mine and do not represent in any way the opinions of anyone else, including my employer.\r\n\r\n\r\n\r\n",
-      "last_modified": "2022-01-30T11:46:17+01:00"
+      "last_modified": "2022-02-13T21:55:16+01:00"
     },
     {
       "path": "index.html",
       "title": "Christoph Jäckel's blog",
       "author": [],
       "contents": "\r\n\r\n\r\n\r\n",
-      "last_modified": "2022-01-30T11:46:18+01:00"
+      "last_modified": "2022-02-13T21:55:18+01:00"
     }
   ],
   "collections": ["posts/posts.json"]

@@ -5,7 +5,7 @@ description: |
 author:
   - name: Christoph Jäckel
     url: {}
-date: 01-09-2022
+date: 02-13-2022
 output:
   distill::distill_article:
     self_contained: false
@@ -28,7 +28,10 @@ library(ggsci) #For colors, see https://www.datanovia.com/en/blog/ggplot-colors-
 library(kableExtra)
 library(utilitiesCJ)
 library(lubridate)
-max_vintage <- 2005
+library(ggpubr)
+probs <- c(0.05, 0.1, 0.25, 0.5, 0.75, 0.9, 0.95)
+start_vintage <- 1990 #Start vintage year for most analyses
+end_vintage   <- 2015 #End vintage year for most analyses
 DT <- readRDS("C:/Users/Christoph Jaeckel/Desktop/Preqin/preqin_data_22March2021.rds")
 DT <- DT[type!="other"]
 #Replace labels to match Harris data and for better readability
@@ -39,23 +42,119 @@ DT[, type:=gsub("vc",     "VC",     type)]
 DT[, geo:=gsub("us",     "North America", geo)]
 DT[, geo:=gsub("europe", "Europe",        geo)]
 DT[, geo:=gsub("row",    "Rest of World", geo)]
-
+#Add NAV to dist and ncf to active funds
+setkey(DT, id, qtr) #DT has to be sorted by qtr as you need the last NAV as final valuation for TVPI
+DT[, ncf:=dist-call]
+#Checked that you can run this with "active" filter or not, same outcome ==> good robustness check, there only seems to be meaningful NAV for active funds
+DT[qtr==max_qtr & status=="active", ncf:=ncf+nav]
+DT[,distNAV:=dist]
+DT[qtr==max_qtr & status=="active",distNAV:=distNAV+nav]
+#Get dates in DT later for IRR calculation; 
+#Some dates are not quarter end date ==> check eventually why
+DT[, date:=min_date %m+% months(3*(qtr-1))] #Get dates in for IRR
+DT[, date:=get_quarter_end_date(date,0)]
+################################ Change type with Strategy
+setnames(DT, "type", "Strategy")
 ```
 
-TODO:
-1. Replace private equity with PE after the first occurrence
-2. Replace type in code with Strategy ==> makes plots / tables nicer
-3. Check what min_date is in the Preqin data set. I assume it is the first quarter you had cash flow activity for each fund. This is very important as if this is not so, your PME calculations might be off!
+```{r GetPublicData}
+################################ FAMA/FRENCH DATA
+### Download market returns from French's website
+#https://stackoverflow.com/questions/3053833/using-r-to-download-zipped-data-file-extract-and-import-data
+temp <- tempfile()
+download.file("http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/F-F_Research_Data_Factors_daily_CSV.zip",temp, mode="wb")
+frenchDTus <- fread(unzip(temp),skip=3)
+unlink(temp)
+setnames(frenchDTus, c("V1", "Mkt-RF"), c("Date", "MktRF"))
+frenchDTus[,Date:=ymd(Date)]
+frenchDTus[,Region:="PM_NA"]
 
-What's the performance of private equity? That's a simple question, yet there is no simple answer. There are too many parameters to adjust, such as the performance metric, the time period and the source of the data. In this blog post, I provide an overview of research papers that have looked into this topic and compare their results. I then do my own analysis with Preqin data. I focus in particular...
+temp <- tempfile()
+download.file("http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/Europe_3_Factors_Daily_CSV.zip",temp, mode="wb")
+frenchDTeurope <- fread(unzip(temp),skip=3)
+unlink(temp)
+setnames(frenchDTeurope, c("V1", "Mkt-RF"), c("Date", "MktRF"))
+frenchDTeurope[,Date:=ymd(Date)]
+frenchDTeurope[,Region:="PM_Europe"]
+
+### Combine European and US data
+frenchDT <- rbind(frenchDTeurope, frenchDTus)
+
+### Only focus on data for which you look at PE data
+frenchDT <- frenchDT[year(Date)>=start_vintage - 1]
+
+### Calculate Ret (MRP plus risk free rate) and cumulate
+#   Weirdly, MktRF seems to be in percent (i.e., multiplied by a factor of 100), RF not
+frenchDT[, Ret:=1 + MktRF/100 + (1+RF)^(1/252) - 1]
+frenchDT[, Index:=cumprod(Ret),by=Region]
+
+### Plot Returns to make sure you are doing the right thing here
+#   Note that you can plot both as you start the indices at different point in times
+#   Looks about right!
+# ggplot(frenchDT[year(Date)>=1990 & Region=="North America"]) + geom_line(aes(x=Date,y=Index))
+
+
+### Only keep quarter end dates; a bit more complicated code because you only have returns on weekdays
+#   Essentially, you are looking for the date per quarter closest to the quarter-end date
+frenchDT[, qtrEnd:=get_quarter_end_date(Date,0)]
+frenchDT <- frenchDT[, DiffDate := as.numeric(qtrEnd - Date)]
+frenchDT[, MinDiff:=min(DiffDate),by=list(qtrEnd, Region)]
+# Mostly 0 when it falls on the quarter-end date, maximum 3 days prior
+# summary(frenchDT$MinDiff)
+frenchDT <- frenchDT[DiffDate==MinDiff]
+
+### Get previous Index to calculate quarterly return
+frenchDT[,Prev_Index := shift(Index, type="lag"),by=Region]
+frenchDT[,Ret:=Index/Prev_Index]
+
+### Limit to what you need: qtrEnd, Ret, Region
+frenchDT <- frenchDT[, list(Region, qtrEnd, Ret)]
+frenchDT <- dcast(frenchDT, qtrEnd ~ Region, value.var="Ret")
+
+################################ NASDAQ DATA
+### Manually downloaded  NASDAQ data from Yahoo finance, do essentially the same steps
+#https://finance.yahoo.com/quote/%5EIXIC/history?p=%5EIXIC
+nasdaqDT <- fread("C:/Users/Christoph Jaeckel/Desktop/CJaeckel Blog/Data for Blog/IXIC_12Feb1989_12Feb2022.csv")
+setnames(nasdaqDT, c("Adj Close"), c("Index"))
+nasdaqDT[, Date:=as.Date(Date)]
+nasdaqDT[, qtrEnd:=get_quarter_end_date(Date,0)]
+nasdaqDT <- nasdaqDT[, DiffDate := as.numeric(qtrEnd - Date)]
+nasdaqDT[, MinDiff:=min(DiffDate),by=list(qtrEnd)]
+# Mostly 0 when it falls on the quarter-end date, maximum 3 days prior
+# summary(nasdaqDT$MinDiff)
+nasdaqDT <- nasdaqDT[DiffDate==MinDiff]
+nasdaqDT[,Prev_Index := shift(Index, type="lag")]
+nasdaqDT[,PM_NASDAQ:=Index/Prev_Index]
+nasdaqDT <- nasdaqDT[, list(qtrEnd, PM_NASDAQ)]
+
+################################ Combine public data
+setkey(nasdaqDT, qtrEnd)
+setkey(frenchDT, qtrEnd)
+frenchDT <- frenchDT[nasdaqDT]
+
+# ### Plot
+# intDT <- frenchDT[!is.na(PM_Europe)]
+# cols <- c("PM_Europe", "PM_NA", "PM_NASDAQ")
+# intDT[,(cols) := lapply(.SD, cumprod), .SDcols = cols]
+# #Looks pretty spot on: https://tinyurl.com/2p9x2sz3
+# ggplot(melt(intDT, id.vars = "qtrEnd"), aes(x=qtrEnd, y=value, color=variable)) +
+#          geom_line()
+
+
+################################ Match with DT
+setkey(DT, date)
+setkey(frenchDT, qtrEnd)
+DT <- DT[frenchDT]
+#Get rid of a few obsservations where you had public data, but not private
+DT <- DT[!is.na(id)]
+```
+
+What's the performance of private equity ("PE")? A seemingly simple question, but believe me that there is no simple answer. There are too many parameters to look at, such as the performance metric, the time period and the source of the data. In this blog post, I provide an overview of research papers that have investigated this topic and compare their results. I then do my own analysis with Preqin data. It's gonna be a long post, so let's get right into it.
 
 <aside>
 I'm focusing on **fund** level performance. There is a separate literature that looks at the performance on the **deal** level. I discuss two such studies in more detail in [this blog post](https://www.christoph-jaeckel.com/posts/2021-02-28-why-does-private-equity-outperform-public-equity/).
 </aside>
 
-Should be a relatively long post, in which you summarize the performance based on sub-asset class (buyout, VC), geography (US/Europe), performance measure (Multiple, IRR, PME), different statistics (median, mean, pooled), data sources, etc. Also include J-curves.
-
-In addition, explain some subtle issues, such as the right-skewed distribution. Also, compare with other studies.
 
 # Introduction
 
@@ -77,7 +176,7 @@ The authors summarize their research question and answer concisely:
 
 While the language might be prosaic, the content is everything but. How to justify a 3% p.a. *underperformance* compared to the overall stock market for an asset class that should be deemed at least as risky (highly levered investments in much smaller companies than the S&P 500 constituents) and much more illiquid? And how to reconcile this underperformance with PE's unprecedented growth in committed capital from USD 5 to USD 300 billion from 1980 to 2004? Did investors keep pouring money into PE despite the poor performance or were they not able to calculate their returns correctly?
 
-To derive at their results, @phalippou-gottschalg:2009 start with the observation that many older funds, 10 years or more, show no sign of activity: no capital calls or distributions and no changes to the NAV or residual value.^[I use the terms NAV and residual value interchangeably throughout this post.] They interpret this lack of activity as confirmation that the funds are in reality liquidated and write-off their final NAV to zero, in contrast to other studies that treat the residual value as a cash inflow of the same amount.
+To derive at their results, @phalippou-gottschalg:2009 start with the observation that many older funds, 10 years or more, show no sign of activity: no capital calls or distributions and no changes to the NAV or residual value.^[I use the terms NAV and residual value interchangeably throughout this post.] They interpret this lack of activity as confirmation that the funds are liquidated and write-off their final NAV to zero, in contrast to other studies that treat the residual value as a cash inflow of the same amount.
 
 <aside>
 @phalippou-gottschalg:2009 propose further corrections to the performance metrics, such as different weightings of the funds and risk adjustments. However, the write-off of the NAVs has the most profound impact on their results, which is why I focus on this part.
@@ -100,11 +199,11 @@ Stucke subsequently shows that the constant NAVs and missing cash flows are inde
 
 ## @harris-etal:2014
 
-This study, published in one of the most prestigious finance journals, is the first to use data sourced by Burgiss. Why is that such a big thing? Because it is notoriously difficult to obtain high quality private equity. Note that there is typically no obligation by GPs and LPs to report their performance to any external parties and that's typically why they don't. So other data providers, such as Preqin, have to rely on data that is provided to them, either because the LPs are forced to do so - essentially U.S. public pension funds because of the [Freedom of Information Act](https://en.wikipedia.org/wiki/Freedom_of_Information_Act_(United_States)) - or because GPs want to. This, of course, creates a few issues: as the pension funds are forced to publish the data, but there is no benefits for them to do so, the data provided is not really well documented. They also do not provide the data in a standardized and granular way. This makes it very difficult to figure out exactly what happens and it is not uncommon to find different performance results from different pension funds for the very same fund. With data provided by GPs, there is a high risk of selection bias: obviously, GPs only have an interest to report those funds that perform well. In addition, GPs that had to close down because of their bad performance cannot report anymore (hindsight bias). Finally, you might have GPs with such a strong track record and such a high demand of LPs that they do not see any reason to publish their performance. And last but not least a GP might decide to stop reporting, as seemed to have happened in the case of TVE, with dire consequences as we have seen in the previous sections.
+This study, published in one of the most prestigious finance journals, is the first to use data sourced by Burgiss. Why is that such a big thing? Because it is notoriously difficult to obtain high quality PE data. Note that there is typically no obligation by GPs and LPs to report their performance to any external parties and that's typically why they don't. So other data providers, such as Preqin, must on data that is provided to them, either because the LPs are forced to do so - essentially U.S. public pension funds because of the [Freedom of Information Act](https://en.wikipedia.org/wiki/Freedom_of_Information_Act_(United_States)) - or because GPs want to. This, of course, creates a few issues: as the pension funds are forced to publish the data, but there is no benefits for them to do so, the data provided is not really well documented. They also do not provide the data in a standardized and granular way. This makes it very difficult to figure out exactly what happens, and it is not uncommon to find different performance results from different pension funds for the very same fund. With data provided by GPs, there is a high risk of selection bias: obviously, GPs only have an interest to report those funds that perform well. In addition, GPs that had to close down because of their bad performance cannot report anymore (hindsight bias). Finally, you might have GPs with such a strong track record and such a high demand of LPs that they do not see any reason to publish their performance. And finally a GP might decide to stop reporting, as seemed to have happened in the case of TVE, with dire consequences as we have seen in the previous sections.
 
-Burgiss does not have these issues as they source the data directly from LPs that use their platform for their internal bookkeeping. As a result, the quality checks when entering the data are rigorous and there is good reason to believe that there is no selection bias: LPs don't stop reporting on a fund just because it performs poorly. One could still argue that the group of LPs that use Burgiss did not assemble a portfolio that is representative of the whole private equity universe. For example, it is likely that the LPs that use Burgiss are larger, more institutionalized LPs that tend to invest in larger funds. However, one would have to argue that such biases in fund selection by the LPs are correlated with the performance of the funds selected. And there is no strong reason to do so.
+Burgiss does not have these issues as they source the data directly from LPs that use their platform for their internal bookkeeping. As a result, the quality checks when entering the data are rigorous and there is good reason to believe that there is no selection bias: LPs don't stop reporting on a fund just because it performs poorly. One could still argue that the group of LPs that use Burgiss did not assemble a portfolio that is representative of the whole PE universe. For example, it is likely that the LPs that use Burgiss are larger, more institutionalized LPs that tend to invest in larger funds. However, one would have to argue that such biases in fund selection by the LPs are correlated with the performance of the funds selected. And there is no strong reason to do so.
 
-@harris-etal:2014 continue to show that their sample of U.S. buyout funds outperformed the S&P 500 by roughly 3% p.a., which is a significant premium. Furthermore, this outperformance happened fairly consistently over their time period from 1984 to 2008 (see Table IV in their study). They also use other indices such as the Russell 3000, which is focused more on smaller listed companies that might be a better comparison for private equity. This slightly reduces the outperformance, but does not get rid of it.
+@harris-etal:2014 continue to show that their sample of U.S. buyout funds outperformed the S&P 500 by roughly 3% p.a., which is a significant premium. Furthermore, this outperformance happened fairly consistently over their time period from 1984 to 2008 (see Table IV in their study). They also use other indices such as the Russell 3000, which is focused more on smaller listed companies that might be a better comparison for PE. This slightly reduces the outperformance but does not get rid of it.
 
 For VC, the picture is more mixed. While VC outperformed markets considerably in the 90s, this trend reversed in the 2000s until 2008. Overall, they find an average outperformance, but a median underperformance over the whole sample. I would assume that the strong performance over the last few years, so after the end of their analysis, for growth companies might have changed the picture a bit. Overall though, it is fair to say that VC's performance is more cyclical than the buyout one.
 
@@ -122,7 +221,7 @@ Second, it argues that buyout funds invest in companies that are much smaller th
 
 ## Honorable mentions
 
-The literature on PE performance has become too vast to fully cover, so this overview cannot cover all studies published on the topic of private equity performance. Above, I introduced a few studies in more detail, let's mention briefly a few more:
+The literature on PE performance has become too vast to fully cover, so this overview cannot cover all studies published on the topic of PE performance. Above, I introduced a few studies in more detail, let's mention briefly a few more:
 
 - @hooke-yook:2016 compare 18 larger, well regarded buyout managers with the overall buyout market and find that their returns are slightly above average.
 - @sorensen-etal:2014 ask the question if the net performance of PE investments is enough to compensate the investors for the leverage and illiquidity they take on and the management and incentive fees they pay to the GPs. To answer it, they develop a model that incorporate these risk/costs and find that funds must generate substantial alpha to compensate investors for them.
@@ -132,9 +231,9 @@ The literature on PE performance has become too vast to fully cover, so this ove
 
 To summarize: Earlier studies found no outperformance, or even an underperformance, of PE compared to the broader stock market. These results, however, were due to a bias in the data used. Using better data, often reported directly from the investors, newer studies found an outperformance, or alpha, instead. A plethora of research linked this alpha with risks - for example due to illiquidity, leverage, and factor exposure - and costs (fees and carry), arguing that the true alpha, after adjusting for them, is closer to zero or even negative again.
 
-From a practitioner's perspective, I find that there is often not much interest in explanations as to which factors drive the overall good returns of PE and arguments if they simply compensate investors for risk factors or can be considered true alpha. Alas, one can even [argue that Buffett's returns are simply due to exposure to some risk factors and leverage.](https://www.tandfonline.com/doi/full/10.2469/faj.v74.n4.3). How much do Buffett's investors care?
+From a practitioner's perspective, I find that there is often not much interest in explanations as to which factors drive the overall good returns of PE and arguments if they simply compensate investors for risk factors or can be considered true alpha. Alas, one can even [argue that Buffett's returns are simply due to exposure to some risk factors and leverage](https://www.tandfonline.com/doi/full/10.2469/faj.v74.n4.3). How much do Buffett's investors care?
 
-What is of great interest to practitioners is often a thorough understanding of private equity returns, with a focus on metrics that are used in the industry (IRR, multiple / MOIC). Yes, they have shortcomings, but despite these shortcomings they are still widely used. This is the focus of the empirical part of this blog post, where I present the results for different strategies (VC, growth, buyout) and geographies with a recent data set until 2020. 
+What is of great interest to practitioners is often a thorough understanding of PE returns, with a focus on metrics that are used in the industry (IRR, multiple / MOIC). Yes, they have shortcomings, but despite these shortcomings they are still widely used. This is the focus of the empirical part of this blog post, where I present the results for different strategies (VC, growth, buyout) and geographies with a recent data set until 2020. 
 
 # Data source and characteristics
 
@@ -142,30 +241,30 @@ Let's revisit some of those topics with an up-to-date data set from [Preqin](www
 
 In this section, I will introduce the data set in more detail. As we have seen above, the quality of the data has a large impact on the results, and hence, it is important to get comfortable with the data set and understand its characteristics. However, readers interested in PE performance can skip this section.
 
-## Number of funds over time and by type
+## Number of funds over time and by strategy
 
 Before we look into the performance, let's first have a look at the number and size of funds for which Preqin has cash flows. This gives us a better understanding of what share of the PE market the data set covers.
 
 ```{r PrepWork, echo=FALSE}
 library("ggsci")
-intDT <- unique(DT[vintage<=2019], by="id")[,.N,by=list(vintage, type)]
+intDT <- unique(DT[vintage<=2019], by="id")[,.N,by=list(vintage, Strategy)]
 ```
 
-Looking at the numbers of funds shows that Preqin only has a few funds per vintage year until the mid-90s, while they increase substantially over time thereafter. While there is a persistent long-term growth for buyout and growth funds, there is quite a bit of volatility across vintage years, in line with overall market cycles. For example, there are `r intDT[vintage==2007 & type=="Buyout", N]` buyout funds with a vintage year of 2007 in the sample, while there are only `r intDT[vintage==2009 & type=="Buyout", N]` for 2009. Interestingly, for VC the absolute peak was in 2000, showing how keen investors were to invest in young companies around the dot-com bubble. 
+Looking at the numbers of funds shows that Preqin only has a few funds per vintage year until the mid-90s, while they increase substantially over time thereafter. While there is a persistent long-term growth for buyout and growth funds, there is quite a bit of volatility across vintage years, in line with overall market cycles. For example, there are `r intDT[vintage==2007 & Strategy=="Buyout", N]` buyout funds with a vintage year of 2007 in the sample, while there are only `r intDT[vintage==2009 & Strategy=="Buyout", N]` for 2009. Interestingly, for VC the absolute peak was in 2000, showing how keen investors were to invest in young companies around the dot-com bubble. 
 
-```{r NumberOfFunds, fig.cap="Number of funds per vintage year with full cash flow data from Preqin, split by the type of fund."}
-ggplot(data=intDT, aes(x=vintage, y=N, color=type)) + 
+```{r NumberOfFunds, fig.cap="Number of funds per vintage year with full cash flow data from Preqin, split by the strategy of fund."}
+ggplot(data=intDT, aes(x=vintage, y=N, color=Strategy)) + 
   geom_line() + xlab("Vintage year") + ylab("Number of funds") +
   scale_color_jco()
 ```
 
 ## Number of funds by region
 
-Another interesting question is how many funds are there per geography. The table below gives the answer. Not surprisingly, North America is by far the largest contributor, which is also in line with [current fundraising data](https://www.statista.com/statistics/513780/private-equity-fundraising-by-region/) that shows North America's leading position. Europe is the second-largest market, followed by Asia. The other markets are very small in comparison. Going forward, I will therefore only report statistics for North America and Europe and pool the rest under "Rest of the World".
+Another interesting question is how many funds there are per geography. The table below gives the answer. Not surprisingly, North America is by far the largest contributor, which is also in line with [current fundraising data](https://www.statista.com/statistics/513780/private-equity-fundraising-by-region/) that shows North America's leading position. Europe is the second-largest market, followed by Asia. The other markets are very small in comparison. Going forward, I will therefore only report statistics for North America and Europe and pool the rest under "Rest of the World".
 
 ```{r NrOfFundsRegions}
-intDT <- unique(DT[vintage<=2019], by="id")[,.N,by=list(geo_original, type)]
-intDT <- dcast(intDT, geo_original ~ type, value.var = "N")
+intDT <- unique(DT[vintage<=2019], by="id")[,.N,by=list(geo_original, Strategy)]
+intDT <- dcast(intDT, geo_original ~ Strategy, value.var = "N")
 
 a <- colSums(intDT[,2:4],na.rm=TRUE)
 globalDT <- data.table(geo_original="Global", a[1], a[2], a[3])
@@ -191,25 +290,25 @@ kbl(intDT,
 
 ## Comparison with other data sets
 
-At the risk of repeating myself: Preqin, as any PE data set, does not cover the whole universe of private equity funds. As such, one has to be careful from drawing conclusions about PE in general when looking at one particular data set. One important question to ask is therefore if the data set at hand is comparable to other data sets. I argued above that Preqin leads to comparable results when looking at the performance of PE. Let's look now if the Preqin data set also has a coverage that is similar to other sources. To do so, the plot below compares the number of funds in the Preqin data set with various other sources, as reported by @harris-etal:2014 in their Table I. As they look at vintages from 1984 to 2008 and only North American funds, I limit sample accordingly. Also, they only report numbers for buyout and VC funds. As I do not know how they classify growth funds, I ignore them.
+At the risk of repeating myself: Preqin, as any PE data set, does not cover the whole universe of PE funds. As such, one should be careful from drawing conclusions about PE in general when looking at one particular data set. One important question to ask is therefore if the data set at hand is comparable to other data sets. I argued above that Preqin leads to comparable results when looking at the performance of PE. Let's look now if the Preqin data set also has a coverage that is similar to other sources. To do so, the plot below compares the number of funds in the Preqin data set with various other sources, as reported by @harris-etal:2014 in their Table I. As they look at vintages from 1984 to 2008 and only North American funds, I limit the sample accordingly. Also, they only report numbers for buyout and VC funds. As I do not know how they classify growth funds, I ignore them.
 
 
-```{r CompNumberOfFundsHarrisEtAl, fig.cap="Comparison of number of funds from Preqin compared with other data sets, as provided by Harris et al. (2014) (see Table I)."}
+```{r CompNumberOfFundsHarrisEtAl, fig.cap="Comparison of number of funds from North American funds in the Preqin data with other data sets, as provided by Harris et al. (2014) (see Table I)."}
 ## Get Harris data and format so you can rbind
 compDT <- fread("C:/Users/Christoph Jaeckel/Desktop/CJaeckel Blog/Data for Blog/NrFunds_Harris_et_al.csv")
 compDT <- melt(compDT, id.vars=c("VY", "Type"))
-setnames(compDT, c("value", "Type", "VY", "variable"), c("N", "type", "vintage", "Source"))
+setnames(compDT, c("value", "Type", "VY", "variable"), c("N", "Strategy", "vintage", "Source"))
 ## Recalculate intDT to only consider North American funds
-intDT <- unique(DT[vintage<=2019 & geo_original=="North America"], by="id")[,.N,by=list(vintage, type)]
+intDT <- unique(DT[vintage<=2019 & geo_original=="North America"], by="id")[,.N,by=list(vintage, Strategy)]
 
 ## Update intDT so you can rbind
 intDT[, Source:="Preqin"]
-intDT <- intDT[type!="Growth"]
+intDT <- intDT[Strategy!="Growth"]
 ## Rbind
 intDT <- rbind(intDT, compDT)
 
 ggplot(data=intDT[vintage<=2008 & vintage>=1984], aes(x=vintage, y=N, color=Source)) +
-  facet_grid(rows=vars(type)) +
+  facet_grid(rows=vars(Strategy)) +
   geom_line() + xlab("Vintage year") + ylab("Number of funds") +
   scale_color_jco()
 ```
@@ -220,7 +319,7 @@ With regards to buyout funds, Preqin (dark blue) is comparable with Burgiss (yel
 
 While Preqin is comparable to other data providers in terms of coverage, especially after 2000, the question remains how good the coverage is. Do those data providers cover most of the PE universe or only a fraction of it? There will not be a perfect answer to this question as no one knows for sure how large the PE universe really is. However, we can look at data that estimates the size of the overall PE market and compare it with the size by the funds covered by Preqin.
 
-In the table below, I compare fundraising numbers for the overall private markets, as reported by @mcKinsey:2021 (see Exhibit 2), with the aggregate size of the funds in Preqin that have cash flow data. As the McKinsey study only reports fundraising numbers over time for private markets, not private equity, I estimate the ratio by multiplying the historic numbers with the 2020 ratio shown in Exhibit 1 of their report (`r paste0(format(502.9/857.8*100, digits=1),"%")`, USD 857.8bn for private markets vs. USD 502.9bn for private equity). This is obviously a rather crude measure, but it should give use a ballpark idea of how good the coverage of Preqin is.
+In the table below, I compare fundraising numbers for the overall private markets, as reported by @mcKinsey:2021 (see Exhibit 2), with the aggregate size of the funds in Preqin that have cash flow data. As the McKinsey study only reports fundraising numbers over time for private markets, not PE, I estimate the ratio by multiplying the historic numbers with the 2020 ratio shown in Exhibit 1 of their report (`r paste0(format(502.9/857.8*100, digits=1),"%")`, USD 857.8bn for private markets vs. USD 502.9bn for PE). This is obviously a rather crude measure, but it should give use a ballpark idea of how good the coverage of Preqin is.
 
 ```{r SizePreqinVsMarket}
 ## Add fund sizes in Preqin data set for aggregate fundraising number
@@ -244,47 +343,49 @@ intDT[, PE := round(PE, digits=0)]
 ## Report
 kbl(intDT[,list(vintage, Market, PE, Preqin, Coverage)],
     align = "c",
-    col.names = c("Vintage year", "Private Markets Fundraising", "Private Equity Fundraising (estimated)", "Total size of Preqin funds with CF data", "Coverage"),
-    caption="For vintage years from 2010 to 2019, the table compares the overall capital raised in private markets and private equity (estimated) with the total size of the funds for which Preqin has cash flow data. Data for the market comes from the McKinsey Global Private Markets Review 2021. Numbers in USD billion.") %>%
+    col.names = c("Vintage year", "Private Markets Fundraising", "PE Fundraising (estimated)", "Total size of Preqin funds with CF data", "Coverage"),
+    caption="For vintage years from 2010 to 2019, the table compares the overall capital raised in private markets and PE (estimated) with the total size of the funds for which Preqin has cash flow data. Data for the market comes from the McKinsey Global Private Markets Review 2021. Numbers in USD billion.") %>%
   kable_classic(full_width = FALSE)
 
 ```
 
-The results are rather comforting as Preqin has on average a coverage of `r avg_cov` over the last decade. They aren't able to cover the full universe, but quite a big chunk of it! In the following, I will make the implicit assumptions that all results I find from the Preqin data set apply to the overall PE universe. Of course, there is always the risk that I report patterns that are due to the specific biases of the Preqin data set and do not apply to the PE universe. However, it's a risk I'm willing to take. It's a blog after all, not a PhD thesis...
+The results are rather comforting as Preqin has on average a coverage of `r avg_cov` over the last decade. They can't cover the full universe, but quite a big chunk of it! In the following, I will make the implicit assumptions that all results I find from the Preqin data set apply to the overall PE universe. Of course, there is always the risk that I report patterns that are due to the specific biases of the Preqin data set and do not apply to the PE universe. However, it's a risk I'm willing to take. It's a blog after all, not a PhD thesis...
 
 ## Size of funds
 
 I apologize for the long table below, I know it's dense, but I think also insightful. The table shows, for each strategy and vintage year, three statistics: the number of funds, the average fund size, and the aggregate fund size, which is the product of the first two. 
 
 ```{r SizeFunds, layout="l-page", fig.cap="Dispersion of fund sizes by strategy over vintage years. Data from Preqin.", eval=FALSE}
-ggplot(unique(DT, by="id")[vintage>=1990],
+ggplot(unique(DT, by="id")[vintage>=start_vintage],
        aes(x=as.factor(vintage), y=size)) +
          geom_boxplot(outlier.shape = NA) +
-         facet_grid(rows=vars(type), scales="free_y") + 
+         facet_grid(rows=vars(Strategy), scales="free_y") + 
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
   xlab("Vintage year") + ylab("Fund size (in USD million)") +
-  scale_y_continuous(limits = c(0, 12000))
+  coord_cartesian(ylim = c(0, 12000))
 ```
 
 ```{r SizeTable}
-intDT <- dcast(unique(DT, by="id")[vintage>=1990 & vintage<=2019, list(N        = .N, 
+intDT <- dcast(unique(DT, by="id")[vintage>=start_vintage & vintage<=2019, list(N        = .N, 
                                                        Avg_Size = mean(size,na.rm=TRUE), 
                                                        Agg      = sum(size/1000,na.rm=TRUE)),
-                                   keyby=list(vintage, type)], vintage ~ type, value.var = c("N", "Avg_Size", "Agg"))
+                                   keyby=list(vintage, Strategy)], vintage ~ Strategy, value.var = c("N", "Avg_Size", "Agg"))
 intDT[, vintage:=as.character(vintage)]
 kbl(intDT[, c(1,2,5,8, 3,6,9, 4,7,10)],
+    align = "c",
     col.names = NULL,
     digits = 1,
     format.args = list(big.mark = ",")) %>%
   kable_classic() %>%
-  add_header_above(c("Vintage",rep(c("Nr. funds", "Avg. size (in USDm)", "Agg. size (in USDbn)"),3))) %>%
+  add_header_above(c("Vintage",rep(c("Nr. funds", "Avg. size (in USDm)", "Agg. size (in USDbn)"),3)),
+                   line=FALSE) %>%
   add_header_above(c(" ", "Buyout" = 3,  "Growth" = 3, "VC" = 3)) 
 
 ```
 
-While buyout funds only make up `r intDT[, sum(N_Buyout)/(sum(N_Buyout)+sum(N_VC)+sum(N_Growth,na.rm=TRUE))]*100`% with regards to their numbers, they are responsible for `r format(intDT[, sum(Agg_Buyout)/(sum(Agg_Buyout)+sum(Agg_VC)+sum(Agg_Growth,na.rm=TRUE))]*100, digits=0)`% of the aggregate size due to their  larger size than VC and growth funds. Growth funds have actually raised a bit more capital overall in the sample than VC (USD `r round(intDT[, sum(Agg_Growth,na.rm=TRUE)],0)`bn vs. `r round(intDT[, sum(Agg_VC,na.rm=TRUE)],0)`bn), despite much lower number of funds (see chart above). These funds can be quite sizable, too, with brands like Warburg Pincus and Insight Partners that raise multi-billion funds. Given their lower number of funds per vintage year, the average size fluctuates quite a bit more than for the other two strategies. For example, in 2011 the average fund size was only around USD 500m, while it was three times as large the following year, even overtaking buyout funds. 
+While buyout funds only make up `r intDT[, sum(N_Buyout)/(sum(N_Buyout)+sum(N_VC)+sum(N_Growth,na.rm=TRUE))]*100`% with regards to their numbers, they are responsible for `r format(intDT[, sum(Agg_Buyout)/(sum(Agg_Buyout)+sum(Agg_VC)+sum(Agg_Growth,na.rm=TRUE))]*100, digits=0)`% of the aggregate size due to their  larger size than VC and growth funds. Growth funds have raised a bit more capital overall in the sample than VC (USD `r round(intDT[, sum(Agg_Growth,na.rm=TRUE)],0)`bn vs. `r round(intDT[, sum(Agg_VC,na.rm=TRUE)],0)`bn), despite much lower number of funds (see chart above). These funds can be quite sizable, too, with brands like Warburg Pincus and Insight Partners that raise multi-billion funds. Given their lower number of funds per vintage year, the average size fluctuates quite a bit more than for the other two strategies. For example, in 2011 the average fund size was only around USD 500m, while it was three times as large the following year, even overtaking buyout funds. 
 
-With regards to fund size growth over the years, VC had the most steady and slowest out of all of them: VCs were raising on average a few hundred millions in the 90s, and they continue to do so in the late 2010s. As VCs are backing founders and their visions and often not much more, the capital needs per investment simply don't change much over the decades. That also explains why the strong VCs can be so access restricted: getting more capital is not their concerns, it's about finding the right teams to back. For buyout funds, the story is different: they can always write bigger checks or do larger M&As, etc. That's why the fund sizes have grown much more over the years. However, fundraising is also more cyclical. For example, while a lot of buyout GPs collected money for large funds in 2006 and 2007, both the number and the size of funds plummeted  in 2009/10. For VC funds, only the number of funds declined, while the fund sizes remained pretty stable. My best guess is that some VCs with weaker track records were unable to raise follow-on funds, while the strong brands had a long line of LPs who were waiting to get it so that they could replace those LPs that suffered from the GFC.
+With regards to fund size growth over the years, VC had the steadiest and slowest out of all of them: VCs were raising on average a few hundred million in the 90s, and they continue to do so in the late 2010s. As VCs are backing founders and their visions and often not much more, the capital needs per investment simply don't change much over the decades. That also explains why the strong VCs can be so access restricted: getting more capital is not their concerns, it's about finding the right teams to back. For buyout funds, the story is different: they can always write bigger checks or do larger M&As, etc. That's why the fund sizes have grown much more over the years. However, fundraising is also more cyclical. For example, while a lot of buyout GPs collected money for large funds in 2006 and 2007, both the number and the size of funds plummeted  in 2009/10. For VC funds, only the number of funds declined, while the fund sizes remained stable. My best guess is that some VCs with weaker track records were unable to raise follow-on funds, while the strong brands had a long line of LPs who were waiting to get it so that they could replace those LPs that suffered from the GFC.
 
 Another interesting trend is that for buyout funds, the fund size quadrupled from 2010 to 2019, while the number of funds only increased two-fold. In contrast, the number of VC funds increased by a factor of `r round(intDT[vintage==2019, N_VC]/intDT[vintage==2010, N_VC], digit=1)`x in the same period, while the fund size only increased by `r round((intDT[vintage==2019, Avg_Size_VC]/intDT[vintage==2010, Avg_Size_VC]-1)*100, digit=0)`%. When things go well, LPs deploy more and more capital into the established buyout managers, while they give money to newer VCs as the capacity to the established brands is limited. 
 
@@ -304,7 +405,7 @@ fun <- function(x, probs = c(0.05, 0.1, 0.25, 0.5, 0.75, 0.9, 0.95)) {
   
 }
 
-intDT <- DT[, fun(size), by=type]
+intDT <- unique(DT, by="id")[, fun(size), by=Strategy]
 kbl(intDT,
     digits=0,
     format.args = list(big.mark = ","),
@@ -314,49 +415,412 @@ kbl(intDT,
 setnames(intDT, names(intDT)[2:ncol(intDT)], c("Perc5", "Perc10", "Perc25", "Median", "Mean", "Perc75", "Perc90", "Perc95"))
 ```
 
-For all three strategies, there is a large spread between the 5^th^ and the 95^th^ percentile. Not surprisingly, the spread is much larger for buyout and growth funds (factor `r round(intDT[type=="Buyout", Perc95/Perc5], digits=0)`x and `r round(intDT[type=="Growth", Perc95/Perc5], digits=0)`x) than for VC (factor `r `round(intDT[type=="VC", Perc95/Perc5], digits=0)`x). Again, the most likely explanation is that successful VCs have to limit their fund sizes much more, as capital needs per investment are not that dependent on the market cycle and they don't want to dilute their returns by investing in more start-ups. Instead, they want to focus on those with the biggest chance of succeeding.
+For all three strategies, there is a large spread between the 5^th^ and the 95^th^ percentile. Not surprisingly, the spread is much larger for buyout and growth funds (factor `r round(intDT[Strategy=="Buyout", Perc95/Perc5], digits=0)`x and `r round(intDT[Strategy=="Growth", Perc95/Perc5], digits=0)`x) than for VC (factor `r `round(intDT[Strategy=="VC", Perc95/Perc5], digits=0)`x). Again, the most likely explanation is that successful VCs must limit their fund sizes much more, as capital needs per investment are not that dependent on the market cycle and they don't want to dilute their returns by investing in more start-ups. Instead, they want to focus on those with the biggest chance of succeeding.
 
-As a result, the distribution is more right-skewed for buyout and growth with a much larger mean than median. Yes, the average buyout fund size is USD `r format(intDT[type=="Buyout", "Mean"], digits=0, big.mark=",")` million, but the average buyout fund only has a size of USD `r format(intDT[type=="Buyout", "Median"], digits=0, big.mark=",")` million. The same goes for growth funds.
+As a result, the distribution is more right-skewed for buyout and growth with a much larger mean than median. Yes, the average buyout fund size is USD `r format(intDT[Strategy=="Buyout", "Mean"], digits=0, big.mark=",")` million, but the average buyout fund only has a size of USD `r format(intDT[Strategy=="Buyout", "Median"], digits=0, big.mark=",")` million. The same goes for growth funds.
 
 # Performance of PE
 
-## TVPIs
+## Total-Value to Paid-In ("TVPI")
+
+### By vintage year
+
+The table below shows the mean, median, and weighted mean TVPIs, or multiples, by strategy and vintage year from `r start_vintage` to 2019. It also shows the ratio of active to all funds for each group. It's important to keep in mind that for the younger vintage years, many funds are still unrealized and TVPIs are expected to increase further. Hence, this is not the final result, just a snapshot. Hopefully, the 2019 vintage doesn't end up at around 1x!
 
 ```{r CacluatePerf}
-setkey(DT, id, qtr) #DT has to be sorted by qtr as you need the last NAV as final valuation for TVPI
-DT[, ncf:=dist-call]
-DT[qtr==max_qtr, ncf:=ncf+nav]
-DT[, date:=min_date %m+% months(3*(qtr-1))] #Get dates in for IRR
-perfDT <- DT[, list(Invested = sum(call),
-                    DPI      = sum(dist)/sum(call),
-                    TVPI     = (sum(dist) + nav[.N])/sum(call),
-                    IRR      = utilitiesCJ::IRR(ncf, date)*100),
-             by=list(id, vintage, size, status, geo, type)]
-cols <- c("Invested", "DPI", "TVPI", "IRR")
-perfDT2 <- melt(perfDT, value.vars = c("id", "vintage", "size", "status", "geo", "type"),
+perfDT <- DT[, list(Invested   = sum(call),
+                    DPI        = sum(dist)/sum(call),
+                    TVPI       = (sum(dist) + nav[.N])/sum(call),
+                    IRR        = utilitiesCJ::IRR(ncf, date)*100,
+                    PME_Europe = PME(.vec_CC = call, .vec_D = distNAV, .vec_Discount = PM_Europe),
+                    PME_NA     = PME(.vec_CC = call, .vec_D = distNAV, .vec_Discount = PM_NA),
+                    PME_NASDAQ = PME(.vec_CC = call, .vec_D = distNAV, .vec_Discount = PM_NASDAQ)),
+             by=list(id, vintage, size, status, geo, Strategy)]
+cols <- c("Invested", "DPI", "TVPI", "IRR", "PME_Europe", "PME_NA", "PME_NASDAQ")
+perfDT2 <- melt(perfDT, value.vars = c("id", "vintage", "size", "status", "geo", "Strategy"),
                measure.vars= cols, variable.name = "stat")
 # vyDT <- dcast(perfDT2, vintage ~ stat, fun=list(min, median, mean, max), value.var = "value", na.rm=TRUE)
 # setnames(vyDT, names(vyDT), gsub("value_", "", names(vyDT)))
 ```
 
-```{r TVPIperStrategy}
-ggplot(perfDT2[stat=="TVPI" & vintage>=1990 & type!="Growth"], aes(factor(vintage),value)) + 
+
+```{r TVPIoverTimeTable}
+vyDT <- perfDT2[vintage>=start_vintage & vintage<=2019 & stat=="TVPI", 
+                      list(RatioActive = paste0(round(sum(status=="active")/.N*100,0),"%"),
+                           Mean        = mean(value,na.rm=TRUE), 
+                           Median      = median(value,na.rm=TRUE), 
+                           WMean       = weighted.mean(value[!is.na(size)],size[!is.na(size)])),
+                keyby=list(vintage, Strategy)]
+shareMeanLargerMedian <- nrow(vyDT[Mean>Median])/nrow(vyDT)
+
+vyDT <-  dcast(vyDT, vintage ~ Strategy, value.var = c("RatioActive", "Mean", "Median", "WMean"))
+vyDT[, vintage:=as.character(vintage)]
+kbl(vyDT[, c(1, 2,5,8,11,  3,6,9,12,  4,7,10, 13)],
+    col.names = NULL,
+    align  = "c",
+    caption = c("Mean, median, and weighted mean TVPIs by strategy and vintage year in the Preqin data set. The weighting is based on fund size. As some funds do not have a fund size reported in the data set, the sample size of the weighted mean can be lower than for the mean and median. The ratio of active funds is based on the reported status in Preqin."),
+    digits = 2) %>%
+  kable_classic() %>%
+  add_header_above(c("Vintage",rep(c("Ratio active funds", "Mean TVPI", "Median TVPI", "Mean TVPI (weighted by size)"),3)),
+                   line = FALSE) %>%
+  add_header_above(c(" ", "Buyout" = 4,  "Growth" = 4, "VC" = 4)) 
+```
+
+```{r TVPIperStrategy, eval=FALSE}
+ggplot(perfDT2[stat=="TVPI" & vintage>=start_vintage & Strategy!="Growth"], aes(factor(vintage),value)) + 
   scale_fill_jco() +
-  geom_boxplot(aes(fill = factor(type)), outlier.size = -1, coef=0) +
+  geom_boxplot(aes(fill = factor(Strategy)), outlier.size = -1, coef=0) +
   #scale_fill_manual(values = viridis::viridis(3)) +
   xlab("Vintage year") + ylab("TVPI") +
   theme(legend.title = element_blank()) +
   theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) + 
-  coord_cartesian(ylim = c(0, 5))
+  coord_cartesian(ylim = c(0, 6))
 
   
 
 ```
 
-Spread, pooled, by size: this is gonna be interesting as I'm pretty sure you have a high correlation with size and returns in VC (see logic above). That's why the pooled returns are so much better.
+There is a lot to look at in this table, so let's get to it. First, let's stay with the ratio of active funds. Obviously, it's increasing over time: most funds that started in the 90s are now fully realized, while almost none is from the last  decade. Hence, the most interesting decade is the one from 2000 to 2010. While almost all funds have a ten-year term, almost none of them is realized within it. Even the majority of pre-GFC funds with vintages of 2006/7 are still active in 2021! This resonates well with an article I recently wrote together with a colleague about in PGIM's Best Ideas series where [we show that a lot of the value of a PE fund is still unrealized after 10 years.](https://www.pgim.com/annual-best-ideas/improving-risk-return-through-private-equity-secondaries)
 
-## DPIs
+The difference across the strategies are also noteworthy: buyout and growth funds are fully liquidated earlier than VC funds. For example, in `r sum(vyDT[vintage>=1996 & vintage<=2015, as.numeric(gsub("%","", RatioActive_Buyout))<as.numeric(gsub("%","", RatioActive_VC))])` out of `r 2015-1996` years from 1996 to 2015, the ratio of active VC funds is higher than for buyout funds.
 
-## IRRs
+Turning the attention to the TVPIs, one finds that the volatility over time is rather low for buyout funds: looking at vintages `r end_vintage` or older, where most of the value creation has already happened, and excluding the outlier vintage of 1992, a typical buyout fund's TVPI lies between `r vyDT[vintage<=end_vintage & vintage!=1992, min(Median_Buyout)]`x and `r vyDT[vintage<=end_vintage & vintage!=1992, max(Median_Buyout)]`x for each vintage year. The pattern for growth funds is similar. This is a great result for investors: even if you picked mediocre buyout and growth funds each year, they all made money. This is not true for VC funds, where there are several vintage years (`r paste(vyDT[vintage<=end_vintage & Median_VC<1, vintage], collapse = ", ")`) where the median fund had a TVPI of below 1x. On the plus side, returns can be much higher in good years as well, as is shown by the fact that VC is the only strategy where the median TVPI is above 3x for some vintage years (`r paste(vyDT[vintage<=end_vintage & Median_VC>3, vintage], collapse = ", ")`).
 
-## PMEs
+In `r round(shareMeanLargerMedian*100)`% of observations, the mean TVPI is larger than the median. This is no coincidence, but the result of the right-skewed return distribution of PE funds. Look at the TVPI of all funds in the sample below: while most TVPIs lie between 0x to 2.5x, there are some outlier funds that perform substantially better. These exceptionally well-performing funds that return a multiple of the invested capital push up the average, while they have no meaningful impact on the median. In contrast, even the worst performing fund can only end up at 0x. This asymmetry explains the higher means the medians.
+
+```{r TVPIhistogram,  fig.cap=paste0("Histogram of PE fund TVPIs from ", start_vintage, " to ", end_vintage,". TVPIs over 10x not shown. Data from Preqin.")}
+# Basic histogram
+meanMedian_data <- perfDT[vintage>=start_vintage & vintage<=end_vintage, 
+                          list(Mean   = mean(TVPI), 
+                               Median = median(TVPI),
+                               WMean  = weighted.mean(TVPI[!is.na(size)],size[!is.na(size)])), 
+                          keyby=Strategy]
+ggplot(perfDT[vintage>=start_vintage & vintage<=end_vintage], aes(x=TVPI, fill=Strategy, color=Strategy)) + 
+  geom_histogram(position="identity", alpha=0.5, binwidth=0.1) +
+  coord_cartesian(xlim=c(0,10)) +
+  scale_color_jco() + scale_fill_jco() #+
+  #geom_vline(data=meanMedian_data, aes(xintercept=Median, color=Strategy))
+
+```
+
+The table below shows different percentiles and the mean. It has the same message as the histogram, but sometimes it's nice to see the numbers.
+
+```{r SpreadTVPIs}
+intDT <- perfDT[vintage>=start_vintage & vintage<=end_vintage, fun(TVPI), by=Strategy]
+kbl(intDT,
+    digits=2,
+    caption = "Mean and different percentiles of TVPIs for buyout, growth, and VC funds in the Preqin data set.") %>%
+  kable_classic(full_width = FALSE)
+###Replace "%" with "Perc" to have no issues referring to column names in text
+setnames(intDT, names(intDT)[2:ncol(intDT)], c("Perc5", "Perc10", "Perc25", "Median", "Mean", "Perc75", "Perc90", "Perc95"))
+
+```
+
+Interestingly, the average TVPIs are almost identical across the three strategies. The median TVPI, on the other hand, differs meaningfully and is lowest for VC funds. If you are investing in VC, you really want to make sure you get into those outlier funds, either by strong selection skills or by broadly diversifying.
+
+
+```{r MeanMedianTVPItable, eval=FALSE}
+kbl(meanMedian_data,
+    digits=2,
+    align = "c",
+    col.names = c("Strategy", "Mean", "Median", "Weighted mean"),
+    caption = paste0("Mean, median and weighted mean TVPIs per strategy for funds with vintage years between ",
+                     start_vintage,
+                     " and ",
+                     end_vintage,
+                     ". Data from Preqin.")) %>%
+  kable_classic(full_width = FALSE)
+
+```
+
+Let's also compare the multiples with the ones reported by @harris-etal:2014. I focus on vintages from `r start_vintage`` to 2002 as many of their funds thereafter were mostly unrealized. I also limit my data set to only North American funds, as @harris-etal:2014 focused on this region as well. Overall, the results are similar. The only exception is the average TVPIs for VC funds, which are much higher for some vintage years in the 1990s. However, these vintage years had a low number of funds overall and as I have explained above, the mean is rather sensitive to positive outliers. Their sample must have a few more of those exceptional VC funds included. Overall, the comparison gives me comfort that both samples lead to similar conclusions.
+
+```{r CompPerfHarrisEtAl, fig.cap="Comparison of performance from North American funds in the Preqin data set compared with Harris et al. (2014) (see Table II)."}
+## Get Harris data and format so you can rbind
+compDT <- fread("C:/Users/Christoph Jaeckel/Desktop/CJaeckel Blog/Data for Blog/Perf_Harris_et_al.csv")
+compDT <- melt(compDT, id.vars=c("VY"))
+compDT <- compDT[grep("Nr", variable, invert=TRUE)] #Get rid of statistics you don't need
+compDT <- compDT[grep("%_", variable, invert=TRUE)] #Get rid of statistics you don't need
+compDT[,c("Perf", "Strategy", "Measure", "Source") := tstrsplit(variable, "_", fixed=TRUE)]
+compDT[,variable:=NULL]  #Not needed after split anymore
+setnames(compDT, c("VY", "Measure"), c("vintage", "variable"))
+compDT[Strategy=="BO", Strategy:="Buyout"]
+compDTirr <- compDT[Perf=="IRR"] #Save this for later
+compDTpme <- compDT[Perf=="PME"] #Save this for later
+compDTirr[,Perf:=NULL]
+compDTpme[,Perf:=NULL]
+compDT <- compDT[Perf=="MOIC"] #We only look at TVPI here
+compDT[,Perf:=NULL]
+
+## Recalculate intDT to only consider North American funds
+intDT <- perfDT2[vintage>=1990 & vintage<=2019 & stat=="TVPI" & geo=="North America", 
+                      list(Mean        = mean(value,na.rm=TRUE), 
+                           Median      = median(value,na.rm=TRUE), 
+                           WMean       = weighted.mean(value[!is.na(size)],size[!is.na(size)])),
+                keyby=list(vintage, Strategy)]
+
+## Update intDT so you can rbind
+intDT[, Source:="Preqin"]
+intDT <- intDT[Strategy!="Growth"]
+intDT <- melt(intDT, id.vars=c("vintage", "Strategy", "Source"))
+
+## Rbind
+intDT <- rbind(intDT, compDT)
+
+ggplot(data=intDT[vintage>=start_vintage & vintage <=2002 & variable!="WMean"], aes(x=vintage, y=value, color=Source)) +
+  facet_grid(rows=vars(Strategy), cols=vars(variable)) +
+  geom_line() + xlab("Vintage year") + ylab("TVPI") +
+  scale_color_jco() +
+  scale_x_continuous(breaks=c(seq(from=start_vintage,to=2002,by=4)))
+```
+
+### By region
+
+
+Are there meaningful differences across regions? The table below gives the answer by showing the mean, median, and weighted mean for different regions for funds with vintage years `r start_vintage` to `r end_vintage`. Starting with buyout funds, the performance of North American and European funds is similar. Outside those regions though, the performance has been much lower. North American growth funds have been stronger than those in Europe and Rest of the World. 
+
+Finally, the average of North American VC funds is higher than the average of their peers over the Atlantic, while the median is lower. It seems there have been some really strong VC funds in North America that drove the mean upwards. Interestingly, VC funds outside those two regions had by far the highest weighted mean, but the sample size is small.
+
+```{r TableRegion}
+meanMedian_data <- perfDT[vintage>=start_vintage & vintage<=end_vintage, 
+                          list(N      = .N,
+                               Mean   = mean(TVPI), 
+                               Median = median(TVPI),
+                               WMean  = weighted.mean(TVPI[!is.na(size)],size[!is.na(size)])), 
+                          keyby=list(Strategy, geo)]
+kbl(meanMedian_data[,!"Strategy",with=FALSE],
+    digits=2,
+    align = "lccc",
+    col.names = c("Geography", "Nr. of funds", "Mean", "Median", "Weighted mean"),
+    caption = paste0("Mean, median and weighted mean TVPIs per strategy for funds with vintage years between ",
+                     start_vintage,
+                     " and ",
+                     end_vintage,
+                     ". Data from Preqin.")) %>%
+  kable_classic(full_width = FALSE) %>%
+  pack_rows("Buyout", 1,3) %>%
+  pack_rows("Growth", 4,6) %>%
+  pack_rows("VC", 7,9)
+```
+
+Overall, North American PE funds had a stronger performance than their international peers. However, for the by far largest strategy, buyouts, the difference to Europe is negligible and for the other two strategies, the difference is minor.
+
+One issue with the above table is that differences in performance could simply be due to different weights of vintage years in the sample: it is fair to assume that the share of North American funds was larger at the beginning of the sample and declined over the years, when PE became more and more popular in other regions. North America might then simply have stronger performance overall as they are overweighted to some early vintages with very strong performance. Hence, let's plot the TVPIs over time for the regions and strategies.
+
+
+```{r TVPIregionOverTime, fig.cap=paste0("Median TVPIs from ", start_vintage, " to ", end_vintage," for different regions. Data from Preqin.")}
+vyDTgeo <- perfDT2[vintage>=start_vintage & vintage<=end_vintage & stat=="TVPI", 
+                      list(RatioActive = paste0(round(sum(status=="active")/.N*100,0),"%"),
+                           Mean        = mean(value,na.rm=TRUE), 
+                           Median      = median(value,na.rm=TRUE), 
+                           WMean       = weighted.mean(value[!is.na(size)],size[!is.na(size)])),
+                keyby=list(vintage, Strategy, geo)]
+ggplot(data=vyDTgeo, aes(x=vintage, y=Median, fill=geo)) +
+  geom_bar(stat="identity", position=position_dodge(preserve="single")) +
+  facet_grid(rows=vars(Strategy)) +
+  xlab("Vintage year") + ylab("TVPI") +
+  scale_fill_jco() +
+  scale_x_continuous(breaks=c(seq(from=start_vintage,to=end_vintage,by=4)))
+```
+
+For buyout and growth, the chart pretty much confirms the above: North American and European buyout funds are comparable, while other buyout funds have weaker performance. North American growth funds are slightly better, but there are also some early vintages where only North America had growth funds in the sample and these vintages were very strong, implying that the difference might partially be driven by timing effects. For VC funds, I do not really see a stronger performance of North American funds overall. In some vintages, they are ahead, in others, European VC funds are. Overall, the patterns found for the whole sample also hold when looking at the performance over vintage years.
+
+However, the chart also shows that there are vintage years in the sample where there are only North American funds, especially in the early years. Hence, one has to be a bit careful to compare different regions as the sample construction changes fundamentally over time.
+
+## Internal Rate of Return ("IRR")
+
+Let's look at the IRR next, again split by vintage year in the table below. Not surprisingly, the patterns are similar to the TVPI table above: vintage years with strong TVPIs tend to have strong IRRs and buyout and growth funds show less volatility than VC funds. The attentive reader might notice that the ratio of active funds is slightly different between the two samples, which is surprising as the sample universe is the same. The reason is that the IRR sometimes cannot be calculated for a fund as it is not uniquely defined, in which case this fund falls out of the sample. This is for example one explanation why the 1992 buyout cohort has a negative IRR for all statistics and a postive TVPI. There are only 8 buyout funds for this vintage year and one particularly strong one does not have an IRR and is therefore excluded. This pushes the IRRs for the cohort down.
+
+```{r IRRoverTimeTable}
+vyDT <- perfDT2[vintage>=start_vintage & vintage<=2019 & stat=="IRR" & !is.na(value), 
+                      list(RatioActive = paste0(round(sum(status=="active")/.N*100,0),"%"),
+                           Mean        = mean(value,na.rm=TRUE), 
+                           Median      = median(value,na.rm=TRUE), 
+                           WMean       = weighted.mean(value[!is.na(size)],size[!is.na(size)])),
+                keyby=list(vintage, Strategy)]
+shareMeanLargerMedian <- nrow(vyDT[Mean>Median])/nrow(vyDT)
+vyDT <-  dcast(vyDT, vintage ~ Strategy, value.var = c("RatioActive", "Mean", "Median", "WMean"))
+vyDT[, vintage:=as.character(vintage)]
+kbl(vyDT[, c(1, 2,5,8,11,  3,6,9,12,  4,7,10, 13)],
+    col.names = NULL,
+    align  = "c",
+    caption = c("Mean, median, and weighted mean IRRs by strategy and vintage year in the Preqin data set. The weighting is based on fund size. As some funds do not have a fund size reported in the data set, the sample size of the weighted mean can be lower than for the mean and median. The ratio of active funds is based on the reported status in Preqin."),
+    digits = 2) %>%
+  kable_classic() %>%
+  add_header_above(c("Vintage",rep(c("Ratio active funds", "Mean IRR", "Median IRR", "Mean IRR (weighted by size)"),3)),
+                   line = FALSE) %>%
+  add_header_above(c(" ", "Buyout" = 4,  "Growth" = 4, "VC" = 4)) 
+```
+
+Next, let's look at the distribution of IRRs over the full sample. Comparing this one with the table for TVPIs, there is one crucial difference: average IRRs are considerably higher for buyout funds than for the other two strategies. As the IRR is a performance measure that considers the timing of the cashflows, while the TVPI does not, the culprit for the difference is clear: buyout funds return capital back faster to the investors than growth and VC funds. I will show this in more detail in the DPI section.
+
+```{r SpreadIRRs}
+intDT <- perfDT[vintage>=start_vintage & vintage<=end_vintage, fun(IRR), by=Strategy]
+kbl(intDT,
+    digits=2,
+    caption = "Mean and different percentiles of IRRs for buyout, growth, and VC funds in the Preqin data set.") %>%
+  kable_classic(full_width = FALSE)
+###Replace "%" with "Perc" to have no issues referring to column names in text
+setnames(intDT, names(intDT)[2:ncol(intDT)], c("Perc5", "Perc10", "Perc25", "Median", "Mean", "Perc75", "Perc90", "Perc95"))
+
+```
+
+Finally, I compare the IRRs in my North American sample with the ones shown in @harris-etal:2014. The correlation between the two is very high.
+
+```{r CompPerfHarrisEtAlIRR, fig.cap="Comparison of IRRs from North American funds in the Preqin data set compared with Harris et al. (2014) (see Table II)."}
+## Recalculate intDT to only consider North American funds
+intDT <- perfDT2[vintage>=1990 & vintage<=2019 & stat=="IRR" & geo=="North America" & !is.na(value), 
+                      list(Mean        = mean(value,na.rm=TRUE), 
+                           Median      = median(value,na.rm=TRUE), 
+                           WMean       = weighted.mean(value[!is.na(size)],size[!is.na(size)])),
+                keyby=list(vintage, Strategy)]
+
+## Update intDT so you can rbind
+intDT[, Source:="Preqin"]
+intDT <- intDT[Strategy!="Growth"]
+intDT <- melt(intDT, id.vars=c("vintage", "Strategy", "Source"))
+
+## Rbind
+intDT <- rbind(intDT, compDTirr)
+
+ggplot(data=intDT[vintage>=start_vintage & vintage <=2002 & variable!="WMean"], aes(x=vintage, y=value, color=Source)) +
+  facet_grid(rows=vars(Strategy), cols=vars(variable)) +
+  geom_line() + xlab("Vintage year") + ylab("IRR") +
+  scale_color_jco() +
+  scale_x_continuous(breaks=c(seq(from=start_vintage,to=2002,by=4)))
+```
+
+## Distributed to Paid-In ("DPI")
+
+
+As the previous sections have shown, buyout funds perform better compared to the other strategies when performance is measured with the IRR instead of the TVPI. As the former takes the timing of cash flows into consideration, while the latter does not, the reason must be that buyout funds return money to investors quicker. If we look at the J-curves for the three different strategies, this is exactly what we find. A typical buyout fund, shown as the black line in the middle of the violet area, has a DPI above 1x around 8 years. For a growth fund, it takes a year or so longer, while a typical VC fund struggles to make it to 1x within a 15-year window!
+
+```{r Jcurves,fig.height=10, fig.cap=paste0("Dispersion of J-curves for three main strategies. Only funds with vintage year ", start_vintage, " or younger considered that are at least 15 years old. Data from Preqin.")}
+DT[, cum_ncf:=cumsum(dist-call),by=id]
+plot_NCF_buyout <- plot_quantiles_over_time(.dt = DT[qtr<60 & vintage>=1990 & vintage<=max(DT$vintage)-60/4 & Strategy=="Buyout"],
+                         .str_value = "cum_ncf",
+                         .str_time = "qtr",
+                         .probs   = probs,
+                         .col_alpha = .75,
+                         .str_ylab = "Net cash flows (Buyout)") +
+  geom_hline(yintercept=0) + theme(legend.position = "None")
+
+
+plot_NCF_growth <- plot_quantiles_over_time(.dt = DT[qtr<60 & vintage>=1990 & vintage<=max(DT$vintage)-60/4 & Strategy=="Growth"],
+                         .str_value = "cum_ncf",
+                         .str_time = "qtr",
+                         .probs   = probs,
+                         .col_alpha = .75,
+                         .str_ylab = "Net cash flows (Growth)") +
+  geom_hline(yintercept=0) + theme(legend.position = "None")
+
+plot_NCF_VC <- plot_quantiles_over_time(.dt = DT[qtr<60 & vintage>=1990 & vintage<=max(DT$vintage)-60/4 & Strategy=="VC"],
+                         .str_value = "cum_ncf",
+                         .str_time = "qtr",
+                         .probs   = probs,
+                         .col_alpha = .75,
+                         .str_ylab = "Net cash flows (VC)") +
+  geom_hline(yintercept=0) + xlab("Quarter")
+
+combined_plot <- ggarrange(plot_NCF_buyout,
+                           plot_NCF_growth,
+                           plot_NCF_VC,
+                           nrow=3)
+combined_plot
+```
+
+Of course, for VC funds there are two effects at work: First, it simply takes longer till liquidity events materialize. Second, a typical VC funds has a lower performance than a typical buyout or growth fund and therefore it takes longer to get to a DPI of 1x. Simple example: if it takes two funds ten years to be fully realized and one fund ends up with a final return of 1x and one with 3x, the former one will need the ten years to pay back the invested capital, while the latter one will have mostly likely returned the capital much earlier.
+
+## Public Market Equivalent ("PME")
+
+Last but not least, let's get to the PMEs. This measure discounts the cash flows of a PE fund with a discount rate, often taken as a broad public market index. If it is above 1x, an investor was better off investing in the fund; if it is below 1x, he should have rather invested it in the index. Conceptually, this measure is the most appealing only one as it considers for the opportunity costs of capital. It sounds good that you made 2x money investing in a fund, but what if you would have made 3x investing in the stock market instead?
+
+<aside>
+@sorensen-jagannathan:2015 is a nice paper that shows that the PME method can be justified on theoretical grounds as a measure of PE performance.
+</aside>
+
+One key question is what market indices to use. [One could adjust for all sorts of factors](https://www.christoph-jaeckel.com/posts/2021-02-28-why-does-private-equity-outperform-public-equity/), but to keep things simple I use broad market indices obtained from [Kenneth French's website](https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html). Later, I also use the NASDAQ index as a benchmark, as it had much stronger returns.
+
+The table below shows that PE funds have consistently outperformed broad public stock markets. Not surprisingly, a few VC vintages ended up well below 1x, but otherwise it's hard to find a PME starting with 0 in the table. This is in line with a large literature on PE performance that shows this outperformance.^[Note that I use PE data that is aggregated on a quarterly basis. A more correct approach would be to use the unaggregated data that shows the cash flows on a daily basis. However, as my comparison with the results from @harris-etal:2014 show, it seems that this simplification has an overall negligible effect on the results.]
+
+```{r PMEoverTimeTableUS}
+##Adjust table as you currently have different PMEs for the same id; now you want to select PME_NA for the North American
+# funds and PME_Europe for the European ones
+perfDT3 <- copy(perfDT2)
+perfDT3[stat=="PME_NA"     & geo=="North America", stat:="PME"]
+perfDT3[stat=="PME_Europe" & geo=="Europe",        stat:="PME"]
+
+vyDT <- perfDT3[vintage>=start_vintage & vintage<=2019 & stat=="PME" & !is.na(value), 
+                      list(RatioActive = paste0(round(sum(status=="active")/.N*100,0),"%"),
+                           Mean        = mean(value,na.rm=TRUE), 
+                           Median      = median(value,na.rm=TRUE), 
+                           WMean       = weighted.mean(value[!is.na(size)],size[!is.na(size)])),
+                keyby=list(vintage, Strategy)]
+shareMeanLargerMedian <- nrow(vyDT[Mean>Median])/nrow(vyDT)
+vyDT <-  dcast(vyDT, vintage ~ Strategy, value.var = c("RatioActive", "Mean", "Median", "WMean"))
+vyDT[, vintage:=as.character(vintage)]
+kbl(vyDT[, c(1, 2,5,8,11,  3,6,9,12,  4,7,10, 13)],
+    col.names = NULL,
+    align  = "c",
+    caption = c("Mean, median, and weighted mean PMEs by strategy and vintage year in the Preqin data set. The weighting is based on fund size. As some funds do not have a fund size reported in the data set, the sample size of the weighted mean can be lower than for the mean and median. The ratio of active funds is based on the reported status in Preqin. Only North American and European funds considered. Public market returns taken from Kenneth French's website."),
+    digits = 2) %>%
+  kable_classic() %>%
+  add_header_above(c("Vintage",rep(c("Ratio active funds", "Mean PME", "Median PME", "Mean PME (weighted by size)"),3)),
+                   line = FALSE) %>%
+  add_header_above(c(" ", "Buyout" = 4,  "Growth" = 4, "VC" = 4)) 
+```
+
+Looking at North American funds only, we can also compare the results again with those reported by @harris-etal:2014. Overall, the results are comparable. Again, we have a few outlier VC years in their sample that drive the mean higher for them, but otherwise both the level and patterns over time are similar.
+
+```{r CompPerfHarrisEtAlPME, fig.cap="Comparison of PMEs from North American funds in the Preqin data set compared with Harris et al. (2014) (see Table III)."}
+## Recalculate intDT to only consider North American funds
+intDT <- perfDT2[vintage>=1990 & vintage<=2019 & stat=="PME_NA" & geo=="North America" & !is.na(value), 
+                      list(Mean        = mean(value,na.rm=TRUE), 
+                           Median      = median(value,na.rm=TRUE), 
+                           WMean       = weighted.mean(value[!is.na(size)],size[!is.na(size)])),
+                keyby=list(vintage, Strategy)]
+
+## Update intDT so you can rbind
+intDT[, Source:="Preqin"]
+intDT <- intDT[Strategy!="Growth"]
+intDT <- melt(intDT, id.vars=c("vintage", "Strategy", "Source"))
+
+## Rbind
+intDT <- rbind(intDT, compDTpme)
+
+ggplot(data=intDT[vintage>=start_vintage & vintage <=2002 & variable!="WMean"], aes(x=vintage, y=value, color=Source)) +
+  facet_grid(rows=vars(Strategy), cols=vars(variable)) +
+  geom_line() + xlab("Vintage year") + ylab("PME") +
+  scale_color_jco() +
+  scale_x_continuous(breaks=c(seq(from=start_vintage,to=2002,by=4)))
+```
+
+Let's now compare the PMEs if we use the NASDAQ index instead as a comparison, which as performed substantially better than the broader stock market over the last decades. I also use this index to benchmark European funds with it, although one could of course argue how relevant a benchmark this is. The chart below shows the PMEs with the different benchmarks.
+
+```{r PMENASDAQ, fig.cap="Median PMEs over vintage years, split across strategies. The PMEs are calculated both with a broad North American or European stock market index, taken from Kenneth French's website, or with the NASDAQ. Funds outside North America and Europe ignored."}
+intDT <- perfDT3[(stat=="PME_NASDAQ" | stat=="PME") & geo!="Rest of World" & vintage>=start_vintage & vintage<=end_vintage,
+                      list(Median = median(value,na.rm=TRUE)),
+        keyby=list(Strategy,vintage, stat)]
+ggplot(intDT, aes(x=vintage, y=Median, color=stat)) +
+  geom_line() +
+  facet_grid(rows=vars(Strategy)) +
+  scale_color_jco() +
+  xlab("Vintage year") + ylab("Median PME")
+```
+
+Changing the benchmark index to the NASDAQ reduces the vintage year median PMEs considerably for all three strategies. A typical buyout funds from 2005 to 2015 pretty much performed like the NASDAQ. Growth funds have a higher volatility, but mostly failed to beat the NASDAQ. A typical VC fund did not manage to beat the NASDAQ index. This also improves only marginally when we use the average PME instead. As explained at length above, the improvement is strongest for the VC strategy, where recent funds since 2011 have performed in line with the NASDAQ.
+
+```{r PMENASDAQAverage, fig.cap="Average PMEs over vintage years, split across strategies. The PMEs are calculated both with a broad North American or European stock market index, taken from Kenneth French's website, or with the NASDAQ. Funds outside North America and Europe ignored."}
+intDT <- perfDT3[(stat=="PME_NASDAQ" | stat=="PME") & geo!="Rest of World" & vintage>=start_vintage & vintage<=end_vintage,
+                      list(Mean = mean(value,na.rm=TRUE)),
+        keyby=list(Strategy,vintage, stat)]
+ggplot(intDT, aes(x=vintage, y=Mean, color=stat)) +
+  geom_line() +
+  facet_grid(rows=vars(Strategy)) +
+  scale_color_jco() +
+  xlab("Vintage year") + ylab("Average PME")
+```
+
+# Summary
+
+In this blog post, I have revisited the question of PE performance and have shown that overall this asset class continues to deliver attractive returns for its investors. The devil is in the detail though and investors should be aware at what statistic (mean, median, or something else?), vintage year composition, measure (TVPI, IRR, PME?), etc. to look at. This blog post hopefully illustrated differences arising from these choices.
