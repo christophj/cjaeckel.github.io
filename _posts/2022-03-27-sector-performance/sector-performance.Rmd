@@ -1,0 +1,235 @@
+---
+title: "Sector performance"
+description: |
+  How to use data from Kenneth French and Aswath Damodaran to understand the impact of macroeconomic events on certain sectors.
+author:
+  - name: Christoph Jäckel
+    url: {}
+date: 2022-04-03
+output:
+  distill::distill_article:
+    self_contained: false
+    code_folding: true
+categories:
+  - Data
+  - Research
+draft: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+Whenever a macroeconomic shock happens, such as the COVID pandemic or Russia's invasion of Ukraine, investors wonder how companies from certain sectors are impacted. One way is a detailed bottom-up analysis by looking into a particular business in detail and trying to understand how demand, supply chains, labor force, etc. are impacted by the event. However, this is an unrealistic tack for investors with larger portfolios. Fortunately, millions of investors do this exercise as well and trade shares in businesses as a response to their findings. One can piggyback on this work and look at sector indices to get a rough guess on how bad a particular sector and its underlying companies are impacted. In this post, let's look at two publicly available data sources to do this.
+
+# Data from Kenneth French's website
+
+Kenneth French kindly provides daily updated performance data for different sectors on his [website](https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html). I wrote a short wrapper function that allows me to download the data from the website and get it into a format I can work with in R. You can find the function in the code chunk below.
+
+<aside>
+The R package [frenchdata](https://cran.r-project.org/web/packages/frenchdata/frenchdata.pdf) is a pre-built package to efficiently download data from Kenneth French's website into R with additional functions.
+</aside>
+
+```{r DefineFunction}
+### Load packages that I need later
+library(data.table)
+library(lubridate)
+library(ggplot2)
+library(kableExtra)
+library(utilitiesCJ)
+### Define function
+get_FF_data <- function(.str_file, .bol_quarterly=FALSE, ...) {
+
+  ###1. Download data
+  temp <- tempfile()
+  download.file(.str_file,temp, mode="wb")
+  csvDT <- data.table::fread(unzip(temp), ...)
+  unlink(temp)
+
+
+  ###2. Change names of columns
+  #     FF doesn't label the date column, enter
+  data.table::setnames(csvDT,
+           old = "V1",
+           new = "Date")
+  #     Get rid of hyphens, don't go well with column names
+  data.table::setnames(csvDT,
+           old = grep("-",names(csvDT),value=TRUE),
+           new = gsub("-", "", grep("-",names(csvDT),value=TRUE)))
+
+  ###3. Convert Date column to date; through warning if format changed
+  if (sum(is.na(lubridate::ymd(csvDT$Date)))>0) {
+    stop("Error in parsing dates to date format: it seems the format in Kenneth French files has changed.")
+  }
+  csvDT[, Date:=lubridate::ymd(Date)]
+
+  return(csvDT)
+
+}
+
+###Change to the folder you want the data to be downlaoded
+setwd("C:/Users/Christoph Jaeckel/Downloads/")
+###Go to Kenneth French's website (https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html) and get the link to the data file you want to download
+### Change link here to play around with other sector classifications
+str_file <- "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/12_Industry_Portfolios_daily_CSV.zip"
+#str_file <- "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/17_Industry_Portfolios_daily_CSV.zip"
+#str_file <- "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/38_Industry_Portfolios_daily_CSV.zip"
+#str_file <- "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/49_Industry_Portfolios_daily_CSV.zip"
+DT <- get_FF_data(str_file, skip = 9, header=TRUE)
+
+### Convert columns to numeric
+cols <- names(DT)[2:ncol(DT)]
+DT[ , (cols) := lapply(.SD, as.numeric), .SDcols = cols]
+# # Calculate the mean daily return (in bps) over the last years
+# DT[year(Date)>2010, lapply(.SD, mean), by = year(Date),.SDcols = cols]
+# 
+```
+
+In this post, I use a classification of 12 sector or industry portfolios. French also has data with lower (only 5 sectors) or higher (12, 17, 30, 38, 48, 49 sectors) granularity on his website. The 12 portfolios are the following:
+
+1. **NoDur**: Consumer Nondurables -- Food, Tobacco, Textiles, Apparel, Leather, Toys
+2. **Durbl**: Consumer Durables -- Cars, TVs, Furniture, Household Appliances
+3. **Manuf**: Manufacturing -- Machinery, Trucks, Planes, Off Furn, Paper, Com Printing
+4. **Enrgy**: Oil, Gas, and Coal Extraction and Products
+5. **Chems**: Chemicals and Allied Products
+6. **BusEq**: Business Equipment -- Computers, Software, and Electronic Equipment
+7. **Telcm**: Telephone and Television Transmission
+8. **Utils**: Utilities
+9. **Shops**: Wholesale, Retail, and Some Services (Laundries, Repair Shops)
+10. **Hlth**: Healthcare, Medical Equipment, and Drugs
+11. **Money**: Finance
+12. **Other**: Other -- Mines, Constr, BldMt, Trans, Hotels, Bus Serv, Entertainment
+
+Let's first look at the average daily returns of those sectors over the last decade in the table below. 
+
+
+```{r DailyReturnAverage}
+startYear <- 2011
+intDT <- DT[year(Date)>=startYear, lapply(.SD, mean), .SDcols = cols]
+kbl(intDT,
+    digits=3,
+    caption=paste0("Average daily returns since ",
+                   startYear, 
+                   " for 12 sectors. Data from Kenneth French's website, obtained on ",
+                   today(), ". Numbers in percent.")) %>%
+  kable_classic(full_width = FALSE)  
+```
+These numbers are already shown as percentage. As an example, the BusEq sector returned `r round(DT[year(Date)>=startYear, lapply(.SD, mean), .SDcols = cols][,BusEq], digits=3)`% on average per day. Doesn't sound like a lot, but compounded over 252 days this results in an annualized return of `r round(((1+DT[year(Date)>=startYear, lapply(.SD, mean), .SDcols = cols][,BusEq]/100)^252-1)*100,digits=1)`%.
+
+Let's now look how the COVID pandemic impacted these sectors.
+
+## Initial COVID impact
+
+The S&P 500 declined from close to 3,400 on 21 February 2020 to just over 2,300 on 20 March 2020. How did the different sectors contribute to those massive losses?
+
+```{r PlotChartCOVID,  fig.cap="Sector returns from 21 February 2020 to 20 March 2020. Data from Kenneth French's website."}
+intDT <- melt(DT[Date>=dmy("21022020") & Date<=dmy("20032020")], id.var="Date")[,list(Ret=prod(1+value/100)-1),by=variable]
+plotBar(.intDT = intDT,
+        .x_name = "variable",
+        .y_name = "Ret",
+        .x_lab = "Sector",
+        .y_lab = "Return",
+        .fillColor = "#581845",
+        .bolSort = TRUE) + 
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
+  theme(axis.text.x = element_text(angle = 45, hjust=1))
+
+
+```
+
+*Healthcare* was the most resilient sector in the first phase of the pandemic and only lost slightly over 20%. *Shops* is an interesting one as many retailers had to close.^[This [Wikipedia article](https://en.wikipedia.org/wiki/Impact_of_the_COVID-19_pandemic_on_retail) mentions that Apple and many other players closed all their shops on March 14. Hence, investors were already well aware of the dramatic impact of the pandemic on retail.] Later on, I show with different data that this sector most likely also includes retailers for daily goods that profited from the panic buying, which explains the overall low impact of the pandemic on this sector. This is a good example of how classifications can lead to ambiguous interpretations.
+
+The most impacted sectors were *Durables* and *Energy*. Both these sectors are [cyclical sectors](https://insight.factset.com/cyclical-vs.-defensive-what-we-learned-from-2020) and initially there was fear among investors that the pandemic would lead to a recession, so it is not surprising that they were impacted heavily. In case of *Energy*, it would be interesting if part of the underperformance was also attributed to the expectation of substantially lower travel activities due to the lock down and, as a result, lower fuel consumption.
+
+## COVID recovery
+
+The S&P 500 then rose close to 3,800 until the end of the year. Which sectors drove this exceptional recovery? The chart below gives the answer.
+
+```{r PlotChartCOVIDrec, fig.cap="Sector returns from 21 March 2020 to 31 December 2020. Data from Kenneth French's website."}
+intDT <- melt(DT[Date>dmy("20032020") & Date<=dmy("31122020")], id.var="Date")[,list(Ret=prod(1+value/100)-1),by=variable]
+plotBar(.intDT = intDT,
+        .x_name = "variable",
+        .y_name = "Ret",
+        .x_lab = "Sector",
+        .y_lab = "Return",
+        .fillColor = "#581845",
+        .bolSort = TRUE) + 
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
+  theme(axis.text.x = element_text(angle = 45, hjust=1))
+
+
+```
+
+*Durables* was by far the best performing sector. It is such an outlier that it would indeed by intersting to know the constituents as my first guess would not have been that companies dealing with "Cars, TVs, Furniture, Household Appliances" were the clear COVID winners. Obviously, Cars include Tesla and Tesla rose over 700% in that period, being one very important driver of this sector, given how large this company's market cap was at the end of 2020. 
+
+<aside>
+Re-run the code with a more granular classification, for example the 38 industry portfolios, and cars shows up as a strongly performing sector.
+</aside>
+
+Unfortunately, the classifications by French do not really put tech / software companies in one bucket. Obviously, these firms performed exceptionally throughout the pandemic, but I don't quite know where they ended up. Could be *Durables*, could be *Business Equipment*, or something else. Fortunately, the data set I use next shows the sector performance in more granularity.
+
+# Data from Aswath Damodaran's website
+
+In my very first [post](https://www.christoph-jaeckel.com/posts/2021-01-17-automatically-obtaining-data-from-damodarans-website-with-r/), I already introduced a function that downloads the data from Damodaran's website. I use this function here to download his Excel file that documents the COVID impact on U.S. firms.
+
+
+```{r DownloadData, message=FALSE, results='hide'}
+library(readxl)
+library(httr)
+intDT <- import_from_excel(.str_file ="https://pages.stern.nyu.edu/~adamodar/pc/datasets/COVIDeffects.xls",
+                           na = c("NA", "N/A"))
+```
+
+```{r CreateTable}
+setnames(intDT,
+         old = c("Industry Name", "Number of firms", "12/31/19", "2/14/20", "3/20/20", "9/1/20", "12/31/21", 
+                 "1/1/20 -  2/14", "2/14/20 - 3/20/20", "3/20/20 - 9/1/20", "9/1/20 - 12/31/21", "1/1/20 - 12/31/21", 
+                 "LTM 2020", "LTM 2021", "% Change", "LTM 20202", "LTM 20213", "% Change4"),
+         new = c("Sector", "N", "MktCap_31Dec19", "MktCap_14Feb20", "MktCap_20Mar20", "MktCap_1Sep20", "MktCap_31Dec21", 
+                 "Chg_preCOVID", "Chg_initial", "Chg_Recov", "Chg_end20", "Chg_21", 
+                 "Rev_LTM_2020", "Rev_LTM_2021", "Chg_Rev", "OpInc_LTM_2020", "OpInc_LTM_2021", "Chg_OpInc"))
+## Report
+intDT <- intDT[grep("Total Market", Sector,invert =TRUE)]
+intDT[, Comb:=(1+Chg_initial)*(1+Chg_Recov)*(1+Chg_end20)-1]
+intDT2 <- intDT[,list(Sector, N, Chg_initial, Chg_Recov, Chg_end20, Comb)][order(Chg_initial)]
+intDT2[, Rank:=round(rank(-Comb),digits=0)]
+cols <- c("Chg_initial", "Chg_Recov", "Chg_end20", "Comb")
+intDT2[, (cols) := lapply(.SD, function(x) {paste0(format(round(x*100,digits=1),nsmall=1), "%")}), .SDcols = cols]  
+kbl(intDT2,
+    align = "c",
+    col.names = c("Sector", "Nr. of firms", "2/14/20 - 3/20/20", "3/20/20 - 9/1/20", "9/1/20 - 12/31/21", "Combined", "Rank"),
+    caption="Performance of different sectors during different phases of the COVID pandemic, sorted by performance in the initial phase. Rank is based on the combined performance. Data from Damodaran's website.") %>%
+  kable_classic(full_width = FALSE)
+```
+
+Damodaran's sector classification is much more granular, which confirms some of the hypotheses I made above when looking at French's data. For example, *Shops* did reasonably well as some of the clear initial COVID winners were grocery and food retailers. Shoes and apparel shops, on the other hand, suffered substantially.
+
+The table also shows nicely for which sectors the sentiment stayed relatively constant and for which it changed. *Air Transport* is a sector that was initially hit the worst and has not recovered grounds since then in comparison to other sectors. Other sectors, such as *Oil/Gas (Production and Exploration)*, did terrible at the start, but ended 2020 as one of the stronger sectors.
+
+Again, Tesla shows up as the clear anomaly in this data set, pushing *Auto & Truck* to the best performing sector. For me, this is difficult to explain: in an unexpected pandemic, one would have expected certain sector rotations. *Air Transport* becomes less relevant as people don't travel anymore; *Software* and *Entertainment* profits as people stay at home. Why do cars though become out of a sudden so much more relevant during a pandemic? People always had them, it's hard for me to come up with a story as to why they became so much more relevant during COVID. Of course, one could argue that the rise of Tesla co-incided with the pandemic, but in this case one would expect the other car manufacturers to lose just as much. Essentially an intra-sector rotation away from the old manufacturers towards Tesla. This, however, didn't seem to happen either as Tesla gained so much to move the whole sector towards new heights. One explanation could be that Tesla took those gains from non-U.S.  competitors such as Daimler, BMW, or Toyota. However, Toyota's share price increased and most of the others are flat compared to the pandemic. 
+
+
+Damodaran also shows the change in revenues and operating income from 2020 to 2021 and the scatterplots below compare them to the stock market performance from mid-February 2020 to the end of 2020. A strong correlation would indicate that the stock price movements were anticipating subsequent moves in cash flows. However, there is no such correlation visible in the data. 
+
+```{r ScatterPlot, fig.cap="Sector performance from 14 Feb 2020 to 31 Dec 2020 vs. change in revenues and operating income from 2020 to 2021. Data obtained from Damodaran's website.", fig.show="hold", out.width="40%"}
+ggplot(intDT[!is.na(Chg_Rev)], 
+       aes(x=Comb, y=Chg_Rev)) + #, color=sector_group)) +
+  scale_x_continuous(labels = scales::percent)  + 
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1))  +
+  geom_point() + xlab("Stock return: 2/14/20-12/31/20") + ylab("Change Rev 20-21") +
+  geom_smooth(method=lm, se=FALSE) +
+  theme(legend.title = element_blank())
+ggplot(intDT[!is.na(Chg_OpInc)], 
+       aes(x=Comb, y=Chg_OpInc)) + #, color=sector_group)) +
+  scale_x_continuous(labels = scales::percent)  + 
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1))  +
+  geom_point() + xlab("Stock return: 2/14/20-12/31/20") + ylab("Change OpInc 20-21") +
+  geom_smooth(method=lm, se=FALSE) +
+  theme(legend.title = element_blank())
+
+```
+
+# Summary
+
+This post has shown how to leverage publicly available data to understand the impact of a macroeconomic shock on different sectors. It used the COVID pandemic as an example, but the code is easily adjustable to look at other events as well.
