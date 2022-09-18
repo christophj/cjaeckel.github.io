@@ -86,640 +86,64 @@ code span.vs { color: #20794d; } /* VerbatimString */
 code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
 
+<style>
+  div.csl-bib-body { }
+  div.csl-entry {
+    clear: both;
+    }
+  .hanging div.csl-entry {
+    margin-left:2em;
+    text-indent:-2em;
+  }
+  div.csl-left-margin {
+    min-width:2em;
+    float:left;
+  }
+  div.csl-right-inline {
+    margin-left:2em;
+    padding-left:1em;
+  }
+  div.csl-indent {
+    margin-left: 2em;
+  }
+</style>
 
   <!--radix_placeholder_meta_tags-->
-  <title>Uncertain times: About this blog</title>
+  <title>Insights from Burgiss holdings data</title>
 
-  <meta property="description" itemprop="description" content="Why bother?"/>
+  <meta property="description" itemprop="description" content="A short review of Brown et al. (2020) with a few intriguing statistics."/>
 
 
+  <!--  https://schema.org/Article -->
+  <meta property="article:published" itemprop="datePublished" content="2022-09-18"/>
+  <meta property="article:created" itemprop="dateCreated" content="2022-09-18"/>
+  <meta name="article:author" content="Christoph Jäckel"/>
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Uncertain times: About this blog"/>
+  <meta property="og:title" content="Insights from Burgiss holdings data"/>
   <meta property="og:type" content="article"/>
-  <meta property="og:description" content="Why bother?"/>
+  <meta property="og:description" content="A short review of Brown et al. (2020) with a few intriguing statistics."/>
   <meta property="og:locale" content="en_US"/>
-  <meta property="og:site_name" content="Uncertain times"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Uncertain times: About this blog"/>
-  <meta property="twitter:description" content="Why bother?"/>
+  <meta property="twitter:title" content="Insights from Burgiss holdings data"/>
+  <meta property="twitter:description" content="A short review of Brown et al. (2020) with a few intriguing statistics."/>
 
   <!--/radix_placeholder_meta_tags-->
+  
+  <meta name="citation_reference" content="citation_title=Private equity portfolio companies: A first look at burgiss holdings data;citation_author=Gregory W Brown;citation_author=Robert S Harris;citation_author=Wendy Hu;citation_author=Tim Jenkinson;citation_author=Steven N Kaplan;citation_author=David T Robinson"/>
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description"]}},"value":[{"type":"character","attributes":{},"value":["About this blog"]},{"type":"character","attributes":{},"value":["Why bother?"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","categories","draft","bibliography"]}},"value":[{"type":"character","attributes":{},"value":["Insights from Burgiss holdings data"]},{"type":"character","attributes":{},"value":["A short review of Brown et al. (2020) with a few intriguing statistics.\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Christoph Jäckel"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["09-18-2022"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained","code_folding"]}},"value":[{"type":"logical","attributes":{},"value":[false]},{"type":"logical","attributes":{},"value":[true]}]}]},{"type":"character","attributes":{},"value":["Private Equity","Research","Data"]},{"type":"logical","attributes":{},"value":[false]},{"type":"character","attributes":{},"value":["C:/Users/Christoph Jaeckel/Desktop/CJaeckel Blog/Blog/docs/biblio.bib"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
+  
+  <script type="text/json" id="radix-resource-manifest">
+  {"type":"character","attributes":{},"value":["Figure_1_Brown_etal_2020.PNG","Figure_4_Brown_etal_2020.PNG","Figure_5_Brown_etal_2020.PNG","Figure_A.3_Brown_etal_2020.PNG","insights-from-burgiss-holdings-data_files/anchor-4.2.2/anchor.min.js","insights-from-burgiss-holdings-data_files/bowser-1.9.3/bowser.min.js","insights-from-burgiss-holdings-data_files/distill-2.2.21/template.v2.js","insights-from-burgiss-holdings-data_files/header-attrs-2.11/header-attrs.js","insights-from-burgiss-holdings-data_files/header-attrs-2.16/header-attrs.js","insights-from-burgiss-holdings-data_files/jquery-3.6.0/jquery-3.6.0.js","insights-from-burgiss-holdings-data_files/jquery-3.6.0/jquery-3.6.0.min.js","insights-from-burgiss-holdings-data_files/jquery-3.6.0/jquery-3.6.0.min.map","insights-from-burgiss-holdings-data_files/popper-2.6.0/popper.min.js","insights-from-burgiss-holdings-data_files/tippy-6.2.7/tippy-bundle.umd.min.js","insights-from-burgiss-holdings-data_files/tippy-6.2.7/tippy-light-border.css","insights-from-burgiss-holdings-data_files/tippy-6.2.7/tippy.css","insights-from-burgiss-holdings-data_files/tippy-6.2.7/tippy.umd.min.js","insights-from-burgiss-holdings-data_files/webcomponents-2.0.0/webcomponents.js"]}
+  </script>
   <!--radix_placeholder_navigation_in_header-->
-  <meta name="distill:offset" content=""/>
-
-  <script type="application/javascript">
-
-    window.headroom_prevent_pin = false;
-
-    window.document.addEventListener("DOMContentLoaded", function (event) {
-
-      // initialize headroom for banner
-      var header = $('header').get(0);
-      var headerHeight = header.offsetHeight;
-      var headroom = new Headroom(header, {
-        tolerance: 5,
-        onPin : function() {
-          if (window.headroom_prevent_pin) {
-            window.headroom_prevent_pin = false;
-            headroom.unpin();
-          }
-        }
-      });
-      headroom.init();
-      if(window.location.hash)
-        headroom.unpin();
-      $(header).addClass('headroom--transition');
-
-      // offset scroll location for banner on hash change
-      // (see: https://github.com/WickyNilliams/headroom.js/issues/38)
-      window.addEventListener("hashchange", function(event) {
-        window.scrollTo(0, window.pageYOffset - (headerHeight + 25));
-      });
-
-      // responsive menu
-      $('.distill-site-header').each(function(i, val) {
-        var topnav = $(this);
-        var toggle = topnav.find('.nav-toggle');
-        toggle.on('click', function() {
-          topnav.toggleClass('responsive');
-        });
-      });
-
-      // nav dropdowns
-      $('.nav-dropbtn').click(function(e) {
-        $(this).next('.nav-dropdown-content').toggleClass('nav-dropdown-active');
-        $(this).parent().siblings('.nav-dropdown')
-           .children('.nav-dropdown-content').removeClass('nav-dropdown-active');
-      });
-      $("body").click(function(e){
-        $('.nav-dropdown-content').removeClass('nav-dropdown-active');
-      });
-      $(".nav-dropdown").click(function(e){
-        e.stopPropagation();
-      });
-    });
-  </script>
-
-  <style type="text/css">
-
-  /* Theme (user-documented overrideables for nav appearance) */
-
-  .distill-site-nav {
-    color: rgba(255, 255, 255, 0.8);
-    background-color: #0F2E3D;
-    font-size: 15px;
-    font-weight: 300;
-  }
-
-  .distill-site-nav a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  .distill-site-nav a:hover {
-    color: white;
-  }
-
-  @media print {
-    .distill-site-nav {
-      display: none;
-    }
-  }
-
-  .distill-site-header {
-
-  }
-
-  .distill-site-footer {
-
-  }
-
-
-  /* Site Header */
-
-  .distill-site-header {
-    width: 100%;
-    box-sizing: border-box;
-    z-index: 3;
-  }
-
-  .distill-site-header .nav-left {
-    display: inline-block;
-    margin-left: 8px;
-  }
-
-  @media screen and (max-width: 768px) {
-    .distill-site-header .nav-left {
-      margin-left: 0;
-    }
-  }
-
-
-  .distill-site-header .nav-right {
-    float: right;
-    margin-right: 8px;
-  }
-
-  .distill-site-header a,
-  .distill-site-header .title {
-    display: inline-block;
-    text-align: center;
-    padding: 14px 10px 14px 10px;
-  }
-
-  .distill-site-header .title {
-    font-size: 18px;
-    min-width: 150px;
-  }
-
-  .distill-site-header .logo {
-    padding: 0;
-  }
-
-  .distill-site-header .logo img {
-    display: none;
-    max-height: 20px;
-    width: auto;
-    margin-bottom: -4px;
-  }
-
-  .distill-site-header .nav-image img {
-    max-height: 18px;
-    width: auto;
-    display: inline-block;
-    margin-bottom: -3px;
-  }
-
-
-
-  @media screen and (min-width: 1000px) {
-    .distill-site-header .logo img {
-      display: inline-block;
-    }
-    .distill-site-header .nav-left {
-      margin-left: 20px;
-    }
-    .distill-site-header .nav-right {
-      margin-right: 20px;
-    }
-    .distill-site-header .title {
-      padding-left: 12px;
-    }
-  }
-
-
-  .distill-site-header .nav-toggle {
-    display: none;
-  }
-
-  .nav-dropdown {
-    display: inline-block;
-    position: relative;
-  }
-
-  .nav-dropdown .nav-dropbtn {
-    border: none;
-    outline: none;
-    color: rgba(255, 255, 255, 0.8);
-    padding: 16px 10px;
-    background-color: transparent;
-    font-family: inherit;
-    font-size: inherit;
-    font-weight: inherit;
-    margin: 0;
-    margin-top: 1px;
-    z-index: 2;
-  }
-
-  .nav-dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: white;
-    min-width: 200px;
-    border: 1px solid rgba(0,0,0,0.15);
-    border-radius: 4px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
-    z-index: 1;
-    margin-top: 2px;
-    white-space: nowrap;
-    padding-top: 4px;
-    padding-bottom: 4px;
-  }
-
-  .nav-dropdown-content hr {
-    margin-top: 4px;
-    margin-bottom: 4px;
-    border: none;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  }
-
-  .nav-dropdown-active {
-    display: block;
-  }
-
-  .nav-dropdown-content a, .nav-dropdown-content .nav-dropdown-header {
-    color: black;
-    padding: 6px 24px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-  }
-
-  .nav-dropdown-content .nav-dropdown-header {
-    display: block;
-    padding: 5px 24px;
-    padding-bottom: 0;
-    text-transform: uppercase;
-    font-size: 14px;
-    color: #999999;
-    white-space: nowrap;
-  }
-
-  .nav-dropdown:hover .nav-dropbtn {
-    color: white;
-  }
-
-  .nav-dropdown-content a:hover {
-    background-color: #ddd;
-    color: black;
-  }
-
-  .nav-right .nav-dropdown-content {
-    margin-left: -45%;
-    right: 0;
-  }
-
-  @media screen and (max-width: 768px) {
-    .distill-site-header a, .distill-site-header .nav-dropdown  {display: none;}
-    .distill-site-header a.nav-toggle {
-      float: right;
-      display: block;
-    }
-    .distill-site-header .title {
-      margin-left: 0;
-    }
-    .distill-site-header .nav-right {
-      margin-right: 0;
-    }
-    .distill-site-header {
-      overflow: hidden;
-    }
-    .nav-right .nav-dropdown-content {
-      margin-left: 0;
-    }
-  }
-
-
-  @media screen and (max-width: 768px) {
-    .distill-site-header.responsive {position: relative; min-height: 500px; }
-    .distill-site-header.responsive a.nav-toggle {
-      position: absolute;
-      right: 0;
-      top: 0;
-    }
-    .distill-site-header.responsive a,
-    .distill-site-header.responsive .nav-dropdown {
-      display: block;
-      text-align: left;
-    }
-    .distill-site-header.responsive .nav-left,
-    .distill-site-header.responsive .nav-right {
-      width: 100%;
-    }
-    .distill-site-header.responsive .nav-dropdown {float: none;}
-    .distill-site-header.responsive .nav-dropdown-content {position: relative;}
-    .distill-site-header.responsive .nav-dropdown .nav-dropbtn {
-      display: block;
-      width: 100%;
-      text-align: left;
-    }
-  }
-
-  /* Site Footer */
-
-  .distill-site-footer {
-    width: 100%;
-    overflow: hidden;
-    box-sizing: border-box;
-    z-index: 3;
-    margin-top: 30px;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    text-align: center;
-  }
-
-  /* Headroom */
-
-  d-title {
-    padding-top: 6rem;
-  }
-
-  @media print {
-    d-title {
-      padding-top: 4rem;
-    }
-  }
-
-  .headroom {
-    z-index: 1000;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-  }
-
-  .headroom--transition {
-    transition: all .4s ease-in-out;
-  }
-
-  .headroom--unpinned {
-    top: -100px;
-  }
-
-  .headroom--pinned {
-    top: 0;
-  }
-
-  /* adjust viewport for navbar height */
-  /* helps vertically center bootstrap (non-distill) content */
-  .min-vh-100 {
-    min-height: calc(100vh - 100px) !important;
-  }
-
-  </style>
-
-  <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-  <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
-  <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
-  <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
-  <script src="site_libs/autocomplete-0.37.1/autocomplete.min.js"></script>
-  <script src="site_libs/fuse-6.4.1/fuse.min.js"></script>
-
-  <script type="application/javascript">
-
-  function getMeta(metaName) {
-    var metas = document.getElementsByTagName('meta');
-    for (let i = 0; i < metas.length; i++) {
-      if (metas[i].getAttribute('name') === metaName) {
-        return metas[i].getAttribute('content');
-      }
-    }
-    return '';
-  }
-
-  function offsetURL(url) {
-    var offset = getMeta('distill:offset');
-    return offset ? offset + '/' + url : url;
-  }
-
-  function createFuseIndex() {
-
-    // create fuse index
-    var options = {
-      keys: [
-        { name: 'title', weight: 20 },
-        { name: 'categories', weight: 15 },
-        { name: 'description', weight: 10 },
-        { name: 'contents', weight: 5 },
-      ],
-      ignoreLocation: true,
-      threshold: 0
-    };
-    var fuse = new window.Fuse([], options);
-
-    // fetch the main search.json
-    return fetch(offsetURL('search.json'))
-      .then(function(response) {
-        if (response.status == 200) {
-          return response.json().then(function(json) {
-            // index main articles
-            json.articles.forEach(function(article) {
-              fuse.add(article);
-            });
-            // download collections and index their articles
-            return Promise.all(json.collections.map(function(collection) {
-              return fetch(offsetURL(collection)).then(function(response) {
-                if (response.status === 200) {
-                  return response.json().then(function(articles) {
-                    articles.forEach(function(article) {
-                      fuse.add(article);
-                    });
-                  })
-                } else {
-                  return Promise.reject(
-                    new Error('Unexpected status from search index request: ' +
-                              response.status)
-                  );
-                }
-              });
-            })).then(function() {
-              return fuse;
-            });
-          });
-
-        } else {
-          return Promise.reject(
-            new Error('Unexpected status from search index request: ' +
-                        response.status)
-          );
-        }
-      });
-  }
-
-  window.document.addEventListener("DOMContentLoaded", function (event) {
-
-    // get search element (bail if we don't have one)
-    var searchEl = window.document.getElementById('distill-search');
-    if (!searchEl)
-      return;
-
-    createFuseIndex()
-      .then(function(fuse) {
-
-        // make search box visible
-        searchEl.classList.remove('hidden');
-
-        // initialize autocomplete
-        var options = {
-          autoselect: true,
-          hint: false,
-          minLength: 2,
-        };
-        window.autocomplete(searchEl, options, [{
-          source: function(query, callback) {
-            const searchOptions = {
-              isCaseSensitive: false,
-              shouldSort: true,
-              minMatchCharLength: 2,
-              limit: 10,
-            };
-            var results = fuse.search(query, searchOptions);
-            callback(results
-              .map(function(result) { return result.item; })
-            );
-          },
-          templates: {
-            suggestion: function(suggestion) {
-              var img = suggestion.preview && Object.keys(suggestion.preview).length > 0
-                ? `<img src="${offsetURL(suggestion.preview)}"</img>`
-                : '';
-              var html = `
-                <div class="search-item">
-                  <h3>${suggestion.title}</h3>
-                  <div class="search-item-description">
-                    ${suggestion.description || ''}
-                  </div>
-                  <div class="search-item-preview">
-                    ${img}
-                  </div>
-                </div>
-              `;
-              return html;
-            }
-          }
-        }]).on('autocomplete:selected', function(event, suggestion) {
-          window.location.href = offsetURL(suggestion.path);
-        });
-        // remove inline display style on autocompleter (we want to
-        // manage responsive display via css)
-        $('.algolia-autocomplete').css("display", "");
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
-
-  });
-
-  </script>
-
-  <style type="text/css">
-
-  .nav-search {
-    font-size: x-small;
-  }
-
-  /* Algolioa Autocomplete */
-
-  .algolia-autocomplete {
-    display: inline-block;
-    margin-left: 10px;
-    vertical-align: sub;
-    background-color: white;
-    color: black;
-    padding: 6px;
-    padding-top: 8px;
-    padding-bottom: 0;
-    border-radius: 6px;
-    border: 1px #0F2E3D solid;
-    width: 180px;
-  }
-
-
-  @media screen and (max-width: 768px) {
-    .distill-site-nav .algolia-autocomplete {
-      display: none;
-      visibility: hidden;
-    }
-    .distill-site-nav.responsive .algolia-autocomplete {
-      display: inline-block;
-      visibility: visible;
-    }
-    .distill-site-nav.responsive .algolia-autocomplete .aa-dropdown-menu {
-      margin-left: 0;
-      width: 400px;
-      max-height: 400px;
-    }
-  }
-
-  .algolia-autocomplete .aa-input, .algolia-autocomplete .aa-hint {
-    width: 90%;
-    outline: none;
-    border: none;
-  }
-
-  .algolia-autocomplete .aa-hint {
-    color: #999;
-  }
-  .algolia-autocomplete .aa-dropdown-menu {
-    width: 550px;
-    max-height: 70vh;
-    overflow-x: visible;
-    overflow-y: scroll;
-    padding: 5px;
-    margin-top: 3px;
-    margin-left: -150px;
-    background-color: #fff;
-    border-radius: 5px;
-    border: 1px solid #999;
-    border-top: none;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion {
-    cursor: pointer;
-    padding: 5px 4px;
-    border-bottom: 1px solid #eee;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion:last-of-type {
-    border-bottom: none;
-    margin-bottom: 2px;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item {
-    overflow: hidden;
-    font-size: 0.8em;
-    line-height: 1.4em;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item h3 {
-    font-size: 1rem;
-    margin-block-start: 0;
-    margin-block-end: 5px;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-description {
-    display: inline-block;
-    overflow: hidden;
-    height: 2.8em;
-    width: 80%;
-    margin-right: 4%;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview {
-    display: inline-block;
-    width: 15%;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img {
-    height: 3em;
-    width: auto;
-    display: none;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img[src] {
-    display: initial;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion.aa-cursor {
-    background-color: #eee;
-  }
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion em {
-    font-weight: bold;
-    font-style: normal;
-  }
-
-  </style>
-
-
   <!--/radix_placeholder_navigation_in_header-->
   <!--radix_placeholder_distill-->
 
@@ -2074,35 +1498,17 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.16/header-attrs.js"></script>
-  <script src="site_libs/popper-2.6.0/popper.min.js"></script>
-  <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
-  <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
-  <script src="site_libs/tippy-6.2.7/tippy.umd.min.js"></script>
-  <script src="site_libs/anchor-4.2.2/anchor.min.js"></script>
-  <script src="site_libs/bowser-1.9.3/bowser.min.js"></script>
-  <script src="site_libs/webcomponents-2.0.0/webcomponents.js"></script>
-  <script src="site_libs/distill-2.2.21/template.v2.js"></script>
+  <script src="insights-from-burgiss-holdings-data_files/header-attrs-2.16/header-attrs.js"></script>
+  <script src="insights-from-burgiss-holdings-data_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+  <script src="insights-from-burgiss-holdings-data_files/popper-2.6.0/popper.min.js"></script>
+  <link href="insights-from-burgiss-holdings-data_files/tippy-6.2.7/tippy.css" rel="stylesheet" />
+  <link href="insights-from-burgiss-holdings-data_files/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
+  <script src="insights-from-burgiss-holdings-data_files/tippy-6.2.7/tippy.umd.min.js"></script>
+  <script src="insights-from-burgiss-holdings-data_files/anchor-4.2.2/anchor.min.js"></script>
+  <script src="insights-from-burgiss-holdings-data_files/bowser-1.9.3/bowser.min.js"></script>
+  <script src="insights-from-burgiss-holdings-data_files/webcomponents-2.0.0/webcomponents.js"></script>
+  <script src="insights-from-burgiss-holdings-data_files/distill-2.2.21/template.v2.js"></script>
   <!--radix_placeholder_site_in_header-->
-  <script type="text/javascript" src="https://www.cookieconsent.com/releases/3.1.0/cookie-consent.js"></script>
-  <script type="text/javascript">
-  document.addEventListener('DOMContentLoaded', function () {
-  cookieconsent.run({
-  'notice_banner_type':'simple',
-  'consent_type': 'express',
-  'palette': 'light',
-  'language': 'en',
-  'website_name': 'uncertain-times',
-  'cookies_policy_url': 'url',
-  'change_preferences_selector':'#CookiePreferences'
-  });});</script>
-  <script type="text/plain" cookie-consent="tracking" async src="https://www.googletagmanager.com/gtag/js?id=G-J5RM2E8REJ"></script>
-  <script type="text/plain" cookie-consent="tracking">
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-J5RM2E8REJ');
-  </script>
   <!--/radix_placeholder_site_in_header-->
 
 
@@ -2113,46 +1519,87 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"About this blog","description":"Why bother?","authors":[]}
+{"title":"Insights from Burgiss holdings data","description":"A short review of Brown et al. (2020) with a few intriguing statistics.","authors":[{"author":"Christoph Jäckel","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2022-09-18T00:00:00.000+02:00","citationText":"Jäckel, 2022"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
 <!--radix_placeholder_navigation_before_body-->
-<header class="header header--fixed" role="banner">
-<nav class="distill-site-nav distill-site-header">
-<div class="nav-left">
-<a href="index.html" class="title">Uncertain times</a>
-<input id="distill-search" class="nav-search hidden" type="text" placeholder="Search..."/>
-</div>
-<div class="nav-right">
-<a href="index.html">Home</a>
-<a href="about.html">About</a>
-<a href="index.xml">
-<i class="fa fa-rss" aria-hidden="true"></i>
-</a>
-<a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
-</div>
-</nav>
-</header>
 <!--/radix_placeholder_navigation_before_body-->
 <!--radix_placeholder_site_before_body-->
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>About this blog</h1>
+<h1>Insights from Burgiss holdings data</h1>
 <!--radix_placeholder_categories-->
+<div class="dt-tags">
+<div class="dt-tag">Private Equity</div>
+<div class="dt-tag">Research</div>
+<div class="dt-tag">Data</div>
+</div>
 <!--/radix_placeholder_categories-->
-<p><p>Why bother?</p></p>
+<p><p>A short review of Brown et al. (2020) with a few intriguing statistics.</p></p>
 </div>
 
+<div class="d-byline">
+  Christoph Jäckel true 
+  
+<br/>09-18-2022
+</div>
 
 <div class="d-article">
-<p>I like financial markets; so much so that I have spent five years of my life to better understand one important driver of them, discount rates, by writing a <a href="https://mediatum.ub.tum.de/1192155">dissertation</a> at the Technical University of Munich. And after finishing my dissertation, I started to work in the finance industry, at <a href="https://www.montana-capital-partners.eu/">Montana Capital Partners</a>, a firm that is focused on secondaries in private equity. In a nutshell, I try to make good investments for our investors such as pension funds, insurance companies and sovereign wealth funds.</p>
-<p>While writing my dissertation, I had plenty of time to run data analyses on large data sets, something I not only thoroughly enjoy, but something that I also find very insightful. At my current job, I still aim to improve my work with data-driven analyses, but there is only so much time you have between internal discussions, external meetings and calls, and day-to-day tasks.</p>
-<p>Fortunately, my wife enjoys puzzling more than I do, which gives me a few hours a week to spend my time thinking about financial markets and related topics and how to support my thoughts with data. I have also noticed that writing these thoughts down results in higher quality and clarity. That’s why I decided to start this blog. And hopefully, some of you find it helpful. I know that most certainly I will find it helpful… I’m often shocked how fast I can forget things that I looked into previously. As such, some posts will also be simple tutorials on how to do certain things in <a href="https://www.r-project.org/">R</a>, the data analysis software of my choice. And it’s also great for blogging; this blog was created with the awesome <a href="https://rstudio.github.io/distill/">Distill</a> package.</p>
-<p>Why did I choose the name of the blog “Uncertain times”? As a gentle reminder that there is only one thing for certain about the times to come, which after all drive current valuations in the financial markets: that they are uncertain. Hence, I’m quite confident that I can keep the blog title, and that’s great, because there aren’t too many other things I’m certain about.</p>
-<p><strong>Disclaimer:</strong> Any opinions I express in this blog are mine and do not represent in any way the opinions of anyone else, including my employer.</p>
+<p>I came across a neat <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3532444">working paper</a> by <span class="citation" data-cites="brown-etal:2020">Brown et al. (<a href="#ref-brown-etal:2020" role="doc-biblioref">2020</a>)</span>. One key issue in private equity (“PE”) research is the lack of high-quality data, in particular on underlying portfolio investments. The authors of the paper, some of the most prominent names in the field, are fortunate to get their hands on a large data set of over 45,000 investments in VC and buyout funds. Burgiss can be considered as the gold standard of PE data as they source the data directly from LPs and GPs that use it for their reporting and book-keeping - hence, it comes with very high quality. As I have outlined in <a href="https://www.christoph-jaeckel.com/posts/2021-04-24-the-performance-of-private-equity/">another post</a>, such high-quality data is hard to come by, so it’s exciting to see when researchers get their hands on it.</p>
+<p>It seems the authors of the paper were just as excited about this: instead of coming up with novel hypotheses and running fancy econometric models, they just provide some summary statistics. I appreciate that. Sometimes a simple table or graph is more insightful than a regression with 10 explanatory factors.</p>
+<aside>
+Given the authors’ background though, I’m sure they are working hard to squeeze some novel findings out of the data and I look forward to those studies, too.
+</aside>
+<h1 id="distribution-of-multiples">Distribution of multiples</h1>
+<p>This will be a short post. The paper is short to start with, so I recommend just reading it, but I will pick those findings that I found most interesting. Let’s get started by looking at the distribution of multiples of realized investments in the sample, shown below. The graph illustrates nicely why VC funds are much riskier than buyout funds, despite more underlying investments per fund: roughly every second VC fund is a full write-off and many more do only marginally better. How do strong VC funds create their performance? By investments that don’t even show up on this chart (as it is cut at 10x). Have a read of <a href="https://www.cbinsights.com/research/best-venture-capital-investments/">this article</a> about investments that made 40x (Xiaomi), 80x (Zynga), and even 300x (Google) for their investors.</p>
+<figure>
+<img src="Figure_1_Brown_etal_2020.PNG" alt="Screenshot of Figure 1 of the paper by Brown et al. (2020). Distribution of multiples / TVPIs for buyout and VC. Only realized investments considered." />
+<figcaption aria-hidden="true">Screenshot of Figure 1 of the paper by Brown et al. (2020). Distribution of multiples / TVPIs for buyout and VC. Only realized investments considered.</figcaption>
+</figure>
+<p>Such returns are simply not possible in a traditional buyout deal with more established companies and larger investment amounts to start with.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> However, investors get their money back much more consistently. “Only” every fifth investment is a full write-off and roughly 75% of all investments return more than the invested capital. The mean / median multiple is 2.28x / 2.07x for buyout investments, so on average the invested capital is more than doubled.</p>
+<p>Not surprisingly, returns are very cyclical, as shown below. Buyout investments done in the 2010s have seen multiples on average above 3x. In contrast, pre-GFC investments in 2007 only returned 2x, while investments in the 90s did even worse.</p>
+<figure>
+<img src="Figure_A.3_Brown_etal_2020.PNG" alt="Screenshot of Figure A.3 of the paper by Brown et al. (2020). Equal- and value-weighted mean and median multiples /TVPIs for realized investments over time, split by type of investment." />
+<figcaption aria-hidden="true">Screenshot of Figure A.3 of the paper by Brown et al. (2020). Equal- and value-weighted mean and median multiples /TVPIs for realized investments over time, split by type of investment.</figcaption>
+</figure>
+<h1 id="does-size-matter">Does size matter?</h1>
+<p>The paper goes on to show that there is a negative relation between the size of an investment and its multiple. The 25% largest buyout investments within a year have a value-weighted multiple that is c. 0.7x lower than the 25% smallest buyout investments (see their Figure 3, Panel A). I find this quite interesting as I have found in my <a href="https://www.christoph-jaeckel.com/posts/2021-04-24-the-performance-of-private-equity/">blog post</a> about PE <em>fund</em> performance that the weighted mean multiple of buyout funds is comparable, if not higher, than the mean / median, which implies that large buyout funds perform just as well as the smaller ones (see my Tables 4 and 6).</p>
+<aside>
+In their Figure A.2, they compare fund vs. holdings performance, so the data set includes both views. Hence, they could look into this topic in more detail. It might simply be the result of different data sources.
+</aside>
+<p>For VC investments, the authors find that the link between size and performance is positive. Their explanation is that investments in one holding are the sum across all of a fund’s exposure to a portfolio company. Obviously, VC funds are more likely to double down on investments that go well. Note that the effect is much smaller though compared to buyout.</p>
+<h1 id="how-long-is-the-holding-period">How long is the holding period?</h1>
+<p>Just like me, the authors are surprised to find that the median duration for both buyout and VC investments is five years. The surprise stems from the fact that the duration of VC funds is much longer than for buyout funds. A reconciliation of this finding can be found when we look at the relationship between performance and duration further below.</p>
+<figure>
+<img src="Figure_4_Brown_etal_2020.PNG" alt="Screenshot of Figure 4 of the paper by Brown et al. (2020). Distribution of duration of realized investments for buyout and VC." />
+<figcaption aria-hidden="true">Screenshot of Figure 4 of the paper by Brown et al. (2020). Distribution of duration of realized investments for buyout and VC.</figcaption>
+</figure>
+<h1 id="is-performance-related-to-duration">Is performance related to duration?</h1>
+<p>Similar to investment size, the results are opposite for buyout and VC investments:</p>
+<ul>
+<li><strong>Buyout:</strong> The most successful buyout investments are exited relatively early, as can be seen in the graph below. The mean TVPI is the highest for investments exited after 3 years, while it continuously declines thereafter.</li>
+<li><strong>VC:</strong> The opposite is true for VC investments: the longer an investment is held, the higher the multiple.</li>
+</ul>
+<figure>
+<img src="Figure_5_Brown_etal_2020.PNG" alt="Screenshot of Figure 5 of the paper by Brown et al. (2020). Multiples / TVPIs for buyout and VC investments vs. duration of investment. Only realized investments considered." />
+<figcaption aria-hidden="true">Screenshot of Figure 5 of the paper by Brown et al. (2020). Multiples / TVPIs for buyout and VC investments vs. duration of investment. Only realized investments considered.</figcaption>
+</figure>
+<p>To summarize: the average duration of VC and buyout investments is essentially the same. However, buyout funds exit their best investments relatively early and the multiples go down after a three year holding period. VC funds, on the other hand, generate the highest multiples with investments they were holding for a longer time and in which they invested in several financing rounds. This explains why the DPI on the <em>fund level</em> increases so much faster for buyout than for VC funds (see Figure 7 in my performance post).</p>
+<p>This concludes my post about this working paper. As mentioned, do yourself a favour and download the paper, it is quite short. You will be rewarded with a few more insights that I did not cover here. For example, they have a detailed descriptive statistics table (Table A.2) that neatly summarizes their data set.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-brown-etal:2020" class="csl-entry" role="doc-biblioentry">
+Brown, Gregory W, Robert S Harris, Wendy Hu, Tim Jenkinson, Steven N Kaplan, and David T Robinson. 2020. <span>“Private Equity Portfolio Companies: A First Look at Burgiss Holdings Data.”</span> <em>Available at SSRN 3532444</em>.
+</div>
+</div>
+<section class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><p>In Table A.1 of the paper, you can see that the mean/median size for buyout investments in the sample is 10.8x/7.5x larger than for VC investments.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
@@ -2165,21 +1612,12 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--/radix_placeholder_site_after_body-->
 <!--radix_placeholder_appendices-->
 <div class="appendix-bottom">
-<h3 id="updates-and-corrections">Corrections</h3>
-<p>If you see mistakes or want to suggest changes, please <a href="https://github.com/christophj/cjaeckel.github.io/issues/new">create an issue</a> on the source repository.</p>
+<h3 id="references">References</h3>
+<div id="references-listing"></div>
 </div>
 <!--/radix_placeholder_appendices-->
 <!--radix_placeholder_navigation_after_body-->
-<div class="distill-site-nav distill-site-footer">
-<p>Copyright 2021 <a
-href="https://www.linkedin.com/in/christoph-j%C3%A4ckel-97401127/">Christoph
-Jaeckel</a></p>
-<p>Code shared on this website licensed under the <a
-href="https://www.apache.org/licenses/LICENSE-2.0">Apache License,
-v2.0</a>.</p>
-</div>
 <!--/radix_placeholder_navigation_after_body-->
-
 
 </body>
 
