@@ -1,0 +1,2078 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+  <meta name="generator" content="distill" />
+
+  <style type="text/css">
+  /* Hide doc at startup (prevent jankiness while JS renders/transforms) */
+  body {
+    visibility: hidden;
+  }
+  </style>
+
+ <!--radix_placeholder_import_source-->
+ <!--/radix_placeholder_import_source-->
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { color: #00769e; background-color: #f1f3f5; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span { color: #00769e; } /* Normal */
+code span.al { color: #ad0000; } /* Alert */
+code span.an { color: #5e5e5e; } /* Annotation */
+code span.at { color: #657422; } /* Attribute */
+code span.bn { color: #ad0000; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #00769e; } /* ControlFlow */
+code span.ch { color: #20794d; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #5e5e5e; } /* Comment */
+code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+code span.dt { color: #ad0000; } /* DataType */
+code span.dv { color: #ad0000; } /* DecVal */
+code span.er { color: #ad0000; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #ad0000; } /* Float */
+code span.fu { color: #4758ab; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #5e5e5e; } /* Information */
+code span.kw { color: #00769e; } /* Keyword */
+code span.op { color: #5e5e5e; } /* Operator */
+code span.ot { color: #00769e; } /* Other */
+code span.pp { color: #ad0000; } /* Preprocessor */
+code span.sc { color: #5e5e5e; } /* SpecialChar */
+code span.ss { color: #20794d; } /* SpecialString */
+code span.st { color: #20794d; } /* String */
+code span.va { color: #111111; } /* Variable */
+code span.vs { color: #20794d; } /* VerbatimString */
+code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+</style>
+
+<style>
+  div.csl-bib-body { }
+  div.csl-entry {
+    clear: both;
+    }
+  .hanging div.csl-entry {
+    margin-left:2em;
+    text-indent:-2em;
+  }
+  div.csl-left-margin {
+    min-width:2em;
+    float:left;
+  }
+  div.csl-right-inline {
+    margin-left:2em;
+    padding-left:1em;
+  }
+  div.csl-indent {
+    margin-left: 2em;
+  }
+</style>
+
+  <!--radix_placeholder_meta_tags-->
+  <title>The Takahashi and Alexander model</title>
+
+  <meta property="description" itemprop="description" content="A brief introduction to the Takahashi and Alexander (TA) model for private equity fund cash flows and how to implement it in R."/>
+
+
+  <!--  https://schema.org/Article -->
+  <meta property="article:published" itemprop="datePublished" content="2023-04-16"/>
+  <meta property="article:created" itemprop="dateCreated" content="2023-04-16"/>
+  <meta name="article:author" content="Christoph Jäckel"/>
+
+  <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
+  <meta property="og:title" content="The Takahashi and Alexander model"/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:description" content="A brief introduction to the Takahashi and Alexander (TA) model for private equity fund cash flows and how to implement it in R."/>
+  <meta property="og:locale" content="en_US"/>
+
+  <!--  https://dev.twitter.com/cards/types/summary -->
+  <meta property="twitter:card" content="summary"/>
+  <meta property="twitter:title" content="The Takahashi and Alexander model"/>
+  <meta property="twitter:description" content="A brief introduction to the Takahashi and Alexander (TA) model for private equity fund cash flows and how to implement it in R."/>
+
+  <!--/radix_placeholder_meta_tags-->
+  
+  <meta name="citation_reference" content="citation_title=Modeling private investment cash flows with market-sensitive periodic growth;citation_author=Vishv Jeet"/>
+  <meta name="citation_reference" content="citation_title=Illiquid alternative asset fund modeling;citation_publisher=Institutional Investor Journals Umbrella;citation_volume=28;citation_author=Dean Takahashi;citation_author=Seth Alexander"/>
+  <!--radix_placeholder_rmarkdown_metadata-->
+
+  <script type="text/json" id="radix-rmarkdown-metadata">
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","categories","bibliography"]}},"value":[{"type":"character","attributes":{},"value":["The Takahashi and Alexander model"]},{"type":"character","attributes":{},"value":["A brief introduction to the Takahashi and Alexander (TA) model for private equity fund cash flows and how to implement it in R.\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Christoph Jäckel"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["2023-04-16"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained","code_folding"]}},"value":[{"type":"logical","attributes":{},"value":[false]},{"type":"logical","attributes":{},"value":[true]}]}]},{"type":"character","attributes":{},"value":["Private Equity","Research","R"]},{"type":"character","attributes":{},"value":["C:/Users/Christoph Jaeckel/Desktop/CJaeckel Blog/Blog/docs/biblio.bib"]}]}
+  </script>
+  <!--/radix_placeholder_rmarkdown_metadata-->
+  
+  <script type="text/json" id="radix-resource-manifest">
+  {"type":"character","attributes":{},"value":["the-takahashi-and-alexander-model_files/anchor-4.2.2/anchor.min.js","the-takahashi-and-alexander-model_files/bowser-1.9.3/bowser.min.js","the-takahashi-and-alexander-model_files/distill-2.2.21/template.v2.js","the-takahashi-and-alexander-model_files/figure-html5/ExampleChaningBowFactors-1.png","the-takahashi-and-alexander-model_files/figure-html5/PlotCumCFs-1.png","the-takahashi-and-alexander-model_files/figure-html5/PlotRDfunction-1.png","the-takahashi-and-alexander-model_files/header-attrs-2.18/header-attrs.js","the-takahashi-and-alexander-model_files/jquery-3.6.0/jquery-3.6.0.js","the-takahashi-and-alexander-model_files/jquery-3.6.0/jquery-3.6.0.min.js","the-takahashi-and-alexander-model_files/jquery-3.6.0/jquery-3.6.0.min.map","the-takahashi-and-alexander-model_files/kePrint-0.0.1/kePrint.js","the-takahashi-and-alexander-model_files/lightable-0.0.1/lightable.css","the-takahashi-and-alexander-model_files/popper-2.6.0/popper.min.js","the-takahashi-and-alexander-model_files/tippy-6.2.7/tippy-bundle.umd.min.js","the-takahashi-and-alexander-model_files/tippy-6.2.7/tippy-light-border.css","the-takahashi-and-alexander-model_files/tippy-6.2.7/tippy.css","the-takahashi-and-alexander-model_files/tippy-6.2.7/tippy.umd.min.js","the-takahashi-and-alexander-model_files/webcomponents-2.0.0/webcomponents.js"]}
+  </script>
+  <!--radix_placeholder_navigation_in_header-->
+  <!--/radix_placeholder_navigation_in_header-->
+  <!--radix_placeholder_distill-->
+
+  <style type="text/css">
+
+  body {
+    background-color: white;
+  }
+
+  .pandoc-table {
+    width: 100%;
+  }
+
+  .pandoc-table>caption {
+    margin-bottom: 10px;
+  }
+
+  .pandoc-table th:not([align]) {
+    text-align: left;
+  }
+
+  .pagedtable-footer {
+    font-size: 15px;
+  }
+
+  d-byline .byline {
+    grid-template-columns: 2fr 2fr;
+  }
+
+  d-byline .byline h3 {
+    margin-block-start: 1.5em;
+  }
+
+  d-byline .byline .authors-affiliations h3 {
+    margin-block-start: 0.5em;
+  }
+
+  .authors-affiliations .orcid-id {
+    width: 16px;
+    height:16px;
+    margin-left: 4px;
+    margin-right: 4px;
+    vertical-align: middle;
+    padding-bottom: 2px;
+  }
+
+  d-title .dt-tags {
+    margin-top: 1em;
+    grid-column: text;
+  }
+
+  .dt-tags .dt-tag {
+    text-decoration: none;
+    display: inline-block;
+    color: rgba(0,0,0,0.6);
+    padding: 0em 0.4em;
+    margin-right: 0.5em;
+    margin-bottom: 0.4em;
+    font-size: 70%;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  d-article table.gt_table td,
+  d-article table.gt_table th {
+    border-bottom: none;
+    font-size: 100%;
+  }
+
+  .html-widget {
+    margin-bottom: 2.0em;
+  }
+
+  .l-screen-inset {
+    padding-right: 16px;
+  }
+
+  .l-screen .caption {
+    margin-left: 10px;
+  }
+
+  .shaded {
+    background: rgb(247, 247, 247);
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .shaded .html-widget {
+    margin-bottom: 0;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .shaded .shaded-content {
+    background: white;
+  }
+
+  .text-output {
+    margin-top: 0;
+    line-height: 1.5em;
+  }
+
+  .hidden {
+    display: none !important;
+  }
+
+  d-article {
+    padding-top: 2.5rem;
+    padding-bottom: 30px;
+  }
+
+  d-appendix {
+    padding-top: 30px;
+  }
+
+  d-article>p>img {
+    width: 100%;
+  }
+
+  d-article h2 {
+    margin: 1rem 0 1.5rem 0;
+  }
+
+  d-article h3 {
+    margin-top: 1.5rem;
+  }
+
+  d-article iframe {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    margin-bottom: 2.0em;
+    width: 100%;
+  }
+
+  /* Tweak code blocks */
+
+  d-article div.sourceCode code,
+  d-article pre code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  d-article pre,
+  d-article div.sourceCode,
+  d-article div.sourceCode pre {
+    overflow: auto;
+  }
+
+  d-article div.sourceCode {
+    background-color: white;
+  }
+
+  d-article div.sourceCode pre {
+    padding-left: 10px;
+    font-size: 12px;
+    border-left: 2px solid rgba(0,0,0,0.1);
+  }
+
+  d-article pre {
+    font-size: 12px;
+    color: black;
+    background: none;
+    margin-top: 0;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+  }
+
+  d-article pre a {
+    border-bottom: none;
+  }
+
+  d-article pre a:hover {
+    border-bottom: none;
+    text-decoration: underline;
+  }
+
+  d-article details {
+    grid-column: text;
+    margin-bottom: 0.8em;
+  }
+
+  @media(min-width: 768px) {
+
+  d-article pre,
+  d-article div.sourceCode,
+  d-article div.sourceCode pre {
+    overflow: visible !important;
+  }
+
+  d-article div.sourceCode pre {
+    padding-left: 18px;
+    font-size: 14px;
+  }
+
+  d-article pre {
+    font-size: 14px;
+  }
+
+  }
+
+  figure img.external {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+    padding: 18px;
+    box-sizing: border-box;
+  }
+
+  /* CSS for d-contents */
+
+  .d-contents {
+    grid-column: text;
+    color: rgba(0,0,0,0.8);
+    font-size: 0.9em;
+    padding-bottom: 1em;
+    margin-bottom: 1em;
+    padding-bottom: 0.5em;
+    margin-bottom: 1em;
+    padding-left: 0.25em;
+    justify-self: start;
+  }
+
+  @media(min-width: 1000px) {
+    .d-contents.d-contents-float {
+      height: 0;
+      grid-column-start: 1;
+      grid-column-end: 4;
+      justify-self: center;
+      padding-right: 3em;
+      padding-left: 2em;
+    }
+  }
+
+  .d-contents nav h3 {
+    font-size: 18px;
+    margin-top: 0;
+    margin-bottom: 1em;
+  }
+
+  .d-contents li {
+    list-style-type: none
+  }
+
+  .d-contents nav > ul {
+    padding-left: 0;
+  }
+
+  .d-contents ul {
+    padding-left: 1em
+  }
+
+  .d-contents nav ul li {
+    margin-top: 0.6em;
+    margin-bottom: 0.2em;
+  }
+
+  .d-contents nav a {
+    font-size: 13px;
+    border-bottom: none;
+    text-decoration: none
+    color: rgba(0, 0, 0, 0.8);
+  }
+
+  .d-contents nav a:hover {
+    text-decoration: underline solid rgba(0, 0, 0, 0.6)
+  }
+
+  .d-contents nav > ul > li > a {
+    font-weight: 600;
+  }
+
+  .d-contents nav > ul > li > ul {
+    font-weight: inherit;
+  }
+
+  .d-contents nav > ul > li > ul > li {
+    margin-top: 0.2em;
+  }
+
+
+  .d-contents nav ul {
+    margin-top: 0;
+    margin-bottom: 0.25em;
+  }
+
+  .d-article-with-toc h2:nth-child(2) {
+    margin-top: 0;
+  }
+
+
+  /* Figure */
+
+  .figure {
+    position: relative;
+    margin-bottom: 2.5em;
+    margin-top: 1.5em;
+  }
+
+  .figure .caption {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 12px;
+    line-height: 1.5em;
+  }
+
+  .figure img.external {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+    padding: 18px;
+    box-sizing: border-box;
+  }
+
+  .figure .caption a {
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  .figure .caption b,
+  .figure .caption strong, {
+    font-weight: 600;
+    color: rgba(0, 0, 0, 1.0);
+  }
+
+  /* Citations */
+
+  d-article .citation {
+    color: inherit;
+    cursor: inherit;
+  }
+
+  div.hanging-indent{
+    margin-left: 1em; text-indent: -1em;
+  }
+
+  /* Citation hover box */
+
+  .tippy-box[data-theme~=light-border] {
+    background-color: rgba(250, 250, 250, 0.95);
+  }
+
+  .tippy-content > p {
+    margin-bottom: 0;
+    padding: 2px;
+  }
+
+
+  /* Tweak 1000px media break to show more text */
+
+  @media(min-width: 1000px) {
+    .base-grid,
+    distill-header,
+    d-title,
+    d-abstract,
+    d-article,
+    d-appendix,
+    distill-appendix,
+    d-byline,
+    d-footnote-list,
+    d-citation-list,
+    distill-footer {
+      grid-template-columns: [screen-start] 1fr [page-start kicker-start] 80px [middle-start] 50px [text-start kicker-end] 65px 65px 65px 65px 65px 65px 65px 65px [text-end gutter-start] 65px [middle-end] 65px [page-end gutter-end] 1fr [screen-end];
+      grid-column-gap: 16px;
+    }
+
+    .grid {
+      grid-column-gap: 16px;
+    }
+
+    d-article {
+      font-size: 1.06rem;
+      line-height: 1.7em;
+    }
+    figure .caption, .figure .caption, figure figcaption {
+      font-size: 13px;
+    }
+  }
+
+  @media(min-width: 1180px) {
+    .base-grid,
+    distill-header,
+    d-title,
+    d-abstract,
+    d-article,
+    d-appendix,
+    distill-appendix,
+    d-byline,
+    d-footnote-list,
+    d-citation-list,
+    distill-footer {
+      grid-template-columns: [screen-start] 1fr [page-start kicker-start] 60px [middle-start] 60px [text-start kicker-end] 60px 60px 60px 60px 60px 60px 60px 60px [text-end gutter-start] 60px [middle-end] 60px [page-end gutter-end] 1fr [screen-end];
+      grid-column-gap: 32px;
+    }
+
+    .grid {
+      grid-column-gap: 32px;
+    }
+  }
+
+
+  /* Get the citation styles for the appendix (not auto-injected on render since
+     we do our own rendering of the citation appendix) */
+
+  d-appendix .citation-appendix,
+  .d-appendix .citation-appendix {
+    font-size: 11px;
+    line-height: 15px;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    padding-left: 18px;
+    border: 1px solid rgba(0,0,0,0.1);
+    background: rgba(0, 0, 0, 0.02);
+    padding: 10px 18px;
+    border-radius: 3px;
+    color: rgba(150, 150, 150, 1);
+    overflow: hidden;
+    margin-top: -12px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  /* Include appendix styles here so they can be overridden */
+
+  d-appendix {
+    contain: layout style;
+    font-size: 0.8em;
+    line-height: 1.7em;
+    margin-top: 60px;
+    margin-bottom: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    color: rgba(0,0,0,0.5);
+    padding-top: 60px;
+    padding-bottom: 48px;
+  }
+
+  d-appendix h3 {
+    grid-column: page-start / text-start;
+    font-size: 15px;
+    font-weight: 500;
+    margin-top: 1em;
+    margin-bottom: 0;
+    color: rgba(0,0,0,0.65);
+  }
+
+  d-appendix h3 + * {
+    margin-top: 1em;
+  }
+
+  d-appendix ol {
+    padding: 0 0 0 15px;
+  }
+
+  @media (min-width: 768px) {
+    d-appendix ol {
+      padding: 0 0 0 30px;
+      margin-left: -30px;
+    }
+  }
+
+  d-appendix li {
+    margin-bottom: 1em;
+  }
+
+  d-appendix a {
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  d-appendix > * {
+    grid-column: text;
+  }
+
+  d-appendix > d-footnote-list,
+  d-appendix > d-citation-list,
+  d-appendix > distill-appendix {
+    grid-column: screen;
+  }
+
+  /* Include footnote styles here so they can be overridden */
+
+  d-footnote-list {
+    contain: layout style;
+  }
+
+  d-footnote-list > * {
+    grid-column: text;
+  }
+
+  d-footnote-list a.footnote-backlink {
+    color: rgba(0,0,0,0.3);
+    padding-left: 0.5em;
+  }
+
+
+
+  /* Anchor.js */
+
+  .anchorjs-link {
+    /*transition: all .25s linear; */
+    text-decoration: none;
+    border-bottom: none;
+  }
+  *:hover > .anchorjs-link {
+    margin-left: -1.125em !important;
+    text-decoration: none;
+    border-bottom: none;
+  }
+
+  /* Social footer */
+
+  .social_footer {
+    margin-top: 30px;
+    margin-bottom: 0;
+    color: rgba(0,0,0,0.67);
+  }
+
+  .disqus-comments {
+    margin-right: 30px;
+  }
+
+  .disqus-comment-count {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+  }
+
+  #disqus_thread {
+    margin-top: 30px;
+  }
+
+  .article-sharing a {
+    border-bottom: none;
+    margin-right: 8px;
+  }
+
+  .article-sharing a:hover {
+    border-bottom: none;
+  }
+
+  .sidebar-section.subscribe {
+    font-size: 12px;
+    line-height: 1.6em;
+  }
+
+  .subscribe p {
+    margin-bottom: 0.5em;
+  }
+
+
+  .article-footer .subscribe {
+    font-size: 15px;
+    margin-top: 45px;
+  }
+
+
+  .sidebar-section.custom {
+    font-size: 12px;
+    line-height: 1.6em;
+  }
+
+  .custom p {
+    margin-bottom: 0.5em;
+  }
+
+  /* Styles for listing layout (hide title) */
+  .layout-listing d-title, .layout-listing .d-title {
+    display: none;
+  }
+
+  /* Styles for posts lists (not auto-injected) */
+
+
+  .posts-with-sidebar {
+    padding-left: 45px;
+    padding-right: 45px;
+  }
+
+  .posts-list .description h2,
+  .posts-list .description p {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+  }
+
+  .posts-list .description h2 {
+    font-weight: 700;
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .posts-list h2.post-tag {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    padding-bottom: 12px;
+  }
+  .posts-list {
+    margin-top: 60px;
+    margin-bottom: 24px;
+  }
+
+  .posts-list .post-preview {
+    text-decoration: none;
+    overflow: hidden;
+    display: block;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 24px 0;
+  }
+
+  .post-preview-last {
+    border-bottom: none !important;
+  }
+
+  .posts-list .posts-list-caption {
+    grid-column: screen;
+    font-weight: 400;
+  }
+
+  .posts-list .post-preview h2 {
+    margin: 0 0 6px 0;
+    line-height: 1.2em;
+    font-style: normal;
+    font-size: 24px;
+  }
+
+  .posts-list .post-preview p {
+    margin: 0 0 12px 0;
+    line-height: 1.4em;
+    font-size: 16px;
+  }
+
+  .posts-list .post-preview .thumbnail {
+    box-sizing: border-box;
+    margin-bottom: 24px;
+    position: relative;
+    max-width: 500px;
+  }
+  .posts-list .post-preview img {
+    width: 100%;
+    display: block;
+  }
+
+  .posts-list .metadata {
+    font-size: 12px;
+    line-height: 1.4em;
+    margin-bottom: 18px;
+  }
+
+  .posts-list .metadata > * {
+    display: inline-block;
+  }
+
+  .posts-list .metadata .publishedDate {
+    margin-right: 2em;
+  }
+
+  .posts-list .metadata .dt-authors {
+    display: block;
+    margin-top: 0.3em;
+    margin-right: 2em;
+  }
+
+  .posts-list .dt-tags {
+    display: block;
+    line-height: 1em;
+  }
+
+  .posts-list .dt-tags .dt-tag {
+    display: inline-block;
+    color: rgba(0,0,0,0.6);
+    padding: 0.3em 0.4em;
+    margin-right: 0.2em;
+    margin-bottom: 0.4em;
+    font-size: 60%;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .posts-list img {
+    opacity: 1;
+  }
+
+  .posts-list img[data-src] {
+    opacity: 0;
+  }
+
+  .posts-more {
+    clear: both;
+  }
+
+
+  .posts-sidebar {
+    font-size: 16px;
+  }
+
+  .posts-sidebar h3 {
+    font-size: 16px;
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+
+  .sidebar-section {
+    margin-bottom: 30px;
+  }
+
+  .categories ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .categories li {
+    color: rgba(0, 0, 0, 0.8);
+    margin-bottom: 0;
+  }
+
+  .categories li>a {
+    border-bottom: none;
+  }
+
+  .categories li>a:hover {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  }
+
+  .categories .active {
+    font-weight: 600;
+  }
+
+  .categories .category-count {
+    color: rgba(0, 0, 0, 0.4);
+  }
+
+
+  @media(min-width: 768px) {
+    .posts-list .post-preview h2 {
+      font-size: 26px;
+    }
+    .posts-list .post-preview .thumbnail {
+      float: right;
+      width: 30%;
+      margin-bottom: 0;
+    }
+    .posts-list .post-preview .description {
+      float: left;
+      width: 45%;
+    }
+    .posts-list .post-preview .metadata {
+      float: left;
+      width: 20%;
+      margin-top: 8px;
+    }
+    .posts-list .post-preview p {
+      margin: 0 0 12px 0;
+      line-height: 1.5em;
+      font-size: 16px;
+    }
+    .posts-with-sidebar .posts-list {
+      float: left;
+      width: 75%;
+    }
+    .posts-with-sidebar .posts-sidebar {
+      float: right;
+      width: 20%;
+      margin-top: 60px;
+      padding-top: 24px;
+      padding-bottom: 24px;
+    }
+  }
+
+
+  /* Improve display for browsers without grid (IE/Edge <= 15) */
+
+  .downlevel {
+    line-height: 1.6em;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+  }
+
+  .downlevel .d-title {
+    padding-top: 6rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .downlevel .d-title h1 {
+    font-size: 50px;
+    font-weight: 700;
+    line-height: 1.1em;
+    margin: 0 0 0.5rem;
+  }
+
+  .downlevel .d-title p {
+    font-weight: 300;
+    font-size: 1.2rem;
+    line-height: 1.55em;
+    margin-top: 0;
+  }
+
+  .downlevel .d-byline {
+    padding-top: 0.8em;
+    padding-bottom: 0.8em;
+    font-size: 0.8rem;
+    line-height: 1.8em;
+  }
+
+  .downlevel .section-separator {
+    border: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .downlevel .d-article {
+    font-size: 1.06rem;
+    line-height: 1.7em;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+  }
+
+
+  .downlevel .d-appendix {
+    padding-left: 0;
+    padding-right: 0;
+    max-width: none;
+    font-size: 0.8em;
+    line-height: 1.7em;
+    margin-bottom: 0;
+    color: rgba(0,0,0,0.5);
+    padding-top: 40px;
+    padding-bottom: 48px;
+  }
+
+  .downlevel .footnotes ol {
+    padding-left: 13px;
+  }
+
+  .downlevel .base-grid,
+  .downlevel .distill-header,
+  .downlevel .d-title,
+  .downlevel .d-abstract,
+  .downlevel .d-article,
+  .downlevel .d-appendix,
+  .downlevel .distill-appendix,
+  .downlevel .d-byline,
+  .downlevel .d-footnote-list,
+  .downlevel .d-citation-list,
+  .downlevel .distill-footer,
+  .downlevel .appendix-bottom,
+  .downlevel .posts-container {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  @media(min-width: 768px) {
+    .downlevel .base-grid,
+    .downlevel .distill-header,
+    .downlevel .d-title,
+    .downlevel .d-abstract,
+    .downlevel .d-article,
+    .downlevel .d-appendix,
+    .downlevel .distill-appendix,
+    .downlevel .d-byline,
+    .downlevel .d-footnote-list,
+    .downlevel .d-citation-list,
+    .downlevel .distill-footer,
+    .downlevel .appendix-bottom,
+    .downlevel .posts-container {
+    padding-left: 150px;
+    padding-right: 150px;
+    max-width: 900px;
+  }
+  }
+
+  .downlevel pre code {
+    display: block;
+    border-left: 2px solid rgba(0, 0, 0, .1);
+    padding: 0 0 0 20px;
+    font-size: 14px;
+  }
+
+  .downlevel code, .downlevel pre {
+    color: black;
+    background: none;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+  }
+
+  .downlevel .posts-list .post-preview {
+    color: inherit;
+  }
+
+
+
+  </style>
+
+  <script type="application/javascript">
+
+  function is_downlevel_browser() {
+    if (bowser.isUnsupportedBrowser({ msie: "12", msedge: "16"},
+                                   window.navigator.userAgent)) {
+      return true;
+    } else {
+      return window.load_distill_framework === undefined;
+    }
+  }
+
+  // show body when load is complete
+  function on_load_complete() {
+
+    // add anchors
+    if (window.anchors) {
+      window.anchors.options.placement = 'left';
+      window.anchors.add('d-article > h2, d-article > h3, d-article > h4, d-article > h5');
+    }
+
+
+    // set body to visible
+    document.body.style.visibility = 'visible';
+
+    // force redraw for leaflet widgets
+    if (window.HTMLWidgets) {
+      var maps = window.HTMLWidgets.findAll(".leaflet");
+      $.each(maps, function(i, el) {
+        var map = this.getMap();
+        map.invalidateSize();
+        map.eachLayer(function(layer) {
+          if (layer instanceof L.TileLayer)
+            layer.redraw();
+        });
+      });
+    }
+
+    // trigger 'shown' so htmlwidgets resize
+    $('d-article').trigger('shown');
+  }
+
+  function init_distill() {
+
+    init_common();
+
+    // create front matter
+    var front_matter = $('<d-front-matter></d-front-matter>');
+    $('#distill-front-matter').wrap(front_matter);
+
+    // create d-title
+    $('.d-title').changeElementType('d-title');
+
+    // create d-byline
+    var byline = $('<d-byline></d-byline>');
+    $('.d-byline').replaceWith(byline);
+
+    // create d-article
+    var article = $('<d-article></d-article>');
+    $('.d-article').wrap(article).children().unwrap();
+
+    // move posts container into article
+    $('.posts-container').appendTo($('d-article'));
+
+    // create d-appendix
+    $('.d-appendix').changeElementType('d-appendix');
+
+    // flag indicating that we have appendix items
+    var appendix = $('.appendix-bottom').children('h3').length > 0;
+
+    // replace footnotes with <d-footnote>
+    $('.footnote-ref').each(function(i, val) {
+      appendix = true;
+      var href = $(this).attr('href');
+      var id = href.replace('#', '');
+      var fn = $('#' + id);
+      var fn_p = $('#' + id + '>p');
+      fn_p.find('.footnote-back').remove();
+      var text = fn_p.html();
+      var dtfn = $('<d-footnote></d-footnote>');
+      dtfn.html(text);
+      $(this).replaceWith(dtfn);
+    });
+    // remove footnotes
+    $('.footnotes').remove();
+
+    // move refs into #references-listing
+    $('#references-listing').replaceWith($('#refs'));
+
+    $('h1.appendix, h2.appendix').each(function(i, val) {
+      $(this).changeElementType('h3');
+    });
+    $('h3.appendix').each(function(i, val) {
+      var id = $(this).attr('id');
+      $('.d-contents a[href="#' + id + '"]').parent().remove();
+      appendix = true;
+      $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('d-appendix'));
+    });
+
+    // show d-appendix if we have appendix content
+    $("d-appendix").css('display', appendix ? 'grid' : 'none');
+
+    // localize layout chunks to just output
+    $('.layout-chunk').each(function(i, val) {
+
+      // capture layout
+      var layout = $(this).attr('data-layout');
+
+      // apply layout to markdown level block elements
+      var elements = $(this).children().not('details, div.sourceCode, pre, script');
+      elements.each(function(i, el) {
+        var layout_div = $('<div class="' + layout + '"></div>');
+        if (layout_div.hasClass('shaded')) {
+          var shaded_content = $('<div class="shaded-content"></div>');
+          $(this).wrap(shaded_content);
+          $(this).parent().wrap(layout_div);
+        } else {
+          $(this).wrap(layout_div);
+        }
+      });
+
+
+      // unwrap the layout-chunk div
+      $(this).children().unwrap();
+    });
+
+    // remove code block used to force  highlighting css
+    $('.distill-force-highlighting-css').parent().remove();
+
+    // remove empty line numbers inserted by pandoc when using a
+    // custom syntax highlighting theme
+    $('code.sourceCode a:empty').remove();
+
+    // load distill framework
+    load_distill_framework();
+
+    // wait for window.distillRunlevel == 4 to do post processing
+    function distill_post_process() {
+
+      if (!window.distillRunlevel || window.distillRunlevel < 4)
+        return;
+
+      // hide author/affiliations entirely if we have no authors
+      var front_matter = JSON.parse($("#distill-front-matter").html());
+      var have_authors = front_matter.authors && front_matter.authors.length > 0;
+      if (!have_authors)
+        $('d-byline').addClass('hidden');
+
+      // article with toc class
+      $('.d-contents').parent().addClass('d-article-with-toc');
+
+      // strip links that point to #
+      $('.authors-affiliations').find('a[href="#"]').removeAttr('href');
+
+      // add orcid ids
+      $('.authors-affiliations').find('.author').each(function(i, el) {
+        var orcid_id = front_matter.authors[i].orcidID;
+        if (orcid_id) {
+          var a = $('<a></a>');
+          a.attr('href', 'https://orcid.org/' + orcid_id);
+          var img = $('<img></img>');
+          img.addClass('orcid-id');
+          img.attr('alt', 'ORCID ID');
+          img.attr('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==');
+          a.append(img);
+          $(this).append(a);
+        }
+      });
+
+      // hide elements of author/affiliations grid that have no value
+      function hide_byline_column(caption) {
+        $('d-byline').find('h3:contains("' + caption + '")').parent().css('visibility', 'hidden');
+      }
+
+      // affiliations
+      var have_affiliations = false;
+      for (var i = 0; i<front_matter.authors.length; ++i) {
+        var author = front_matter.authors[i];
+        if (author.affiliation !== "&nbsp;") {
+          have_affiliations = true;
+          break;
+        }
+      }
+      if (!have_affiliations)
+        $('d-byline').find('h3:contains("Affiliations")').css('visibility', 'hidden');
+
+      // published date
+      if (!front_matter.publishedDate)
+        hide_byline_column("Published");
+
+      // document object identifier
+      var doi = $('d-byline').find('h3:contains("DOI")');
+      var doi_p = doi.next().empty();
+      if (!front_matter.doi) {
+        // if we have a citation and valid citationText then link to that
+        if ($('#citation').length > 0 && front_matter.citationText) {
+          doi.html('Citation');
+          $('<a href="#citation"></a>')
+            .text(front_matter.citationText)
+            .appendTo(doi_p);
+        } else {
+          hide_byline_column("DOI");
+        }
+      } else {
+        $('<a></a>')
+           .attr('href', "https://doi.org/" + front_matter.doi)
+           .html(front_matter.doi)
+           .appendTo(doi_p);
+      }
+
+       // change plural form of authors/affiliations
+      if (front_matter.authors.length === 1) {
+        var grid = $('.authors-affiliations');
+        grid.children('h3:contains("Authors")').text('Author');
+        grid.children('h3:contains("Affiliations")').text('Affiliation');
+      }
+
+      // remove d-appendix and d-footnote-list local styles
+      $('d-appendix > style:first-child').remove();
+      $('d-footnote-list > style:first-child').remove();
+
+      // move appendix-bottom entries to the bottom
+      $('.appendix-bottom').appendTo('d-appendix').children().unwrap();
+      $('.appendix-bottom').remove();
+
+      // hoverable references
+      $('span.citation[data-cites]').each(function() {
+        const citeChild = $(this).children()[0]
+        // Do not process if @xyz has been used without escaping and without bibliography activated
+        // https://github.com/rstudio/distill/issues/466
+        if (citeChild === undefined) return true
+
+        if (citeChild.nodeName == "D-FOOTNOTE") {
+          var fn = citeChild
+          $(this).html(fn.shadowRoot.querySelector("sup"))
+          $(this).id = fn.id
+          fn.remove()
+        }
+        var refs = $(this).attr('data-cites').split(" ");
+        var refHtml = refs.map(function(ref) {
+          // Could use CSS.escape too here, we insure backward compatibility in navigator
+          return "<p>" + $('div[id="ref-' + ref + '"]').html() + "</p>";
+        }).join("\n");
+        window.tippy(this, {
+          allowHTML: true,
+          content: refHtml,
+          maxWidth: 500,
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start'
+        });
+      });
+
+      // fix footnotes in tables (#411)
+      // replacing broken distill.pub feature
+      $('table d-footnote').each(function() {
+        // we replace internal showAtNode methode which is triggered when hovering a footnote
+        this.hoverBox.showAtNode = function(node) {
+          // ported from https://github.com/distillpub/template/pull/105/files
+          calcOffset = function(elem) {
+              let x = elem.offsetLeft;
+              let y = elem.offsetTop;
+              // Traverse upwards until an `absolute` element is found or `elem`
+              // becomes null.
+              while (elem = elem.offsetParent && elem.style.position != 'absolute') {
+                  x += elem.offsetLeft;
+                  y += elem.offsetTop;
+              }
+
+              return { left: x, top: y };
+          }
+          // https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetTop
+          const bbox = node.getBoundingClientRect();
+          const offset = calcOffset(node);
+          this.show([offset.left + bbox.width, offset.top + bbox.height]);
+        }
+      })
+
+      // clear polling timer
+      clearInterval(tid);
+
+      // show body now that everything is ready
+      on_load_complete();
+    }
+
+    var tid = setInterval(distill_post_process, 50);
+    distill_post_process();
+
+  }
+
+  function init_downlevel() {
+
+    init_common();
+
+     // insert hr after d-title
+    $('.d-title').after($('<hr class="section-separator"/>'));
+
+    // check if we have authors
+    var front_matter = JSON.parse($("#distill-front-matter").html());
+    var have_authors = front_matter.authors && front_matter.authors.length > 0;
+
+    // manage byline/border
+    if (!have_authors)
+      $('.d-byline').remove();
+    $('.d-byline').after($('<hr class="section-separator"/>'));
+    $('.d-byline a').remove();
+
+    // remove toc
+    $('.d-contents').remove();
+
+    // move appendix elements
+    $('h1.appendix, h2.appendix').each(function(i, val) {
+      $(this).changeElementType('h3');
+    });
+    $('h3.appendix').each(function(i, val) {
+      $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('.d-appendix'));
+    });
+
+
+    // inject headers into references and footnotes
+    var refs_header = $('<h3></h3>');
+    refs_header.text('References');
+    $('#refs').prepend(refs_header);
+
+    var footnotes_header = $('<h3></h3');
+    footnotes_header.text('Footnotes');
+    $('.footnotes').children('hr').first().replaceWith(footnotes_header);
+
+    // move appendix-bottom entries to the bottom
+    $('.appendix-bottom').appendTo('.d-appendix').children().unwrap();
+    $('.appendix-bottom').remove();
+
+    // remove appendix if it's empty
+    if ($('.d-appendix').children().length === 0)
+      $('.d-appendix').remove();
+
+    // prepend separator above appendix
+    $('.d-appendix').before($('<hr class="section-separator" style="clear: both"/>'));
+
+    // trim code
+    $('pre>code').each(function(i, val) {
+      $(this).html($.trim($(this).html()));
+    });
+
+    // move posts-container right before article
+    $('.posts-container').insertBefore($('.d-article'));
+
+    $('body').addClass('downlevel');
+
+    on_load_complete();
+  }
+
+
+  function init_common() {
+
+    // jquery plugin to change element types
+    (function($) {
+      $.fn.changeElementType = function(newType) {
+        var attrs = {};
+
+        $.each(this[0].attributes, function(idx, attr) {
+          attrs[attr.nodeName] = attr.nodeValue;
+        });
+
+        this.replaceWith(function() {
+          return $("<" + newType + "/>", attrs).append($(this).contents());
+        });
+      };
+    })(jQuery);
+
+    // prevent underline for linked images
+    $('a > img').parent().css({'border-bottom' : 'none'});
+
+    // mark non-body figures created by knitr chunks as 100% width
+    $('.layout-chunk').each(function(i, val) {
+      var figures = $(this).find('img, .html-widget');
+      // ignore leaflet img layers (#106)
+      figures = figures.filter(':not(img[class*="leaflet"])')
+      if ($(this).attr('data-layout') !== "l-body") {
+        figures.css('width', '100%');
+      } else {
+        figures.css('max-width', '100%');
+        figures.filter("[width]").each(function(i, val) {
+          var fig = $(this);
+          fig.css('width', fig.attr('width') + 'px');
+        });
+
+      }
+    });
+
+    // auto-append index.html to post-preview links in file: protocol
+    // and in rstudio ide preview
+    $('.post-preview').each(function(i, val) {
+      if (window.location.protocol === "file:")
+        $(this).attr('href', $(this).attr('href') + "index.html");
+    });
+
+    // get rid of index.html references in header
+    if (window.location.protocol !== "file:") {
+      $('.distill-site-header a[href]').each(function(i,val) {
+        $(this).attr('href', $(this).attr('href').replace(/^index[.]html/, "./"));
+      });
+    }
+
+    // add class to pandoc style tables
+    $('tr.header').parent('thead').parent('table').addClass('pandoc-table');
+    $('.kable-table').children('table').addClass('pandoc-table');
+
+    // add figcaption style to table captions
+    $('caption').parent('table').addClass("figcaption");
+
+    // initialize posts list
+    if (window.init_posts_list)
+      window.init_posts_list();
+
+    // implmement disqus comment link
+    $('.disqus-comment-count').click(function() {
+      window.headroom_prevent_pin = true;
+      $('#disqus_thread').toggleClass('hidden');
+      if (!$('#disqus_thread').hasClass('hidden')) {
+        var offset = $(this).offset();
+        $(window).resize();
+        $('html, body').animate({
+          scrollTop: offset.top - 35
+        });
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    if (is_downlevel_browser())
+      init_downlevel();
+    else
+      window.addEventListener('WebComponentsReady', init_distill);
+  });
+
+  </script>
+
+  <!--/radix_placeholder_distill-->
+  <script src="the-takahashi-and-alexander-model_files/header-attrs-2.18/header-attrs.js"></script>
+  <script src="the-takahashi-and-alexander-model_files/kePrint-0.0.1/kePrint.js"></script>
+  <link href="the-takahashi-and-alexander-model_files/lightable-0.0.1/lightable.css" rel="stylesheet" />
+  <script src="the-takahashi-and-alexander-model_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+  <script src="the-takahashi-and-alexander-model_files/popper-2.6.0/popper.min.js"></script>
+  <link href="the-takahashi-and-alexander-model_files/tippy-6.2.7/tippy.css" rel="stylesheet" />
+  <link href="the-takahashi-and-alexander-model_files/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
+  <script src="the-takahashi-and-alexander-model_files/tippy-6.2.7/tippy.umd.min.js"></script>
+  <script src="the-takahashi-and-alexander-model_files/anchor-4.2.2/anchor.min.js"></script>
+  <script src="the-takahashi-and-alexander-model_files/bowser-1.9.3/bowser.min.js"></script>
+  <script src="the-takahashi-and-alexander-model_files/webcomponents-2.0.0/webcomponents.js"></script>
+  <script src="the-takahashi-and-alexander-model_files/distill-2.2.21/template.v2.js"></script>
+  <!--radix_placeholder_site_in_header-->
+  <!--/radix_placeholder_site_in_header-->
+
+
+</head>
+
+<body>
+
+<!--radix_placeholder_front_matter-->
+
+<script id="distill-front-matter" type="text/json">
+{"title":"The Takahashi and Alexander model","description":"A brief introduction to the Takahashi and Alexander (TA) model for private equity fund cash flows and how to implement it in R.","authors":[{"author":"Christoph Jäckel","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2023-04-16T00:00:00.000+02:00","citationText":"Jäckel, 2023"}
+</script>
+
+<!--/radix_placeholder_front_matter-->
+<!--radix_placeholder_navigation_before_body-->
+<!--/radix_placeholder_navigation_before_body-->
+<!--radix_placeholder_site_before_body-->
+<!--/radix_placeholder_site_before_body-->
+
+<div class="d-title">
+<h1>The Takahashi and Alexander model</h1>
+<!--radix_placeholder_categories-->
+<div class="dt-tags">
+<div class="dt-tag">Private Equity</div>
+<div class="dt-tag">Research</div>
+<div class="dt-tag">R</div>
+</div>
+<!--/radix_placeholder_categories-->
+<p><p>A brief introduction to the Takahashi and Alexander (TA) model for private equity fund cash flows and how to implement it in R.</p></p>
+</div>
+
+<div class="d-byline">
+  Christoph Jäckel true 
+  
+<br/>2023-04-16
+</div>
+
+<div class="d-article">
+<p>Modelling cash flows of private equity funds is important for investors, especially for liquidity management. Unfortunately, it is also difficult. An important question an investor has to ask is what model to use. In the end, all models are simplifications of reality, but there is a huge variety on what assumptions are made, which parameters are important, and which are ignored.</p>
+<p>In this post, I’m presenting one of the earliest models for fund cash flows, the Takahashi and Alexander (TA) model, and show how to implement it in R. Introduced in <span class="citation" data-cites="takahashi-alexander:2002">Takahashi and Alexander (<a href="#ref-takahashi-alexander:2002" role="doc-biblioref">2002</a>)</span> over two decades ago, it is still used in the industry today. This success stems in my opinion from its simplicity: the model can be described with a few simple equations and easily be implemented in tools such as Excel and R in a few minutes to draw nice-looking curves of capital calls and distributions.</p>
+<p>This simplicity makes the model quite useful for quick analyses. Sometimes, all you need is a capital call and distribution curve of a fund to test out a few hypotheses such as what the gross/net spread of a fund should be with certain fee and carry terms. In the next section, I outline the relevant equations. I thereby follow the notation of <span class="citation" data-cites="jeet:2020">Jeet (<a href="#ref-jeet:2020" role="doc-biblioref">2020</a>)</span>, who provides a nice introduction as well as a helpful modification to the model.</p>
+<h1 id="the-takahashi-and-alexander-model">The Takahashi and Alexander model</h1>
+<p>There are three vectors an investor is interested about a PE fund: a vector of capital calls, distributions, and NAVs. The TA model starts by defining the capital call in period <span class="math inline">\(t\)</span>, <span class="math inline">\(C_t\)</span>, as the uncalled commitment at the end of the previous period, <span class="math inline">\(UC_{t-1}\)</span>, multiplied with a rate of contribution, <span class="math inline">\(RC\)</span>, that is a function of the age of the fund:</p>
+<p><span class="math display">\[ C_t = UC_{t-1} \times RC(Age_{t-1}). \]</span></p>
+<p>TA give some guidance on how to specify RC: “Rather than specify a different rate of contribution every year, we simplify the model by separating the first two years of contributions from subsequent years. Typically, we would assume two similarly sized large contributions in years one and two, and geometrically declining contributions in subsequent years.” Of course, one can deviate from this. For example, I don’t see a good reason to separate between the first two years and subsequent years and would rather separate between the investment period (typically 3-5 years) and thereafter.</p>
+<p>Distributions in <span class="math inline">\(D_t\)</span> are the product of the NAV at the end of the previous period, <span class="math inline">\(NAV_{t-1}\)</span>, multiplied with a growth rate, <span class="math inline">\(G_t\)</span>,<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> and a rate of distribution function <span class="math inline">\(RD\)</span>:</p>
+<p><span class="math display">\[ D_t=NAV_{t-1} \times (1+G_t) \times RD(Age_t-1, bow, L). \]</span>
+In contrast to the RC function, TA specify the RD function, which is the defining characteristic of their model. Concretely,</p>
+<p><span class="math display">\[ RD=\left(\frac{Age_{t-1}}{L} \right)^{bow}. \]</span></p>
+<p>Below I plot the RD function for different <span class="math inline">\(bow\)</span> values to get a better understanding of the mechanics. A few observations:</p>
+<ul>
+<li>The rate of distribution increases over time and always ends up at 100%</li>
+<li>The higher the <span class="math inline">\(bow\)</span> factor, the lower the rate of distribution is in earlier years</li>
+<li>A <span class="math inline">\(bow\)</span> factor of 1 is the special case for which the rate of distribution increases linearly with the age of the PE fund</li>
+</ul>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://r-datatable.com'>data.table</a></span><span class='op'>)</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span></span>
+<span><span class='va'>RD_function</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>age</span>, <span class='va'>L</span>, <span class='va'>bow</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span>  <span class='kw'><a href='https://rdrr.io/r/base/function.html'>return</a></span><span class='op'>(</span><span class='op'>(</span><span class='va'>age</span><span class='op'>/</span><span class='va'>L</span><span class='op'>)</span><span class='op'>^</span><span class='va'>bow</span><span class='op'>)</span></span>
+<span><span class='op'>}</span></span>
+<span><span class='va'>vecBow</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span>from<span class='op'>=</span><span class='fl'>0.5</span>,to<span class='op'>=</span><span class='fl'>3</span>,by<span class='op'>=</span><span class='fl'>0.5</span><span class='op'>)</span></span>
+<span><span class='va'>vecAge</span> <span class='op'>&lt;-</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>15</span></span>
+<span><span class='va'>rdDT</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span><span class='op'>(</span>Bow <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='va'>vecBow</span>, each<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>vecAge</span><span class='op'>)</span><span class='op'>)</span>,</span>
+<span>                   Age <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='va'>vecAge</span>, times<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>vecBow</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></span>
+<span><span class='va'>rdDT</span><span class='op'>[</span>, <span class='va'>RD</span><span class='op'>:=</span><span class='fu'>RD_function</span><span class='op'>(</span>age<span class='op'>=</span><span class='va'>Age</span>, bow<span class='op'>=</span><span class='va'>Bow</span>,L<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span><span class='op'>(</span><span class='va'>Age</span><span class='op'>)</span><span class='op'>)</span>, by<span class='op'>=</span><span class='va'>Bow</span><span class='op'>]</span></span>
+<span></span>
+<span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>rdDT</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>Age</span>, y<span class='op'>=</span><span class='va'>RD</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> </span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> </span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_wrap.html'>facet_wrap</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/vars.html'>vars</a></span><span class='op'>(</span><span class='va'>Bow</span><span class='op'>)</span>, nrow<span class='op'>=</span><span class='fl'>3</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>ylab</a></span><span class='op'>(</span><span class='st'>"Rate of Distribution (RD)"</span><span class='op'>)</span></span></code></pre>
+</div>
+</details>
+<div class="figure"><span style="display:block;" id="fig:PlotRDfunction"></span>
+<img src="the-takahashi-and-alexander-model_files/figure-html5/PlotRDfunction-1.png" alt="Rate of distribution (RD) in the TA model for different bow factors." width="624" />
+<p class="caption">
+Figure 1: Rate of distribution (RD) in the TA model for different bow factors.
+</p>
+</div>
+</div>
+<h1 id="implementation-in-r">Implementation in R</h1>
+<p>Below is the code for an R function to run the TA model in R, together with a function that produces outputs, including <code>ggplot2</code> plots:</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'># This file includes functions to run the Takahashi / Alexander (TA) model</span></span>
+<span></span>
+<span><span class='co'>#' This function produces vectors of contributions, distributions, and NAVs,</span></span>
+<span><span class='co'>#' based on the deterministic Takahashi / Alexander (TA) (2002) model and</span></span>
+<span><span class='co'>#' adjusted for a periodically changing growth rate, as proposed by</span></span>
+<span><span class='co'>#' Jeet (2020).</span></span>
+<span><span class='co'>#'</span></span>
+<span><span class='co'>#' The inputs of the model are explained in the parameter section. The</span></span>
+<span><span class='co'>#' inputs have to be adjusted based on the desired periodicity (annually,</span></span>
+<span><span class='co'>#' quarterly, etc.).. Three equations fully describe the model:</span></span>
+<span><span class='co'>#'</span></span>
+<span><span class='co'>#' Equation to model capital calls \eqn{C_t} in period t, based on</span></span>
+<span><span class='co'>#' uncalled capital \eqn{UC_t}:</span></span>
+<span><span class='co'>#'</span></span>
+<span><span class='co'>#' \deqn{C[t] = UC[t] * .vec\_RC[t]}</span></span>
+<span><span class='co'>#'</span></span>
+<span><span class='co'>#' \code{.vec_RC} is the vector of rate of contributions. This one is pretty</span></span>
+<span><span class='co'>#' straightforward; the called capital in a period is the beginning-of-period</span></span>
+<span><span class='co'>#' uncalled capital multiplied with the percentage of capital assumed /</span></span>
+<span><span class='co'>#' expected to be called in the period.</span></span>
+<span><span class='co'>#'</span></span>
+<span><span class='co'>#' To model distributions \eqn{D_t} in period t, the following equation is</span></span>
+<span><span class='co'>#' used:</span></span>
+<span><span class='co'>#'</span></span>
+<span><span class='co'>#' \deqn{D[t] = NAV[t-1] * (1+.vec\_growth[t]) * RD(Age[t-1],.bow,.life)}</span></span>
+<span><span class='co'>#'</span></span>
+<span><span class='co'>#' The distributions have to come from the NAV of the fund, which is grown</span></span>
+<span><span class='co'>#' by a growth factor over time. The level of distributions is then defined</span></span>
+<span><span class='co'>#' by a function RD as follows:</span></span>
+<span><span class='co'>#'</span></span>
+<span><span class='co'>#' \deqn{RD = (\frac{Age[t-1]}{.life})^{.bow}}</span></span>
+<span><span class='co'>#'</span></span>
+<span><span class='co'>#' The term in brackets linearly increases from 0 to 1 over the fund's</span></span>
+<span><span class='co'>#' life time \code{.life}. With the \code{.bow} factor, the modeler can</span></span>
+<span><span class='co'>#' control how front or backloaded those distributions are. The higher</span></span>
+<span><span class='co'>#' the bow factor, the smaller RD becomes as the factor in brackets is</span></span>
+<span><span class='co'>#' typically below 1.</span></span>
+<span><span class='co'>#'</span></span>
+<span><span class='co'>#' The NAV is modeled simply by growing it with the growth factor and</span></span>
+<span><span class='co'>#' adjusting for distributions and capital calls:</span></span>
+<span><span class='co'>#'</span></span>
+<span><span class='co'>#' \deqn{NAV[t] = NAV[t-1]*(1+vec_growth[t]) + C[t] - D[t]}</span></span>
+<span><span class='co'>#'</span></span>
+<span><span class='co'>#'</span></span>
+<span><span class='co'>#' @param .bow numeric; defines the distribution rate over the life of the</span></span>
+<span><span class='co'>#'        investment. A higher bow factor projects more distributions</span></span>
+<span><span class='co'>#'        occurring later in the investment’s life.</span></span>
+<span><span class='co'>#' @param .life numeric; the term / lifetime of the fund.</span></span>
+<span><span class='co'>#' @param .vec_growth numeric vector; growth vector of the NAV; user can</span></span>
+<span><span class='co'>#'        also only supply a scaler / one number, in which case a constant</span></span>
+<span><span class='co'>#'        growth rate is assumed.</span></span>
+<span><span class='co'>#' @param .vec_RC numeric vector; vector of rate of contributions. Valid inputs</span></span>
+<span><span class='co'>#'         are between 0 and 1.</span></span>
+<span><span class='co'>#' @param .nav numeric; NAV at the beginning; default value is 0, which implies</span></span>
+<span><span class='co'>#'         that the full term of the fund is modeled; however, the TA model</span></span>
+<span><span class='co'>#'         can also be applied to funds that are already older than age 0.</span></span>
+<span><span class='co'>#' @param .uc numeric; uncalled capital; for a new fund (e.g.\code{.nav=0}),</span></span>
+<span><span class='co'>#'        this value is equal to the commitment amount.</span></span>
+<span><span class='co'>#' @return A data.table holding all the relevant information of the fund:</span></span>
+<span><span class='co'>#'         Inputs of TA model: Age, bow factor, rate of contributions, growth rate</span></span>
+<span><span class='co'>#'         Outputs of TA model: calls and distributions (also cumulated); NAV</span></span>
+<span><span class='co'>#'         and uncalled capital both at the beginning of the period (BOP) and</span></span>
+<span><span class='co'>#'         end of period (EOP).</span></span>
+<span><span class='co'>#'</span></span>
+<span><span class='co'>#' @export</span></span>
+<span><span class='co'>#'</span></span>
+<span><span class='co'>#' @references</span></span>
+<span><span class='co'>#' Takahashi / Alexander (2002): Illiquid Alternative Asset Fund Modeling,</span></span>
+<span><span class='co'>#' The Journal of Portfolio Management</span></span>
+<span><span class='co'>#' Jeet (2020): Modeling Private Investment Cash Flows with</span></span>
+<span><span class='co'>#' Market-Sensitive Periodic Growth, PGIM</span></span>
+<span><span class='co'>#'</span></span>
+<span><span class='co'>#' @examples</span></span>
+<span><span class='co'>#' # Taken from Jeet (2020): Modeling Private Investment Cash Flows</span></span>
+<span><span class='co'>#' # with Market_Sensitive Periodic Growth</span></span>
+<span><span class='co'>#' run_TA_model(.bow=2,</span></span>
+<span><span class='co'>#'              .life=13,</span></span>
+<span><span class='co'>#'              .nav=0,</span></span>
+<span><span class='co'>#'              .uc=1,</span></span>
+<span><span class='co'>#'              .vec_growth = c(0.05,0.04,0.06,0.01,-0.01,0.02,</span></span>
+<span><span class='co'>#'                              0.07,0.08,0.02,0.05,0.07,0.02,0.03),</span></span>
+<span><span class='co'>#'              .vec_RC = c(0.25,0.33,rep(0.5,11)))</span></span>
+<span><span class='co'>#' # Run it quarterly (not quite the same as above, as cash flows are not</span></span>
+<span><span class='co'>#' # compouned for a full year anymore)</span></span>
+<span><span class='co'>#' run_TA_model(.bow=2,</span></span>
+<span><span class='co'>#'              .life=13*4,</span></span>
+<span><span class='co'>#'              .nav=0,</span></span>
+<span><span class='co'>#'              .uc=1,</span></span>
+<span><span class='co'>#'              .vec_growth = rep(c(0.05,0.04,0.06,0.01,-0.01,0.02,</span></span>
+<span><span class='co'>#'                              0.07,0.08,0.02,0.05,0.07,0.02,0.03),</span></span>
+<span><span class='co'>#'                              each=4)/4,</span></span>
+<span><span class='co'>#'              .vec_RC = rep(c(0.25,0.33,rep(0.5,11)),</span></span>
+<span><span class='co'>#'                        each=4)/5)</span></span>
+<span><span class='co'>#' # Model fund that is already running for a few years</span></span>
+<span><span class='co'>#' run_TA_model(.bow=2,</span></span>
+<span><span class='co'>#'              .life=7,</span></span>
+<span><span class='co'>#'              .nav=0.8,</span></span>
+<span><span class='co'>#'              .uc=0.15,</span></span>
+<span><span class='co'>#'              .vec_growth = rep(0.07, times=7),</span></span>
+<span><span class='co'>#'              .vec_RC =     rep(0.75,times=7))</span></span>
+<span><span class='va'>run_TA_model</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>.bow</span>, <span class='va'>.life</span>, <span class='va'>.vec_growth</span>, <span class='va'>.vec_RC</span>,</span>
+<span>                         <span class='va'>.nav</span> <span class='op'>=</span> <span class='fl'>0</span>, <span class='va'>.uc</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span></span>
+<span></span>
+<span>  <span class='co'>####### Checks</span></span>
+<span>  <span class='co'>#'#################################################################################</span></span>
+<span>  <span class='co'># Check that .vec_growth and .vec_RC are the same length</span></span>
+<span>  <span class='va'>len</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>.vec_growth</span><span class='op'>)</span></span>
+<span>  <span class='co'>#If user used scalar, create vector with same length as .vec_RC</span></span>
+<span>  <span class='kw'>if</span> <span class='op'>(</span><span class='va'>len</span><span class='op'>==</span><span class='fl'>1</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span>    <span class='va'>.vec_growth</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='va'>.vec_growth</span>, times<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>.vec_RC</span><span class='op'>)</span><span class='op'>)</span></span>
+<span>  <span class='op'>}</span> <span class='kw'>else</span> <span class='kw'>if</span> <span class='op'>(</span><span class='va'>len</span><span class='op'>!=</span><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>.vec_RC</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span>    <span class='kw'><a href='https://rdrr.io/r/base/stop.html'>stop</a></span><span class='op'>(</span><span class='st'>"run_TA_model: .vec_growth and .vec_RC not of same length."</span><span class='op'>)</span></span>
+<span>  <span class='op'>}</span> <span class='kw'>else</span> <span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>.vec_RC</span><span class='op'>)</span><span class='op'>!=</span><span class='va'>.life</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span>    <span class='kw'><a href='https://rdrr.io/r/base/stop.html'>stop</a></span><span class='op'>(</span><span class='st'>"run_TA_model: the length of .vec_RC has to be the same as .life"</span><span class='op'>)</span></span>
+<span>  <span class='op'>}</span></span>
+<span></span>
+<span>  <span class='co'>#'#################################################################################</span></span>
+<span>  <span class='co'># Check that assumptions are reasonable</span></span>
+<span>  <span class='kw'>if</span> <span class='op'>(</span><span class='op'>!</span><span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>is.numeric</a></span><span class='op'>(</span><span class='va'>.bow</span><span class='op'>)</span> <span class='op'>|</span> <span class='va'>.bow</span><span class='op'>&lt;</span><span class='fl'>0</span> <span class='op'>|</span> <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>.bow</span><span class='op'>)</span><span class='op'>!=</span><span class='fl'>1</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span>    <span class='kw'><a href='https://rdrr.io/r/base/stop.html'>stop</a></span><span class='op'>(</span><span class='st'>"Bow factor .bow should be numeric, not a vector, and non-negative."</span><span class='op'>)</span></span>
+<span>  <span class='op'>}</span></span>
+<span>  <span class='kw'>if</span> <span class='op'>(</span><span class='op'>!</span><span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>is.numeric</a></span><span class='op'>(</span><span class='va'>.life</span><span class='op'>)</span> <span class='op'>|</span> <span class='va'>.life</span><span class='op'>&lt;</span><span class='fl'>0</span> <span class='op'>|</span> <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>.life</span><span class='op'>)</span><span class='op'>!=</span><span class='fl'>1</span> <span class='op'>|</span> <span class='va'>.life</span><span class='op'>&lt;</span><span class='fl'>2</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span>    <span class='kw'><a href='https://rdrr.io/r/base/stop.html'>stop</a></span><span class='op'>(</span><span class='st'>"Life .life should be numeric, not a vector, larger than 1, and non-negative."</span><span class='op'>)</span></span>
+<span>  <span class='op'>}</span></span>
+<span>  <span class='kw'>if</span> <span class='op'>(</span><span class='op'>!</span><span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>is.numeric</a></span><span class='op'>(</span><span class='va'>.nav</span><span class='op'>)</span> <span class='op'>|</span> <span class='va'>.nav</span><span class='op'>&lt;</span><span class='fl'>0</span> <span class='op'>|</span> <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>.nav</span><span class='op'>)</span><span class='op'>!=</span><span class='fl'>1</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span>    <span class='kw'><a href='https://rdrr.io/r/base/stop.html'>stop</a></span><span class='op'>(</span><span class='st'>"NAV .nav should be numeric, not a vector, and non-negative."</span><span class='op'>)</span></span>
+<span>  <span class='op'>}</span></span>
+<span>  <span class='kw'>if</span> <span class='op'>(</span><span class='op'>!</span><span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>is.numeric</a></span><span class='op'>(</span><span class='va'>.uc</span><span class='op'>)</span> <span class='op'>|</span> <span class='va'>.uc</span><span class='op'>&lt;</span><span class='fl'>0</span> <span class='op'>|</span> <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>.uc</span><span class='op'>)</span><span class='op'>!=</span><span class='fl'>1</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span>    <span class='kw'><a href='https://rdrr.io/r/base/stop.html'>stop</a></span><span class='op'>(</span><span class='st'>"Uncalled capital .uc should be numeric, not a vector, and non-negative."</span><span class='op'>)</span></span>
+<span>  <span class='op'>}</span></span>
+<span></span>
+<span>  <span class='co'>### Calculate the vector of rate of distributions</span></span>
+<span>  <span class='va'>vec_RD</span> <span class='op'>&lt;-</span> <span class='op'>(</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='va'>.life</span><span class='op'>)</span><span class='op'>/</span><span class='va'>.life</span><span class='op'>)</span><span class='op'>^</span><span class='va'>.bow</span></span>
+<span></span>
+<span>  <span class='co'>### Initialize vectors</span></span>
+<span>  <span class='va'>vec_CC</span>  <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></span><span class='op'>(</span><span class='va'>.life</span><span class='op'>)</span></span>
+<span>  <span class='va'>vec_D</span>   <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></span><span class='op'>(</span><span class='va'>.life</span><span class='op'>)</span></span>
+<span>  <span class='va'>vec_NAV</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></span><span class='op'>(</span><span class='va'>.life</span><span class='op'>+</span><span class='fl'>1</span><span class='op'>)</span></span>
+<span>  <span class='va'>vec_UC</span>  <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></span><span class='op'>(</span><span class='va'>.life</span><span class='op'>+</span><span class='fl'>1</span><span class='op'>)</span></span>
+<span>  <span class='va'>vec_NAV</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='va'>.nav</span></span>
+<span>  <span class='va'>vec_UC</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>  <span class='op'>&lt;-</span> <span class='va'>.uc</span></span>
+<span></span>
+<span>  <span class='co'>### Loop through each period to calculate values</span></span>
+<span>  <span class='kw'>for</span> <span class='op'>(</span><span class='va'>t</span> <span class='kw'>in</span> <span class='fl'>1</span><span class='op'>:</span><span class='va'>.life</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span>    <span class='va'>vec_CC</span><span class='op'>[</span><span class='va'>t</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='va'>vec_UC</span><span class='op'>[</span><span class='va'>t</span><span class='op'>]</span> <span class='op'>*</span> <span class='va'>.vec_RC</span><span class='op'>[</span><span class='va'>t</span><span class='op'>]</span></span>
+<span>    <span class='va'>vec_D</span><span class='op'>[</span><span class='va'>t</span><span class='op'>]</span>  <span class='op'>&lt;-</span> <span class='va'>vec_NAV</span><span class='op'>[</span><span class='va'>t</span><span class='op'>]</span> <span class='op'>*</span> <span class='op'>(</span><span class='fl'>1</span><span class='op'>+</span><span class='va'>.vec_growth</span><span class='op'>[</span><span class='va'>t</span><span class='op'>]</span><span class='op'>)</span><span class='op'>*</span><span class='va'>vec_RD</span><span class='op'>[</span><span class='va'>t</span><span class='op'>]</span></span>
+<span>    <span class='va'>vec_NAV</span><span class='op'>[</span><span class='va'>t</span><span class='op'>+</span><span class='fl'>1</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='va'>vec_NAV</span><span class='op'>[</span><span class='va'>t</span><span class='op'>]</span> <span class='op'>*</span> <span class='op'>(</span><span class='fl'>1</span><span class='op'>+</span><span class='va'>.vec_growth</span><span class='op'>[</span><span class='va'>t</span><span class='op'>]</span><span class='op'>)</span> <span class='op'>+</span> <span class='va'>vec_CC</span><span class='op'>[</span><span class='va'>t</span><span class='op'>]</span> <span class='op'>-</span> <span class='va'>vec_D</span><span class='op'>[</span><span class='va'>t</span><span class='op'>]</span></span>
+<span>    <span class='va'>vec_UC</span><span class='op'>[</span><span class='va'>t</span><span class='op'>+</span><span class='fl'>1</span><span class='op'>]</span>  <span class='op'>&lt;-</span> <span class='va'>vec_UC</span><span class='op'>[</span><span class='va'>t</span><span class='op'>]</span> <span class='op'>-</span> <span class='va'>vec_CC</span><span class='op'>[</span><span class='va'>t</span><span class='op'>]</span></span>
+<span>  <span class='op'>}</span></span>
+<span></span>
+<span>  <span class='kw'><a href='https://rdrr.io/r/base/function.html'>return</a></span><span class='op'>(</span><span class='fu'>data.table</span><span class='fu'>::</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span><span class='op'>(</span>Age      <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='va'>.life</span>,</span>
+<span>                                Bow      <span class='op'>=</span> <span class='va'>.bow</span>,</span>
+<span>                                RC       <span class='op'>=</span> <span class='va'>.vec_RC</span>,</span>
+<span>                                Growth   <span class='op'>=</span> <span class='va'>.vec_growth</span>,</span>
+<span>                                Calls    <span class='op'>=</span> <span class='va'>vec_CC</span>,</span>
+<span>                                Dist     <span class='op'>=</span> <span class='va'>vec_D</span>,</span>
+<span>                                CumCalls <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/cumsum.html'>cumsum</a></span><span class='op'>(</span><span class='va'>vec_CC</span><span class='op'>)</span>,</span>
+<span>                                CumDist  <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/cumsum.html'>cumsum</a></span><span class='op'>(</span><span class='va'>vec_D</span><span class='op'>)</span>,</span>
+<span>                                NAV_BOP  <span class='op'>=</span> <span class='va'>vec_NAV</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='va'>.life</span><span class='op'>]</span>,</span>
+<span>                                NAV_EOP  <span class='op'>=</span> <span class='va'>vec_NAV</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>:</span><span class='op'>(</span><span class='va'>.life</span><span class='op'>+</span><span class='fl'>1</span><span class='op'>)</span><span class='op'>]</span>,</span>
+<span>                                UC_BOP   <span class='op'>=</span> <span class='va'>vec_UC</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='va'>.life</span><span class='op'>]</span>,</span>
+<span>                                UC_EOP   <span class='op'>=</span> <span class='va'>vec_UC</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>:</span><span class='op'>(</span><span class='va'>.life</span><span class='op'>+</span><span class='fl'>1</span><span class='op'>)</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='op'>}</span></span>
+<span></span>
+<span><span class='co'>#' Produces plots and output statistics for function \code{\link{run_TA_model}}</span></span>
+<span><span class='co'>#'</span></span>
+<span><span class='co'>#' This function takes as an input the data.table produced by \code{\link{</span></span>
+<span><span class='co'>#' run_TA_model}} and produces output plots and statistics.</span></span>
+<span><span class='co'>#'</span></span>
+<span><span class='co'>#' @param .dt_TA data.table, as returned by function \code{\link{run_TA_model}}</span></span>
+<span><span class='co'>#' @return A list containing three elements: 1) plotTA: a ggplot with the</span></span>
+<span><span class='co'>#'         the distributions, calls, uncalled capital and NAV; 2) plotCumTA:</span></span>
+<span><span class='co'>#'         the same as plotTA, but with Dist and Calls cumulated; 3) statsTA:</span></span>
+<span><span class='co'>#'         a data.table including the multiple and IRR of the fund.</span></span>
+<span><span class='co'>#'</span></span>
+<span><span class='co'>#' @importFrom data.table melt</span></span>
+<span><span class='co'>#' @importFrom data.table data.table</span></span>
+<span><span class='co'>#' @importFrom utilitiesCJ IRR_fixed_intervals</span></span>
+<span><span class='co'>#' @importFrom ggplot2 ggplot</span></span>
+<span><span class='co'>#'</span></span>
+<span><span class='co'>#' @export</span></span>
+<span><span class='co'>#' @examples</span></span>
+<span><span class='co'>#' # Taken from Jeet (2020): Modeling Private Investment Cash Flows</span></span>
+<span><span class='co'>#' # with Market_Sensitive Periodic Growth</span></span>
+<span><span class='co'>#' require(data.table)</span></span>
+<span><span class='co'>#' require(ggplot2)</span></span>
+<span><span class='co'>#' require(utilitiesCJ)</span></span>
+<span><span class='co'>#' dt_TA &lt;- run_TA_model(.bow=2,</span></span>
+<span><span class='co'>#'              .life=13,</span></span>
+<span><span class='co'>#'              .nav=0,</span></span>
+<span><span class='co'>#'              .uc=1,</span></span>
+<span><span class='co'>#'              .vec_growth = 0.12,</span></span>
+<span><span class='co'>#'              .vec_RC = c(0.25,0.33,rep(0.5,11)))</span></span>
+<span><span class='co'>#' output_dt_TA &lt;- output_TA_model(.dt_TA = dt_TA)</span></span>
+<span><span class='va'>output_TA_model</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>.dt_TA</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span></span>
+<span>  <span class='va'>melt_dt_TA</span> <span class='op'>&lt;-</span> <span class='fu'>data.table</span><span class='fu'>::</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/melt.data.table.html'>melt</a></span><span class='op'>(</span><span class='va'>.dt_TA</span>,id.vars <span class='op'>=</span> <span class='st'>"Age"</span><span class='op'>)</span></span>
+<span></span>
+<span>  <span class='va'>plotTA</span> <span class='op'>&lt;-</span> <span class='fu'>ggplot2</span><span class='fu'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>melt_dt_TA</span><span class='op'>[</span><span class='va'>variable</span><span class='op'>==</span><span class='st'>"Age"</span>  <span class='op'>|</span> <span class='va'>variable</span><span class='op'>==</span><span class='st'>"Calls"</span> <span class='op'>|</span></span>
+<span>                             <span class='va'>variable</span><span class='op'>==</span><span class='st'>"Dist"</span> <span class='op'>|</span> <span class='va'>variable</span><span class='op'>==</span><span class='st'>"NAV_BOP"</span> <span class='op'>|</span></span>
+<span>                             <span class='va'>variable</span><span class='op'>==</span><span class='st'>"UC_BOP"</span><span class='op'>]</span>,</span>
+<span>                  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>Age</span>, y<span class='op'>=</span><span class='va'>value</span>, color<span class='op'>=</span> <span class='va'>variable</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_y_continuous</a></span><span class='op'>(</span>labels <span class='op'>=</span> <span class='fu'>scales</span><span class='fu'>::</span><span class='va'><a href='https://scales.r-lib.org/reference/percent_format.html'>percent</a></span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>caption <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"Bow factor: "</span>, <span class='va'>.dt_TA</span><span class='op'>[</span><span class='fl'>1</span>,<span class='va'>Bow</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span></span>
+<span></span>
+<span>  <span class='va'>plotCumTA</span> <span class='op'>&lt;-</span> <span class='fu'>ggplot2</span><span class='fu'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>melt_dt_TA</span><span class='op'>[</span><span class='va'>variable</span><span class='op'>==</span><span class='st'>"Age"</span>  <span class='op'>|</span> <span class='va'>variable</span><span class='op'>==</span><span class='st'>"CumCalls"</span> <span class='op'>|</span></span>
+<span>                                         <span class='va'>variable</span><span class='op'>==</span><span class='st'>"CumDist"</span> <span class='op'>|</span> <span class='va'>variable</span><span class='op'>==</span><span class='st'>"NAV_BOP"</span> <span class='op'>|</span></span>
+<span>                                         <span class='va'>variable</span><span class='op'>==</span><span class='st'>"UC_BOP"</span><span class='op'>]</span>,</span>
+<span>                            <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>Age</span>, y<span class='op'>=</span><span class='va'>value</span>, color<span class='op'>=</span> <span class='va'>variable</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_y_continuous</a></span><span class='op'>(</span>labels <span class='op'>=</span> <span class='fu'>scales</span><span class='fu'>::</span><span class='va'><a href='https://scales.r-lib.org/reference/percent_format.html'>percent</a></span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>caption <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"Bow factor: "</span>, <span class='va'>.dt_TA</span><span class='op'>[</span><span class='fl'>1</span>,<span class='va'>Bow</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span></span>
+<span></span>
+<span>  <span class='va'>statsTA</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span><span class='op'>(</span>TVPI <span class='op'>=</span> <span class='va'>.dt_TA</span><span class='op'>$</span><span class='va'>CumDist</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>.dt_TA</span><span class='op'>)</span><span class='op'>]</span><span class='op'>/</span><span class='va'>.dt_TA</span><span class='op'>$</span><span class='va'>CumCalls</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>.dt_TA</span><span class='op'>)</span><span class='op'>]</span>,</span>
+<span>                        IRR  <span class='op'>=</span> <span class='fu'>utilitiesCJ</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/utilitiesCJ/man/IRR_fixed_intervals.html'>IRR_fixed_intervals</a></span><span class='op'>(</span>.vec_cf <span class='op'>=</span> <span class='va'>.dt_TA</span><span class='op'>$</span><span class='va'>Dist</span> <span class='op'>-</span> <span class='va'>.dt_TA</span><span class='op'>$</span><span class='va'>Calls</span><span class='op'>)</span><span class='op'>)</span></span>
+<span></span>
+<span></span>
+<span>  <span class='kw'><a href='https://rdrr.io/r/base/function.html'>return</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>plotTA    <span class='op'>=</span> <span class='va'>plotTA</span>,</span>
+<span>              plotCumTA <span class='op'>=</span> <span class='va'>plotCumTA</span>,</span>
+<span>              statsTA   <span class='op'>=</span> <span class='va'>statsTA</span><span class='op'>)</span><span class='op'>)</span></span>
+<span><span class='op'>}</span></span></code></pre>
+</div>
+</details>
+</div>
+<p>Let’s take those functions for a test drive. Concretely, let’s model a fund with 12-year life, a bow factor of 2, and an annual growth of 12%, i.e., a 12% IRR. The rate of contribution is 40%.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>t</span> <span class='op'>&lt;-</span> <span class='fl'>12</span></span>
+<span><span class='va'>res_TA</span> <span class='op'>&lt;-</span> <span class='fu'>run_TA_model</span><span class='op'>(</span>.bow<span class='op'>=</span><span class='fl'>2</span>,</span>
+<span>                       .life<span class='op'>=</span><span class='va'>t</span>,</span>
+<span>                       .nav<span class='op'>=</span><span class='fl'>0</span>,</span>
+<span>                       .uc<span class='op'>=</span><span class='fl'>1</span>,</span>
+<span>                       .vec_growth <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>0.12</span>, times<span class='op'>=</span><span class='va'>t</span><span class='op'>)</span>,</span>
+<span>                       .vec_RC <span class='op'>=</span>     <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>0.4</span>, times<span class='op'>=</span><span class='va'>t</span><span class='op'>)</span><span class='op'>)</span></span>
+<span><span class='va'>output_TA</span> <span class='op'>&lt;-</span> <span class='fu'>output_TA_model</span><span class='op'>(</span><span class='va'>res_TA</span><span class='op'>)</span></span></code></pre>
+</div>
+</details>
+</div>
+<p>It’s now straightforward to get the relevant information of the output object, <code>output_TA</code> in the above example. To get the plot of cumulative calls and distributions over time as well the NAV and unfunded commitment, one can call <code>output_TA</code>:</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>output_TA</span><span class='op'>$</span><span class='va'>plotCumTA</span></span></code></pre>
+</div>
+</details>
+<div class="figure"><span style="display:block;" id="fig:PlotCumCFs"></span>
+<img src="the-takahashi-and-alexander-model_files/figure-html5/PlotCumCFs-1.png" alt="Cumulative calls, distributions, NAV, and unfunded commitment in the TA model. Inputs: bow factor=2, L=12, RC=0.4,G=0.12." width="624" />
+<p class="caption">
+Figure 2: Cumulative calls, distributions, NAV, and unfunded commitment in the TA model. Inputs: bow factor=2, L=12, RC=0.4,G=0.12.
+</p>
+</div>
+</div>
+<p>The TVPI and IRR are obtained by calling <code>output_TA$statsTA$TVPI</code>and <code>output_TA$statsTA$IRR</code>, respectively.</p>
+<p>Thanks to Rs capabilities, it’s also pretty easy to compare the results for different inputs. For example, let’s look at how the results change for different bow factors, while leaving all the other inputs the same.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>l_results</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>lapply</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span>from<span class='op'>=</span><span class='fl'>0</span>,to<span class='op'>=</span><span class='fl'>4</span>,by<span class='op'>=</span><span class='fl'>0.5</span><span class='op'>)</span>,</span>
+<span>                    <span class='va'>run_TA_model</span>,</span>
+<span>                       .life<span class='op'>=</span><span class='va'>t</span>,</span>
+<span>                       .nav<span class='op'>=</span><span class='fl'>0</span>,</span>
+<span>                       .uc<span class='op'>=</span><span class='fl'>1</span>,</span>
+<span>                       .vec_growth <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>0.12</span>, times<span class='op'>=</span><span class='va'>t</span><span class='op'>)</span>,</span>
+<span>                       .vec_RC <span class='op'>=</span>     <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>0.4</span>, times<span class='op'>=</span><span class='va'>t</span><span class='op'>)</span><span class='op'>)</span></span>
+<span><span class='va'>DT</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/rbindlist.html'>rbindlist</a></span><span class='op'>(</span><span class='va'>l_results</span><span class='op'>)</span></span>
+<span><span class='va'>meltDT</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/melt.data.table.html'>melt</a></span><span class='op'>(</span><span class='va'>DT</span><span class='op'>[</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>Age</span>, <span class='va'>Bow</span>, <span class='va'>CumCalls</span>,<span class='va'>CumDist</span>, <span class='va'>NAV_BOP</span><span class='op'>)</span><span class='op'>]</span>, id.vars <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Age"</span>, <span class='st'>"Bow"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>meltDT</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>Age</span>, y<span class='op'>=</span><span class='va'>value</span>, color<span class='op'>=</span><span class='va'>variable</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> </span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> </span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_wrap.html'>facet_wrap</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/vars.html'>vars</a></span><span class='op'>(</span><span class='va'>Bow</span><span class='op'>)</span>, nrow<span class='op'>=</span><span class='fl'>3</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>ylab</a></span><span class='op'>(</span><span class='st'>""</span><span class='op'>)</span></span></code></pre>
+</div>
+</details>
+<div class="figure"><span style="display:block;" id="fig:ExampleChaningBowFactors"></span>
+<img src="the-takahashi-and-alexander-model_files/figure-html5/ExampleChaningBowFactors-1.png" alt="Cumulative calls, distributions, and NAV in the TA model for different bow factors. Inputs: L=12, RC=0.4,G=0.12." width="624" />
+<p class="caption">
+Figure 3: Cumulative calls, distributions, and NAV in the TA model for different bow factors. Inputs: L=12, RC=0.4,G=0.12.
+</p>
+</div>
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>results_TVPI_IRR</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/rbindlist.html'>rbindlist</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>lapply</a></span><span class='op'>(</span><span class='va'>l_results</span>, <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='fu'>output_TA_model</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>$</span><span class='va'>statsTA</span><span class='op'>)</span><span class='op'>)</span></span>
+<span><span class='va'>results_TVPI_IRR</span><span class='op'>[</span>, <span class='va'>Bow</span><span class='op'>:=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span>from<span class='op'>=</span><span class='fl'>0</span>,to<span class='op'>=</span><span class='fl'>4</span>,by<span class='op'>=</span><span class='fl'>0.5</span><span class='op'>)</span><span class='op'>]</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://haozhu233.github.io/kableExtra/'>kableExtra</a></span><span class='op'>)</span></span>
+<span><span class='fu'><a href='https://rdrr.io/pkg/kableExtra/man/kbl.html'>kbl</a></span><span class='op'>(</span><span class='va'>results_TVPI_IRR</span><span class='op'>[</span>,<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>Bow</span>,<span class='va'>TVPI</span>,<span class='va'>IRR</span><span class='op'>)</span><span class='op'>]</span>,</span>
+<span>    digits<span class='op'>=</span><span class='fl'>3</span>,</span>
+<span>    caption<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"TVPI and IRR for different bow factors."</span><span class='op'>)</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span>  <span class='fu'><a href='https://rdrr.io/pkg/kableExtra/man/kable_classic.html'>kable_classic</a></span><span class='op'>(</span>full_width <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> </span></code></pre>
+</div>
+</details>
+<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:ExampleChaningBowFactors">Table 1: </span>TVPI and IRR for different bow factors.
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;">
+Bow
+</th>
+<th style="text-align:right;">
+TVPI
+</th>
+<th style="text-align:right;">
+IRR
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+1.118
+</td>
+<td style="text-align:right;">
+0.119
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+0.5
+</td>
+<td style="text-align:right;">
+1.233
+</td>
+<td style="text-align:right;">
+0.120
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1.0
+</td>
+<td style="text-align:right;">
+1.383
+</td>
+<td style="text-align:right;">
+0.120
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+1.547
+</td>
+<td style="text-align:right;">
+0.120
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2.0
+</td>
+<td style="text-align:right;">
+1.705
+</td>
+<td style="text-align:right;">
+0.120
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:right;">
+1.850
+</td>
+<td style="text-align:right;">
+0.120
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3.0
+</td>
+<td style="text-align:right;">
+1.978
+</td>
+<td style="text-align:right;">
+0.120
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3.5
+</td>
+<td style="text-align:right;">
+2.090
+</td>
+<td style="text-align:right;">
+0.120
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4.0
+</td>
+<td style="text-align:right;">
+2.188
+</td>
+<td style="text-align:right;">
+0.120
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The higher the bow factor, the more backloaded the distributions are. This implies a higher multiple as there is more time for value creation, while the IRR, or growth rate of value, stays the same, at 12% in this case. The example illustrates nicely that a benchmark based on the TVPI alone is meaningless: a multiple of 2x can either be good or bad, depending on how long it took to generate it.</p>
+<h1 id="final-remarks">Final remarks</h1>
+<p>In this post, I have introduced the TA model and have shown how to implement it in R. Of course, this is the easy part. The much harder part would be the calibration of the model. What parameters should one use to derive reasonable outcomes? To do so, one would have to get real cash flow data of funds and run regressions to estimate the parameters. As the function is non-linear, some adjustments have to be made. My statistic knowledge is diminishing, but <a href="https://stats.stackexchange.com/questions/73209/estimation-of-a-power-function-in-regression-y-axk">this post</a> seems like a good starting point to do so. Fundamentally, the issue I see with calibration is that most funds actually have highly non-linear functions of cash flows, in particular distributions, which do not resemble the curves of the TA model at all. In particular (lower) mid-market buyout funds with only 5-6 investments might not distribute at all in a year or two, just to have large distributions in the next year. Hence, the TA model might therefore be better suited to model portfolio of funds, as the actual curves get the smoother, the more diversified the portfolio is.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-jeet:2020" class="csl-entry" role="doc-biblioentry">
+Jeet, Vishv. 2020. <span>“Modeling Private Investment Cash Flows with Market-Sensitive Periodic Growth.”</span> <em>PGIM IAS-October</em>.
+</div>
+<div id="ref-takahashi-alexander:2002" class="csl-entry" role="doc-biblioentry">
+Takahashi, Dean, and Seth Alexander. 2002. <span>“Illiquid Alternative Asset Fund Modeling.”</span> <em>The Journal of Portfolio Management</em> 28 (2): 90–100.
+</div>
+</div>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1"><p>This is the one modification of <span class="citation" data-cites="jeet:2020">Jeet (<a href="#ref-jeet:2020" role="doc-biblioref">2020</a>)</span> that I mentioned above. In his model, the growth rate is time-varying and not fixed as in <span class="citation" data-cites="takahashi-alexander:2002">Takahashi and Alexander (<a href="#ref-takahashi-alexander:2002" role="doc-biblioref">2002</a>)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+<!--radix_placeholder_article_footer-->
+<!--/radix_placeholder_article_footer-->
+</div>
+
+<div class="d-appendix">
+</div>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+<!--radix_placeholder_site_after_body-->
+<!--/radix_placeholder_site_after_body-->
+<!--radix_placeholder_appendices-->
+<div class="appendix-bottom">
+<h3 id="references">References</h3>
+<div id="references-listing"></div>
+</div>
+<!--/radix_placeholder_appendices-->
+<!--radix_placeholder_navigation_after_body-->
+<!--/radix_placeholder_navigation_after_body-->
+
+</body>
+
+</html>
