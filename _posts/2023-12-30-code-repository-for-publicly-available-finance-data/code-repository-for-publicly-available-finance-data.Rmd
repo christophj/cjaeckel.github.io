@@ -191,6 +191,7 @@ taxRatesDT[,Year:=NULL]
 aggTaxRatesDT <- taxRatesDT[,  lapply(.SD, mean, na.rm=TRUE), by=Country]
 aggTaxRatesDT[Country=="Germany"]
 ```
+
 # Kenneth French's stock market data
 
 I used this function already for example in the post on [sector performance](https://www.christoph-jaeckel.com/posts/2022-03-27-sector-performance/) to obtain data from Kenneth French's website.
